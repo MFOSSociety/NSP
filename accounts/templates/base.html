@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      {% block head %}
+      <meta charset="UTF-8">
+      <title></title>
+      {% endblock %}
+   </head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <body>
+      <br>
+      <div class="container">
+         <nav class="navbar navbar-default">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/">Ideate 2018</a>
+               </div>
+               <div id="navbar" class="navbar-collapse collapse">
+                  <!-- THis is for logged in users -->
+                  {% if user.is_authenticated %}
+                  <ul class="nav navbar-nav">
+                     <!-- Do not fucking forget the / -> the forward slash -->
+                     <li><a href="/account" class="glyphicon glyphicon-home"></a></li>
+                     <li><a href="/account/profile" class="glyphicon glyphicon-user"></a></li>
+                     <li><a href="/account/profile/edit" class="glyphicon glyphicon-pencil"></a></li>
+                     <li><a href="/account/change-password">Change Password</a></li>
+                     <li><a href="/account/reset-password">Reset Password</a></li>
+                     <form class="navbar-form navbar-right" role="search" method="get">
+                        <div class="form-group">
+                           <input type="text" class="form-control" name="q">
+                        </div>
+                        <button type="submit" class="glyphicon glyphicon-search"></button>
+                     </form>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                     <!-- Do not fucking forget the / -> the forward slash -->
+                     <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
+                  </ul>
+                  {% else %}
+                  <ul class="nav navbar-nav">
+                     <!-- Do not fucking forget the / -> the forward slash -->
+                     <form class="navbar-form navbar-right" role="search" method="get">
+                        <div class="form-group">
+                           <input type="text" class="form-control" name="q">
+                        </div>
+                        <button type="submit" class="glyphicon glyphicon-search"></button>
+                     </form>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                     <!-- Do not fucking forget the / -> the forward slash -->
+                     <li><a href="/account/login">Login</a></li>
+                     <li><a href="/account/register">Register</a></li>
+                  </ul>
+                  {% endif %}
+               </div>
+               <!--/.nav-collapse -->
+            </div>
+            <!--/.container-fluid -->
+         </nav>
+      </div>
+      {% block body %}
+      <h1>Base</h1>
+      {% endblock %}
+   </body>
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</html>

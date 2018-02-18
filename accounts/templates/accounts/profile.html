@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      {% block head %}
+      <meta charset="UTF-8">
+      {% load static %}
+          <link rel="stylesheet" href="{% static 'accounts/css/profile_card.css' %}">
+      <title>Profile Page</title>
+      {% endblock %}
+   </head>
+   <body>
+      {% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="row section-success ourTeam-box text-center">
+        <div class="col-md-12 section1">
+
+            {%  if user.userprofile.image is not None %}
+                <img src={{ user.userprofile.image.url }}>
+
+            {% else %}
+            <img src={% static 'accounts/img/default_face.jpg' %}>
+            {% endif %}
+        </div>
+        <div class="col-md-12 section2">
+          <p>{{ user }}</p>
+
+          <span>
+              {% if user.userprofile.description is not None %}
+              {{ user.userprofile.description }} <br>
+              {% endif %}
+              {% if user.userprofile.phone is not none and not 0 %}
+              {{ user.userprofile.phone }}  <br>
+              {% endif %}
+              {% if user.userprofile.city is not none %}
+              {{ user.userprofile.city }}   <br>
+              {% endif %}
+              {% if user.userprofile.website is not none %}
+              <a href="{{ user.userprofile.website }}">{{ user.userprofile.website }}</a>  <br>
+              {% endif %}
+          </span><br>
+
+            <label class="glyphicon glyphicon-btc"> {{ user.email }}</label>
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+      {% endblock %}
+   </body>
+   </body>
+</html>
+
