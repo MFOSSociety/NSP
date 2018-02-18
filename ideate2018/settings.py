@@ -112,7 +112,7 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'socialnet/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'ideate2018/../accounts/media')
 
 # when you log in you visit your account profile page
 LOGIN_REDIRECT_URL = '/account/profile/'
