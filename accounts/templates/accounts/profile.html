@@ -40,6 +40,9 @@
               {% if user.userprofile.stream is not none %}
               <p>Stream : {{ user.userprofile.stream }}</p>
               {% endif %}
+              <p>{{ userprofile.objects.all }}</p>
+
+
               <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
           </span><br>
 
