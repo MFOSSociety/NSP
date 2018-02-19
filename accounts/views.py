@@ -10,9 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 
 def home(request):
-    numbers = [1, 2, 3, 4, 5]
     name = "ideate 2018"
-    args = {'name': name, 'numbers': numbers}
+    args = {'name': name}
     return render(request, 'accounts/home.html', args)
 
 
