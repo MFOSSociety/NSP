@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
-
 class Skill(models.Model):
     name = models.CharField(max_length=100, default="", blank=True)
 
@@ -26,6 +25,7 @@ class Tool(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # listing for multiple objects
     skill = models.ManyToManyField(Skill)
     books = models.ManyToManyField(Book)
     tools = models.ManyToManyField(Tool)
@@ -36,8 +36,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
-
-
 
 
 def create_profile(sender, **kwargs):

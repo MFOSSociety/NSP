@@ -4,7 +4,7 @@
 <head>
     {% block head %}
         <meta charset="UTF-8">
-        <title>Profile Page</title>
+        <title>{{ user.first_name }}</title>
     {% endblock %}
 
 </head>
@@ -15,7 +15,7 @@
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-success">Submit</button>
+                <button class="btn btn-success">Change</button>
             </form>
         </div>
     {% endblock %}
