@@ -1,3 +1,5 @@
+
+
 {% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,56 +7,64 @@
       {% block head %}
       <meta charset="UTF-8">
       {% load static %}
-          <link rel="stylesheet" href="{% static 'accounts/css/profile_card.css' %}">
+      <link rel="stylesheet" href="{% static 'accounts/css/profile_card.css' %}">
       <title>Hey, {{ user.first_name }}!</title>
       {% endblock %}
    </head>
    <body>
       {% block body %}
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="row section-success ourTeam-box text-center">
-        <div class="col-md-12 section1">
-
-            {%  if user.userprofile.image.url is not None %}
-                <img src={{ user.userprofile.image.url }}>
-            {% else %}
-            <img src={% static 'accounts/img/default_face.jpg' %}>
-            {% endif %}
-        </div>
-        <div class="col-md-12 section2">
-          <label class="glyphicon glyphicon-usd"> {{ user }}</label>
-
-          <span>
-              {% if user.userprofile.year_of_study is not None %}
-              <p>Year Of Study : {{ user.userprofile.year_of_study }} </p>
-              {% endif %}
-              {% if user.userprofile.phone is not 0 %}
-              <p>Phone No. : {{ user.userprofile.phone }} </p>
-              {% endif %}
-              {% if user.userprofile.books is not none %}
-              <p>Books : {{ user.userprofile.books }}</p>
-              {% endif %}
-              {% if user.userprofile.stream is not none %}
-              <p>Stream : {{ user.userprofile.stream }}</p>
-              {% endif %}
-              <p>{{ userprofile.objects.all }}</p>
-
-
-              <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
-          </span><br>
-
-
-
-        </div>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+               <div class="row section-success ourTeam-box text-center">
+                  <div class="col-md-12 section1">
+                     {%  if user.userprofile.image.url is not None %}
+                     <img src={{ user.userprofile.image.url }}>
+                     {% else %}
+                     <img src={% static 'accounts/img/default_face.jpg' %}>
+                     {% endif %}
+                  </div>
+                  <div class="col-md-12 section2">
+                     <label class="glyphicon glyphicon-usd"> {{ user }}</label>
+                     <span>
+                        {% if user.userprofile.year_of_study is not None %}
+                        <p>Year Of Study : {{ user.userprofile.year_of_study }} </p>
+                        {% endif %}
+                        {% if user.userprofile.phone is not 0 %}
+                        <p>Phone No. : {{ user.userprofile.phone }} </p>
+                        {% endif %}
+                        <p>
+                           {% if user.userprofile.books is not none %}
+                           {% for book in user.userprofile.books.all %}
+                        <li>{{ book }}</li>
+                        {% endfor %}
+                        {% endif %}
+                        </p>
+                        <p>
+                           {% if user.userprofile.skills is not none %}
+                           {% for skill in user.userprofile.skills.all %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                        {% endif %}
+                        </p>
+                        <p>
+                           {% if user.userprofile.tools is not none %}
+                           {% for tool in user.userprofile.tools.all %}
+                        <li>{{ tool }}</li>
+                        {% endfor %}
+                        {% endif %}
+                        </p>
+                        {% if user.userprofile.stream is not none %}
+                        <p>Stream : {{ user.userprofile.stream }}</p>
+                        {% endif %}
+                        <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
+                     </span>
+                     <br>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
-
-    </div>
-  </div>
-
       {% endblock %}
    </body>
    </body>
