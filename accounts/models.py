@@ -2,22 +2,23 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
+
 class Skill(models.Model):
-    name = models.CharField(max_length=100, default="", blank=True)
+    name = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=100, default="", blank=True)
+    name = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Tool(models.Model):
-    name = models.CharField(max_length=100, default="", blank=True)
+    name = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
@@ -26,9 +27,10 @@ class Tool(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # listing for multiple objects
-    skill = models.ManyToManyField(Skill)
-    books = models.ManyToManyField(Book)
-    tools = models.ManyToManyField(Tool)
+
+    skill = models.ManyToManyField(Skill, blank=True)
+    books = models.ManyToManyField(Book, blank=True)
+    tools = models.ManyToManyField(Tool, blank=True)
     year_of_study = models.CharField(max_length=3, default="", blank=True)
     stream = models.CharField(max_length=50, default="", blank=True)
     phone = models.IntegerField(default=0, blank=True)
