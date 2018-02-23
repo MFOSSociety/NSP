@@ -4,21 +4,21 @@ from django.contrib.auth.models import User
 
 
 class Skill(models.Model):
-    name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
 class Book(models.Model):
-    name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
 class Tool(models.Model):
-    name = models.CharField(max_length=100, blank=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -28,9 +28,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # listing for multiple objects
 
-    skill = models.ManyToManyField(Skill, blank=True)
-    books = models.ManyToManyField(Book, blank=True)
-    tools = models.ManyToManyField(Tool, blank=True)
+    skill = models.ManyToManyField(Skill, default="", blank=True)
+    books = models.ManyToManyField(Book, default="", blank=True)
+    tools = models.ManyToManyField(Tool, default="", blank=True)
     year_of_study = models.CharField(max_length=3, default="", blank=True)
     stream = models.CharField(max_length=50, default="", blank=True)
     phone = models.IntegerField(default=0, blank=True)
