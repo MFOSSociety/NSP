@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <div class="container">
     <h1>Search Information</h1>
-    <form method="post" action="/search/">
+    <form method="post" action="/account/search/">
         {% csrf_token %}
         <div class="form-group">
             <div class="col-lg-5">
@@ -11,6 +11,23 @@
                 <button type="submit" class="btn btn-success">Search</button>
             </label>
             </div>
-        </div>
-    </form>
+
+    </form><br><br>
+</div>
+<div>
+    {% if messages %}
+        <ul class="messages">
+            {% for k in messages %}
+            <li style="color: red">{{ k }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div><br>
+
+<div class="container">
+    {% for k in sr %}
+    <div class="container">
+        <p>{{ sr.first_name }} {{ sr.last_name }}</p>
+    </div>
+    {% endfor %}
 </div>
