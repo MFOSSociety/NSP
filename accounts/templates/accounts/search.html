@@ -14,6 +14,7 @@
 
     </form><br><br>
 </div>
+<!-- This Part is Total Crap! -->
 <div>
     {% if messages %}
         <ul class="messages">
@@ -24,10 +25,20 @@
     {% endif %}
 </div><br>
 
+{% if condition == 'person' %}
 <div class="container">
     {% for k in sr.all %}
-    <div class="container">
-        <p>{{ k }}</p>
-    </div>
+
+        <img src={{ k.userprofile.image.url }}>
+        <p> {{ k.first_name }} {{ k.last_name }}</p>
+
     {% endfor %}
 </div>
+{% endif %}
+{% if condition == 'skill'%}
+<div class="container">
+    {% for k in sr.all %}
+        <p>{{ k }}</p>
+    {% endfor %}
+</div>
+{% endif %}
