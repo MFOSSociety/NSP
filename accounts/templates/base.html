@@ -30,18 +30,21 @@
                      <li><a href="/account" class="glyphicon glyphicon-home"></a></li>
                      <li><a href="/account/profile" class="glyphicon glyphicon-user"></a></li>
                      <li><a href="/account/profile/edit" class="glyphicon glyphicon-edit"></a></li>
-                      <li><a href="https://mext.in/" class="glyphicon glyphicon-education" target="_blank"></a></li>
-                      <li><a href="https://binderbug.com/" class="glyphicon glyphicon-sunglasses" target="_blank"></a></li>
-                     <form class="navbar-form navbar-right" role="search" method="get">
+                     <li><a href="https://mext.in/" class="glyphicon glyphicon-education" target="_blank"></a></li>
+                     <li><a href="https://binderbug.com/" class="glyphicon glyphicon-sunglasses" target="_blank"></a></li>
+                     <form class="navbar-form navbar-right" method="post" action="/account/search/">
+                        {% csrf_token %}
                         <div class="form-group">
-                           <input type="text" class="form-control" name="q">
+                           <div class="col-lg-5">
+                              <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
+                           </div>
                         </div>
                         <button type="submit" class="glyphicon glyphicon-search"></button>
                      </form>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                      <li><a href="/account/change-password">Change Password</a></li>
+                     <li><a href="/account/change-password">Change Password</a></li>
                      <li><a href="/account/reset-password">Reset Password</a></li>
                      <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
                   </ul>
@@ -57,9 +60,8 @@
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                      <li><a href="/account/register" class="glyphicon glyphicon-pencil"></a></li>
+                     <li><a href="/account/register" class="glyphicon glyphicon-pencil"></a></li>
                      <li><a href="/account/login" class="glyphicon glyphicon-off"></a></li>
-
                   </ul>
                   {% endif %}
                </div>
@@ -75,3 +77,4 @@
    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </html>
+
