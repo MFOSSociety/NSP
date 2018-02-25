@@ -2,12 +2,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 {% block body %}
 <div class="container">
-    <h1>Search Information</h1>
     <form method="post" action="/account/search/">
         {% csrf_token %}
         <div class="form-group">
             <div class="col-lg-5">
-                <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
+                <input type="text" placeholder="Search by Skill/Utility/Name" name="srh" class="form-control">
             </div>
             <label class="col-lg-2">
                 <button type="submit" class="btn btn-success">Search</button>
@@ -29,11 +28,13 @@
 
 {% if condition == 'person' %}
 <div class="container">
+<hr>
     {% for k in sr.all %}
-
-        <img src={{ k.userprofile.image.url }}>
-        <p> {{ k.first_name }} {{ k.last_name }}</p>
-
+        <div class="container-fluid">
+        <img style="height: 100px; width: 100px; border-radius: 50%"src={{ k.userprofile.image.url }}>
+        <p class="align-right" style="display: inline-block"> {{ k.first_name }} {{ k.last_name }}</p>
+        </div>
+        <hr>
     {% endfor %}
 </div>
 {% endif %}

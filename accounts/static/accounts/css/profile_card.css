@@ -1,26 +1,10 @@
-.section-ourTeam{
-    background-color: #f1f1f1;
-}
-.ourTeam-hedding p{
-    color:#979797;
-}
-.ourTeam-hedding strong{
-    color:black;
-}
-.ourTeam-hedding{
-    margin-bottom: 50px;
-}
-.ourTeam-hedding h1{
-    font-size: 25px;
-    font-weight: bold;
-    color:#FD8469;
-}
 .ourTeam-box{
     border-radius:2px;
-    border-top: 6px solid grey;
-    margin:0px;
-    background-color: mintcream;
+    border-top: 20px solid grey;
+    margin:5px;
+    background-color: gray;
     margin-bottom: 30px;
+    size: 50px;
 }
 .section1{
     padding: 30px 0px 30px 0px;
@@ -32,14 +16,14 @@
 }
 .section2 p{
     font-weight: bold;
-    color:#5DDDD3;
+    color:#000000;
     letter-spacing:1px;
 }
 .section2 span{
     color:#979597;
 }
 .section2 label{
-    background-color: #5DDDD3;
+    background-color: #000000;
     padding: 8px 10px 8px 10px;
     color:#fff;
     font-weight: normal;
@@ -47,34 +31,11 @@
     border-radius: 2px;
 }
 .section3{
-    background-color: #5DDDD3;
+    background-color: #000000;
 }
 .section3 i{
     color:#fff;
     padding:15px;
     font-size: 15px;
 }
-.section-info{
-    border-top:6px solid #90DFAA;
-}
-.section-info p{
-    color:#90DFAA;
-}
-.section-info .section2 label{
-    background-color:#90DFAA;
-}
-.section-info .section3{
-    background-color:#90DFAA;
-}
-.section-danger{
-    border-top:6px solid #FD8469;
-}
-.section-danger p{
-    color:#FD8469;
-}
-.section-danger .section2 label{
-    background-color:#FD8469;
-}
-.section-danger .section3{
-    background-color:#FD8469;
-}
+
