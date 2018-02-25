@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
+from accounts.models import UserProfile
 
 class RegistrationForm(UserCreationForm):   # extending from superclass
     email = forms.EmailField(required=True)
@@ -42,6 +42,21 @@ class EditProfileForm(UserChangeForm):
             'password'
         )
         # we can use exclude(....fields....) if we want to exclude attributes
+
+
+class EditSkillUtilityForm(UserChangeForm):
+
+    class Meta:
+        model = UserProfile
+        fields = (
+            'skill',
+            'books',
+            'tools',
+            'image',
+            'year_of_study',
+            'stream',
+            'phone',
+        )
 
 
 

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from accounts.forms import (
     RegistrationForm,
     EditProfileForm,
+    EditSkillUtilityForm,
 )
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -59,6 +60,21 @@ def edit_profile(request):
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/edit_profile.html', args)
+
+@login_required
+def edit_details(request):
+    if request.method == 'POST':
+        print("if statement reached")
+        form = EditSkillUtilityForm(request.POST, instance=request.userprofile)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/account/profile')
+
+        else:
+            form = EditSkillUtilityForm(instance=request.userprofile)
+            args = {'form': form}
+            return render(request, 'accounts/edit_detail.html', args)
 
 
 @login_required
