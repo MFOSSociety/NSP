@@ -4,12 +4,34 @@ from accounts.forms import UserForm, UserProfileForm
 from accounts.forms import (
     EditProfileForm,
     EditSkillUtilityForm,
+    ProjectForm,
 )
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
 from accounts.models import User, UserProfile
 
+
+def project_home(request):
+    args = {}
+    return render(request, 'accounts/project_home.html', args)
+
+def describe(request):
+    project_registered = False
+
+    if request.method == 'POST':
+        project_form = ProjectForm(data=request.POST)
+
+        if project_form.is_valid():
+            project_details = project_form.save()
+            project_details = project_form.save(commit=False)
+            project_registered = True
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        project_form = ProjectForm()
+
+    return render(request, 'accounts/describe.html', {'project_form': project_form, 'project_registered':project_registered})
 
 def home(request):
     name = "ideate 2018"

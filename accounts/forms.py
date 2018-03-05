@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import  UserChangeForm
 from accounts.models import UserProfile
+from accounts.models import project_details
 
 
 class UserForm(forms.ModelForm):
@@ -51,6 +52,32 @@ class UserProfileForm(forms.ModelForm):
             userprofile.save()
 
         return userprofile
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = project_details
+        fields = (
+            'project_name',
+            'mentor_name',
+            'branch',
+            'duration',
+            'paid',
+            'description',
+        )
+
+    def save(self, commit=True):
+        project = super(ProjectForm, self).save(commit=False)
+        project.project_name = self.cleaned_data['project_name']
+        project.mentor_name = self.cleaned_data['mentor_name']
+        project.branch = self.cleaned_data['duration']
+        project.duration = self.cleaned_data['duration']
+        project.paid = self.cleaned_data['paid']
+        project.description = self.cleaned_data['description']
+
+        if commit:
+            project.save()
+
+        return project
 
 
 class EditProfileForm(UserChangeForm):
