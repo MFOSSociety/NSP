@@ -12,8 +12,11 @@
 
     {% block body %}
         <div class="container">
-        
-        <h1 class="glyphicon glyphicon-home"> Home</h1>
+        {% if user.is_authenticated  %}
+            <button class="btn btn-upload btn-success">Start Exploring!</button>
+        {% else %}
+        <h1>You need to register/login to access the n-s-p features!!</h1>
+        {% endif %}
         </div>
     {% endblock %}
 
