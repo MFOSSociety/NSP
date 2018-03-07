@@ -6,7 +6,7 @@
         {% csrf_token %}
         <div class="form-group">
             <div class="col-lg-5">
-                <input type="text" placeholder="Search by Skill/Utility/Name" name="srh" class="form-control">
+                <input type="text" placeholder="Search by Skill/Name/Project" name="srh" class="form-control">
             </div>
             <label class="col-lg-2">
                 <button type="submit" class="btn btn-success">Search</button>
@@ -31,18 +31,34 @@
 <hr>
     {% for k in sr.all %}
         <div class="container-fluid">
-        <img style="height: 100px; width: 100px; border-radius: 50%"src={{ k.userprofile.image.url }}>
         <p class="align-right" style="display: inline-block"> {{ k.first_name }} {{ k.last_name }}</p>
         </div>
         <hr>
     {% endfor %}
 </div>
 {% endif %}
-{% if condition == 'skill'%}
+{% if condition == 'project'%}
 <div class="container">
     {% for k in sr.all %}
         <p>{{ k }}</p>
     {% endfor %}
 </div>
+{% endif %}
+{% if condition == 'mentor'%}
+<div class="container">
+    {% for k in sr.all %}
+        <p>{{ k }}</p>
+    {% endfor %}
+</div>
+{% if condition == 'branch'%}
+<div class="container">
+    {% for k in sr.all %}
+        <p>{{ k }}</p>
+    {% endfor %}
+</div>
+{% if condition == 'search_fail'%}
+<p style="color: rebeccapurple">no results found!!</p>
+{% endif %}
+{% endif %}
 {% endif %}
 {% endblock %}
