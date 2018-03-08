@@ -1,4 +1,4 @@
-from django.urls.conf import path
+from django.urls.conf import path, re_path
 from accounts import views
 from accounts.views import search
 from django.contrib.auth.views import (
@@ -24,7 +24,7 @@ urlpatterns = [
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/done/', password_reset_done, name='password_reset_done'),
     # Thank God this piece of shit works, do not tamper.
-    path('reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm,
+    re_path(r'reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm,
          name='password_reset_confirm'),
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
