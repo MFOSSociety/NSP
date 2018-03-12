@@ -1,47 +1,75 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
       {% block head %}
       <meta charset="UTF-8">
       <title></title>
+      <style type="text/css">
+  	  .footer {
+  		position: fixed;
+  		left: 0;
+  		bottom: 0;
+  		width: 100%;
+  		background-color: black;
+  		text-align: center;
+  	}
+      .navbar{
+          border-radius: 0;
+          padding-top: 0px;
+      }
+          body{
+      background: url({% static 'accounts/black.jpg' %})
+      {#color: white;#}
+
+    }
+          </style>
       {% endblock %}
+
+
    </head>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <body>
+{#   <img src="{% static 'accounts/black.jpg' %}">#}
       <br>
-      <div class="container">
+      <div class="container-fluid">
          <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">Ideate 2018</a>
+                  <a class="navbar-brand" style="padding: 15px; font-size: 30px;" href="/account" class="glyphicon glyphicon-home" >NSP</a>
                </div>
                <div id="navbar" class="navbar-collapse collapse">
                   <!-- THis is for logged in users -->
                   {% if user.is_authenticated %}
                   <ul class="nav navbar-nav">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                     <li><a href="/account" class="glyphicon glyphicon-home"></a></li>
+{#                     <li><a href="/account" class="glyphicon glyphicon-home"></a></li>#}
                      <li><a href="/account/profile" class="glyphicon glyphicon-user"></a></li>
                      <li><a href="/account/profile/edit" class="glyphicon glyphicon-edit"></a></li>
-                      <li><a href="/account/profile/edit_details">Edit Details</a> </li>
-                     <li><a href="https://mext.in/" class="glyphicon glyphicon-education" target="_blank"></a></li>
-                     <li><a href="https://binderbug.com/" class="glyphicon glyphicon-sunglasses" target="_blank"></a></li>
-                     <form class="navbar-form navbar-right" method="post" action="/account/search/">
+{#                      <li><a href="/account/profile/edit_details">Edit Details</a> </li>#}
+
+                     <form class="navbar-form navbar-right" role="search" method="post" action="/account/search/">
                         {% csrf_token %}
                         <div class="form-group">
-                           <div class="col-lg-5">
+
                               <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
-                           </div>
+
                         </div>
-                        <button type="submit" class="glyphicon glyphicon-search"></button>
+                        <button type="submit" class="btn btn-transparent">
+                            <span class="glyphicon glyphicon-search">
+                            </span>
+                        </button>
                      </form>
+                  <li ><a href="#">Features</a></li>
+                      <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
@@ -50,20 +78,29 @@
                      <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
                   </ul>
                   {% else %}
+                      <div class="container-fluid">
                   <ul class="nav navbar-nav">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                     <form class="navbar-form navbar-right" role="search" method="get">
+                     <form class="navbar-form navbar-right" role="search" method="post" action="/account/search/">
+                        {% csrf_token %}
                         <div class="form-group">
-                           <input type="text" class="form-control" name="q">
+                              <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
                         </div>
-                        <button type="submit" class="glyphicon glyphicon-search"></button>
+                        <button type="submit" class="btn btn-transparent">
+                            <span class="glyphicon glyphicon-search">
+                            </span>
+                        </button>
                      </form>
+                  <li ><a href="#">Features</a></li>
+                      <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
                      <li><a href="/account/register" class="glyphicon glyphicon-pencil"></a></li>
                      <li><a href="/account/login" class="glyphicon glyphicon-off"></a></li>
                   </ul>
+                      </div>
                   {% endif %}
                </div>
                <!--/.nav-collapse -->

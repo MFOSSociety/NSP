@@ -9,12 +9,13 @@ from accounts.forms import (
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from accounts.models import User, UserProfile
+from accounts.models import User, UserProfile, project_details
 
 
 def project_home(request):
     args = {}
     return render(request, 'accounts/project_home.html', args)
+
 
 def describe(request):
     project_registered = False
