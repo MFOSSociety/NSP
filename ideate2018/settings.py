@@ -121,8 +121,3 @@ LOGIN_REDIRECT_URL = '/account/profile/'
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
-
-
-
-# superuser = team
-# password = passionate

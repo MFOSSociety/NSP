@@ -1,28 +1,29 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
-# from django.contrib.auth.forms import UserCreationForm use this for not custom\
-from accounts.forms import UserForm, UserProfileForm
+# from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
     EditProfileForm,
-    EditSkillUtilityForm,
     ProjectForm,
+    SignUpForm,
+    SkillForm,
 )
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from accounts.models import User, UserProfile, project_details
+from accounts.models import User, project_details
 
 
+@login_required
 def project_home(request):
     args = {}
     return render(request, 'accounts/project_home.html', args)
 
 
+@login_required
 def describe(request):
     project_registered = False
 
     if request.method == 'POST':
         project_form = ProjectForm(data=request.POST)
-
         if project_form.is_valid():
             project_details = project_form.save()
             project_details = project_form.save(commit=False)
@@ -31,8 +32,8 @@ def describe(request):
     # These forms will be blank, ready for user input.
     else:
         project_form = ProjectForm()
+    return render(request, 'accounts/describe.html', {'project_form': project_form, 'project_registered': project_registered})
 
-    return render(request, 'accounts/describe.html', {'project_form': project_form, 'project_registered':project_registered})
 
 def home(request):
     name = "ideate 2018"
@@ -41,43 +42,19 @@ def home(request):
 
 
 def user_login(request):
-
-    # If the request is a HTTP POST, try to pull out the relevant information.
     if request.method == 'POST':
-        # Gather the username and password provided by the user.
-        # This information is obtained from the login form.
-                # We use request.POST.get('<variable>') as opposed to request.POST['<variable>'],
-                # because the request.POST.get('<variable>') returns None, if the value does not exist,
-                # while the request.POST['<variable>'] will raise key error exception
         username = request.POST.get('username')
         password = request.POST.get('password')
-
-        # Use Django's machinery to attempt to see if the username/password
-        # combination is valid - a User object is returned if it is.
         user = authenticate(username=username, password=password)
-
-        # If we have a User object, the details are correct.
-        # If None (Python's way of representing the absence of a value), no user
-        # with matching credentials was found.
         if user:
-            # Is the account active? It could have been disabled.
             if user.is_active:
-                # If the account is valid and active, we can log the user in.
-                # We'll send the user back to the homepage.
                 login(request, user)
                 return HttpResponseRedirect('/account/')
             else:
-                # An inactive account was used - no logging in!
                 return HttpResponse("Your NSP account is disabled.")
         else:
-            # Bad login details were provided. So we can't log the user in.
             return HttpResponse("Invalid login details supplied.")
-
-    # The request is not a HTTP POST, so display the login form.
-    # This scenario would most likely be a HTTP GET.
     else:
-        # No context variables to pass to the template system, hence the
-        # blank dictionary object...
         return render(request, 'accounts/login.html', {})
 
 
@@ -117,6 +94,10 @@ def view_profile(request):
     return render(request, 'accounts/profile.html', args)
 
 
+def about(request):
+    return HttpResponse("<h1>About Us</h1>")
+
+
 # pass, if you don't want to write the method yet
 
 @login_required
@@ -132,21 +113,6 @@ def edit_profile(request):
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/edit_profile.html', args)
-
-@login_required
-def edit_details(request):
-    if request.method == 'POST':
-        print("if statement reached")
-        form = EditSkillUtilityForm(request.POST, instance=request.userprofile)
-
-        if form.is_valid():
-            form.save()
-            return redirect('/account/profile')
-
-        else:
-            form = EditSkillUtilityForm(instance=request.userprofile)
-            args = {'form': form}
-            return render(request, 'accounts/edit_detail.html', args)
 
 
 @login_required
@@ -171,55 +137,50 @@ def change_password(request):
 # Go through this, this is important
 
 
-def register(request):
-    # A boolean value for telling the template whether the registration was successful.
-    # Set to False initially. Code changes value to True when registration succeeds.
+def signup(request):
     registered = False
-    # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
-        # Attempt to grab information from the raw form information.
-        # Note that we make use of both UserForm and UserProfileForm.
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
-
-        # If the two forms are valid...
-        if user_form.is_valid() and profile_form.is_valid():
-            # Save the user's form data to the database.
-            user = user_form.save()
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
-
-            user.set_password(user.password)
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            print(user)
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.branch = form.cleaned_data.get('branch')
+            user.profile.phone = form.cleaned_data.get('phone')
+            user.profile.year = form.cleaned_data.get('year')
+            # user.proifle.image = form.cleaned_data.get('image')
             user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('/account/registersuccess')
+    else:
+        form = SignUpForm()
+    return render(request, 'accounts/signup.html', {'form': form, 'registered': registered})
 
-            # Now sort out the UserProfile instance.
-            # Since we need to set the user attribute ourselves, we set commit=False.
-            # This delays saving the model until we're ready to avoid integrity problems.
-            profile = profile_form.save(commit=False)
 
-            profile.user = user
+@login_required
+def addskill(request):
+    skill_added = False
 
-            # Did the user provide a profile picture?
-            # If so, we need to get it from the input form and put it in the UserProfile model.
-            if 'picture' in request.FILES:
-                profile.image = request.FILES['image']
+    if request.method == 'POST':
+        skill_form = SkillForm(data=request.POST)
 
-            # Now we save the UserProfile model instance.
-            profile.save()
-
-            # Update our variable to tell the template registration was successful.
-            registered = True
-
-        # Invalid form or forms - mistakes or something else?
-        # Print problems to the terminal.
-        # They'll also be shown to the user.
-        else:
-            print("Django Shit Itself")
+        if skill_form.is_valid():
+            skill_detail = skill_form.save()
+            skill_detail = skill_form.save(commit=False)
+            skill_added = True
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
+        skill_form = ProjectForm()
 
-    # Render the template depending on the context.
-    return render(request, 'accounts/register.html', {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
+    return render(request, 'accounts/addskill.html', {'skill_form': skill_form, 'skill_added': skill_added})
+
+
+def skills(request):
+    pass
+
+
+def registersuccess(request):
+    return render(request, 'accounts/registersuccess.html')

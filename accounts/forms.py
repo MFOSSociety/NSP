@@ -1,57 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import  UserChangeForm
-from accounts.models import UserProfile
-from accounts.models import project_details
+from django.contrib.auth.forms import  UserChangeForm, UserCreationForm
+from accounts.models import project_details, Skill
+from django.forms import ModelForm
 
 
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+class ProfileForm(ModelForm):
+    pass
 
-    class Meta:
-        model = User
-        fields = (
-            'username',
-            'first_name',
-            'last_name',
-            'email',
-            'password'
-
-        )
-
-    def save(self, commit=True):
-        user = super(UserForm, self).save(commit=False)  # i might have left a loophole here
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.email = self.cleaned_data['email']
-
-        if commit:
-            user.save()
-
-        return user
-
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = (
-            'year_of_study',
-            'image',
-            'phone',
-            'stream',
-        )
-
-    def save(self, commit=True):
-        userprofile = super(UserProfileForm, self).save(commit=False)
-        userprofile.year_of_study = self.cleaned_data['year_of_study']
-        userprofile.image = self.cleaned_data['image']
-        userprofile.phone = self.cleaned_data['phone']
-        userprofile.stream = self.cleaned_data['stream']
-
-        if commit:
-            userprofile.save()
-
-        return userprofile
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -93,17 +49,26 @@ class EditProfileForm(UserChangeForm):
         # we can use exclude(....fields....) if we want to exclude attributes
 
 
-class EditSkillUtilityForm(UserChangeForm):
+class SignUpForm(UserCreationForm):
+    branch = forms.CharField(help_text="Your Branch")
+    phone = forms.CharField(help_text="Your Phone Number")
+    year = forms.CharField(help_text="Your Year OF Study")
 
     class Meta:
-        model = UserProfile
-        fields = (
-            'image',
-            'year_of_study',
-            'stream',
-            'phone',
-        )
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name','branch', 'phone', 'year', 'password1', 'password2')
 
 
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ('skill_name',)
 
+    def save(self, commit=True):
+        skills = super(SkillForm, self).save(commit=False)
+        skills.project_name = self.cleaned_data['skill_name']
 
+        if commit:
+            skills.save()
+
+        return skills

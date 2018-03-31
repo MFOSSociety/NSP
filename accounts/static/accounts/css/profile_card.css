@@ -1,8 +1,8 @@
 .ourTeam-box{
     border-radius:2px;
-    border-top: 20px solid grey;
+    border-top: 20px whitesmoke;
     margin:5px;
-    background-color: gray;
+    background-color: mintcream;
     margin-bottom: 30px;
     size: 50px;
 }
@@ -16,14 +16,14 @@
 }
 .section2 p{
     font-weight: bold;
-    color:#000000;
+    color:aqua;
     letter-spacing:1px;
 }
 .section2 span{
     color:#979597;
 }
 .section2 label{
-    background-color: #000000;
+    background-color: aqua;
     padding: 8px 10px 8px 10px;
     color:#fff;
     font-weight: normal;
@@ -31,7 +31,7 @@
     border-radius: 2px;
 }
 .section3{
-    background-color: #000000;
+    background-color: antiquewhite;
 }
 .section3 i{
     color:#fff;

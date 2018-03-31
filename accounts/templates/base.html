@@ -5,36 +5,33 @@
       {% block head %}
       <meta charset="UTF-8">
       <title></title>
-      <style type="text/css">
-  	  .footer {
-  		position: fixed;
-  		left: 0;
-  		bottom: 0;
-  		width: 100%;
-  		background-color: black;
-  		text-align: center;
-  	}
-      .navbar{
-          border-radius: 0;
-          padding-top: 0px;
-      }
-          body{
-      background: url({% static 'accounts/black.jpg' %})
-      {#color: white;#}
-
-    }
-          </style>
       {% endblock %}
 
 
    </head>
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <style type="text/css">
+      body{
+        background-image: url({% static 'accounts/img/backgroundnsp.png' %});
+          background-repeat: repeat;
+          font-family: Montserrat;
+          background-size: cover;
+
+      }
+
+      .form-group{
+          padding-bottom: 5px;
+      }
+  </style>
+
    <body>
 {#   <img src="{% static 'accounts/black.jpg' %}">#}
-      <br>
-      <div class="container-fluid">
-         <nav class="navbar navbar-inverse">
+         <nav class="navbar navbar-inverse" style="color: white">
             <div class="container-fluid">
                <div class="navbar-header">
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -58,46 +55,28 @@
                      <form class="navbar-form navbar-right" role="search" method="post" action="/account/search/">
                         {% csrf_token %}
                         <div class="form-group">
-
                               <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
-
                         </div>
-                        <button type="submit" class="btn btn-transparent">
+                        <button type="submit" class="btn btn-transparent" style="background-color: grey">
                             <span class="glyphicon glyphicon-search">
                             </span>
                         </button>
                      </form>
-                  <li ><a href="#">Features</a></li>
-                      <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
                      <li><a href="/account/change-password">Change Password</a></li>
-                     <li><a href="/account/reset-password">Reset Password</a></li>
                      <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
                   </ul>
                   {% else %}
                       <div class="container-fluid">
                   <ul class="nav navbar-nav">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                     <form class="navbar-form navbar-right" role="search" method="post" action="/account/search/">
-                        {% csrf_token %}
-                        <div class="form-group">
-                              <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-transparent">
-                            <span class="glyphicon glyphicon-search">
-                            </span>
-                        </button>
-                     </form>
-                  <li ><a href="#">Features</a></li>
-                      <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
+
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                     <li><a href="/account/register" class="glyphicon glyphicon-pencil"></a></li>
+                     <li><a href="/account/signup" class="glyphicon glyphicon-pencil"></a></li>
                      <li><a href="/account/login" class="glyphicon glyphicon-off"></a></li>
                   </ul>
                       </div>
@@ -107,7 +86,6 @@
             </div>
             <!--/.container-fluid -->
          </nav>
-      </div>
       <br>
       {% block body %}
       <h1 class="glyphicon glyphicon-home"> YOHO people</h1>

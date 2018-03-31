@@ -7,63 +7,110 @@
       <meta charset="UTF-8">
       {% load static %}
       <link rel="stylesheet" href="{% static 'accounts/css/profile_card.css' %}">
-      <title>Hey, {{ user.first_name }}!</title>
-          <style type="text/css">
-  	  .footer {
-  		position: fixed;
-  		left: 0;
-  		bottom: 0;
-  		width: 100%;
-  		background-color: black;
-  		text-align: center;
-  	}
-      .navbar{
-          border-radius: 0;
-          padding-top: 0px;
-      }
-          body{
-      background: url({% static 'accounts/black.jpg' %})
-      {#color: white;#}
-
-    }
-          </style>
+      <title>Hey, {{ user.username }}!</title>
       {% endblock %}
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+      <style>
+         .item{
+         background-color:;
+         }
+      </style>
    </head>
    <body>
       {% block body %}
-      <div class="container">
+      <div class="container-fluid">
          <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-               <div class="row section-success ourTeam-box text-center">
-                  <div class="col-md-12 section1">
-                     {%  if user.userprofile.image.url is not None %}
-                     <img src={{ user.userprofile.image.url }}>
-                     {% else %}
-                     <img src={% static 'accounts/img/default_face.jpg' %}>
-                     {% endif %}
+            <div class="col-lg-8 col-md-8">
+               <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="1800">
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" style="height: 350px;background-color:rgba(255,255,255,0.8);border-radius:25px; ">
+                     <div class="item active text-center">
+                        <h1>Project 1</h1>
+                        <br><br>
+                        <h3>Mentor Name</h3>
+                        <h5>Phone No</h5>
+                        <p>Description</p>
+                     </div>
+                     <div class="item text-center">
+                        <h1>Project 2</h1>
+                        <br><br>
+                        <h3>Mentor Name</h3>
+                        <h5>Phone No</h5>
+                        <p>Description</p>
+                     </div>
+                     <div class="item text-center">
+                        <h1>Project 3</h1>
+                        <br><br>
+                        <h3>Mentor Name</h3>
+                        <h5>Phone No</h5>
+                        <p>Description</p>
+                     </div>
                   </div>
-                  <div class="col-md-12 section2">
-                     <label class="glyphicon glyphicon-usd"> {{ user }}</label>
-                     <span>
-                        {% if user.userprofile.year_of_study is not None %}
-                        <p>Year Of Study : {{ user.userprofile.year_of_study }} </p>
-                        {% endif %}
-                        {% if user.userprofile.phone is not 0 %}
-                        <p>Phone No. : {{ user.userprofile.phone }} </p>
-                        {% endif %}
-                        </p>
-                        {% if user.userprofile.stream is not none %}
-                        <p>Stream : {{ user.userprofile.stream }}</p>
-                        {% endif %}
-                        <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
-                     </span>
-                     <br>
+                  <!-- Left and right controls -->
+                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                  <span class="sr-only">Next</span>
+                  </a>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+               <div class="card" >
+
+               <img class="img-rounded">
+                   <span class="glyphicon glyphicon-user"></span>
+               </img>
+
+                  <center>
+                     <div class="card-body text-center" style="background-color: rgba(255,255,255,0.8);margin-top:25px;border-radius:10px;width: 350px">
+                        <center>
+                           <label class=""> {{ user }}</label>
+                        </center>
+                        <span>
+                           <p>Year Of Study : {{ user.profile.year }} </p>
+                           <p>Phone No. : {{ user.profile.phone }} </p>
+                           <p>Stream : {{ user.profile.branch }}</p>
+                           <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
+                           <p> Skill :
+                              {% for skill_name in user.profile.skill.all %}
+                              {{ skill_name }}
+                              {% endfor %}
+                           </p>
+                        </span>
+                        <br>
+                  </center>
+                  <center> <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Add Skill</button></center>
+                  <div class="modal modal-fade" role="dialog" id="myModal">
+                  <div class="modal-dialog">
+                  <div class="modal-content">
+                  <div class="modal-header" style="background-color:rgb(47,141,189);color: white;">
+                  <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                  <h4 class="modal-title">Add Skill</h4>
+                  </div>
+                  <div class="modal-body" style="margin: 10px;">
+                  <label for="addskill" >Skills  :</label>
+                  <input type="text" name="Skill" placeholder="Add Skill" value="" size="50" />
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
                   </div>
                </div>
             </div>
          </div>
-      </div>
+
       {% endblock %}
    </body>
-   </body>
+
 </html>
+
