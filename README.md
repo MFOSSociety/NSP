@@ -24,3 +24,8 @@ Visit - http://nsp.pythonanywhere.com/
 
 ## Change Password Page
 ![Change Password](https://github.com/Rishi110/NSP/blob/master/screenshots/6%20Change%20Password.png)
+
+## Developers:
+### Backend Developers - Rishi Banerjee, Pratik Jain
+### Frontend Developers - Prachal Goyal, Atiksh Srivastava
+### Designer - Amit Parameshwar
