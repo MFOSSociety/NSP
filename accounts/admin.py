@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import UserProfile, project_details
+from .models import project_details, Profile, Skill
 
 
-admin.site.register(UserProfile)
+
 admin.site.register(project_details)
+admin.site.register(Profile)
+admin.site.register(Skill)

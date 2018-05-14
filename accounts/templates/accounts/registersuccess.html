@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <title>NSP</title>
+  	<meta charset="utf-8">
+
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    {% endblock %}
+
+<style type="text/css">
+
+body{
+    font-family: 'Montserrat';
+    width: 100%;
+    height: 100%;
+
+}
+
+.hero-image{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url({% static 'accounts/img/nspback.png' %});
+    background-size: cover;
+    height: 80vh;
+    width: 99vw;
+    }
+
+
+    .footer {
+  		position: relative;
+  		left: 0;
+  		bottom: 0;
+  		width: 100%;
+  		background-color: black;
+  		{#text-align: center;#}
+
+
+  	}
+
+ .navbar{
+  margin-bottom: 0px;
+
+ }
+.no-margin{
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+}
+.no-padding{color: rgba(144,);
+  padding: 0px;
+  padding-top: 0px;
+}
+.img-rounded{
+  box-shadow: 0 10px 16px 0 rgba(47,141,189, 0.1),0 10px 16px 0 rgba(47,141,189, 0.1) ;
+}
+.but{
+  font-size: 20px;
+  margin-left: 36%;
+  margin-top: 5%;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+</style>
+
+</head>
+
+<div>
+
+    {% block body %}
+        <nav class="navbar navbar-inverse" style="color: white;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand"  style="padding: 15px; font-size: 30px;" href="#">NSP</a>
+    </div>
+    <div class="navbar-collapse collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <form class="navbar-form navbar-left" style="padding-top: 3px;">
+       <div class="form-group">
+         <input type="text" name="search_string" class="form-control" placeholder="name/project">
+       </div>
+       <button type="submit" class="btn btn-trasparent" style="background-color: grey;">
+         <span class="glyphicon glyphicon-search"></span>
+       </button>
+     </form>
+      </ul>
+        {% if user.is_authenticated %}
+            <ul class="nav navbar-nav">
+                     <!-- Do not fucking forget the / -> the forward slash -->
+                     <li><a href="/account/profile" class="glyphicon glyphicon-user"></a></li>
+                     <li><a href="/account/profile/edit" class="glyphicon glyphicon-edit"></a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                     <!-- Do not fucking forget the / -> the forward slash -->
+                      <li><a href = "/account/project/start">Start Project</a></li>
+                     <li><a href="/account/change-password">Change Password</a></li>
+                     <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
+                  </ul>
+        {% else %}
+
+        {% endif %}
+    </div>
+  </div>
+</nav>
+{% endblock %}
+ <div class="hero-image no-margin">
+    </div>
+
+
+<div class="container-fluid no-padding" style="color: white;" >
+  <div class="no-margin" style="background-color: rgb(47,141,189);width: 100vw;padding-top: 5px;">
+     <center>
+      <p style="font-size: 35px;">You have been REGISTERED</p>
+     </center>
+        <div class="text-center">
+        <img src="111project1.png" class="img-circle">
+        <button class="btn btn-primary">Start New Project</button>
+        </div>
+
+  </div>
+</div>

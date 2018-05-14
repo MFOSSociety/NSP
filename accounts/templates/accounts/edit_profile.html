@@ -1,45 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% block head %}
-        <meta charset="UTF-8">
-        <title>{{ user.first_name }}</title>
-
-    {% endblock %}
-<style type="text/css">
-  	  .footer {
-  		position: fixed;
-  		left: 0;
-  		bottom: 0;
-  		width: 100%;
-  		background-color: black;
-  		text-align: center;
-  	}
-      .navbar{
-          border-radius: 0;
-          padding-top: 0px;
-      }
-          body{
-      background: url({% static 'accounts/black.jpg' %})
-      color: white;
-
-    }
-          </style>
-
-</head>
-<body>
-
-    {% block body %}
-        <div class="container">
-            <form method="POST">
+{% block head %}
+<meta charset="UTF-8">
+    <head>
+<title>{{ user.first_name }}</title>
+    </head>
+{% endblock %}
+{% block body %}
+    <center>
+        <div class="container" style="padding-top: 120px; background-color: rgba(255,255,255,0.6); width: 900px;">
+            <form method="POST" style="padding-bottom: 20px;">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button class="btn btn-success">Change</button>
             </form>
         </div>
-    {% endblock %}
-
-</body>
-</html>
+    </center>
+{% endblock %}

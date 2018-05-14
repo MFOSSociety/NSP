@@ -1,45 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <head>
+    <head class="center">
         <title>Start a Project</title>
     </head>
-    <style type="text/css">
-  	  .footer {
-  		position: fixed;
-  		left: 0;
-  		bottom: 0;
-  		width: 100%;
-  		background-color: black;
-  		text-align: center;
-  	}
-      .navbar{
-          border-radius: 0;
-          padding-top: 0px;
-      }
-          body{
-      background: url({% static 'accounts/black.jpg' %})
-      {#color: white;#}
-
-    }
-          </style>
 {% endblock %}
 {% block body %}
     {% if project_registered %}
     <h1 class="container">Thank you for Starting a Project!</h1>
     {% else %}
-    <body class="container">
-        <h1>Fill this form to let the NSP know what you are going to work on!</h1>
-        <strong>Implement Project Now</strong><br />
-        <form id="user_form" method="post">
-            {% csrf_token %}
-            <!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
-            {{ project_form.as_p }}
-            <!-- Provide a button to click to submit the form. -->
-            <button type="submit" name="submit" value="Register" class="btn btn-success">Start a Project</button>
-        </form>
-    </body>
-    {% endif %}
-{% endblock %}
+        <body class="container-fluid ">
+
+        <div class="text-center" style="background-color: rgba(255,255,255,0.8);border-radius:50px;margin-top:50px;padding-top:10px;padding-bottom:10px;">
+
+            <h1>Fill this form to let NSP know what you are going to work on!</h1>
+
+            <form id="user_form" method="post">
+                {% csrf_token %}
+                {{ project_form.as_p }}
+                <button type="submit" name="submit" value="Register" class="btn btn-success">Get Started!</button>
+            </form>
+        </div>
+        </body>
+        {% endif %}
+    {% endblock %}

@@ -1,6 +1,15 @@
-from django.db import models
-from django.db.models.signals import post_save
 from django.contrib.auth.models import User
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class Skill(models.Model):
+    skill_name = models.CharField(max_length=20, default="", blank=True)
+
+    def __str__(self):
+        return self.skill_name
+
 
 
 class project_details(models.Model):
@@ -14,23 +23,30 @@ class project_details(models.Model):
     def __str__(self):
         return self.project_name + " under " + self.mentor_name
 
-class UserProfile(models.Model):
+
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    year_of_study = models.CharField(max_length=3, default="", blank=True)
-    stream = models.CharField(max_length=50, default="", blank=True)
-    phone = models.IntegerField(default=0, blank=True)
-    image = models.ImageField(upload_to='profile_image', blank=True)
+    branch = models.CharField(max_length=50, default="", blank=True)
+    year = models.CharField(max_length=50, default="", blank=True)
+    phone = models.CharField(max_length=15, default="", blank=True)
+    skill_name = models.ManyToManyField(Skill, blank=True)
+    # image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.first_name + " " + self.user.last_name + " " + self.branch + " " + self.year + " " + self.phone
 
 
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()
 
 
-post_save.connect(create_profile, sender=User)
+
+
+
+
 
 
 

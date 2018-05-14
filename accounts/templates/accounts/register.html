@@ -4,48 +4,26 @@
 <html>
     <head>
         <title>Register</title>
-        <style type="text/css">
-  	  .footer {
-  		position: fixed;
-  		left: 0;
-  		bottom: 0;
-  		width: 100%;
-  		background-color: black;
-  		text-align: center;
-  	}
-      .navbar{
-          border-radius: 0;
-          padding-top: 0px;
-      }
-          body{
-      background: url({% static 'accounts/black.jpg' %})
-      {#color: white;#}
-
-    }
-          </style>
     </head>
     {% block body %}
     <body class="container">
+    <div class="center align-center" style="align-items: center">
         <h1>Registration</h1>
 
         {% if registered %}
         Team |n-s-p| : <strong>thank you for registering!</strong>
-        <a href="/account/">Return to the homepage.</a><br />
+        <a href="/account/">Return to the homepage.</a><br/>
         {% else %}
-        <strong>Register Here</strong><br />
-
+        <center>
         <form id="user_form" method="post" action="/account/register/">
             {% csrf_token %}
-            <!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
             {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-
             <!-- Provide a button to click to submit the form. -->
-            <button type="submit" name="submit" value="Register" class="btn btn-success">Register to NSP</button>
+            <button type="submit" name="submit" value="Register" class="btn btn-upload">Register to NSP</button>
         </form>
+        </center>
         {% endif %}
+    </div>
     </body>
 {% endblock %}
 </html>
