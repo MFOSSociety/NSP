@@ -6,7 +6,7 @@
       <meta charset="UTF-8">
       {% load static %}
           <link rel="stylesheet" href="{% static 'accounts/css/profile_card.css' %}">
-      <title>Profile Page</title>
+      <title>Hey, {{ user.first_name }}!</title>
       {% endblock %}
    </head>
    <body>
@@ -25,24 +25,25 @@
             {% endif %}
         </div>
         <div class="col-md-12 section2">
-          <p>{{ user }}</p>
+          <label class="glyphicon glyphicon-usd"> {{ user }}</label>
 
           <span>
-              {% if user.userprofile.description is not None %}
-              {{ user.userprofile.description }} <br>
+              {% if user.userprofile.year_of_study is not None %}
+              <p>Year Of Study : {{ user.userprofile.year_of_study }} </p>
               {% endif %}
-              {% if user.userprofile.phone is not none and not 0 %}
-              {{ user.userprofile.phone }}  <br>
+              {% if user.userprofile.phone is not 0 %}
+              <p>Phone No. : {{ user.userprofile.phone }} </p>
               {% endif %}
-              {% if user.userprofile.city is not none %}
-              {{ user.userprofile.city }}   <br>
+              {% if user.userprofile.books is not none %}
+              <p>Books : {{ user.userprofile.books }}</p>
               {% endif %}
-              {% if user.userprofile.website is not none %}
-              <a href="{{ user.userprofile.website }}">{{ user.userprofile.website }}</a>  <br>
+              {% if user.userprofile.stream is not none %}
+              <p>Stream : {{ user.userprofile.stream }}</p>
               {% endif %}
+              <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
           </span><br>
 
-            <label class="glyphicon glyphicon-btc"> {{ user.email }}</label>
+
 
         </div>
       </div>
