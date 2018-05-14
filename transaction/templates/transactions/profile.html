@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+   <title>Profile</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" type="text/css" href="profile.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="base.css">
+   <style>
+      html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+   </style>
+   <body class="w3-light-grey">
+      <nav class="navbar_color navbar">
+         <div class="container-fluid">
+            <!-- Header-->
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <!-- Profile Picture Here -->
+               <a class="navbar_color navbar-brand" href="#">Profile</a>
+            </div>
+            <!-- Items -->
+            <div class="collapse navbar-collapse" id="topNavBar">
+               <ul class="nav navbar-nav">
+                  <li class="active">
+                     <a href="#" class="navbar_color">
+                     <span class="glyphicon glyphicon-bell" aria-hidden="true">
+                     </span>&nbsp
+                     Notification
+                     </a>
+                  </li>
+               </ul>
+               <form class="navbar-form navbar-left" role="search" method="get" action="#">
+                  <div class="form-group">
+                     <input type="text" class="form-control" name="q" value="">
+                  </div>
+                  <button type="submit" class="navbar_color btn btn-default">Search</button>
+               </form>
+               <ul class="nav navbar-nav navbar-right">
+                  <li class="">
+                     <a href="#" class="navbar_color">
+                     <span class="glyphicon glyphicon-off" aria-hidden="true">
+                     </span>&nbsp
+                     Logout
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <!-- Page Container -->
+      <div class="w3-content w3-margin-top" style="max-width:1400px;">
+         <!-- The Grid -->
+         <div class="w3-row-padding">
+            <!-- Left Column -->
+            <div class="w3-third">
+               <div class="w3-white w3-text-grey w3-card-4">
+                  <div class="w3-display-container">
+                     <img src="https://ichef-1.bbci.co.uk/news/660/cpsprodpb/475B/production/_98776281_gettyimages-521697453.jpg" style="width:100%" alt="Avatar">
+                  </div>
+                  <div class="w3-container">
+                     <h2>Username</h2>
+                     <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Block No</p>
+                     <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Registration ID</p>
+                     <hr>
+                     <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+                     <div class="skills_align">
+                        <p>Adobe Photoshop</p>
+                        <p>Photography</p>
+                        <p>Illustrator</p>
+                        <p>Media</p>
+                     </div>
+                     <hr>
+                     <p class="w3-large w3-text-theme"><b><i class="fa fa-desktop fa-fw w3-margin-right w3-text-teal"></i>Languages and Technology</b></p>
+                     <div class="skills_align">
+                        <p>Java</p>
+                        <p>Python</p>
+                        <p>C++</p>
+                        <p>Django</p>
+                     </div>
+                     <br>
+                  </div>
+               </div>
+               <br>
+               <!-- End Left Column -->
+            </div>
+            <!-- Right Column -->
+            <div class="w3-twothird">
+               <div class="w3-container w3-card w3-white">
+                  <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Books</h2>
+                  <div class="w3-container">
+                  
+                     <div class="full">
+                     <div class="w3-container left">
+                        <h3 class="bookname w3-text-grey">Name</h3>
+                        <div class="w3-container">
+                           <ul class="w3-text-grey name_font">
+                              <!-- Python Jinga Code over here -->
+                              <li>S. Bhavikatti</li>
+                              <hr>
+                              <li>B.S Grewal</li>
+                              <hr>
+                              <li>H.K Dass</li>
+                              <hr>
+                              <li>R.K Rajput</li>
+                              <hr>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="w3-container right">
+                        <h3 class="bookname w3-text-grey">Price</h3>
+                        <div class="w3-container">
+                           <ul class="w3-text-grey name_font">
+                              <!-- Python Jinga Code over here -->
+                              <p>₹500</p>
+                              <hr>
+                              <p>₹240</p>
+                              <hr>
+                              <p>₹150</p>
+                              <hr>
+                              <p>₹320</p>
+                              <hr>
+                              <hr>
+                           </ul>
+                        </div>
+                     </div>
+                     </div>
+                  </div>
+               </div>
+               <br>
+               <div class="w3-container w3-card w3-white w3-margin-bottom">
+                  <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Tool-kit</h2>
+                  <div class="w3-container">
+                     <ul class="w3-text-grey">
+                        <li>Sheet Holder</li>
+                        <hr>
+                        <li>Drafter</li>
+                        <hr>
+                        <li>Geometry Box</li>
+                        <hr>
+                        <li>Notes</li>
+                        <hr>
+                     </ul>
+                  </div>
+               </div>
+               <!-- End Right Column -->
+            </div>
+            <!-- End Grid -->
+         </div>
+         <!-- End Page Container -->
+      </div>
+      <footer class="w3-container w3-teal w3-center w3-margin-top">
+         <img src="manipalwhite.png" width="300px">
+      </footer>
+   </body>
+</html>
