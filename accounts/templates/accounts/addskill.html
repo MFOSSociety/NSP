@@ -4,21 +4,12 @@
 <html>
     <head>
         <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
-        <title>Login to NSP</title>
+        <title>Skills</title>
     </head>
     {% block body %}
     <body class="container">
     <center>
-        <form id="login_form" method="post" action="{% url 'user_login' %}">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="username" value="" size="50"/>
-            <br>
-            <br>
-            <input type="password" name="password" placeholder="password" value="" size="50"/>
-            <br>
-            <br>
-            <button class="btn btn-success">Login</button>
-        </form>
+        {{ skill_added }}
     </center>
     </body>
     {% endblock %}

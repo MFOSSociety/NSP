@@ -38,7 +38,7 @@ def describe(request):
 def home(request):
     name = "ideate 2018"
     args = {'name': name}
-    return render(request, 'accounts/home.html', args)
+    return render(request, 'accounts/index.html', args)
 
 
 def user_login(request):
@@ -174,7 +174,6 @@ def addskill(request):
     # These forms will be blank, ready for user input.
     else:
         skill_form = ProjectForm()
-
     return render(request, 'accounts/addskill.html', {'skill_form': skill_form, 'skill_added': skill_added})
 
 

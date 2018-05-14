@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load pinax_messages_tags %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -96,7 +97,10 @@
                   </div>
                   <div class="modal-body" style="margin: 10px;">
                   <label for="addskill" >Skills  :</label>
-                  <input type="text" name="Skill" placeholder="Add Skill" value="" size="50" />
+                  <form method="post">
+                      {% csrf_token %}
+                      <input type="text" name="Skill" placeholder="Add Skill" value="" name="addSkill" size="50"/>
+                  </form>
                   </div>
                   <div class="modal-footer">
                   <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
@@ -111,6 +115,5 @@
 
       {% endblock %}
    </body>
-
 </html>
 

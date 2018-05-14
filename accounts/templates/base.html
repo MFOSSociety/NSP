@@ -6,8 +6,6 @@
       <meta charset="UTF-8">
       <title></title>
       {% endblock %}
-
-
    </head>
 
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -51,17 +49,17 @@
                      <li><a href="{% url 'view_profile' %}" class="glyphicon glyphicon-user"></a></li>
                      <li><a href="{% url 'edit_profile' %}" class="glyphicon glyphicon-edit"></a></li>
 {#                      <li><a href="/account/profile/edit_details">Edit Details</a> </li>#}
-
-                     <form class="navbar-form navbar-right" role="search" method="post" action="/account/search/">
-                        {% csrf_token %}
-                        <div class="form-group">
-                              <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-transparent" style="background-color: grey">
-                            <span class="glyphicon glyphicon-search">
-                            </span>
-                        </button>
-                     </form>
+                      <ul class="nav navbar-nav">
+                  <form class="navbar-form navbar-left" style="padding-top: 3px;" role="search" method="post" action="{% url 'search' %}">
+                     {% csrf_token %}
+                     <div class="form-group">
+                        <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
+                     </div>
+                     <button type="submit" class="btn btn-trasparent" style="background-color: grey;">
+                     <span class="glyphicon glyphicon-search"></span>
+                     </button>
+                  </form>
+               </ul>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
