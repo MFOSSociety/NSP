@@ -3,18 +3,41 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
 
+class Skill(models.Model):
+    name = models.CharField(max_length=100, default="", blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Book(models.Model):
+    name = models.CharField(max_length=100, default="", blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Tool(models.Model):
+    name = models.CharField(max_length=100, default="", blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    skill = models.CharField(max_length=100, default="", blank=True)
+    skill = models.ManyToManyField(Skill)
+    books = models.ManyToManyField(Book)
+    tools = models.ManyToManyField(Tool)
     year_of_study = models.CharField(max_length=3, default="", blank=True)
     stream = models.CharField(max_length=50, default="", blank=True)
-    books = models.CharField(max_length=100, default="", blank=True)
-    tools = models.CharField(max_length=100, default="", blank=True)
     phone = models.IntegerField(default=0, blank=True)
     image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
+
+
 
 
 def create_profile(sender, **kwargs):

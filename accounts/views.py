@@ -11,9 +11,10 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     numbers = [1, 2, 3, 4, 5]
-    name = "Rishi Banerjee"
+    name = "ideate 2018"
     args = {'name': name, 'numbers': numbers}
     return render(request, 'accounts/home.html', args)
+
 
 @login_required
 def view_profile(request):
@@ -36,6 +37,7 @@ def edit_profile(request):
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/edit_profile.html', args)
+
 
 @login_required
 def change_password(request):
