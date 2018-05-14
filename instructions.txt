@@ -1,0 +1,2 @@
+After migration, open db.sqlite3
+then in accounts_user_id, modify the field to only integer, not null and not auto increment. It gives the AnonymousUser _meta and Integrity Error!
