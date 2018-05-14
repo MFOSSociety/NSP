@@ -86,16 +86,24 @@ def search(request):
 
         if srch:
             match1 = User.objects.filter(first_name__icontains=srch)
-            match2 = UserProfile.objects.filter(skill__name__icontains=srch)
-
+            #TODO skill name search functionlity to be added
+            match2 = project_details.objects.filter(project_name__icontains=srch)
+            match3 = project_details.objects.filter(branch__icontains=srch)
+            match4 = project_details.objects.filter(mentor_name__icontains=srch)
             if match1:
-                # for userprofile
+                print("match1")
                 return render(request, 'accounts/search.html', {'sr': match1, 'condition': 'person'})
             elif match2:
-                # for user skill
-                return render(request, 'accounts/search.html', {'sr': match2, 'condition': 'skill'})
+                print("match2")
+                return render(request, 'accounts/search.html', {'sr': match2, 'condition': 'project'})
+            elif match3:
+                print("match3")
+                return render(request, 'accounts/search.html', {'sr': match3, 'condition': 'branch'})
+            elif match4:
+                print("match4")
+                return render(request, 'accounts/search.html', {'sr': match4, 'condition': 'mentor'})
             else:
-                return render(request, 'accounts/search.html', {'sr': 'no results found'})
+                return render(request, 'accounts/search.html', {'sr': 'search_fail', 'condition': 'search_fail'})
 
         else:
             return HttpResponse('/account/search/')
