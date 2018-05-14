@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
@@ -33,21 +31,21 @@
                         {% if user.userprofile.phone is not 0 %}
                         <p>Phone No. : {{ user.userprofile.phone }} </p>
                         {% endif %}
-                        <p>
+                        <p> Books :
                            {% if user.userprofile.books is not none %}
                            {% for book in user.userprofile.books.all %}
                         <li>{{ book }}</li>
                         {% endfor %}
                         {% endif %}
                         </p>
-                        <p>
-                           {% if user.userprofile.skills is not none %}
-                           {% for skill in user.userprofile.skills.all %}
+                        <p> Skills :
+                           {% if user.userprofile.skill is not none %}
+                           {% for skill in user.userprofile.skill.all %}
                         <li>{{ skill }}</li>
                         {% endfor %}
                         {% endif %}
                         </p>
-                        <p>
+                        <p> Tools :
                            {% if user.userprofile.tools is not none %}
                            {% for tool in user.userprofile.tools.all %}
                         <li>{{ tool }}</li>
