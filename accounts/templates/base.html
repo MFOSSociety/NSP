@@ -40,7 +40,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" style="padding: 15px; font-size: 30px;" href="/account" class="glyphicon glyphicon-home" >NSP</a>
+                  <a class="navbar-brand" style="padding: 15px; font-size: 30px;" href="{% url 'home' %}" class="glyphicon glyphicon-home" >NSP</a>
                </div>
                <div id="navbar" class="navbar-collapse collapse">
                   <!-- THis is for logged in users -->
@@ -48,8 +48,8 @@
                   <ul class="nav navbar-nav">
                      <!-- Do not fucking forget the / -> the forward slash -->
 {#                     <li><a href="/account" class="glyphicon glyphicon-home"></a></li>#}
-                     <li><a href="/account/profile" class="glyphicon glyphicon-user"></a></li>
-                     <li><a href="/account/profile/edit" class="glyphicon glyphicon-edit"></a></li>
+                     <li><a href="{% url 'view_profile' %}" class="glyphicon glyphicon-user"></a></li>
+                     <li><a href="{% url 'edit_profile' %}" class="glyphicon glyphicon-edit"></a></li>
 {#                      <li><a href="/account/profile/edit_details">Edit Details</a> </li>#}
 
                      <form class="navbar-form navbar-right" role="search" method="post" action="/account/search/">
@@ -65,8 +65,8 @@
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                     <li><a href="/account/change-password">Change Password</a></li>
-                     <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
+                     <li><a href="{% url 'change_password' %}">Change Password</a></li>
+                     <li><a href="{% url 'logout' %}" class="glyphicon glyphicon-off"></a></li>
                   </ul>
                   {% else %}
                       <div class="container-fluid">
@@ -76,8 +76,8 @@
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                     <li><a href="/account/signup" class="glyphicon glyphicon-pencil"></a></li>
-                     <li><a href="/account/login" class="glyphicon glyphicon-off"></a></li>
+                     <li><a href="{% url 'signup' %}" class="glyphicon glyphicon-pencil"></a></li>
+                     <li><a href="{% url 'user_login' %}" class="glyphicon glyphicon-off"></a></li>
                   </ul>
                       </div>
                   {% endif %}

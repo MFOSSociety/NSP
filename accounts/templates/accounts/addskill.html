@@ -9,7 +9,7 @@
     {% block body %}
     <body class="container">
     <center>
-        <form id="login_form" method="post" action="/account/login/">
+        <form id="login_form" method="post" action="{% url 'user_login' %}">
             {% csrf_token %}
             <input type="text" name="username" placeholder="username" value="" size="50"/>
             <br>

@@ -12,7 +12,7 @@
 
         {% if registered %}
         Team |n-s-p| : <strong>thank you for registering!</strong>
-        <a href="/account/">Return to the homepage.</a><br/>
+        <a href="{% url 'home' %}">Return to the homepage.</a><br/>
         {% else %}
         <center>
         <form id="user_form" method="post" action="/account/register/">

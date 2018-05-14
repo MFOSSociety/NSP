@@ -105,14 +105,14 @@ hr {
         {% if user.is_authenticated %}
             <ul class="nav navbar-nav">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                     <li><a href="/account/profile" class="glyphicon glyphicon-user"></a></li>
-                     <li><a href="/account/profile/edit" class="glyphicon glyphicon-edit"></a></li>
+                     <li><a href="{% url 'view_profile' %}" class="glyphicon glyphicon-user"></a></li>
+                     <li><a href="{% url 'edit_profile' %}" class="glyphicon glyphicon-edit"></a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                      <!-- Do not fucking forget the / -> the forward slash -->
-                      <li><a href = "/account/project/start">Start Project</a></li>
-                     <li><a href="/account/change-password">Change Password</a></li>
-                     <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
+                      <li><a href = "{% url 'start_project' %}">Start Project</a></li>
+                     <li><a href="{% url 'change_password' %}">Change Password</a></li>
+                     <li><a href="{% url 'logout' %}" class="glyphicon glyphicon-off"></a></li>
                   </ul>
         {% else %}
 
@@ -131,7 +131,7 @@ hr {
       <p style="font-size: 35px;">You have been REGISTERED</p>
      </center>
         <div class="text-center">
-        <img src="111project1.png" class="img-circle">
+        <img src="{% static 'accounts/img/111project1.png' %}" class="img-circle">
         <button class="btn btn-primary">Start New Project</button>
         </div>
 

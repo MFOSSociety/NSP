@@ -17,7 +17,7 @@
 
         <center>
     <div class="container" style="padding-top: 100px;background-color: rgba(255,255,255,0.7);padding-bottom: 20px;width: 800px;">
-        <form id="login_form" method="post" action="/account/login/">
+        <form id="login_form" method="post" action="{% url 'user_login' %}">
             {% csrf_token %}
             <input type="text" name="username" placeholder="username" value="" size="50" />
             <br>

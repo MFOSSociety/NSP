@@ -11,15 +11,14 @@ from django.contrib.auth.views import (
 
 urlpatterns = [
     path('', views.home, name='home'),
-
     path('project/start/', views.describe, name='start_project'),
     path('search/', search, name='search'),
     path('login/', views.user_login, name='user_login'),
     path('registersuccess/', views.registersuccess, name='registersucess'),
     path('signup/', views.signup, name='signup'),
-    path('logout/', logout, {'template_name': 'accounts/logout.html'}),
+    path('logout/', logout, {'template_name': 'accounts/logout.html'}, name='logout'),
     path('profile/', views.view_profile, name='view_profile'),
-    path('profile/skills', views.skills, name='skills' ),
+    path('profile/skills', views.skills, name='skills'),
     path('about/', views.about, name='about'),
     path('profile/edit', views.edit_profile, name='edit_profile'),
     # path('profile/edit_details', views.edit_details, name='edit_details'),
@@ -31,7 +30,6 @@ urlpatterns = [
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.addskill, name='addskill'),
-
     ]
 
 # setting up a local mail server for testing and debugging

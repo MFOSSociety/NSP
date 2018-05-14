@@ -82,7 +82,7 @@
 
 
                <ul class="nav navbar-nav">
-                  <form class="navbar-form navbar-left" style="padding-top: 3px;" role="search" method="post" action="/account/search/">
+                  <form class="navbar-form navbar-left" style="padding-top: 3px;" role="search" method="post" action="{% url 'search' %}">
                      {% csrf_token %}
                      <div class="form-group">
                         <input type="text" placeholder="Search by Skill/Utility" name="srh" class="form-control">
@@ -95,30 +95,19 @@
                {% if user.is_authenticated %}
                <ul class="nav navbar-nav">
                   <!-- Do not fucking forget the / -> the forward slash -->
-                  <li><a href="/account/profile" class="glyphicon glyphicon-user"></a></li>
-                  <li><a href="/account/profile/edit" class="glyphicon glyphicon-edit"></a></li>
+                  <li><a href="{% url 'view_profile' %}" class="glyphicon glyphicon-user"></a></li>
+                  <li><a href="{% url 'edit_profile' %}" class="glyphicon glyphicon-edit"></a></li>
                </ul>
                <ul class="nav navbar-nav navbar-right">
                   <!-- Do not fucking forget the / -> the forward slash -->
-                  <li><a href = "/account/project/start">Start Project</a></li>
-                  <li><a href="/account/change-password">Change Password</a></li>
-                  <li><a href="/account/logout/" class="glyphicon glyphicon-off"></a></li>
-                                        <audio id="background_audio" autoplay="autoplay">
-      <source src="{{ MEDIA_URL }}/audio.mp3" type="audio/mpeg" />
-                    </audio>
-               <li><button class="icon-bar" onclick="document.getElementById('background_audio').muted = true;" >MUTE</button></li>
-
+                  <li><a href = "{% url 'start_project' %}">Start Project</a></li>
+                  <li><a href="{% url 'change_password' %}">Change Password</a></li>
+                  <li><a href="{% url 'logout' %}" class="glyphicon glyphicon-off"></a></li>
                </ul>
                {% else %}
                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="/account/signup/"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-                  <li><a href="/account/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                                       <audio id="background_audio" autoplay="autoplay">
-      <source src="{{MEDIA_URL}}/pyaudio.mp3" type="audio/mpeg" />
-                    </audio>
-               <li><button class="btn btn-primary" style="font-size:15px;color: white;margin-top: 7px;" onclick="document.getElementById('background_audio').muted = true;" >MUTE</button></li>
-
-
+                  <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+                  <li><a href="{% url 'user_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                </ul>
                {% endif %}
             </div>
@@ -135,14 +124,14 @@
                <div class="col-lg-4 col-md-4 a " style="padding-top: 3vh;align-content: center;">
                   <center><img class="img-circle" src="{% static 'accounts/img/signup.png' %}" width="40%;">
                   </center>
-                  <a href="/account/signup/"><button class="btn btn-primary but" >Sign Up</button></a>
+                  <a href="{% url 'signup' %}"><button class="btn btn-primary but" >Sign Up</button></a>
                </div>
                <div class="col-lg-4 col-md-4 center-block" style="padding-top: 7vh;">
                   <center><img class="img-rounded" src="{% static 'accounts/img/aboutus.jpg' %}" ></center>
                </div>
                <div class="col-lg-4 col-md-4 a"  style="padding-top: 3vh;align-content: center;padding-bottom: 4px;">
                   <center><img class="img-circle" src="{% static 'accounts/img/111loggin.png' %}" width="40%;"></center>
-                  <a href = "/account/login/"><button class="btn btn-primary but" >Login</button></a>
+                  <a href = "{% url 'user_login' %}"><button class="btn btn-primary but" >Login</button></a>
                </div>
             </div>
          </div>
@@ -197,8 +186,5 @@
       {% endblock %}
       <br>
    </div>
-
-
-
 </html>
 
