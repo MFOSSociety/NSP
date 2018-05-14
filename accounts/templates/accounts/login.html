@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 
-{% block body %}
-    <div class="container">
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
+        <title>Login to NSP</title>
+    </head>
+    {% block body %}
+    <body class="container">
+        <h1>Login to the NSP</h1>
 
-        {% if not user.is_authenticated %}
-            <h1>Welcome</h1>
-        <p>
-            You can Login Here.
-        </p>
-        <h2>Login</h2>
-        <form method="post">
+        <form id="login_form" method="post" action="/account/login/">
             {% csrf_token %}
-            {{ form.as_p }}
-        <button class="btn btn-success">Login</button>
+            Username: <input type="text" name="username" value="" size="50" />
+            <br>
+            Password: <input type="password" name="password" value="" size="50" />
+            <br>
+            <button class="btn btn-success">Login</button>
         </form>
-            {% else %}
-            <p>You are already Logged In</p>
-        {% endif %}
-    </div>
-{% endblock %}
+    </body>
+    {% endblock %}
+</html>
