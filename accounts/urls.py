@@ -2,7 +2,6 @@ from django.urls.conf import path
 from accounts import views
 from accounts.views import search
 from django.contrib.auth.views import (
-    login,
     logout,
     password_reset,
     password_reset_done,
@@ -13,7 +12,7 @@ from django.contrib.auth.views import (
 urlpatterns = [
     path('', views.home),
     path('search/', search, name='search'),
-    path('login/', login, {'template_name': 'accounts/login.html'}),
+    path('login/', views.user_login, name='user_login'),
     path('logout/', logout, {'template_name': 'accounts/logout.html'}),
     path('register/', views.register, name='register'),
     path('profile/', views.view_profile, name='view_profile'),
