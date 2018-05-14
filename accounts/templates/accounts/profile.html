@@ -31,26 +31,6 @@
                         {% if user.userprofile.phone is not 0 %}
                         <p>Phone No. : {{ user.userprofile.phone }} </p>
                         {% endif %}
-                        <p> Books :
-                           {% if user.userprofile.books is not none %}
-                           {% for book in user.userprofile.books.all %}
-                        <li>{{ book }}</li>
-                        {% endfor %}
-                        {% endif %}
-                        </p>
-                        <p> Skills :
-                           {% if user.userprofile.skill is not none %}
-                           {% for skill in user.userprofile.skill.all %}
-                        <li>{{ skill }}</li>
-                        {% endfor %}
-                        {% endif %}
-                        </p>
-                        <p> Tools :
-                           {% if user.userprofile.tools is not none %}
-                           {% for tool in user.userprofile.tools.all %}
-                        <li>{{ tool }}</li>
-                        {% endfor %}
-                        {% endif %}
                         </p>
                         {% if user.userprofile.stream is not none %}
                         <p>Stream : {{ user.userprofile.stream }}</p>
