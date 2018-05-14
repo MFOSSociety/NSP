@@ -21,18 +21,21 @@ def search(request):
         srch = request.POST['srh']
 
         if srch:
-            #match = User.objects.filter(first_name__icontains=srch)
-            match = UserProfile.objects.filter(skill__name__icontains=srch)
+            match1 = User.objects.filter(first_name__icontains=srch)
+            match2 = UserProfile.objects.filter(skill__name__icontains=srch)
 
-            if match:
-                return render(request, 'accounts/search.html', {'sr': match})
+            if match1:
+                # for userprofile
+                return render(request, 'accounts/search.html', {'sr': match1, 'condition': 'person'})
+            elif match2:
+                # for user skill
+                return render(request, 'accounts/search.html', {'sr': match2, 'condition': 'skill'})
             else:
                 return render(request, 'accounts/search.html', {'sr': 'no results found'})
 
         else:
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
-
 
 
 @login_required
