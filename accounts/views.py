@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
     RegistrationForm,
     EditProfileForm,
 )
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from accounts.models import User, UserProfile
 
 
 def home(request):
@@ -16,7 +17,24 @@ def home(request):
 
 
 def search(request):
+    if request.method=='POST':
+        srch = request.POST['srh']
+
+        if srch:
+            #match = User.objects.filter(first_name__icontains=srch)
+            match = UserProfile.objects.filter(skill__name__icontains=srch)
+
+
+
+            if match:
+                return render(request, 'accounts/search.html', {'sr': match})
+            else:
+                return render(request, 'accounts/search.html', {'sr': 'no results found'})
+
+        else:
+            return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
+
 
 
 @login_required
