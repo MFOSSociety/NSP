@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% block head %}
         <meta charset="UTF-8">
         <title>{{ user.first_name }}</title>
+
     {% endblock %}
+<style type="text/css">
+  	  .footer {
+  		position: fixed;
+  		left: 0;
+  		bottom: 0;
+  		width: 100%;
+  		background-color: black;
+  		text-align: center;
+  	}
+      .navbar{
+          border-radius: 0;
+          padding-top: 0px;
+      }
+          body{
+      background: url({% static 'accounts/black.jpg' %})
+      color: white;
+
+    }
+          </style>
 
 </head>
 <body>
