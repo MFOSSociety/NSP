@@ -18,9 +18,8 @@
       <div class="row section-success ourTeam-box text-center">
         <div class="col-md-12 section1">
 
-            {%  if user.userprofile.image is not None %}
+            {%  if user.userprofile.image.url is not None %}
                 <img src={{ user.userprofile.image.url }}>
-
             {% else %}
             <img src={% static 'accounts/img/default_face.jpg' %}>
             {% endif %}
