@@ -15,6 +15,10 @@ def home(request):
     return render(request, 'accounts/home.html', args)
 
 
+def search(request):
+    return render(request, 'accounts/search.html')
+
+
 @login_required
 def view_profile(request):
     args = {'user': request.user}
