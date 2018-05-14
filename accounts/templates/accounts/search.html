@@ -25,9 +25,9 @@
 </div><br>
 
 <div class="container">
-    {% for k in sr %}
+    {% for k in sr.all %}
     <div class="container">
-        <p>{{ sr.first_name }} {{ sr.last_name }}</p>
+        <p>{{ k }}</p>
     </div>
     {% endfor %}
 </div>

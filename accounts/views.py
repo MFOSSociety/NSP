@@ -24,8 +24,6 @@ def search(request):
             #match = User.objects.filter(first_name__icontains=srch)
             match = UserProfile.objects.filter(skill__name__icontains=srch)
 
-
-
             if match:
                 return render(request, 'accounts/search.html', {'sr': match})
             else:
@@ -85,6 +83,7 @@ def change_password(request):
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             form.save()  # this pretty much creates the user
             return redirect('/account')   # this is /account
@@ -94,6 +93,3 @@ def register(request):
         args = {'form': form}
         # this refers to the template, so accounts/reg_form.html
         return render(request, 'accounts/reg_form.html', args)
-
-
-
