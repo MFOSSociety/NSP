@@ -20,7 +20,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'pinax.messages',
     'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
