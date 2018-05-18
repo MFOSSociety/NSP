@@ -1,4 +1,4 @@
-from django.urls.conf import path, re_path
+from django.urls.conf import path, re_path, include
 from accounts import views
 from accounts.views import search
 from django.contrib.auth.views import (
@@ -30,6 +30,7 @@ urlpatterns = [
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.addskill, name='addskill'),
+    path('questions/', include('qa.urls'))
     ]
 
 # setting up a local mail server for testing and debugging
