@@ -14,6 +14,7 @@ urlpatterns = [
     path('project/start/', views.describe, name='start_project'),
     path('search/', search, name='search'),
     path('login/', views.user_login, name='user_login'),
+    path('oauth/', include('social_django.urls', namespace='social')),
     path('registersuccess/', views.registersuccess, name='registersucess'),
     path('signup/', views.signup, name='signup'),
     path('logout/', logout, {'template_name': 'accounts/logout.html'}, name='logout'),
@@ -26,7 +27,7 @@ urlpatterns = [
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/done/', password_reset_done, name='password_reset_done'),
     # Thank God this piece of shit works, do not tamper.
-    re_path(r'reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm, name='password_reset_confirm'),
+    re_path('reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm, name='password_reset_confirm'),
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.addskill, name='addskill'),

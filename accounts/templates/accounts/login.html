@@ -15,7 +15,7 @@
     <br><br>
     <br><br><br>
 
-        <center>
+
     <div class="container" style="padding-top: 100px;background-color: rgba(255,255,255,0.7);padding-bottom: 20px;width: 800px;">
         <form id="login_form" method="post" action="{% url 'user_login' %}">
             {% csrf_token %}
@@ -27,8 +27,11 @@
             <br>
             <button class="btn btn-success">Login</button>
         </form>
-        </center>
+
+     <p><strong>-- OR --</strong></p>
+    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
     </div>
+
     </body>
     {% endblock %}
 </html>
