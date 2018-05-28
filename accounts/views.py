@@ -10,7 +10,8 @@ from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
 from accounts.models import User, project_details
-
+from django.shortcuts import render
+from django.core.files.storage import FileSystemStorage
 
 @login_required
 def project_home(request):
@@ -200,3 +201,16 @@ def skills(request):
 
 def registersuccess(request):
     return render(request, 'accounts/registersuccess.html')
+
+
+# This is for the file upload
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'accounts/simple_upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'accounts/simple_upload.html')

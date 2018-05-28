@@ -1,8 +1,10 @@
-from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from accounts.models import project_details, Skill
 from django.forms import ModelForm
+
+
+from django import forms
 
 
 class ProfileForm(ModelForm):
