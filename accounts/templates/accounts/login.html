@@ -9,21 +9,18 @@
 {% endblock %}
 
 {% block body %}
-     <div class="container">
-
-        {% if not user.is_authenticated %}
-            <h1>Welcome</h1>
-        <p>
-            You can Login Here.
-        </p>
-        <h2>Login</h2>
-        <form method="post">
+    <br>
+     <div class="container-fluid">
+        <h1>Welcome </h1>
+        {% if user.is_authenticated %}
+         <h2>You are already logged in</h2>
+        {% else %}
+        <form method="post" action="{% url 'user_login' %}">
             {% csrf_token %}
             {{ form.as_p }}
         <button class="btn btn-success">Login</button>
         </form>
-            {% else %}
-            <p>You are already Logged In</p>
         {% endif %}
+
     </div>
 {% endblock %}

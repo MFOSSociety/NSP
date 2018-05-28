@@ -8,12 +8,13 @@ from django.contrib.auth.views import (
     password_reset_confirm,
     password_reset_complete,
 )
-
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home, name='home'),
     path('project/start/', views.describe, name='start_project'),
     path('search/', search, name='search'),
-    path('login/', views.user_login, name='user_login'),
+    # path('login/', views.user_login, name='user_login'),
+    path('login/', auth_views.login, {'template_name' : 'accounts/login.html'}, name = 'user_login'),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('registersuccess/', views.registersuccess, name='registersucess'),
     path('signup/', views.register, name='signup'),

@@ -36,7 +36,7 @@ def describe(request):
 
 
 def home(request):
-    name = "ideate 2018"
+    name = "NSP - Network Of Skilled People"
     args = {'name': name}
     return render(request, 'accounts/index.html', args)
 
