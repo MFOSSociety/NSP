@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirec
 from accounts.forms import (
     EditProfileForm,
     ProjectForm,
-    SignUpForm,
+    RegistrationForm,
     SkillForm,
 )
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
@@ -136,7 +136,7 @@ def change_password(request):
 
 # Go through this, this is important
 
-
+"""
 def signup(request):
     registered = False
     if request.method == 'POST':
@@ -157,7 +157,24 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form, 'registered': registered})
+"""
 
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        print("The form reached")
+        print(form.is_valid())
+        if form.is_valid():
+            print("the form is validated")
+            form.save()  # this pretty much creates the user
+            return redirect('/account')   # this is /account
+        # giving them the opportunity to get the form
+    # the else condition is working
+    else:
+        form = RegistrationForm()
+        args = {'form': form}
+        # this refers to the template, so accounts/reg_form.html
+        return render(request, 'accounts/signup.html', args)
 
 @login_required
 def addskill(request):

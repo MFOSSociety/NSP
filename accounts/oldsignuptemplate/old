@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register</title>
+        <meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    </head>
+    {% block body %}
+    <body class="container-fluid fuck">
+        {% if registered %}
+        Team |n-s-p| : <strong>Thank You for Signing Up!</strong>
+        <a href="/account/">Return to the Homepage.</a><br />
+        {% else %}
+        <center>
+        <div class="form-bottom backs" style="background-color: rgba(0,0,0,0.3);padding:15px;border-radius: 10px;width:550px;padding-bottom: 5px; ">
+        <form  id="form" method="post" action="/account/signup/">
+            {% csrf_token %}
+            <!-- Display each form. The as_p method wraps each element in a paragraph
+                 (<p>) element. This ensures each element appears on a new line,
+                 making everything look neater. -->
+
+            <div class="form-group">
+                <label for="username">Username: </label>
+            <input type="text" id="username" name="username" placeholder="Username" value="" size="50" />
+            <br>
+            </div>
+
+
+            <div class="form-group">
+            <label for="email">Email:</label>
+                <input type="email"  id="email" name="email" placeholder="Email" value="" size="50" />
+                <br>
+                </div>
+
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+            <input type="text" name="first_name"  id="first_name" placeholder="First Name" value="" size="50" />
+            <br>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+
+            <input type="text" name="last_name" id="last_name" placeholder="Last Name" value="" size="50" />
+            <br>
+            </div>
+
+            <div class="form-group">
+                <label for="branch">Branch :</label>
+            <input type="text" name="branch" id="branch" placeholder="Your Branch" value="" size="50" />
+            <br>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone No :</label>
+            <input type="text" name="phone" id="phone" placeholder="Phone Number" value="" size="50" />
+            <br>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year :</label>
+            <input type="text" name="year" id="year" placeholder="Year Studying In" value="" size="50" />
+            <br>
+            </div>
+
+            <div class="form-group">
+                <label for="password1">Password :</label>
+            <input type="password" id="password1" name="password1" placeholder="Password" value="" size="50" />
+            <br>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm">Confirm Password :</label>
+            <input type="password" name="password2" placeholder="Confirm Password" value="" size="50" />
+            <br>
+            </div>
+            <!-- Provide a button to click to submit the form. -->
+            <br>
+            <button type="submit" name="submit" value="Register" class="btn btn-primary">SignUp to NSP</button>
+            <br><br>
+        </form>
+            </div>
+        </center>
+        {% endif %}
+    </body>
+{% endblock %}
+</html>
+-->

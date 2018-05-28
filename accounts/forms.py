@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import  UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from accounts.models import project_details, Skill
 from django.forms import ModelForm
 
@@ -48,7 +48,7 @@ class EditProfileForm(UserChangeForm):
         )
         # we can use exclude(....fields....) if we want to exclude attributes
 
-
+"""
 class SignUpForm(UserCreationForm):
     branch = forms.CharField(help_text="Your Branch")
     phone = forms.CharField(help_text="Your Phone Number")
@@ -57,6 +57,34 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name','branch', 'phone', 'year', 'password1', 'password2')
+"""
+
+class RegistrationForm(UserCreationForm):   # extending from superclass
+    email = forms.EmailField(required=True)
+
+    # define meta data
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password1',
+            'password2'
+        )
+
+    def save(self, commit=True):
+        user = super(RegistrationForm, self).save(commit=False) # i might have left a loophole here
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.email = self.cleaned_data['email']
+
+        if commit:
+            user.save()
+
+        return user
 
 
 class SkillForm(forms.ModelForm):

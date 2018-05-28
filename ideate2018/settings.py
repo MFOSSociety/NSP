@@ -150,8 +150,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'ideate2018/../accounts/media')
 
 # when you log in you visit your account profile page
-LOGIN_REDIRECT_URL = '/account/profile/'
-
+LOGIN_REDIRECT_URL = '/account/'
+LOGIN_URL = '/account/login/'
 # For mailing purposes
 
 EMAIL_HOST = 'localhost'
