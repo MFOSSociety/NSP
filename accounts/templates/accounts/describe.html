@@ -1,26 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <head class="center">
         <title>Start a Project</title>
-    </head>
 {% endblock %}
 {% block body %}
     {% if project_registered %}
     <h1 class="container">Thank you for Starting a Project!</h1>
     {% else %}
-        <body class="container-fluid ">
-
         <div class="text-center" style="background-color: rgba(255,255,255,0.8);border-radius:50px;margin-top:50px;padding-top:10px;padding-bottom:10px;">
 
             <h1>Fill this form to let NSP know what you are going to work on!</h1>
-
+            <div class="container">
             <form id="user_form" method="post">
                 {% csrf_token %}
-                {{ project_form.as_p }}
+                {{ project_form.as_ul }}
                 <button type="submit" name="submit" value="Register" class="btn btn-success">Get Started!</button>
             </form>
+            </div>
         </div>
-        </body>
-        {% endif %}
-    {% endblock %}
+    {% endif %}
+{% endblock %}

@@ -9,7 +9,7 @@ from accounts.forms import (
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from accounts.models import User, project_details
+from accounts.models import User, ProjectDetail
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 
@@ -26,8 +26,8 @@ def describe(request):
     if request.method == 'POST':
         project_form = ProjectForm(data=request.POST)
         if project_form.is_valid():
-            project_details = project_form.save()
-            project_details = project_form.save(commit=False)
+            ProjectDetail = project_form.save()
+            ProjectDetail = project_form.save(commit=False)
             project_registered = True
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
@@ -66,9 +66,9 @@ def search(request):
         if srch:
             match1 = User.objects.filter(first_name__icontains=srch)
             #TODO skill name search functionlity to be added
-            match2 = project_details.objects.filter(project_name__icontains=srch)
-            match3 = project_details.objects.filter(branch__icontains=srch)
-            match4 = project_details.objects.filter(mentor_name__icontains=srch)
+            match2 = ProjectDetail.objects.filter(project_name__icontains=srch)
+            match3 = ProjectDetail.objects.filter(branch__icontains=srch)
+            match4 = ProjectDetail.objects.filter(mentor_name__icontains=srch)
             if match1:
                 print("match1")
                 return render(request, 'accounts/search.html', {'sr': match1, 'condition': 'person'})

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django import forms
+import datetime
 
 
 class Skill(models.Model):
@@ -10,13 +12,13 @@ class Skill(models.Model):
         return self.skill_name
 
 
-class project_details(models.Model):
+class ProjectDetail(models.Model):
     project_name = models.CharField(max_length=50, default="", blank=False)
     mentor_name = models.CharField(max_length=50, default="", blank=False)
     branch = models.CharField(max_length=50, blank=True)
-    description = models.CharField(max_length=2400)
+    description = models.CharField(max_length=2500, blank=False)
     paid = models.BooleanField(default=False)
-    duration = models.IntegerField(default=6, blank=True)
+    start_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
         return self.project_name + " under " + self.mentor_name

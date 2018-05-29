@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from accounts.models import project_details, Skill
+from accounts.models import ProjectDetail, Skill
 from django.forms import ModelForm
 
 
@@ -13,22 +13,26 @@ class ProfileForm(ModelForm):
 
 class ProjectForm(forms.ModelForm):
     class Meta:
-        model = project_details
+        model = ProjectDetail
         fields = (
             'project_name',
             'mentor_name',
             'branch',
-            'duration',
+            'start_date',
             'paid',
             'description',
         )
+        widgets = {
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'start_date': forms.DateInput(attrs={'class': 'datepicker'}),
+        }
 
     def save(self, commit=True):
         project = super(ProjectForm, self).save(commit=False)
         project.project_name = self.cleaned_data['project_name']
         project.mentor_name = self.cleaned_data['mentor_name']
-        project.branch = self.cleaned_data['duration']
-        project.duration = self.cleaned_data['duration']
+        project.branch = self.cleaned_data['branch']
+        project.start_date = self.cleaned_data['start_date']
         project.paid = self.cleaned_data['paid']
         project.description = self.cleaned_data['description']
 
