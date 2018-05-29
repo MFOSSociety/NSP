@@ -44,9 +44,7 @@ def update_user_profile(sender, instance, created, **kwargs):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=100, default="", blank=True)
-    city = models.CharField(max_length=100, default="", blank=True)
-    website = models.URLField(default="", blank=True)
+    # Some more details if you want
 
     def __str__(self):
         return self.user.username

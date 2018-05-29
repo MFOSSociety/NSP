@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'taggit',
     'hitcount',
     'markdownx',
+    'star_ratings',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

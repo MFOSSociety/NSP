@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load ratings %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -74,15 +75,8 @@
                            <label class=""> {{ user }}</label>
                         </center>
                         <span>
-                           <p>Year Of Study : {{ user.profile.year }} </p>
-                           <p>Phone No. : {{ user.profile.phone }} </p>
-                           <p>Stream : {{ user.profile.branch }}</p>
+                            {% ratings user %}
                            <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
-                           <p> Skill :
-                              {% for skill_name in user.profile.skill.all %}
-                              {{ skill_name }}
-                              {% endfor %}
-                           </p>
                         </span>
                         <br>
                   </center>
@@ -93,13 +87,6 @@
                   <div class="modal-header" style="background-color:rgb(47,141,189);color: white;">
                   <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
                   <h4 class="modal-title">Add Skill</h4>
-                  </div>
-                  <div class="modal-body" style="margin: 10px;">
-                  <label for="addskill" >Skills  :</label>
-                  <form method="post">
-                      {% csrf_token %}
-                      <input type="text" name="Skill" placeholder="Add Skill" value="" name="addSkill" size="50"/>
-                  </form>
                   </div>
                   <div class="modal-footer">
                   <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
