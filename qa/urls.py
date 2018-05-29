@@ -3,6 +3,8 @@ from . import views
 
 
 urlpatterns = [
+
+
     re_path('', views.QuestionIndexView.as_view(), name='qa_index'),
 
     re_path('question/(?P<pk>\d+)/',
