@@ -94,6 +94,7 @@ def ProfileView(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
+
 def PeopleView(request):
     users = User.objects.all()
     list_of_users = []
@@ -101,6 +102,7 @@ def PeopleView(request):
         list_of_users.append(users.get(id=user).username)
     args = {'users': list_of_users}
     return render(request, 'accounts/people.html', args)
+
 
 def FriendProfileView(request, username):
     try:
