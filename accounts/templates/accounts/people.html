@@ -1,2 +1,18 @@
 {% extends 'base.html' %}
-<p>This is the page</p>
+{% load ratings %}
+{% block body %}
+<div class="container">
+
+{% for people in users %}
+    {% if people.is_superuser is False %}
+    <li>
+    <div class="content">
+    <a href="{% url 'view_friend' people.username %}">{{ people.username }}</a>
+    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {% ratings people %}</p>
+    </div>
+    </li>
+    {% endif %}
+{% endfor %}
+
+</div>
+{% endblock %}

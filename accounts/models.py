@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from django import forms
 import datetime
-
+from star_ratings.models import Rating
+from django.contrib.contenttypes.fields import GenericRelation
 
 class Skill(models.Model):
     skill_name = models.CharField(max_length=20, default="", blank=True)
@@ -47,6 +47,8 @@ def update_user_profile(sender, instance, created, **kwargs):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Some more details if you want
+    ratings = GenericRelation(Rating, related_query_name='username')
+
 
     def __str__(self):
         return self.user.username
