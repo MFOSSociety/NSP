@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, Http404
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
     EditProfileForm,
@@ -14,13 +14,13 @@ from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 
 @login_required
-def project_home(request):
+def ProjectHomeView(request):
     args = {}
     return render(request, 'accounts/project_home.html', args)
 
 
 @login_required
-def describe(request):
+def ProjectDescribeView(request):
     project_registered = False
 
     if request.method == 'POST':
@@ -36,13 +36,13 @@ def describe(request):
     return render(request, 'accounts/describe.html', {'project_form': project_form, 'project_registered': project_registered})
 
 
-def home(request):
+def HomeView(request):
     name = "NSP - Network Of Skilled People"
     args = {'name': name}
     return render(request, 'accounts/index.html', args)
 
 
-def user_login(request):
+def LoginView(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -59,7 +59,7 @@ def user_login(request):
         return render(request, 'accounts/login.html', {})
 
 
-def search(request):
+def SearchView(request):
     if request.method=='POST':
         srch = request.POST['srh']
 
@@ -90,19 +90,36 @@ def search(request):
 
 
 @login_required
-def view_profile(request):
+def ProfileView(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
+def FriendProfileView(request, username):
+    try:
+        user =  User.objects.get(username = username)
+    except:
+        raise Http404
 
-def about(request):
+    # Flag that determines if we should show editable elements
+    editable = False
+
+    context = locals()
+    template = 'accounts/profile_friend.html'
+
+    return render(request, template, context)
+
+
+#return render(request, 'accounts/profile_friend.html', args)
+
+
+def AboutView(request):
     return HttpResponse("<h1>About Us</h1>")
 
 
 # pass, if you don't want to write the method yet
 
 @login_required
-def edit_profile(request):
+def EditProfileView(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
 
@@ -117,7 +134,7 @@ def edit_profile(request):
 
 
 @login_required
-def change_password(request):
+def ChangePasswordView(request):
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
 
@@ -160,7 +177,7 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form': form, 'registered': registered})
 """
 
-def register(request):
+def RegistrationView(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         print("The form reached")
@@ -178,7 +195,7 @@ def register(request):
         return render(request, 'accounts/signup.html', args)
 
 @login_required
-def addskill(request):
+def AddSkillView(request):
     skill_added = False
 
     if request.method == 'POST':
@@ -195,16 +212,16 @@ def addskill(request):
     return render(request, 'accounts/addskill.html', {'skill_form': skill_form, 'skill_added': skill_added})
 
 
-def skills(request):
+def SkillsView(request):    # I dont know what this does
     pass
 
 
-def registersuccess(request):
+def SuccesfullRegistrationView(request):
     return render(request, 'accounts/registersuccess.html')
 
 
 # This is for the file upload
-def simple_upload(request):
+def SimpleUploadView(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()

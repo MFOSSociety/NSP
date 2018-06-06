@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load ratings %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      {% block head %}
+      <meta charset="UTF-8">
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'accounts/css/profile_card.css' %}">
+      <title>Hey, {{ user.username }}!</title>
+      {% endblock %}
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+      <style>
+         .item{
+         background-color:;
+         }
+      </style>
+   </head>
+   <body>
+      {% block body %}
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-lg-8 col-md-8">
+               <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="1800">
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" style="height: 350px;background-color:rgba(255,255,255,0.8);border-radius:25px; ">
+                     <div class="item active text-center">
+                        <h1>Project 1</h1>
+                        <br><br>
+                        <h3>Mentor Name</h3>
+                        <h5>Phone No</h5>
+                        <p>Description</p>
+                     </div>
+                     <div class="item text-center">
+                        <h1>Project 2</h1>
+                        <br><br>
+                        <h3>Mentor Name</h3>
+                        <h5>Phone No</h5>
+                        <p>Description</p>
+                     </div>
+                     <div class="item text-center">
+                        <h1>Project 3</h1>
+                        <br><br>
+                        <h3>Mentor Name</h3>
+                        <h5>Phone No</h5>
+                        <p>Description</p>
+                     </div>
+                  </div>
+                  <!-- Left and right controls -->
+                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                  <span class="sr-only">Next</span>
+                  </a>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+               <div class="card" >
+
+               <img class="img-rounded">
+                   <span class="glyphicon glyphicon-user"></span>
+               </img>
+
+                  <center>
+                     <div class="card-body text-center" style="background-color: rgba(255,255,255,0.8);margin-top:25px;border-radius:10px;width: 350px">
+                        <center>
+                           <label class=""> {{ user }}</label>
+                        </center>
+                        <span>
+                            {% ratings user %}
+                           <p class="glyphicon glyphicon-envelope"> {{ user.email }}</p>
+                        </span>
+                        <br>
+                  </center>
+                  <center> <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Add Skill</button></center>
+                  <div class="modal modal-fade" role="dialog" id="myModal">
+                  <div class="modal-dialog">
+                  <div class="modal-content">
+                  <div class="modal-header" style="background-color:rgb(47,141,189);color: white;">
+                  <button type="button" class="close" data-dismiss="modal" style="color: white">&times;</button>
+                  <h4 class="modal-title">Add Skill</h4>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      {% endblock %}
+   </body>
+</html>
+
