@@ -39,6 +39,7 @@
           <div class="navbar navbar-right">
             {% if user.is_authenticated %}
                 <a href="{% url 'view_profile' %}">Profile</a>
+                <a href="{% url 'view_people' %}">People</a>
                 <a class="btn btn-primary" href="{% url 'logout' %}">Log Out</a>
             {% else %}
                 <a class="btn btn-primary" href="{% url 'user_login' %}">Sign In  </a>

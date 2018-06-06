@@ -21,6 +21,7 @@ urlpatterns = [
     path('register/', views.RegistrationView, name='signup'),
     path('logout/', logout, {'template_name': 'accounts/logout.html'}, name='logout'),
     path('profile/', views.ProfileView, name='view_profile'),
+    path('people/', views.PeopleView, name='view_people'),
     re_path('friend/(?P<username>[\w\-]+)/', views.FriendProfileView, name='view_friend'),
     path('profile/skills', views.SkillsView, name='skills'),
     path('about/', views.AboutView, name='about'),
