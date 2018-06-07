@@ -92,10 +92,10 @@ def SearchView(request):
 
 @login_required
 def ProfileView(request):
-    users = User.objects.all()
+    # users = User.objects.all()
     # filtering the objects
-    users = users.filter(userprofile__ratings__isnull = False).order_by('userprofile__ratings')
-    args = {'user': users}
+    # users = users.filter(userprofile__ratings__isnull = False).order_by('userprofile__ratings')
+    args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 
