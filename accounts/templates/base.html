@@ -35,11 +35,12 @@
   <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-          <a class="navbar-brand" href="">NSP</a>
+          <a class="navbar-brand" href="{% url 'home' %}">NSP</a>
           <div class="navbar navbar-right">
             {% if user.is_authenticated %}
-                <a href="{% url 'view_profile' %}">Profile</a>
-                <a href="{% url 'view_people' %}">People</a>
+
+                <a  class="btn btn-success" href="{% url 'view_profile' %}" >Profile</a>
+                <a class="btn btn-info" href="{% url 'view_people' %}">People</a>
                 <a class="btn btn-primary" href="{% url 'logout' %}">Log Out</a>
             {% else %}
                 <a class="btn btn-primary" href="{% url 'user_login' %}">Sign In  </a>

@@ -17,7 +17,7 @@ from django.core.files.storage import FileSystemStorage
 @login_required
 def ProjectHomeView(request):
     args = {}
-    return render(request, 'accounts/project_home.html', args)
+    return render(request, 'accounts/home.html', args)
 
 
 @login_required
@@ -53,9 +53,9 @@ def LoginView(request):
                 login(request, user)
                 return HttpResponseRedirect('/account/')
             else:
-                return HttpResponse("Your NSP account is disabled.")
+                return HttpResponse("Your NSP account is disabled.")        #This is not working
         else:
-            return HttpResponse("Invalid login details supplied.")
+            return HttpResponse("<h2>Invalid login details supplied.</h2>")  #By Default, Django's message is working
     else:
         return render(request, 'accounts/login.html', {})
 
@@ -65,11 +65,11 @@ def SearchView(request):
         srch = request.POST['srh']
 
         if srch:
-            match1 = User.objects.filter(first_name__icontains=srch)
+            match1 = User.objects.filter(first_name__icontains=srch).first()
             #TODO skill name search functionlity to be added
-            match2 = ProjectDetail.objects.filter(project_name__icontains=srch)
-            match3 = ProjectDetail.objects.filter(branch__icontains=srch)
-            match4 = ProjectDetail.objects.filter(mentor_name__icontains=srch)
+            match2 = ProjectDetail.objects.filter(project_name__icontains=srch).first()
+            match3 = ProjectDetail.objects.filter(branch__icontains=srch).first()
+            match4 = ProjectDetail.objects.filter(mentor_name__icontains=srch).first()
             if match1:
                 print("match1")
                 return render(request, 'accounts/search.html', {'sr': match1, 'condition': 'person'})
@@ -92,22 +92,20 @@ def SearchView(request):
 
 @login_required
 def ProfileView(request):
-    # users = User.objects.all()
-    # filtering the objects
-    # users = users.filter(userprofile__ratings__isnull = False).order_by('userprofile__ratings')
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 
 def PeopleView(request):
-    users = User.objects.all()
+    users = User.objects.all()          #do not use filter() with User object
     args = {'users': users}
     return render(request, 'accounts/people.html', args)
 
 
 def FriendProfileView(request, username):
     try:
-        user =  User.objects.get(username = username)
+        user = User.objects.get(username=username).first()
+
     except:
         raise Http404
 
@@ -188,7 +186,9 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form': form, 'registered': registered})
 """
 
+
 def RegistrationView(request):
+
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         print("The form reached")
@@ -196,14 +196,15 @@ def RegistrationView(request):
         if form.is_valid():
             print("the form is validated")
             form.save()  # this pretty much creates the user
-            return redirect('/account')   # this is /account
+            return redirect('/account')  # this is /account
         # giving them the opportunity to get the form
-    # the else condition is working
+        # the else condition is working
     else:
         form = RegistrationForm()
         args = {'form': form}
         # this refers to the template, so accounts/reg_form.html
         return render(request, 'accounts/signup.html', args)
+
 
 @login_required
 def AddSkillView(request):

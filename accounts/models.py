@@ -49,7 +49,6 @@ class UserProfile(models.Model):
     # Some more details if you want
     ratings = GenericRelation(Rating, related_query_name='username')
 
-
     def __str__(self):
         return self.user.username
 
