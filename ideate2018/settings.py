@@ -38,10 +38,6 @@ QA_SETTINGS = {
 
 INSTALLED_APPS = [
     'accounts',
-    'qa',
-    'taggit',
-    'hitcount',
-    'markdownx',
     'star_ratings',
     'django.contrib.admin',
     'django.contrib.auth',

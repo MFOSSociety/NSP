@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 import datetime
 from star_ratings.models import Rating
 from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+
 
 class Skill(models.Model):
     skill_name = models.CharField(max_length=20, default="", blank=True)
@@ -42,6 +44,9 @@ def update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 """
+
+# Question Answer Views Goes here
+
 
 
 class UserProfile(models.Model):
