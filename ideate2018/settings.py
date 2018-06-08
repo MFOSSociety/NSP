@@ -1,4 +1,5 @@
 import os
+from machina import get_apps as get_machina_apps    # For Question Answer Forum
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,9 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django', # For All Social Authentication
+
+    # Machina Related Apps
+
 ]
 
+
 MIDDLEWARE = [
+    #'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,6 +74,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                #'machina.core.context_processors.metadata',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -164,4 +171,6 @@ STAR_RATINGS_RERATE = False
 STAR_RATINGS_RANGE = 8
 STAR_RATINGS_ANONYMOUS = True
 STAR_RATINGS_STAR_HEIGHT = 16
-STAR_RATINGS_STAR_WIDTH =  16
+STAR_RATINGS_STAR_WIDTH = 16
+
+
