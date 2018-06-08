@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django', # For All Social Authentication
-
     # Machina Related Apps
     'mptt',                 #to handle the tree of forum intances
     'haystack',             #provides search capabilities
