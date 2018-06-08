@@ -10,7 +10,6 @@
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 <!-- Add icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-{% load static %}
 <link rel="stylesheet" href="{% static 'accounts/css/profiles.css' %}">
 {% endblock %}
 {% block body %}
@@ -19,10 +18,6 @@
    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
    <p class="title">Hey, {{ user.username }}</p>
    <p>{% ratings user read_only %}</p>
-   <a href="#"><i class="fa fa-dribbble"></i></a>
-   <a href="#"><i class="fa fa-twitter"></i></a>
-   <a href="#"><i class="fa fa-linkedin"></i></a>
-   <a href="#"><i class="fa fa-facebook"></i></a>
    <p><button class="btn btn-success">Add Skill</button></p>
 </div>
 </div>

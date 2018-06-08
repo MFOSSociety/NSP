@@ -105,23 +105,22 @@ def PeopleView(request):
 def FriendProfileView(request, username):
     try:
         user = User.objects.get(username=username)
-
     except:
         raise Http404
 
     # Flag that determines if we should show editable elements
     editable = False
-
     context = locals()
     template = 'accounts/profile_friend.html'
 
     args = {'user': user, 'viewer': request.user}
-
     return render(request, template, args)
 
 
 #return render(request, 'accounts/profile_friend.html', args)
 
+def DevelopersView(request):
+    return render(request, 'accounts/team.html')
 
 def AboutView(request):
     return HttpResponse("<h1>About Us</h1>")

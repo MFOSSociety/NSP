@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'accounts/css/team.css' %}">
+{% endblock %}
+{% block body %}
+<div class="container">
+   <div class="row">
+      <div class="column">
+         <div class="card">
+            <img src="{% static 'accounts/img/img1.png' %}" alt="Rishi Banerjee">
+            <div class="container">
+               <h2>Rishi Banerjee</h2>
+               <p class="title">Backend/Frontend Developer - Admin</p>
+               <p>Knows how to copy paste code</p>
+               <p>rishieric91@gmail.com</p>
+            </div>
+         </div>
+      </div>
+      <div class="column">
+         <div class="card">
+            <img src="{% static 'accounts/img/img1.png' %}" alt="Pratik Jain">
+            <div class="container">
+               <h2>Pratik Jain</h2>
+               <p class="title">Backend/Frontend Developer - Admin</p>
+               <p>Wanted to make this in Node.js, well Django it is</p>
+               <p>pratikjain0411@gmail.com</p>
+            </div>
+         </div>
+      </div>
+      <div class="column">
+         <div class="card">
+            <img src="{% static 'accounts/img/img1.png' %}" alt="Prachal Goyal">
+            <div class="container">
+               <h2>Prachal Goyal</h2>
+               <p class="title">Front-End Developer/Designer</p>
+               <p>Took me 2 minutes to download this stolen front-end template.</p>
+               <p>Just Follow me on Instagram</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+
