@@ -1,5 +1,7 @@
 import os
-from machina import get_apps as get_machina_apps    # For Question Answer Forum
+from machina import get_apps as get_machina_apps # For Question Answer Forum
+from machina import MACHINA_MAIN_STATIC_DIR  # it includes the django-machina’s static directory:
+from machina import MACHINA_MAIN_TEMPLATE_DIR
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,12 +51,15 @@ INSTALLED_APPS = [
     'social_django', # For All Social Authentication
 
     # Machina Related Apps
+    'mptt',                 #to handle the tree of forum intances
+    'haystack',             #provides search capabilities
+    'widget_tweaks',
 
-]
+] + get_machina_apps()
 
 
 MIDDLEWARE = [
-    #'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware', # For All Social Authentication
+    'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
 ]
 
 ROOT_URLCONF = 'ideate2018.urls'
@@ -70,11 +76,16 @@ ROOT_URLCONF = 'ideate2018.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': (
+            # ...
+            MACHINA_MAIN_TEMPLATE_DIR,
+        ),
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
-                #'machina.core.context_processors.metadata',
+                # ...
+                #Machina
+                'machina.core.context_processors.metadata',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -83,9 +94,19 @@ TEMPLATES = [
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ]
         },
     },
 ]
+
+
+STATICFILES_DIRS = (
+    # ...
+    MACHINA_MAIN_STATIC_DIR,
+)
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
@@ -108,6 +129,22 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'machina_attachments': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/tmp',
+    },
+}
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join('home/pratik/NSP', 'whoosh_index'),         #edit the path accordingly
+    },
+}
 
 
 # Password validation
@@ -172,5 +209,4 @@ STAR_RATINGS_RANGE = 8
 STAR_RATINGS_ANONYMOUS = True
 STAR_RATINGS_STAR_HEIGHT = 16
 STAR_RATINGS_STAR_WIDTH = 16
-
 
