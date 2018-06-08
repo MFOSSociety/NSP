@@ -9,6 +9,7 @@ from django.contrib.auth.views import (
 )
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('', views.HomeView, name='home'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
