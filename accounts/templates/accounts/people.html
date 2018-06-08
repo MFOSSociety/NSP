@@ -8,7 +8,11 @@
     <li>
     <div class="content">
     <a href="{% url 'view_friend' people.username %}">{{ people.username }}</a>
+    {% if viewer.is_superuser %}
     <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {% ratings people %}</p>
+    {% else %}
+    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {% ratings people read_only %}</p>
+    {% endif %}
     </div>
     </li>
     {% endif %}

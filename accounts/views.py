@@ -98,13 +98,13 @@ def ProfileView(request):
 
 def PeopleView(request):
     users = User.objects.all()          #do not use filter() with User object
-    args = {'users': users}
+    args = {'users': users, 'viewer': request.user}
     return render(request, 'accounts/people.html', args)
 
 
 def FriendProfileView(request, username):
     try:
-        user = User.objects.get(username=username).first()
+        user = User.objects.get(username=username)
 
     except:
         raise Http404
@@ -115,7 +115,9 @@ def FriendProfileView(request, username):
     context = locals()
     template = 'accounts/profile_friend.html'
 
-    return render(request, template, context)
+    args = {'user': user, 'viewer': request.user}
+
+    return render(request, template, args)
 
 
 #return render(request, 'accounts/profile_friend.html', args)
