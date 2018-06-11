@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+<html>
+{% block title %}
+    <title>Add Skill</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Add Your Skills</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}
+</html>
