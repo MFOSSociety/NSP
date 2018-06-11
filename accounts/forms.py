@@ -93,7 +93,7 @@ class RegistrationForm(UserCreationForm):   # extending from superclass
         return user
 
 
-class SkillForm(forms.ModelForm):
+'''''class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
         fields = ('skill_name',)
@@ -105,4 +105,15 @@ class SkillForm(forms.ModelForm):
         if commit:
             skills.save()
 
-        return skills
+        return skills '''''
+
+
+                                    #SKILL FORM
+class SkillForm(forms.Form):
+    model = Skill
+    skill = forms.CharField(max_length=20, help_text= 'Enter Your Skill')
+
+    def clean_skill(self):
+        data = self.cleaned_data['skill']
+        return data
+
