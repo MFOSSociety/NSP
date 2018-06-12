@@ -13,15 +13,18 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-<div class="card">
-   <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-   <p class="title">Hey, {{ user.username }}</p>
-   {% if user.userprofile.image %}
-   <img src="{{ user.userprofile.image.url }}" width="240">
-   {% endif %}
-   <p>Rating : {{ user.userprofile.ratings }}</p>
-   <p><button class="btn btn-success">Add Skill</button></p>
-</div>
+   <div class="card">
+      <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+      <p class="title">Hey, {{ user.username }}</p>
+      {% if user.userprofile.image %}
+      <img src="{{ user.userprofile.image.url }}" width="240">
+      {% endif %}
+      <p>Rating : {{ user.userprofile.ratings }}</p>
+      <div class="container">
+         <a  class="btn btn-success" href="{% url 'edit_info' %}" >Update Pic</a>
+         <a  class="btn btn-success" href="{% url 'addskill' %}" >Add Skill</a>
+      </div>
+   </div>
 </div>
 {% endblock %}
 

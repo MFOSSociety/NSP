@@ -5,14 +5,14 @@ from accounts.forms import (
     ProjectForm,
     RegistrationForm,
     SkillForm,
+    EditInformationForm,
 )
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from accounts.models import User, ProjectDetail
+from accounts.models import User, ProjectDetail, UserProfile
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
-
 
 @login_required
 def ProjectHomeView(request):
@@ -122,6 +122,7 @@ def FriendProfileView(request, username):
 def DevelopersView(request):
     return render(request, 'accounts/team.html')
 
+
 def AboutView(request):
     return HttpResponse("<h1>About Us</h1>")
 
@@ -141,6 +142,23 @@ def EditProfileView(request):
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/edit_profile.html', args)
+
+
+@login_required
+def EditInformationView(request):
+
+    user = request.user
+
+    if 'image' in request.POST:
+
+        image = request.POST.get('image')
+        user.userprofile.image = image.url
+        return redirect('/account/profile')
+
+    else:
+        form = EditInformationForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'accounts/edit_info.html', args)
 
 
 @login_required
