@@ -61,18 +61,6 @@
           <div class="col-xl-9 mx-auto">
             <h1 class="mb-5">Think. Gather. Build.</h1>
           </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
-                </div>
-                <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">Newsletter!</button>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
       </div>
     </header>
@@ -178,21 +166,33 @@
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
+          {% if user.is_authenticated %}
           <div class="col-xl-9 mx-auto">
+            <h2 class="mb-4">Start a project? Go!</h2>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <form>
+              <div class="form-row">
+                <div class="center">
+                  <a href="{% url 'start_project' %}" class="btn btn-block btn-lg btn-primary">Start</a>
+                </div>
+              </div>
+            </form>
+          </div>
+          {% else %}
+              <div class="col-xl-9 mx-auto">
             <h2 class="mb-4">Ready to do a project? Sign up now!</h2>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form>
               <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
-                </div>
-                <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+                <div class="center">
+                  <a href="{% url 'signup' %}" class="btn btn-block btn-lg btn-primary">Sign up!</a>
                 </div>
               </div>
             </form>
           </div>
+          {% endif %}
         </div>
       </div>
     </section>
