@@ -1,43 +1,10 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from accounts.models import ProjectDetail, Skill, UserProfile
 from django.forms import ModelForm
 from django import forms
 
 
-# Custom Forms
-class UserChangeForm(forms.ModelForm):
-    password = ReadOnlyPasswordHashField(label=("Password"))
-
-    class Meta:
-        model = User
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super(UserChangeForm, self).__init__(*args, **kwargs)
-        f = self.fields.get('user_permissions', None)
-        if f is not None:
-            f.queryset = f.queryset.select_related('content_type')
-
-    def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
-        # This is done here, rather than on the field, because the
-        # field does not have access to the initial value
-
-        return self.initial["password"]
-
-
-class UserProfileChangeForm(forms.ModelForm):
-
-    class Meta:
-        model = UserProfile
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        super(UserProfileChangeForm, self).__init__(*args, **kwargs)
-        f = self.fields.get('user_permissions', None)
-        if f is not None:
-            f.queryset = f.queryset.select_related('content_type')
 
 
 class ProfileForm(ModelForm):
@@ -88,9 +55,7 @@ class EditProfileForm(UserChangeForm):
         # we can use exclude(....fields....) if we want to exclude attributes
 
 
-
-
-class EditInformationForm(UserProfileChangeForm):
+class EditInformationForm(UserChangeForm):
 
     class Meta:
         model = UserProfile

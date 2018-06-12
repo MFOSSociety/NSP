@@ -146,14 +146,12 @@ def EditProfileView(request):
 
 @login_required
 def EditInformationView(request):
+    if request.method == 'POST':
+        form = EditInformationForm(request.POST, instance=request.user)
 
-    user = request.user
-
-    if 'image' in request.POST:
-
-        image = request.POST.get('image')
-        user.userprofile.image = image.url
-        return redirect('/account/profile')
+        if form.is_valid():
+            form.save()
+            return redirect('/account/profile')
 
     else:
         form = EditInformationForm(instance=request.user)

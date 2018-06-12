@@ -28,12 +28,13 @@ class ProjectDetail(models.Model):
 # Question Answer Views Goes here
 
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # Some more details if you want
     ratings = models.IntegerField(null=True, default=0)
     image = models.ImageField(upload_to="profile_image", blank=True)
+    year = models.IntegerField(null=True)
+    branch = models.CharField(max_length=20, default="", blank=True)
+    stream = models.CharField(max_length=20, default="", blank=True)
 
     def __str__(self):
         return self.user.username

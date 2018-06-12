@@ -19,6 +19,12 @@
       {% if user.userprofile.image %}
       <img src="{{ user.userprofile.image.url }}" width="240">
       {% endif %}
+      {% if user.userprofile.branch %}
+      <p>Branch : {{ user.userprofile.branch }}</p>
+      {% endif %}
+      {% if user.userprofile.year %}
+      <p>Year : {{ user.userprofile.year }}</p>
+      {% endif %}
       <p>Rating : {{ user.userprofile.ratings }}</p>
       <div class="container">
          <a  class="btn btn-success" href="{% url 'edit_info' %}" >Update Pic</a>
