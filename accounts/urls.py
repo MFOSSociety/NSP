@@ -12,7 +12,6 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.HomeView, name='home'),
-    path('ratings/', include('star_ratings.urls', namespace='ratings')),
     path('upload/', views.SimpleUploadView, name='upload'),
     path('project/start/', views.ProjectDescribeView, name='start_project'),
     path('search/', views.SearchView, name='search'),

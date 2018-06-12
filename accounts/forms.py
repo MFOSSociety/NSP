@@ -111,7 +111,7 @@ class RegistrationForm(UserCreationForm):   # extending from superclass
                                     #SKILL FORM
 class SkillForm(forms.Form):
     model = Skill
-    skill = forms.CharField(max_length=20, help_text= 'Enter Your Skill')
+    skill = forms.CharField(max_length=20, help_text='Enter Your Skill')
 
     def clean_skill(self):
         data = self.cleaned_data['skill']

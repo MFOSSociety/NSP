@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load ratings %}
 {% block head %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +16,10 @@
 <div class="card">
    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
    <p class="title">Hey, {{ user.username }}</p>
+   {% if user.userprofile.image %}
    <img src="{{ user.userprofile.image.url }}" width="240">
-   <p>{% ratings user read_only %}</p>
+   {% endif %}
+   <p>Rating : {{ user.userprofile.ratings }}</p>
    <p><button class="btn btn-success">Add Skill</button></p>
 </div>
 </div>

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load ratings %}
 {% block head %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +17,7 @@
 <div class="card">
    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
    <p class="title">Hey, {{ user.username }}</p>
-   {% if viewer.is_superuser %}
-   <p>{% ratings user %}</p>
-   {% else %}
-   <p>{% ratings user read_only %}</p>
-   {% endif %}
+
    <p><button class="btn btn-success">Follow</button></p>
 </div>
 </div>

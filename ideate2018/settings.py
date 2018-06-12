@@ -41,7 +41,6 @@ QA_SETTINGS = {
 
 INSTALLED_APPS = [
     'accounts',
-    'star_ratings',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -202,10 +201,5 @@ EMAIL_PORT = 1025
 SOCIAL_AUTH_GITHUB_KEY = '1872ea14c197d599ebe5'
 SOCIAL_AUTH_GITHUB_SECRET = 'cc56899a4a0cf19258c33d76280450f9be98ad46'
 
-# For the Rating Application
-STAR_RATINGS_RERATE = False
-STAR_RATINGS_RANGE = 8
-STAR_RATINGS_ANONYMOUS = True
-STAR_RATINGS_STAR_HEIGHT = 16
-STAR_RATINGS_STAR_WIDTH = 16
+
 

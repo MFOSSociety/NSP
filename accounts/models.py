@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 import datetime
-from star_ratings.models import Rating
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 
@@ -52,7 +51,7 @@ def update_user_profile(sender, instance, created, **kwargs):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Some more details if you want
-    ratings = GenericRelation(Rating, related_query_name='username')
+    ratings = models.IntegerField(null=True, default=0)
     image = models.ImageField(upload_to="profile_image", blank=True)
 
     def __str__(self):
