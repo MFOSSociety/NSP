@@ -53,6 +53,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Some more details if you want
     ratings = GenericRelation(Rating, related_query_name='username')
+    image = models.ImageField(upload_to="profile_image", blank=True)
 
     def __str__(self):
         return self.user.username

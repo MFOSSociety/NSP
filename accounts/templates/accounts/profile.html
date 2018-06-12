@@ -17,6 +17,7 @@
 <div class="card">
    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
    <p class="title">Hey, {{ user.username }}</p>
+   <img src="{{ user.userprofile.image.url }}" width="240">
    <p>{% ratings user read_only %}</p>
    <p><button class="btn btn-success">Add Skill</button></p>
 </div>
