@@ -207,8 +207,8 @@ def RegistrationView(request):
         return render(request, 'accounts/signup.html', args)
 
 
-@login_required
-def AddSkillView(request):
+#@login_required
+'''def AddSkillView(request):
     skill_added = False
 
     if request.method == 'POST':
@@ -223,10 +223,27 @@ def AddSkillView(request):
     else:
         skill_form = ProjectForm()
     return render(request, 'accounts/addskill.html', {'skill_form': skill_form, 'skill_added': skill_added})
-
+'''
 
 def SkillsView(request):    # I dont know what this does
     pass
+
+#SKILL FORM VIEW LATEST CREATION
+
+
+def AddSkillView(request):
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+
+        if form.is_valid():
+            skill_inst = form.cleaned_data['skill']
+            skill_inst.save()
+            return render(request, 'accounts/addskill.html')
+    else:
+        form = SkillForm()
+    return render(request, 'accounts/addskill.html', {'form': form})
+
+
 
 
 def SuccesfullRegistrationView(request):
