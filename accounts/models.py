@@ -29,12 +29,15 @@ class ProjectDetail(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     ratings = models.IntegerField(null=True, default=0)
     image = models.ImageField(upload_to="profile_image", blank=True)
     year = models.IntegerField(null=True)
     branch = models.CharField(max_length=20, default="", blank=True)
     stream = models.CharField(max_length=20, default="", blank=True)
+
+    class Meta:
+        db_table = 'accounts_userprofile'
 
     def __str__(self):
         return self.user.username

@@ -6,6 +6,7 @@ from accounts.forms import (
     RegistrationForm,
     SkillForm,
     EditInformationForm,
+    ProfileForm
 )
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
@@ -157,6 +158,24 @@ def EditInformationView(request):
         form = EditInformationForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/edit_info.html', args)
+
+@login_required
+def SaveProfile(request):
+    saved = False
+
+    if request.method == "POST":
+        # Get the posted form
+        MyProfileForm = ProfileForm(request.POST, request.FILES)
+        if MyProfileForm.is_valid():
+            profile = UserProfile()
+            profile.image = MyProfileForm.cleaned_data["image"]
+            profile.save()
+            saved = True
+    else:
+        MyProfileForm = ProfileForm()
+
+    return render(request, 'accounts/saved.html', locals())
+
 
 
 @login_required

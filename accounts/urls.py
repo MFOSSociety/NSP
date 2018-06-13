@@ -28,6 +28,7 @@ urlpatterns = [
     path('about/', views.AboutView, name='about'),
     path('profile/edit', views.EditProfileView, name='edit_profile'),
     path('profile/edit_info', views.EditInformationView, name='edit_info'),
+    path('saved/', views.SaveProfile, name = 'save_profile'),
     path('change-password/', views.ChangePasswordView, name='change_password'),
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/done/', password_reset_done, name='password_reset_done'),

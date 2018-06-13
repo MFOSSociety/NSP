@@ -27,9 +27,30 @@
       {% endif %}
       <p>Rating : {{ user.userprofile.ratings }}</p>
       <div class="container">
-         <a  class="btn btn-success" href="{% url 'edit_info' %}" >Update Pic</a>
          <a  class="btn btn-success" href="{% url 'addskill' %}" >Add Skill</a>
       </div>
+       <form name = "form" enctype = "multipart/form-data"
+         action = "{% url "save_profile" %}" method = "POST" >
+         {% csrf_token %}
+
+         <div style = "max-width:470px;">
+            <center>
+               <input type = "file" style = "margin-left:20%;"
+                  placeholder = "Picture" name = "image" />
+            </center>
+         </div>
+
+         <div style = "max-width:470px;">
+            <center>
+
+               <button class="btn btn-success" type = "submit">
+                  <strong>Submit</strong>
+               </button>
+
+            </center>
+         </div>
+
+      </form>
    </div>
 </div>
 {% endblock %}

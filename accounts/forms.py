@@ -4,13 +4,6 @@ from accounts.models import ProjectDetail, Skill, UserProfile
 from django.forms import ModelForm
 from django import forms
 
-
-
-
-class ProfileForm(ModelForm):
-    pass
-
-
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = ProjectDetail
@@ -53,6 +46,11 @@ class EditProfileForm(UserChangeForm):
             'password'
         )
         # we can use exclude(....fields....) if we want to exclude attributes
+
+
+# Taken from tutorialspoint
+class ProfileForm(forms.Form):
+    image = forms.ImageField()
 
 
 class EditInformationForm(UserChangeForm):
