@@ -1,0 +1,6 @@
+django_machina==0.6.0
+Django==2.0.1
+setuptools==39.0.1
+termcolor==1.1.0
+machina==0.1
+South==1.0.2
