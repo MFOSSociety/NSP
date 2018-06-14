@@ -1,0 +1,28 @@
+django-friendship was originally created by Frank Wiles (frank@revsys.com)
+with contributions from:
+
+    Jeff Triplett <jeff.triplett@gmail.com>
+    Jacob Burch <jacobburch@gmail.com>
+    Florian Demmer <fdemmer@gmail.com>
+    Flavio Curella <flavio@revsys.com>
+    Issac Kelly <issac.kelly@gmail.com>
+    Daniel Greenfeld <pydanny@gmail.com>
+    Sergey Komar <komarserjio@gmail.com>
+    Alessandro Pagnin
+    Diego Ponciano <diego+github@diegoponciano.com>
+    Dmitry A. Shashkin <shashkin@crystalnix.com>
+    Egor Yurtaev <yurtaev.egor+github@gmail.com>
+    Ali Oğuzhan Yıldız <aoguzhanyildiz@gmail.com>
+    Afnarel <afnarel@gmail.com>
+    Julian Wachholz <julian@wachholz.ch>
+    Kasia S <kstaniszewska@gmail.com>
+    Bruno Orlandi <brorlandi@gmail.com>
+    Sergey Dyachok <sergey@sdyachok.com.ua>
+    awidgery - https://github.com/awidgery
+    Jesper Håkansson- https://github.com/drager
+    Jonathan Cox <jonathan.cox.c@gmail.com>
+    Evgeniy Kirov - https://github.com/kirov
+    mirskiy - https://github.com/mirskiy
+    Eric Conner <econner@cs.stanford.edu> - http://ericwconner.com
+    narnikgamarnik - https://github.com/narnikgamarnikus
+    Darren Mckeeman <darren@kinkbnb.com> - https://www.kinkbnb.com
