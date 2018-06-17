@@ -15,11 +15,15 @@
         {% if user.is_authenticated %}
          <h2>You are already logged in</h2>
         {% else %}
+        <div class="container-fluid">
         <form method="post" action="{% url 'user_login' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
+            <table border = "1" align="center">
+                {% csrf_token %}
+                {{ form }}
+            </table>
         <button class="btn btn-success">Login</button>
         </form>
+        </div>
         {% endif %}
 
     </div>

@@ -9,11 +9,13 @@
     {% else %}
         <div class="text-center" style="background-color: rgba(255,255,255,0.8);border-radius:50px;margin-top:50px;padding-top:10px;padding-bottom:10px;">
 
-            <h1>Fill this form to let NSP know what you are going to work on!</h1>
+            <h1 align="center">Describe your Project</h1>
             <div class="container">
-            <form id="user_form" method="post">
+            <form id="user_form" method="post" class="project_form">
+                <table border = "1">
                 {% csrf_token %}
-                {{ project_form.as_ul }}
+                {{ project_form }}
+                </table>
                 <button type="submit" name="submit" value="Register" class="btn btn-success">Get Started!</button>
             </form>
             </div>
