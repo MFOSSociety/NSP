@@ -43,6 +43,7 @@
                 <a  class="btn btn-danger" href="{% url 'edit_profile' %}" >Edit Profile</a>
                 <a class="btn btn-info" href="{% url 'view_people' %}">People</a>
                 <a  class="btn btn-danger" href="{% url 'start_project' %}" >Start Project</a>
+                <a  class="btn btn-success" href="{% url 'project_list_view' %}" >Active Projects</a>
                 <a class="btn btn-primary" href="{% url 'logout' %}">Log Out</a>
             {% else %}
                 <a class="btn btn-primary" href="{% url 'user_login' %}">Sign In  </a>
