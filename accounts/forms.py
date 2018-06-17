@@ -8,6 +8,7 @@ from django import forms
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = ProjectDetail
+        exclude = ('Description',)
         fields = (
             'project_name',
             'mentor_name',
@@ -88,6 +89,13 @@ class RegistrationForm(UserCreationForm):   # extending from superclass
             'password1',
             'password2'
         )
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].label = "Password"
+        self.fields['password1'].help_text = ""
+        self.fields['password2'].label = "Confirm Password"
+        self.fields['password2'].help_text = ""
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False) # i might have left a loophole here
