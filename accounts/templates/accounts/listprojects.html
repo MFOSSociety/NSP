@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container-fluid">
+{% for project in projects %}
+    <li>
+    <a href="{% url 'view_project_detail' project.project_name %}">{{ project.project_name }}</a>
+    <p>Mentor : {{ project.mentor_name }}</p>
+    <p>Paid : {{ project.paid }}</p>
+    </li>
+{% endfor %}
+</div>
+{% endblock %}

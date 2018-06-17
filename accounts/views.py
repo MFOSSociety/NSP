@@ -102,6 +102,24 @@ def PeopleView(request):
     args = {'users': users, 'viewer': request.user}
     return render(request, 'accounts/people.html', args)
 
+def ProjectsListView(request):
+    projects = ProjectDetail.objects.all()
+    args = {'projects': projects}
+    return render(request, 'accounts/listprojects.html', args)
+
+
+def ProjectDetailView(request, project_name):
+    try:
+        project = ProjectDetail.objects.get(project_name=project_name)
+    except:
+        raise Http404
+
+    editable = False
+    context = locals()
+    template = 'accounts/projectdetailview.html'
+    args = {'project': project}
+    return render(request, template, args)
+
 
 def FriendProfileView(request, username):
     try:
