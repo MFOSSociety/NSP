@@ -1,3 +1,5 @@
+
+
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
@@ -29,28 +31,46 @@
       <div class="container">
          <a  class="btn btn-success" href="{% url 'addskill' %}" >Add Skill</a>
       </div>
-       <form name = "form" enctype = "multipart/form-data"
-         action = "{% url "save_profile" %}" method = "POST" >
+      <form
+         enctype="multipart/form-data"
+         id="id_ajax_upload_form" method="POST"
+         novalidate="">
          {% csrf_token %}
-
-         <div style = "max-width:470px;">
-            <center>
-               <input type = "file" style = "margin-left:20%;"
-                  placeholder = "Picture" name = "image" />
-            </center>
-         </div>
-
-         <div style = "max-width:470px;">
-            <center>
-
-               <button class="btn btn-success" type = "submit">
-                  <strong>Submit</strong>
-               </button>
-
-            </center>
-         </div>
-
+         {{ form.as_p }}
+         <input type="submit" />
       </form>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script type="text/javascript">
+         // form upload
+         $('#id_ajax_upload_form').submit(function(e){
+             e.preventDefault();
+             $form = $(this)
+             var formData = new FormData(this);
+             $.ajax({
+                 url: window.location.pathname,
+                 type: 'POST',
+                 data: formData,
+                 success: function (response) {
+                     $('.error').remove();
+                     console.log(response)
+                     if(response.error){
+                         $.each(response.errors, function(name, error){
+                             error = '<small class="text-muted error">' + error + '</small>'
+                             $form.find('[name=' + name + ']').after(error);
+                         })
+                     }
+                     else{
+                         alert(response.message);
+                         window.location = ""
+                     }
+                 },
+                 cache: false,
+                 contentType: false,
+                 processData: false
+             });
+         });
+         // end
+      </script>
    </div>
 </div>
 {% endblock %}

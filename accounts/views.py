@@ -6,7 +6,7 @@ from accounts.forms import (
     RegistrationForm,
     SkillForm,
     EditInformationForm,
-    ProfileForm
+    ImageFileUploadForm,
 )
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from accounts.models import User, ProjectDetail, UserProfile
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
 
 @login_required
 def ProjectHomeView(request):
@@ -314,5 +315,17 @@ def SimpleUploadView(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'accounts/simple_upload.html')
+
+def django_image_and_file_upload_ajax(request):
+    if request.method == 'POST':
+       form = ImageFileUploadForm(request.POST, request.FILES)
+       if form.is_valid():
+           form.save()
+           return JsonResponse({'error': False, 'message': 'Uploaded Successfully'})
+       else:
+           return JsonResponse({'error': True, 'errors': form.errors})
+    else:
+        form = ImageFileUploadForm()
+        return render(request, 'accounts/django_image_upload_ajax.html', {'form': form})
 
 

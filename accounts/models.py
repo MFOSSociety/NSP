@@ -88,9 +88,9 @@ class ProjectDetail(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
     ratings = models.IntegerField(null=True, default=0)
-    image = models.ImageField(upload_to="profile_image", blank=True)
+    photo = models.ImageField(upload_to="profile_image", null=True)
     year = models.IntegerField(null=True)
     branch = models.CharField(max_length=20, default="", blank=True)
     stream = models.CharField(max_length=20, default="", blank=True)

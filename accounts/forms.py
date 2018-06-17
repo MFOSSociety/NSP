@@ -37,6 +37,14 @@ class ProjectForm(forms.ModelForm):
         return project
 
 
+class ImageFileUploadForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = (
+            'photo',
+        )
+
+
 class EditProfileForm(UserChangeForm):
 
     class Meta:
@@ -51,8 +59,10 @@ class EditProfileForm(UserChangeForm):
 
 
 # Taken from tutorialspoint
+"""
 class ProfileForm(forms.Form):
     image = forms.ImageField()
+"""
 
 
 class EditInformationForm(UserChangeForm):
@@ -60,7 +70,7 @@ class EditInformationForm(UserChangeForm):
     class Meta:
         model = UserProfile
         fields = (
-            'image',
+            'photo',
         )
 
 """

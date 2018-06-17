@@ -11,6 +11,7 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
+    path('testing/', views.django_image_and_file_upload_ajax, name='testing'),
     path('', views.HomeView, name='home'),
     path('upload/', views.SimpleUploadView, name='upload'),
     path('project/start/', views.ProjectDescribeView, name='start_project'),
