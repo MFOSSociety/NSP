@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from accounts.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from accounts.models import ProjectDetail, Skill, UserProfile
 from django.forms import ModelForm
