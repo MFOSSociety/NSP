@@ -43,9 +43,12 @@ os.system("python manage.py makemigrations accounts")
 os.system("python manage.py migrate")
 print(colored("+++++++Complete++++++++", "green"))
 
+"""
 print(colored("\nDo you want to create a Super User?[Y/n]", "blue"))
 choice = input()
 if(choice == 'n' or choice == 'N'):
 	runserver()
 os.system("python manage.py createsuperuser")
-
+"""
+os.system("./manage.py shell -c \"from accounts.models import User; User.objects.create_superuser('rishieric91@gmail.com', 'something')\"")
+print("Created Superuser")
