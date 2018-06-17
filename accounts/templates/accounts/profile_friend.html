@@ -16,7 +16,8 @@
 <div class="container">
 <div class="card">
    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-   <p class="title">Hey, {{ user.username }}</p>
+   <p class="title">{{ user.username }}</p>
+   <p>Rating : {{ user.userprofile.rating }}</p>
 
    <p><button class="btn btn-success">Follow</button></p>
 </div>

@@ -94,6 +94,7 @@ class UserProfile(models.Model):
     year = models.IntegerField(null=True)
     branch = models.CharField(max_length=20, default="", blank=True)
     stream = models.CharField(max_length=20, default="", blank=True)
+    follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
         db_table = 'accounts_userprofile'

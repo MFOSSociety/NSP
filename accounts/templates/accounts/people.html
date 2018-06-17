@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load ratings %}
+
 {% block body %}
 <div class="container">
 
@@ -9,9 +9,9 @@
     <div class="content">
     <a href="{% url 'view_friend' people.username %}">{{ people.username }}</a>
     {% if viewer.is_superuser %}
-    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {% ratings people %}</p>
+    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {{ people.userprofile.rating }}</p>
     {% else %}
-    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {% ratings people read_only %}</p>
+    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {{ people.userprofile.rating }}</p>
     {% endif %}
     </div>
     </li>

@@ -11,13 +11,15 @@
 
             <h1 align="center">Describe your Project</h1>
             <div class="container">
-            <form id="user_form" method="post" class="project_form">
+            <center>
+            <form id="user_form" method="post">
                 <table border = "1">
                 {% csrf_token %}
                 {{ project_form }}
                 </table>
                 <button type="submit" name="submit" value="Register" class="btn btn-success">Get Started!</button>
             </form>
+            </center>
             </div>
         </div>
     {% endif %}

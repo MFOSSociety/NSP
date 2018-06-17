@@ -296,3 +296,5 @@ def SimpleUploadView(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'accounts/simple_upload.html')
+
+
