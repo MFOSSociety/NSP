@@ -43,12 +43,34 @@ os.system("python manage.py makemigrations accounts")
 os.system("python manage.py migrate")
 print(colored("+++++++Complete++++++++", "green"))
 
-"""
-print(colored("\nDo you want to create a Super User?[Y/n]", "blue"))
-choice = input()
-if(choice == 'n' or choice == 'N'):
-	runserver()
-os.system("python manage.py createsuperuser")
-"""
-os.system("./manage.py shell -c \"from accounts.models import User; User.objects.create_superuser('rishieric91@gmail.com', 'something')\"")
-print("Created Superuser")
+os.system("./manage.py shell -c \"from accounts.models import User; User.objects.create_superuser('admin@gmail.com', 'something')\"")
+print("\nCreated Superuser")
+print(colored("\nCreating Starting Users", "yellow"))
+os.system("./manage.py shell -c \"from accounts.models import User; User.objects._create_user(username='rshrc1', email='rshrc404@gmail.com', password='something')\"")
+os.system("./manage.py shell -c \"from accounts.models import User; User.objects._create_user(username='lol', email='lol404@gmail.com', password='something')\"")
+os.system("./manage.py shell -c \"from accounts.models import User; User.objects._create_user(username='lmao', email='lmao@gmail.com', password='something')\"")
+os.system("./manage.py shell -c \"from accounts.models import User; User.objects._create_user(username='shrek', email='shrek@gmail.com', password='something')\"")
+os.system("./manage.py shell -c \"from accounts.models import User; User.objects._create_user(username='neo', email='neo@gmail.com', password='something')\"")
+print(colored("Created 5 Users", "yellow"))
+
+print(colored("\nCreating 5 Random Projects", "yellow"))
+os.system("./manage.py shell -c \"from accounts.models import ProjectDetail; ProjectDetail.objects.create(project_name='DeepML', mentor_name='Rishi Banerjee', paid=True, description='fill this yourself', start_date='1999-09-01', branch='CSE/IT')\"")
+os.system("./manage.py shell -c \"from accounts.models import ProjectDetail; ProjectDetail.objects.create(project_name='Azure', mentor_name='Kshitij Gupta', paid=True, description='fill this yourself', start_date='1999-09-01', branch='CSE/IT')\"")
+os.system("./manage.py shell -c \"from accounts.models import ProjectDetail; ProjectDetail.objects.create(project_name='DeepAI', mentor_name='Tushar Saddana', paid=True, description='fill this yourself', start_date='1999-09-01', branch='CSE/IT')\"")
+os.system("./manage.py shell -c \"from accounts.models import ProjectDetail; ProjectDetail.objects.create(project_name='WebAndApp', mentor_name='Vidyanshu Jain', paid=True, description='fill this yourself', start_date='1999-09-01', branch='CSE/IT')\"")
+os.system("./manage.py shell -c \"from accounts.models import ProjectDetail; ProjectDetail.objects.create(project_name='InfoMUJ', mentor_name='Ashish Kumar', paid=True, description='fill this yourself', start_date='1999-09-01', branch='CSE/IT')\"")
+print(colored("Created 5 Random Projects", "yellow"))
+
+print("\nNow you can start testing the NSP Application :)")
+
+print(colored("\n=======================", "green"))
+print(colored("	  Running Server", "green"))
+print(colored("=======================", "green"))
+
+os.system("python manage.py runserver")
+
+# Scripted with love by Rishi Banerjee
+
+
+
+
