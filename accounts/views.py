@@ -11,10 +11,12 @@ from accounts.forms import (
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from accounts.models import User, ProjectDetail, UserProfile
+from accounts.models import User, ProjectDetail, UserProfile, FollowModel
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
+from django.views import View
+
 
 @login_required
 def ProjectHomeView(request):
@@ -36,7 +38,8 @@ def ProjectDescribeView(request):
     # These forms will be blank, ready for user input.
     else:
         project_form = ProjectForm()
-    return render(request, 'accounts/describe.html', {'project_form': project_form, 'project_registered': project_registered})
+    return render(request, 'accounts/describe.html',
+                  {'project_form': project_form, 'project_registered': project_registered})
 
 
 def HomeView(request):
@@ -55,20 +58,20 @@ def LoginView(request):
                 login(request, user)
                 return HttpResponseRedirect('/account/')
             else:
-                return HttpResponse("Your NSP account is disabled.")        #This is not working
+                return HttpResponse("Your NSP account is disabled.")  # This is not working
         else:
-            return HttpResponse("<h2>Invalid login details supplied.</h2>")  #By Default, Django's message is working
+            return HttpResponse("<h2>Invalid login details supplied.</h2>")  # By Default, Django's message is working
     else:
         return render(request, 'accounts/login.html', {})
 
 
 def SearchView(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         srch = request.POST['srh']
 
         if srch:
             match1 = User.objects.filter(first_name__icontains=srch).first()
-            #TODO skill name search functionlity to be added
+            # TODO skill name search functionlity to be added
             match2 = ProjectDetail.objects.filter(project_name__icontains=srch).first()
             match3 = ProjectDetail.objects.filter(branch__icontains=srch).first()
             match4 = ProjectDetail.objects.filter(mentor_name__icontains=srch).first()
@@ -99,9 +102,10 @@ def ProfileView(request):
 
 
 def PeopleView(request):
-    users = User.objects.all()          #do not use filter() with User object
+    users = User.objects.all()  # do not use filter() with User object
     args = {'users': users, 'viewer': request.user}
     return render(request, 'accounts/people.html', args)
+
 
 def ProjectsListView(request):
     projects = ProjectDetail.objects.all()
@@ -137,7 +141,7 @@ def FriendProfileView(request, username):
     return render(request, template, args)
 
 
-#return render(request, 'accounts/profile_friend.html', args)
+# return render(request, 'accounts/profile_friend.html', args)
 
 def DevelopersView(request):
     return render(request, 'accounts/team.html')
@@ -178,6 +182,7 @@ def EditInformationView(request):
         args = {'form': form}
         return render(request, 'accounts/edit_info.html', args)
 
+
 @login_required
 def SaveProfile(request):
     saved = False
@@ -194,7 +199,6 @@ def SaveProfile(request):
         MyProfileForm = ProfileForm()
 
     return render(request, 'accounts/saved.html', locals())
-
 
 
 @login_required
@@ -215,6 +219,7 @@ def ChangePasswordView(request):
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
+
 
 # Go through this, this is important
 
@@ -243,7 +248,6 @@ def signup(request):
 
 
 def RegistrationView(request):
-
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         print("The form reached")
@@ -261,7 +265,7 @@ def RegistrationView(request):
         return render(request, 'accounts/signup.html', args)
 
 
-#@login_required
+# @login_required
 '''def AddSkillView(request):
     skill_added = False
 
@@ -279,10 +283,12 @@ def RegistrationView(request):
     return render(request, 'accounts/addskill.html', {'skill_form': skill_form, 'skill_added': skill_added})
 '''
 
-def SkillsView(request):    # I dont know what this does
+
+def SkillsView(request):  # I dont know what this does
     pass
 
-#SKILL FORM VIEW LATEST CREATION
+
+# SKILL FORM VIEW LATEST CREATION
 
 
 def AddSkillView(request):
@@ -296,8 +302,6 @@ def AddSkillView(request):
     else:
         form = SkillForm()
     return render(request, 'accounts/addskill.html', {'form': form})
-
-
 
 
 def SuccesfullRegistrationView(request):
@@ -316,16 +320,24 @@ def SimpleUploadView(request):
         })
     return render(request, 'accounts/simple_upload.html')
 
+
 def django_image_and_file_upload_ajax(request):
     if request.method == 'POST':
-       form = ImageFileUploadForm(request.POST, request.FILES)
-       if form.is_valid():
-           form.save()
-           return JsonResponse({'error': False, 'message': 'Uploaded Successfully'})
-       else:
-           return JsonResponse({'error': True, 'errors': form.errors})
+        form = ImageFileUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'error': False, 'message': 'Uploaded Successfully'})
+        else:
+            return JsonResponse({'error': True, 'errors': form.errors})
     else:
         form = ImageFileUploadForm()
         return render(request, 'accounts/django_image_upload_ajax.html', {'form': form})
 
 
+class FollowView(View):  # url would be something like /social/follow/userid
+
+    def post(self, request, follow):
+        follow = FollowModel()
+        follow.follower = request.user.id
+        follow.following = User.objects.get(id=follow)
+        follow.save()

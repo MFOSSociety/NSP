@@ -17,9 +17,9 @@
 <div class="container">
    <div class="card">
       <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-      <p class="title">Hey, {{ user.username }}</p>
-      {% if user.userprofile.image %}
-      <img src="{{ user.userprofile.image.url }}" width="240">
+      <p>Hey, {{ user.username }}</p>
+      {% if user.userprofile.photo %}
+      <img src="{{ user.userprofile.photo.url }}" width="240">
       {% endif %}
       {% if user.userprofile.branch %}
       <p>Branch : {{ user.userprofile.branch }}</p>

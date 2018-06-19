@@ -111,6 +111,10 @@ def create_profile(sender, **kwargs):
 post_save.connect(create_profile, sender=User)
 
 
+# Model to get followed
+class FollowModel(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, to_field="id", related_name="follower_rel_field")
+    following = models.ForeignKey(User, on_delete=models.CASCADE, to_field="id", related_name="following_rel_field")
 
 
 

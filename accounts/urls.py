@@ -8,6 +8,7 @@ from django.contrib.auth.views import (
     password_reset_complete,
 )
 from django.contrib.auth import views as auth_views
+from accounts.views import FollowView
 
 
 urlpatterns = [
@@ -26,6 +27,7 @@ urlpatterns = [
     path('logout/', logout, {'template_name': 'accounts/logout.html'}, name='logout'),
     path('profile/', views.ProfileView, name='view_profile'),
     path('people/', views.PeopleView, name='view_people'),
+    # re_path('follow/(?P<username>[\w\-]+)/', FollowView.post(), name='follow_user'),
     re_path('users/(?P<username>[\w\-]+)/', views.FriendProfileView, name='view_friend'),
     path('profile/skills', views.SkillsView, name='skills'),
     path('about/', views.AboutView, name='about'),
