@@ -113,9 +113,9 @@ def ProjectsListView(request):
     return render(request, 'accounts/listprojects.html', args)
 
 
-def ProjectDetailView(request, project_name):
+def ProjectDetailView(request, project_id):
     try:
-        project = ProjectDetail.objects.get(project_name=project_name)
+        project = ProjectDetail.objects.get(id=project_id)
     except:
         raise Http404
 

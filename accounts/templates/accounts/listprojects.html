@@ -17,7 +17,7 @@
 </tr>
 {% for project in projects %}
     <tr>
-    <td class="lead mb-7"><a href="{% url 'view_project_detail' project.project_name %}">{{ project.project_name }}</a></td>
+    <td class="lead mb-7"><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a></td>
     <td class="lead mb-7">{{ project.mentor_name }}</td>
     <td class="lead mb-7">{{ project.initiated_by }}TODO</td>
     <td class="lead mb-7">{% if project.paid %} Yes {% else %} {{ No }} {% endif %}</td>
