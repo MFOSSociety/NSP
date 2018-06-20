@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import ProjectDetail, UserProfile
 from accounts.models import User
 
-admin.site.site_title  = "NSP"
+admin.site.site_title = "NSP"
 admin.site.index_title = "NSP"
 admin.site.site_header = "NSP ADMINISTRATION"
 

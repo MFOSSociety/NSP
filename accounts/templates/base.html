@@ -38,14 +38,14 @@
           <a class="navbar-brand" href="{% url 'home' %}">NSP</a>
           <div class="navbar navbar-right">
             {% if user.is_authenticated %}
-                <a  class="btn btn-success" href="{% url 'view_profile' %}" >Profile</a>
-                <a  class="btn btn-danger" href="{% url 'edit_profile' %}" >Edit Profile</a>
-                <a class="btn btn-info" href="{% url 'view_people' %}">People</a>
-                <a  class="btn btn-danger" href="{% url 'start_project' %}" >Start Project</a>
-                <a  class="btn btn-success" href="{% url 'project_list_view' %}" >Active Projects</a>
-                <a class="btn btn-primary" href="{% url 'logout' %}">Log Out</a>
+                <a  class="btn btn-primary" href="{% url 'view_profile' %}" >Profile</a>
+                <a  class="btn btn-primary" href="{% url 'edit_profile' %}" >Edit Profile</a>
+                <a class="btn btn-primary" href="{% url 'view_people' %}">People</a>
+                <a  class="btn btn-primary" href="{% url 'start_project' %}" >Start Project</a>
+                <a  class="btn btn-primary" href="{% url 'project_list_view' %}" >Active Projects</a>
+                <a class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
             {% else %}
-                <a class="btn btn-primary" href="{% url 'user_login' %}">Sign In  </a>
+                <a class="btn btn-primary" href="{% url 'user_login' %}">Sign In </a>
                 <a class="btn btn-primary" href="{% url 'signup' %}">Sign Up</a>
             {% endif %}
 

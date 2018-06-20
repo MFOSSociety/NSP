@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block body %}
-
+<br>
+<div class="container">
 <center>
-<table border="1" style="width: 100%; height: 100%" cellspacing="10" cellpadding="10">
+<table border="1" style="width: 100%; height: 100%; border-radius: 25px" cellspacing="10" cellpadding="10">
 <tr>
     <td>Project Name</td>
     <td>Mentor Name</td>
+    <td>Initiator</td>
     <td>Paid</td>
     <td>Branches Preferred</td>
-    <td>Description</td>
-    <td>Start Date</td>
+    <td>Description (On Project Page)</td>
+    <td>Published On</td>
     <td>People Interested</td>
     <td>Get In!</td>
 </tr>
@@ -17,14 +19,25 @@
     <tr>
     <td><a href="{% url 'view_project_detail' project.project_name %}">{{ project.project_name }}</a></td>
     <td>{{ project.mentor_name }}</td>
+    <td>{{ project.initiated_by }}TODO</td>
     <td>{% if project.paid %} Yes {% else %} {{ No }} {% endif %}</td>
     <td><center>{{ project.branch }}</center></td>
     <td>{{ project.description }}</td>
     <td>{{ project.start_date }}</td>
-    <td>Some random Number</td>
+    <td>
+        <center>
+            {% if project.people_interested %}
+                {{ project.people_interested }}
+            {% else %}
+                0
+            {% endif %}
+        </center>
+    </td>
     <td><a class="btn btn-primary">Check</a></td>
     </tr>
 {% endfor %}
 </table>
 </center>
+</div>
+<br><br>
 {% endblock %}

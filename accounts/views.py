@@ -27,7 +27,7 @@ def ProjectHomeView(request):
 @login_required
 def ProjectDescribeView(request):
     project_registered = False
-
+    initiator = request.user    # TODO
     if request.method == 'POST':
         project_form = ProjectForm(data=request.POST)
         if project_form.is_valid():
@@ -321,6 +321,7 @@ def SimpleUploadView(request):
     return render(request, 'accounts/simple_upload.html')
 
 
+# TODO
 def django_image_and_file_upload_ajax(request):
     if request.method == 'POST':
         form = ImageFileUploadForm(request.POST, request.FILES)
@@ -333,7 +334,7 @@ def django_image_and_file_upload_ajax(request):
         form = ImageFileUploadForm()
         return render(request, 'accounts/django_image_upload_ajax.html', {'form': form})
 
-
+# TODO
 class FollowView(View):  # url would be something like /social/follow/userid
 
     def post(self, request, follow):
@@ -341,3 +342,10 @@ class FollowView(View):  # url would be something like /social/follow/userid
         follow.follower = request.user.id
         follow.following = User.objects.get(id=follow)
         follow.save()
+
+
+# TODO
+def ProjectInterestedCounter(request):
+    project = ProjectDetail.objects.get(project_name=project_name)
+    project.people_interested = project.people_interested + 1
+    print("Value Upldated")

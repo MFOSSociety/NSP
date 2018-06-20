@@ -20,7 +20,7 @@ urlpatterns = [
     re_path('project/(?P<project_name>[\w\-]+)/', views.ProjectDetailView, name='view_project_detail'),
     path('search/', views.SearchView, name='search'),
     # path('login/', views.user_login, name='user_login'),
-    path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name = 'user_login'),
+    path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('registersuccess/', views.SuccesfullRegistrationView, name='registersucess'),
     path('register/', views.RegistrationView, name='signup'),
@@ -42,6 +42,7 @@ urlpatterns = [
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),
     path('developers/', views.DevelopersView, name='developers')
+
 ]
 
 # setting up a local mail server for testing and debugging
