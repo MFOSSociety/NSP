@@ -11,7 +11,7 @@ from accounts.forms import (
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from accounts.models import User, ProjectDetail, UserProfile, FollowModel
+from accounts.models import User, ProjectDetail, UserProfile,Follow
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
@@ -334,15 +334,23 @@ def django_image_and_file_upload_ajax(request):
         form = ImageFileUploadForm()
         return render(request, 'accounts/django_image_upload_ajax.html', {'form': form})
 
-# TODO
-class FollowView(View):  # url would be something like /social/follow/userid
+def followUser(request,ID):
+    follow_args = {
+        "follower":request.user,
+        "following":User.objects.get(pk=ID)
+    }
+    if not Follow.objects.filter(**follow_args):
+        Follow.objects.create(**follow_args)
 
-    def post(self, request, follow):
-        follow = FollowModel()
-        follow.follower = request.user.id
-        follow.following = User.objects.get(id=follow)
-        follow.save()
+    return redirect("/account/profile")
 
+def unfollowUser(request,ID):
+    follow_args = {
+        "follower":request.user,
+        "following":User.objects.get(pk=ID)
+    }
+    Follow.objects.filter(**follow_args).delete()
+    return redirect("/account/profile")
 
 # TODO
 def ProjectInterestedCounter(request):
