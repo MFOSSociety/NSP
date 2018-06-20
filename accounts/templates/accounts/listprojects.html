@@ -2,12 +2,30 @@
 {% block body %}
 
 <div class="container">
+<center>
+<div class="container">
+<table border="1">
+<tr>
+    <td>Project Name</td>
+    <td>Mentor Name</td>
+    <td>Paid</td>
+    <td>Branches Preferred</td>
+    <td>Description</td>
+    <td>Start Date</td>
+    <td>People Interested</td>
+</tr>
 {% for project in projects %}
-    <li>
-    <a href="{% url 'view_project_detail' project.project_name %}">{{ project.project_name }}</a>
-    <p>Mentor : {{ project.mentor_name }}</p>
-    <p>Paid : {{ project.paid }}</p>
-    </li>
+    <tr>
+    <td><a href="{% url 'view_project_detail' project.project_name %}">{{ project.project_name }}</a></td>
+    <td>{{ project.mentor_name }}</td>
+    <td>{% if project.paid %} Yes {% else %} {{ No }} {% endif %}</td>
+    <td><center>{{ project.branch }}</center></td>
+    <td>{{ project.description }}</td>
+    <td>{{ project.start_description }}</td>
+    </tr>
 {% endfor %}
+</table>
+</div>
+</center>
 </div>
 {% endblock %}
