@@ -36,6 +36,10 @@
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
           <a class="navbar-brand" href="{% url 'home' %}">NSP</a>
+          <form action="#" method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="Search..">
+          </form>
           <div class="navbar navbar-right">
             {% if user.is_authenticated %}
                 <a  class="btn btn-primary" href="{% url 'view_profile' %}" >Profile</a>

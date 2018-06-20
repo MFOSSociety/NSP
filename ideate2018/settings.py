@@ -140,7 +140,7 @@ CACHES = {
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join('home/pratik/NSP', 'whoosh_index'),         #edit the path accordingly
+        'PATH': os.path.join('home/rishi/Desktop/NSP', 'whoosh_index'),         #edit the path accordingly
     },
 }
 

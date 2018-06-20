@@ -17,14 +17,14 @@
 </tr>
 {% for project in projects %}
     <tr>
-    <td><a href="{% url 'view_project_detail' project.project_name %}">{{ project.project_name }}</a></td>
-    <td>{{ project.mentor_name }}</td>
-    <td>{{ project.initiated_by }}TODO</td>
-    <td>{% if project.paid %} Yes {% else %} {{ No }} {% endif %}</td>
-    <td><center>{{ project.branch }}</center></td>
-    <td>{{ project.description }}</td>
-    <td>{{ project.start_date }}</td>
-    <td>
+    <td class="lead mb-7"><a href="{% url 'view_project_detail' project.project_name %}">{{ project.project_name }}</a></td>
+    <td class="lead mb-7">{{ project.mentor_name }}</td>
+    <td class="lead mb-7">{{ project.initiated_by }}TODO</td>
+    <td class="lead mb-7">{% if project.paid %} Yes {% else %} {{ No }} {% endif %}</td>
+    <td class="lead mb-7"><center>{{ project.branch }}</center></td>
+    <td class="lead mb-7">{{ project.description }}</td>
+    <td class="lead mb-7">{{ project.start_date }}</td>
+    <td class="lead mb-7">
         <center>
             {% if project.people_interested %}
                 {{ project.people_interested }}
@@ -33,7 +33,7 @@
             {% endif %}
         </center>
     </td>
-    <td><a class="btn btn-primary">Check</a></td>
+    <td class="lead mb-7"><a class="btn btn-primary">Check</a></td>
     </tr>
 {% endfor %}
 </table>

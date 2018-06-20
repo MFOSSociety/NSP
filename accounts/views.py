@@ -77,22 +77,22 @@ def SearchView(request):
             match4 = ProjectDetail.objects.filter(mentor_name__icontains=srch).first()
             if match1:
                 print("match1")
-                return render(request, 'accounts/search.html', {'sr': match1, 'condition': 'person'})
+                return render(request, 'accounts/searchOld.html', {'sr': match1, 'condition': 'person'})
             elif match2:
                 print("match2")
-                return render(request, 'accounts/search.html', {'sr': match2, 'condition': 'project'})
+                return render(request, 'accounts/searchOld.html', {'sr': match2, 'condition': 'project'})
             elif match3:
                 print("match3")
-                return render(request, 'accounts/search.html', {'sr': match3, 'condition': 'branch'})
+                return render(request, 'accounts/searchOld.html', {'sr': match3, 'condition': 'branch'})
             elif match4:
                 print("match4")
-                return render(request, 'accounts/search.html', {'sr': match4, 'condition': 'mentor'})
+                return render(request, 'accounts/searchOld.html', {'sr': match4, 'condition': 'mentor'})
             else:
-                return render(request, 'accounts/search.html', {'sr': 'search_fail', 'condition': 'search_fail'})
+                return render(request, 'accounts/searchOld.html', {'sr': 'search_fail', 'condition': 'search_fail'})
 
         else:
             return HttpResponse('/account/search/')
-    return render(request, 'accounts/search.html')
+    return render(request, 'accounts/searchOld.html')
 
 
 @login_required
