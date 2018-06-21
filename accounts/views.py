@@ -18,6 +18,7 @@ from django.http import JsonResponse
 from django.views import View
 
 
+
 @login_required
 def ProjectHomeView(request):
     args = {}
@@ -219,6 +220,21 @@ def ChangePasswordView(request):
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
+
+
+@login_required
+def ChangeProfilePicture(request):
+    current_user = request.user
+    current_user_profile = UserProfile.objects.get(user=current_user)
+    if request.method == "POST":
+        if request.FILES:
+            current_user_profile.photo = request.FILES["photo"] # "photo" because in the template the upload image file name is photo
+            current_user_profile.save()
+            return redirect("accounts/change_profilepic")
+    else:
+        context = {"current_user_profile":current_user_profile}
+        return render(request,"accounts/django_image_upload_ajax.html",context)
+
 
 
 # Go through this, this is important

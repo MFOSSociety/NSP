@@ -3,12 +3,13 @@
      <title> Django image and file upload using ajax </title>
   </head>
 <body>
+  <img style="position: center;" src="{{ current_user_profile.photo.url }}">
    <form
     enctype="multipart/form-data"
     id="id_ajax_upload_form" method="POST"
     novalidate="">
-      {% csrf_token %}
-      {{ form.as_p }}
+              {% csrf_token %}
+      <p><label for="id_photo">Photo:</label> <input type="file" name="photo" required id="id_photo" /></p>
       <input type="submit" />
    </form>
    <script
