@@ -8,7 +8,7 @@ from django.contrib.auth.views import (
     password_reset_complete,
 )
 from django.contrib.auth import views as auth_views
-from accounts.views import FollowView
+from accounts.views import followUser,unfollowUser
 
 
 urlpatterns = [
@@ -29,7 +29,8 @@ urlpatterns = [
     path('logout/', logout, {'template_name': 'accounts/logout.html'}, name='logout'),
     path('profile/', views.ProfileView, name='view_profile'),
     path('people/', views.PeopleView, name='view_people'),
-    # re_path('follow/(?P<username>[\w\-]+)/', FollowView.post(), name='follow_user'),
+    path("social/follow/<ID>",views.followUser,name="followUser"),
+    path("social/unfollow/<ID>",views.unfollowUser,name="unfollowUser"),
     re_path('users/(?P<username>[\w\-]+)/', views.FriendProfileView, name='view_friend'),
     path('profile/skills', views.SkillsView, name='skills'),
     path('about/', views.AboutView, name='about'),
@@ -40,6 +41,7 @@ urlpatterns = [
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/done/', password_reset_done, name='password_reset_done'),
     # Thank God this piece of shit works, do not tamper.
+    # second programmer : LMAO
     re_path('reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm, name='password_reset_confirm'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),
