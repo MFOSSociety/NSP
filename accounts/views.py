@@ -335,16 +335,19 @@ def django_image_and_file_upload_ajax(request):
         return render(request, 'accounts/django_image_upload_ajax.html', {'form': form})
 
 
-def followUser(request,ID):
+def followUser(request, ID):
     friend = User.objects.get(pk=ID)
+    follow_value = False
     follow_args = {
         "follower": request.user,
         "following": User.objects.get(pk=ID)
     }
     if not Follow.objects.filter(**follow_args):
         Follow.objects.create(**follow_args)
+        follow_value = True
+    args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
     # redirecting to the same page
-    return redirect("/account/users/"+friend.username+"/")
+    return redirect("/account/users/"+friend.username+"/", args)
 
 def unfollowUser(request,ID):
     follow_args = {
