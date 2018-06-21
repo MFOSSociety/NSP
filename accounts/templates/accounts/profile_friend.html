@@ -18,6 +18,7 @@
    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
    <p class="title">{{ user.username }}</p>
    <p>Rating : {{ user.userprofile.rating }}</p>
+   <a href="{% url 'followUser' user.id %}" class="btn btn-primary">Follow</a>
 </div>
 </div>
 {% endblock %}
