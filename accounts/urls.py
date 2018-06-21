@@ -12,6 +12,7 @@ from accounts.views import followUser,unfollowUser
 
 
 urlpatterns = [
+    path("change_profilepic", views.ChangeProfilePicture,name="ChangeProfilePicture"),
     path('testing/', views.django_image_and_file_upload_ajax, name='testing'),
     path('', views.HomeView, name='home'),
     path('upload/', views.SimpleUploadView, name='upload'),
