@@ -423,5 +423,5 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
         return user.userprofile
 
     def get_success_url(self, *args, **kwargs):
-        return reverse("/account/profile")
+        return reverse("view_profile")
 
