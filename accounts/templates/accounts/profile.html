@@ -19,7 +19,9 @@
       <h1>{{ user.first_name }} {{ user.last_name }}</h1>
       <p>Hey, {{ user.username }}</p>
       {% if user.userprofile.photo %}
-      <img src="{{ user.userprofile.photo.url }}" width="240">
+      <img class="img-fluid" src="{{ user.userprofile.photo.url }}" width="240">
+      {% else %}
+      <img class="img-fluid" src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
       {% endif %}
       {% if user.userprofile.branch %}
       <p>Branch : {{ user.userprofile.branch }}</p>
@@ -27,50 +29,16 @@
       {% if user.userprofile.year %}
       <p>Year : {{ user.userprofile.year }}</p>
       {% endif %}
-      <p>Rating : {{ user.userprofile.ratings }}</p>
+      <p>
+         {% if user.userprofile.ratings == 0 %}
+             {{ user.userprofile.ratings }}
+             <i class="fa fa-star" style="color:dodgerblue"></i>
+         {% endif %}
+      </p>
       <div class="container">
-         <a  class="btn btn-success" href="{% url 'addskill' %}" >Add Skill</a>
+         <a class="btn btn-success" href="{% url 'addskill' %}" >Add Skill</a>
+         <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}">Edit Profile Picture</a>
       </div>
-      <form
-         enctype="multipart/form-data"
-         id="id_ajax_upload_form" method="POST"
-         novalidate="">
-         {% csrf_token %}
-         {{ form.as_p }}
-         <input type="submit" />
-      </form>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript">
-         // form upload
-         $('#id_ajax_upload_form').submit(function(e){
-             e.preventDefault();
-             $form = $(this)
-             var formData = new FormData(this);
-             $.ajax({
-                 url: window.location.pathname,
-                 type: 'POST',
-                 data: formData,
-                 success: function (response) {
-                     $('.error').remove();
-                     console.log(response)
-                     if(response.error){
-                         $.each(response.errors, function(name, error){
-                             error = '<small class="text-muted error">' + error + '</small>'
-                             $form.find('[name=' + name + ']').after(error);
-                         })
-                     }
-                     else{
-                         alert(response.message);
-                         window.location = ""
-                     }
-                 },
-                 cache: false,
-                 contentType: false,
-                 processData: false
-             });
-         });
-         // end
-      </script>
    </div>
 </div>
 {% endblock %}

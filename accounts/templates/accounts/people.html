@@ -1,22 +1,36 @@
-{% extends 'base.html' %}
 
+
+{% extends 'base.html' %}
 {% block body %}
 <div class="container">
-
-{% for people in users %}
-    {% if people.is_superuser is False %}
-    <li>
-    <div class="content">
-    <a href="{% url 'view_friend' people.username %}">{{ people.username }}</a>
-    {% if viewer.is_superuser %}
-    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {{ people.userprofile.rating }}</p>
-    {% else %}
-    <p>Name : {{ people.first_name }} {{ people.last_name }} Ratings {{ people.userprofile.rating }}</p>
-    {% endif %}
-    </div>
-    </li>
-    {% endif %}
-{% endfor %}
-
+   <div class="container">
+      <center>
+         <table border="1" style="width: 100%; height: 100%; border-radius: 25px" cellspacing="10"
+            cellpadding="10">
+            <tr>
+               <td>Username</td>
+               <td>Name</td>
+               <td>Ratings</td>
+            </tr>
+            {% for people in users %}
+            {% if people.is_superuser is False %}
+            <tr>
+               <td class="lead mb-7"><a
+                  href="{% url 'view_friend' people.username %}">{{ people.username }}</a></td>
+               {% if viewer.is_superuser %}
+               <td class="lead mb-7">{{ people.first_name }} {{ people.last_name }}</td>
+               <td class="lead mb-7">{{ people.userprofile.ratings }}</td>
+               {% else %}
+               <td class="lead mb-7">{{ people.first_name }} {{ people.last_name }}</td>
+               <td class="lead mb-7">{{ people.userprofile.ratings}}</td>
+               {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+         </table>
+      </center>
+   </div>
+   <br><br>
 </div>
 {% endblock %}
+

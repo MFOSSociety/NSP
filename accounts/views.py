@@ -233,7 +233,7 @@ def ChangeProfilePicture(request):
             return redirect("accounts/change_profilepic")
     else:
         context = {"current_user_profile":current_user_profile}
-        return render(request,"accounts/django_image_upload_ajax.html",context)
+        return render(request, "accounts/profile_pic_upload.html", context)
 
 
 
@@ -348,7 +348,7 @@ def django_image_and_file_upload_ajax(request):
             return JsonResponse({'error': True, 'errors': form.errors})
     else:
         form = ImageFileUploadForm()
-        return render(request, 'accounts/django_image_upload_ajax.html', {'form': form})
+        return render(request, 'accounts/profile_pic_upload.html', {'form': form})
 
 
 def followUser(request, ID):
@@ -372,6 +372,7 @@ def unfollowUser(request,ID):
     }
     Follow.objects.filter(**follow_args).delete()
     return redirect("/account/profile")
+
 
 # TODO
 def ProjectInterestedCounter(request):
