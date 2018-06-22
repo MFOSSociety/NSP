@@ -1,27 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-<title>Login Page</title>
+    <title>Login Page</title>
 {% endblock %}
 
 {% block customcss %}
-<link href="{% static 'accounts/css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'accounts/css/login.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
     <br>
-     <div class="container-fluid">
+    <div class="container-fluid">
         <h1>Welcome </h1>
         {% if user.is_authenticated %}
-         <h2>You are already logged in</h2>
+            <h2>You are already logged in</h2>
         {% else %}
-        <form method="post" action="{% url 'user_login' %}">
-            <table border = "1">
-                {% csrf_token %}
-                {{ form }}
-            </table>
-        <button class="btn btn-success">Login</button>
-        </form>
+            <div class="container-fluid">
+            <form method="post" action="{% url 'user_login' %}">
+
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="username" id="username" tabindex="1" class="form-control"
+                               placeholder="email" value="">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" tabindex="2" class="form-control"
+                               placeholder="Password">
+                    </div>
+
+
+                <button class="btn btn-success">Login</button>
+            </form>
+            </div>
         {% endif %}
 
     </div>
