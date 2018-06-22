@@ -379,3 +379,8 @@ def ProjectInterestedCounter(request):
     project = ProjectDetail.objects.get(project_name=project_name)
     project.people_interested = project.people_interested + 1
     print("Value Upldated")
+
+
+# TODO
+def EditDetails(request):
+    return redirect("/account/profile")
