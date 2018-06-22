@@ -24,7 +24,7 @@ from accounts.forms import (
     ImageFileUploadForm,
     UserProfileForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, Follow
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested
 
 
 @login_required
@@ -118,7 +118,15 @@ def PeopleView(request):
 
 def ProjectsListView(request):
     projects = ProjectDetail.objects.all()
-    args = {'projects': projects}
+    projects_peopleInterested = {}
+    for project in projects:
+        interested = ProjectPeopleInterested.objects.filter(project=project)
+        projects_peopleInterested[project] = len(interested)
+    except:
+        projects_peopleInterested[project] = 0
+
+
+    args = {"projects_peopleInterested":projects_peopleInterested}
     return render(request, 'accounts/listprojects.html', args)
 
 
@@ -339,13 +347,6 @@ def unfollowUser(request, ID):
     }
     Follow.objects.filter(**follow_args).delete()
     return redirect("/account/profile")
-
-
-# TODO
-def ProjectInterestedCounter(request):
-    project = ProjectDetail.objects.get(project_name=project_name)
-    project.people_interested = project.people_interested + 1
-    print("Value Upldated")
 
 
 # TODO
