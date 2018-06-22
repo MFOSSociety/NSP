@@ -8,7 +8,7 @@ from django.contrib.auth.views import (
     password_reset_complete,
 )
 from django.contrib.auth import views as auth_views
-from accounts.views import followUser,unfollowUser
+from accounts.views import followUser,unfollowUser, EditUserProfileView
 
 
 urlpatterns = [
@@ -36,7 +36,7 @@ urlpatterns = [
     path('profile/skills', views.SkillsView, name='skills'),
     path('about/', views.AboutView, name='about'),
     path('profile/edit', views.EditProfileView, name='edit_profile'),
-    path('profile/edit_details', views.EditDetails, name='EditDetails'),
+    re_path('profile/(?P<pk>\d+)/edit_details', EditUserProfileView.as_view(), name='EditDetails'),
     path('saved/', views.SaveProfile, name ='save_profile'),
     path('change-password/', views.ChangePasswordView, name='change_password'),
     path('reset-password/', password_reset, name='reset_password'),

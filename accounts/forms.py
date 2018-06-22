@@ -73,6 +73,20 @@ class EditInformationForm(UserChangeForm):
             'photo',
         )
 
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('year', 'branch')  # Note that we didn't mention user field here.
+
+    def save(self, user=None):
+        user_profile = super(UserProfileForm, self).save(commit=False)
+        if user:
+            user_profile.user = user
+        user_profile.save()
+        return user_profile
+
+
 """
 class SignUpForm(UserCreationForm):
     branch = forms.CharField(help_text="Your Branch")

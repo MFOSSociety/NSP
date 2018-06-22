@@ -1,4 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import (
+     render,
+     redirect,
+     HttpResponse,
+     HttpResponseRedirect,
+     Http404,
+     reverse,
+     get_object_or_404,
+)
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
     EditProfileForm,
@@ -7,6 +15,7 @@ from accounts.forms import (
     SkillForm,
     EditInformationForm,
     ImageFileUploadForm,
+    UserProfileForm,
 )
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
@@ -15,7 +24,7 @@ from accounts.models import User, ProjectDetail, UserProfile,Follow
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
-from django.views import View
+from django.views.generic import FormView, UpdateView
 
 
 
@@ -384,3 +393,35 @@ def ProjectInterestedCounter(request):
 # TODO
 def EditDetails(request):
     return redirect("/account/profile")
+
+"""
+class NewUserProfileView(FormView):
+
+    template_name = "accounts/edit_detail.html"
+    form_class = UserProfileForm
+
+    def form_valid(self, form):
+        form.save(self.request.user)
+        return super(NewUserProfileView, self).form_valid(form)
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse("/account/profile")
+"""
+
+
+class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and not FormView
+    model = UserProfile
+    form_class = UserProfileForm
+    template_name = "accounts/edit_detail.html"
+
+    def get_object(self, *args, **kwargs):
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
+
+        # We can also get user object using self.request.user  but that doesnt work
+        # for other models.
+
+        return user.userprofile
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse("/account/profile")
+
