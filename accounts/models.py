@@ -1,9 +1,7 @@
-from django.db import models
-# from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 import datetime
-from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.db import models
+from django.db.models.signals import post_save
 
 
 class MyUserManager(BaseUserManager):
@@ -11,6 +9,7 @@ class MyUserManager(BaseUserManager):
     A custom user manager to deal with emails as unique identifiers for auth
     instead of usernames. The default that's used is "UserManager"
     """
+
     def _create_user(self, email, password, **extra_fields):
         """
         Creates and saves a User with the given email and password.
@@ -35,7 +34,6 @@ class MyUserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=20)
     email = models.EmailField(unique=True, null=True)
@@ -49,7 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(
         'active',
         default=True,
-        help_text= '',
+        help_text='',
 
     )
     USERNAME_FIELD = 'email'
@@ -114,9 +112,8 @@ post_save.connect(create_profile, sender=User)
 
 
 class Follow(models.Model):
-    follower = models.ForeignKey(User,on_delete=models.CASCADE,related_name="follower")
-    following = models.ForeignKey(User,on_delete=models.CASCADE,related_name="following")
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
+
     def __str__(self):
-        return "{} started following {}".format(self.follower,self.following)
-
-
+        return "{} started following {}".format(self.follower, self.following)

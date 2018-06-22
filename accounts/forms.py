@@ -1,9 +1,9 @@
 # from django.contrib.auth.models import User
-from accounts.models import User
+from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from accounts.models import ProjectDetail, Skill, UserProfile
-from django.forms import ModelForm
-from django import forms
+from accounts.models import User
+
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -46,7 +46,6 @@ class ImageFileUploadForm(forms.ModelForm):
 
 
 class EditProfileForm(UserChangeForm):
-
     class Meta:
         model = User
         fields = (
@@ -59,15 +58,7 @@ class EditProfileForm(UserChangeForm):
         # we can use exclude(....fields....) if we want to exclude attributes
 
 
-# Taken from tutorialspoint
-"""
-class ProfileForm(forms.Form):
-    image = forms.ImageField()
-"""
-
-
 class EditInformationForm(UserChangeForm):
-
     class Meta:
         model = UserProfile
         fields = (
@@ -92,18 +83,7 @@ class UserProfileForm(forms.ModelForm):
         return user_profile
 
 
-"""
-class SignUpForm(UserCreationForm):
-    branch = forms.CharField(help_text="Your Branch")
-    phone = forms.CharField(help_text="Your Phone Number")
-    year = forms.CharField(help_text="Your Year OF Study")
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'first_name', 'last_name','branch', 'phone', 'year', 'password1', 'password2')
-"""
-
-class RegistrationForm(UserCreationForm):   # extending from superclass
+class RegistrationForm(UserCreationForm):  # extending from superclass
     email = forms.EmailField(required=True)
 
     # define meta data
@@ -127,7 +107,7 @@ class RegistrationForm(UserCreationForm):   # extending from superclass
         self.fields['password2'].help_text = ""
 
     def save(self, commit=True):
-        user = super(RegistrationForm, self).save(commit=False) # i might have left a loophole here
+        user = super(RegistrationForm, self).save(commit=False)  # i might have left a loophole here
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
@@ -137,23 +117,9 @@ class RegistrationForm(UserCreationForm):   # extending from superclass
 
         return user
 
-
-'''''class SkillForm(forms.ModelForm):
-    class Meta:
-        model = Skill
-        fields = ('skill_name',)
-
-    def save(self, commit=True):
-        skills = super(SkillForm, self).save(commit=False)
-        skills.project_name = self.cleaned_data['skill_name']
-
-        if commit:
-            skills.save()
-
-        return skills '''''
+        # SKILL FORM
 
 
-                                    #SKILL FORM
 class SkillForm(forms.Form):
     model = Skill
     skill = forms.CharField(max_length=20, help_text='Enter Your Skill')
@@ -161,4 +127,3 @@ class SkillForm(forms.Form):
     def clean_skill(self):
         data = self.cleaned_data['skill']
         return data
-

@@ -1,5 +1,9 @@
+from django.contrib.auth import update_session_auth_hash, authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
 from django.shortcuts import (
-    render,
     redirect,
     HttpResponse,
     HttpResponseRedirect,
@@ -7,6 +11,9 @@ from django.shortcuts import (
     reverse,
     get_object_or_404,
 )
+from django.shortcuts import render
+from django.views.generic import UpdateView
+
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
     EditProfileForm,
@@ -17,14 +24,7 @@ from accounts.forms import (
     ImageFileUploadForm,
     UserProfileForm,
 )
-from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
-from django.contrib.auth import update_session_auth_hash, authenticate, login
-from django.contrib.auth.decorators import login_required
 from accounts.models import User, ProjectDetail, UserProfile, Follow
-from django.shortcuts import render
-from django.core.files.storage import FileSystemStorage
-from django.http import JsonResponse
-from django.views.generic import FormView, UpdateView
 
 
 @login_required
@@ -247,29 +247,6 @@ def ChangeProfilePicture(request):
 
 # Go through this, this is important
 
-"""
-def signup(request):
-    registered = False
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            print(user)
-            user.refresh_from_db()  # load the profile instance created by the signal
-            user.profile.branch = form.cleaned_data.get('branch')
-            user.profile.phone = form.cleaned_data.get('phone')
-            user.profile.year = form.cleaned_data.get('year')
-            # user.proifle.image = form.cleaned_data.get('image')
-            user.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect('/account/registersuccess')
-    else:
-        form = SignUpForm()
-    return render(request, 'accounts/signup.html', {'form': form, 'registered': registered})
-"""
-
 
 def RegistrationView(request):
     if request.method == 'POST':
@@ -287,25 +264,6 @@ def RegistrationView(request):
         args = {'form': form}
         # this refers to the template, so accounts/reg_form.html
         return render(request, 'accounts/signup.html', args)
-
-
-# @login_required
-'''def AddSkillView(request):
-    skill_added = False
-
-    if request.method == 'POST':
-        skill_form = SkillForm(data=request.POST)
-
-        if skill_form.is_valid():
-            skill_detail = skill_form.save()
-            skill_detail = skill_form.save(commit=False)
-            skill_added = True
-    # Not a HTTP POST, so we render our form using two ModelForm instances.
-    # These forms will be blank, ready for user input.
-    else:
-        skill_form = ProjectForm()
-    return render(request, 'accounts/addskill.html', {'skill_form': skill_form, 'skill_added': skill_added})
-'''
 
 
 def SkillsView(request):  # I dont know what this does
@@ -393,21 +351,6 @@ def ProjectInterestedCounter(request):
 # TODO
 def EditDetails(request):
     return redirect("/account/profile")
-
-
-"""
-class NewUserProfileView(FormView):
-
-    template_name = "accounts/edit_detail.html"
-    form_class = UserProfileForm
-
-    def form_valid(self, form):
-        form.save(self.request.user)
-        return super(NewUserProfileView, self).form_valid(form)
-
-    def get_success_url(self, *args, **kwargs):
-        return reverse("/account/profile")
-"""
 
 
 class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and not FormView

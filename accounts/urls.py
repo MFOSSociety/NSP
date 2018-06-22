@@ -8,7 +8,7 @@ from django.contrib.auth.views import (
     password_reset_complete,
 )
 from django.contrib.auth import views as auth_views
-from accounts.views import followUser,unfollowUser, EditUserProfileView
+from accounts.views import EditUserProfileView
 
 
 urlpatterns = [
@@ -18,11 +18,8 @@ urlpatterns = [
     path('upload/', views.SimpleUploadView, name='upload'),
     path('project/start/', views.ProjectDescribeView, name='start_project'),
     path('project/active/', views.ProjectsListView, name='project_list_view'),
-    #re_path('project/(?P<project_name>[\w\-]+)/', views.ProjectDetailView, name='view_project_detail'),
     re_path('project/(\d+)/', views.ProjectDetailView, name='view_project_detail'),
-    # path('search/', views.SearchView, name='search'),
     path('search/', include('haystack.urls')),
-    # path('login/', views.user_login, name='user_login'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('registersuccess/', views.SuccesfullRegistrationView, name='registersucess'),
@@ -41,8 +38,6 @@ urlpatterns = [
     path('change-password/', views.ChangePasswordView, name='change_password'),
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/done/', password_reset_done, name='password_reset_done'),
-    # Thank God this piece of shit works, do not tamper.
-    # second programmer : LMAO
     re_path('reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm, name='password_reset_confirm'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),

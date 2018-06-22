@@ -1,24 +1,18 @@
 import os
-from machina import get_apps as get_machina_apps # For Question Answer Forum
+
 from machina import MACHINA_MAIN_STATIC_DIR  # it includes the django-machina’s static directory:
 from machina import MACHINA_MAIN_TEMPLATE_DIR
+from machina import get_apps as get_machina_apps  # For Question Answer Forum
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# Your secret key here
 SECRET_KEY = '<Secret-Key>'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -38,23 +32,19 @@ QA_SETTINGS = {
     }
 }
 
-
 INSTALLED_APPS = [
-    'accounts',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'social_django', # For All Social Authentication
-    # Machina Related Apps
-    'mptt',                 #to handle the tree of forum intances
-    'haystack',             #provides search capabilities
-    'widget_tweaks',
+                     'accounts',
+                     'django.contrib.admin',
+                     'django.contrib.auth',
+                     'django.contrib.contenttypes',
+                     'django.contrib.sessions',
+                     'django.contrib.messages',
+                     'django.contrib.staticfiles',
+                     'mptt',  # to handle the tree of forum instances
+                     'haystack',  # provides search capabilities
+                     'widget_tweaks',
 
-] + get_machina_apps()
-
+                 ] + get_machina_apps()
 
 MIDDLEWARE = [
 
@@ -65,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware', # For All Social Authentication
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # For All Social Authentication
     'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
 ]
 
@@ -82,7 +72,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 # ...
-                #Machina
+                # Machina
                 'machina.core.context_processors.metadata',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -100,7 +90,6 @@ TEMPLATES = [
     },
 ]
 
-
 STATICFILES_DIRS = (
     # ...
     MACHINA_MAIN_STATIC_DIR,
@@ -115,7 +104,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'ideate2018.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -140,10 +128,9 @@ CACHES = {
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join('home/rishi/Desktop/NSP', 'whoosh_index'),         #edit the path accordingly
+        'PATH': os.path.join('home/rishi/Desktop/NSP', 'whoosh_index'),  # edit the path accordingly
     },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -163,7 +150,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -177,12 +163,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
 
 MEDIA_URL = '/media/'
 
@@ -202,6 +186,3 @@ SOCIAL_AUTH_GITHUB_KEY = '1872ea14c197d599ebe5'
 SOCIAL_AUTH_GITHUB_SECRET = 'cc56899a4a0cf19258c33d76280450f9be98ad46'
 
 AUTH_USER_MODEL = 'accounts.User'
-
-
-
