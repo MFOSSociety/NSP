@@ -50,6 +50,7 @@ class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = (
+            'username',
             'first_name',
             'last_name',
             'email',
@@ -77,7 +78,11 @@ class EditInformationForm(UserChangeForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('year', 'branch')  # Note that we didn't mention user field here.
+        fields = (
+            'year',
+            'branch',
+            'stream',
+        )  # Note that we didn't mention user field here.
 
     def save(self, user=None):
         user_profile = super(UserProfileForm, self).save(commit=False)

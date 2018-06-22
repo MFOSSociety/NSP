@@ -1,11 +1,11 @@
 from django.shortcuts import (
-     render,
-     redirect,
-     HttpResponse,
-     HttpResponseRedirect,
-     Http404,
-     reverse,
-     get_object_or_404,
+    render,
+    redirect,
+    HttpResponse,
+    HttpResponseRedirect,
+    Http404,
+    reverse,
+    get_object_or_404,
 )
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
@@ -20,12 +20,11 @@ from accounts.forms import (
 from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
-from accounts.models import User, ProjectDetail, UserProfile,Follow
+from accounts.models import User, ProjectDetail, UserProfile, Follow
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.views.generic import FormView, UpdateView
-
 
 
 @login_required
@@ -37,7 +36,7 @@ def ProjectHomeView(request):
 @login_required
 def ProjectDescribeView(request):
     project_registered = False
-    initiator = request.user    # TODO
+    initiator = request.user  # TODO
     if request.method == 'POST':
         project_form = ProjectForm(data=request.POST)
         if project_form.is_valid():
@@ -237,13 +236,13 @@ def ChangeProfilePicture(request):
     current_user_profile = UserProfile.objects.get(user=current_user)
     if request.method == "POST":
         if request.FILES:
-            current_user_profile.photo = request.FILES["photo"] # "photo" because in the template the upload image file name is photo
+            current_user_profile.photo = request.FILES["photo"]
+            # "photo" because in the template the upload image file name is photo
             current_user_profile.save()
             return redirect("accounts/change_profilepic")
     else:
-        context = {"current_user_profile":current_user_profile}
+        context = {"current_user_profile": current_user_profile}
         return render(request, "accounts/profile_pic_upload.html", context)
-
 
 
 # Go through this, this is important
@@ -372,12 +371,13 @@ def followUser(request, ID):
         follow_value = True
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
     # redirecting to the same page
-    return redirect("/account/users/"+friend.username+"/", args)
+    return redirect("/account/users/" + friend.username + "/", args)
 
-def unfollowUser(request,ID):
+
+def unfollowUser(request, ID):
     follow_args = {
-        "follower":request.user,
-        "following":User.objects.get(pk=ID)
+        "follower": request.user,
+        "following": User.objects.get(pk=ID)
     }
     Follow.objects.filter(**follow_args).delete()
     return redirect("/account/profile")
@@ -393,6 +393,7 @@ def ProjectInterestedCounter(request):
 # TODO
 def EditDetails(request):
     return redirect("/account/profile")
+
 
 """
 class NewUserProfileView(FormView):
@@ -424,4 +425,3 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
-

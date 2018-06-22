@@ -29,6 +29,9 @@
       {% if user.userprofile.year %}
       <p>Year : {{ user.userprofile.year }}</p>
       {% endif %}
+      {% if user.userprofile.stream %}
+      <p>Stream : {{ user.userprofile.stream }}</p>
+      {% endif %}
       <p>
          {% if user.userprofile.ratings == 0 %}
              {{ user.userprofile.ratings }}
