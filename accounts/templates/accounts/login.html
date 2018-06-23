@@ -4,35 +4,46 @@
     <title>Login Page</title>
 {% endblock %}
 
-{% block customcss %}
-    <link href="{% static 'accounts/css/login.css' %}" rel="stylesheet">
-{% endblock %}
-
 {% block body %}
-    <br>
-    <div class="container-fluid">
-        <h1>Welcome </h1>
-        {% if user.is_authenticated %}
-            <h2>You are already logged in</h2>
-        {% else %}
-            <div class="container-fluid">
-            <form method="post" action="{% url 'user_login' %}">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="row">
+                <div class="col-md-9">
 
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                               placeholder="email" value="">
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="wrap-login100">
+                        <span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					    </span>
+                        <form method="post" class="login100-form" action="{% url 'user_login' %}">
+                            {% csrf_token %}
+
+                            <div class="wrap-input100">
+                                <input class="input100" type="text" name="username" id="username" placeholder="Email">
+                                <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                                <span></span>
+                            </div>
+
+                            <div class="wrap-input100" data-validate="Enter password">
+                                <input class="input100" type="password" name="password" id="password" placeholder="Password">
+                                <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                            </div>
+
+                            <div class="container-login100-form-btn">
+                                <button class="login100-form-btn">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <input type="password" name="password" id="password" tabindex="2" class="form-control"
-                               placeholder="Password">
-                    </div>
 
+                </div>
 
-                <button class="btn btn-success">Login</button>
-            </form>
             </div>
-        {% endif %}
 
+        </div>
     </div>
 {% endblock %}
