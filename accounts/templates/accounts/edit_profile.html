@@ -7,25 +7,29 @@
     </head>
 {% endblock %}
 {% block body %}
+    <p>{{ user.username }}</p>
+    <p>{{ user.first_name }}</p>
+    <p>{{ user.last_name }}</p>
+    <p>{{ user.email }}</p>
     <center>
         <div class="container" style="padding-top: 120px; background-color: rgba(255,255,255,0.6); width: 900px;">
             <form method="POST" style="padding-bottom: 20px;">
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                           placeholder="Username" value="">
+                           placeholder="Username" value="{{ user.username }}">
                 </div>
                 <div class="form-group">
                     <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control"
-                           placeholder="First Name" value="">
+                           placeholder="First Name" value="{{ user.first_name }}">
                 </div>
                 <div class="form-group">
                     <input type="text" name="last_name" id="last_name" tabindex="1" class="form-control"
-                           placeholder="Last Name" value="">
+                           placeholder="Last Name" value="{{ user.last_name }}">
                 </div>
                 <div class="form-group">
                     <input type="text" name="email" id="email" tabindex="1" class="form-control"
-                           placeholder="Email" value="">
+                           placeholder="Email" value="{{ user.email }}">
                 </div>
                 <button class="btn btn-success">Change</button>
             </form>
