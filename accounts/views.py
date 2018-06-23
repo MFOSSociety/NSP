@@ -117,16 +117,30 @@ def PeopleView(request):
 
 
 def ProjectsListView(request):
+    current_user = request.user
     projects = ProjectDetail.objects.all()
-    projects_peopleInterested = {}
+    dict_ = {} 
     for project in projects:
         interested = ProjectPeopleInterested.objects.filter(project=project)
-        projects_peopleInterested[project] = len(interested)
+        current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user,project=project)
+        dict_[project] = len(interested),current_user_interested
 
-
-
-    args = {"projects_peopleInterested": projects_peopleInterested, 'projects': projects}
+    args = {"dict_": dict_}
     return render(request, 'accounts/listprojects.html', args)
+
+def addInterested(request,ID):
+    current_user = request.user
+    project = ProjectDetail.objects.get(pk=ID)
+    current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user,project=project)
+    if not current_user_interested:
+        ProjectPeopleInterested.objects.create(user=current_user,project=project)
+    return redirect("/account/project/active/")
+
+def removeInsterested(request,ID):
+    current_user = request.user
+    project = ProjectDetail.objects.get(pk=ID)
+    ProjectPeopleInterested.objects.get(user=current_user,project=project).delete()
+    return redirect("/account/project/active/")
 
 
 def ProjectDetailView(request, project_id):
