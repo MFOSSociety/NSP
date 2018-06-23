@@ -122,8 +122,7 @@ def ProjectsListView(request):
     for project in projects:
         interested = ProjectPeopleInterested.objects.filter(project=project)
         projects_peopleInterested[project] = len(interested)
-        # removed except
-        projects_peopleInterested[projects] = 0  # changed project to projects
+
 
 
     args = {"projects_peopleInterested": projects_peopleInterested, 'projects': projects}
