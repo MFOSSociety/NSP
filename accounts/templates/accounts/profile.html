@@ -3,47 +3,44 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-<!-- Add icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="{% static 'accounts/css/profiles.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'accounts/css/profiles.css' %}">
 {% endblock %}
 {% block body %}
-<div class="container">
-   <div class="card">
-      <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-      <p>Hey, {{ user.username }}</p>
-      {% if user.userprofile.photo %}
-      <img class="img-fluid" src="{{ user.userprofile.photo.url }}" width="240">
-      {% else %}
-      <img class="img-fluid" src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
-      {% endif %}
-      {% if user.userprofile.branch %}
-      <p>Branch : {{ user.userprofile.branch }}</p>
-      {% endif %}
-      {% if user.userprofile.year %}
-      <p>Year : {{ user.userprofile.year }}</p>
-      {% endif %}
-      {% if user.userprofile.stream %}
-      <p>Stream : {{ user.userprofile.stream }}</p>
-      {% endif %}
-      <p>
-         {% if user.userprofile.ratings == 0 %}
-             {{ user.userprofile.ratings }}
-             <i class="fa fa-star" style="color:dodgerblue"></i>
-         {% endif %}
-      </p>
-      <div class="container">
-         <a class="btn btn-success" href="{% url 'addskill' %}" >Add Skill</a>
-         <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}">Edit Profile Picture</a>
-         <a class="btn btn-primary" href="{% url 'EditDetails' user.id %}">Edit Details</a>
-      </div>
-   </div>
-</div>
+    <div class="container">
+        <div class="card">
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            <p>Hey, {{ user.username }}</p>
+            {% if user.userprofile.photo %}
+                <img class="img-fluid" src="{{ user.userprofile.photo.url }}" width="240">
+            {% else %}
+                <img class="img-fluid" src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
+            {% endif %}
+            {% if user.userprofile.branch %}
+                <p>Branch : {{ user.userprofile.branch }}</p>
+            {% endif %}
+            {% if user.userprofile.year %}
+                <p>Year : {{ user.userprofile.year }}</p>
+            {% endif %}
+            {% if user.userprofile.stream %}
+                <p>Stream : {{ user.userprofile.stream }}</p>
+            {% endif %}
+            <p>    {{ user.userprofile.ratings }}
+                <i class="fa fa-star" style="color:dodgerblue"></i>
+            </p>
+            <div class="container">
+                <a class="btn btn-success" href="{% url 'addskill' %}">Add Skill</a>
+                <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}">Edit Profile Picture</a>
+                <a class="btn btn-primary" href="{% url 'EditDetails' user.id %}">Edit Details</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
