@@ -12,7 +12,6 @@ from django.shortcuts import (
     get_object_or_404,
 )
 from django.shortcuts import render
-from django.views.generic import UpdateView
 
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
@@ -24,7 +23,8 @@ from accounts.forms import (
     ImageFileUploadForm,
     UserProfileForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow
+from django.views.generic import UpdateView
 
 
 @login_required
@@ -122,11 +122,11 @@ def ProjectsListView(request):
     for project in projects:
         interested = ProjectPeopleInterested.objects.filter(project=project)
         projects_peopleInterested[project] = len(interested)
-    except:
-        projects_peopleInterested[project] = 0
+        # removed except
+        projects_peopleInterested[projects] = 0  # changed project to projects
 
 
-    args = {"projects_peopleInterested":projects_peopleInterested}
+    args = {"projects_peopleInterested": projects_peopleInterested, 'projects': projects}
     return render(request, 'accounts/listprojects.html', args)
 
 
@@ -198,24 +198,6 @@ def EditInformationView(request):
         form = EditInformationForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/edit_info.html', args)
-
-
-@login_required
-def SaveProfile(request):
-    saved = False
-
-    if request.method == "POST":
-        # Get the posted form
-        MyProfileForm = ProfileForm(request.POST, request.FILES)
-        if MyProfileForm.is_valid():
-            profile = UserProfile()
-            profile.image = MyProfileForm.cleaned_data["image"]
-            profile.save()
-            saved = True
-    else:
-        MyProfileForm = ProfileForm()
-
-    return render(request, 'accounts/saved.html', locals())
 
 
 @login_required

@@ -34,7 +34,6 @@ urlpatterns = [
     path('about/', views.AboutView, name='about'),
     path('profile/edit', views.EditProfileView, name='edit_profile'),
     re_path('profile/(?P<pk>\d+)/edit_details', EditUserProfileView.as_view(), name='EditDetails'),
-    path('saved/', views.SaveProfile, name ='save_profile'),
     path('change-password/', views.ChangePasswordView, name='change_password'),
     path('reset-password/', password_reset, name='reset_password'),
     path('reset-password/done/', password_reset_done, name='password_reset_done'),

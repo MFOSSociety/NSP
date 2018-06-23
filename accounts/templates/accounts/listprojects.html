@@ -15,7 +15,7 @@
     <td>People Interested</td>
     <td>Get In!</td>
 </tr>
-{% for project,interested in projects_peopleInterested.items %}
+{% for project in projects %}
     <tr>
     <td class="lead mb-7"><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a></td>
     <td class="lead mb-7">{{ project.mentor_name }}</td>
