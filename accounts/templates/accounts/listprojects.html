@@ -15,7 +15,7 @@
     <td>People Interested</td>
     <td>Get In!</td>
 </tr>
-{% for project in projects %}
+{% for project,interested in projects_peopleInterested.items %}
     <tr>
     <td class="lead mb-7"><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a></td>
     <td class="lead mb-7">{{ project.mentor_name }}</td>
@@ -26,8 +26,8 @@
     <td class="lead mb-7">{{ project.start_date }}</td>
     <td class="lead mb-7">
         <center>
-            {% if project.people_interested %}
-                {{ project.people_interested }}
+            {% if interested %}
+                {{ interested }}
             {% else %}
                 0
             {% endif %}
