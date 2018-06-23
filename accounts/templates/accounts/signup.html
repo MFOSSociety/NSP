@@ -1,37 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-    <div class="container">
-        <h1>Register</h1>
-        <form method="post">
-            <table border="1">
-                {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                           placeholder="username" value="">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control"
-                           placeholder="First Name" value="">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="last_name" id="last_name" tabindex="1" class="form-control"
-                           placeholder="Last Name" value="">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="email" id="email" tabindex="1" class="form-control"
-                           placeholder="Email" value="">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password1" id="password1" tabindex="2" class="form-control"
-                           placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password2" id="password2" tabindex="2" class="form-control"
-                           placeholder="Confirm Password">
-                </div>
-            </table>
-            <button class="btn btn-success">Submit</button>
-        </form>
-    </div>
+<div class="container">
+   <h1>Register</h1>
+   <form method="post">
+      <script src="{% static 'accounts/js/password.js' %}">
+      </script>
+      <table border="1">
+         {% csrf_token %}
+         <div class="form-group">
+            <input type="text" name="username" id="username" tabindex="1" class="form-control"
+               placeholder="username" value="">
+         </div>
+         <div class="form-group">
+            <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control"
+               placeholder="First Name" value="">
+         </div>
+         <div class="form-group">
+            <input type="text" name="last_name" id="last_name" tabindex="1" class="form-control"
+               placeholder="Last Name" value="">
+         </div>
+         <div class="form-group">
+            <input type="text" name="email" id="email" tabindex="1" class="form-control"
+               placeholder="Email" value="">
+         </div>
+         <div class="form-group">
+            <input type="password" name="password1" id="password1" tabindex="2" class="form-control"
+               placeholder="Password">
+         </div>
+         <div class="form-group">
+            <input type="password" name="password2" id="password2" tabindex="2" class="form-control"
+               placeholder="Confirm Password">
+         </div>
+      </table>
+      <button class="btn btn-success">Submit</button>
+   </form>
+</div>
 {% endblock %}
+

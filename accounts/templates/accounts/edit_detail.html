@@ -1,24 +1,43 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% block head %}
-        <meta charset="UTF-8">
-        <title>This is to be Changed</title>
-    {% endblock %}
-
-</head>
-<body>
-
-    {% block body %}
-        <div class="container">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-success">Change</button>
-            </form>
-        </div>
-    {% endblock %}
-
-</body>
-</html>
+{% block head %}
+<meta charset="UTF-8">
+<title>This is to be Changed</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+   <form method="POST">
+      {% csrf_token %}
+      <ul>
+      <label>Branch : </label>
+      <select id = "branch" name="branch">
+         <option value = "{{ user.userprofile.branch }}">{{ user.userprofile.branch }}</option>
+         <option value = "CSE">CSE</option>
+         <option value = "IT">IT</option>
+         <option value = "CCE">CCE</option>
+         <option value = "MECHANICAL">MECHNICAL</option>
+         <option value = "CIVIL">CIVIL</option>
+         <option value = "ECE">ECE</option>
+         <option value = "EE">EE</option>
+         <option value = "CHEMICAL">CHEMICAL</option>
+      </select>
+      <label>Year of Study : </label>
+      <select id = "year" name="year">
+         <option value = "{{ user.userprofile.year }}">{{ user.userprofile.year }}</option>
+         <option value = "1">1</option>
+         <option value = "2">2</option>
+         <option value = "3">3</option>
+         <option value = "4">4</option>
+      </select>
+      <label>Stream : </label>
+      <select id = "stream" name="stream">
+         <option value = "{{ user.userprofile.stream }}">{{ user.userprofile.stream }}</option>
+         <option value = "B.Tech">B.Tech</option>
+         <option value = "B.Hons">B.Hons</option>
+         <option value = "BJMC">BJMC</option>
+         <option value = "BSc">BSc</option>
+      </select>
+      <button class="btn btn-success">Change</button>
+          </ul> 
+   </form>
+</div>
+{% endblock %}
