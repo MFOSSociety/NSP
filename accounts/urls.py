@@ -18,6 +18,8 @@ urlpatterns = [
     path('upload/', views.SimpleUploadView, name='upload'),
     path('project/start/', views.ProjectDescribeView, name='start_project'),
     path('project/active/', views.ProjectsListView, name='project_list_view'),
+    path("project/active/addInterested/<ID>",views.addInterested,name="addInterested"),
+    path("project/active/removeInsterested/<ID>",views.removeInsterested,name="removeInsterested"),
     re_path('project/(\d+)/', views.ProjectDetailView, name='view_project_detail'),
     path('search/', include('haystack.urls')),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),

@@ -15,7 +15,7 @@
     <td>People Interested</td>
     <td>Get In!</td>
 </tr>
-{% for project,people_insterested in projects_peopleInterested.items %}
+{% for project,interested in dict_.items %}
     <tr>
     <td class="lead mb-7"><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a></td>
     <td class="lead mb-7">{{ project.mentor_name }}</td>
@@ -26,15 +26,15 @@
     <td class="lead mb-7">{{ project.start_date }}</td>
     <td class="lead mb-7">
         <center>
-            {% if people_insterested %}
-                {{ people_insterested }}
-            {% else %}
-                0
-            {% endif %}
+                {{ interested.0 }}  <!-- insterested.0 is total number of people interested -->
         </center>
     </td>
-    <td class="lead mb-7"><a class="btn btn-primary">Check</a></td>
-    </tr>
+    {% if interested.1 %} <!-- insterested.1 is for current_user, if he "interested" this project then it's True -->
+        <td class="lead mb-7"><a href="{% url 'removeInsterested' project.id %}" class="btn btn-primary">Uninterested</a></td>
+    {% else %}
+        <td class="lead mb-7"><a href="{% url 'addInterested' project.id %}" class="btn btn-primary">Interested</a></td>
+
+    {% endif %}    </tr>
 {% endfor %}
 </table>
 </center>
