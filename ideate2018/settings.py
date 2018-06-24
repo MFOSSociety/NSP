@@ -29,18 +29,18 @@ QA_SETTINGS = {
 }
 
 INSTALLED_APPS = [
-                     'accounts',
-                     'django.contrib.admin',
-                     'django.contrib.auth',
-                     'django.contrib.contenttypes',
-                     'django.contrib.sessions',
-                     'django.contrib.messages',
-                     'django.contrib.staticfiles',
-                     'mptt',  # to handle the tree of forum instances
-                     'haystack',  # provides search capabilities
-                     'widget_tweaks',
+    'accounts',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'mptt',  # to handle the tree of forum instances
+    'haystack',  # provides search capabilities
+    'widget_tweaks',
 
-                 ]
+]
 
 MIDDLEWARE = [
 
@@ -66,7 +66,6 @@ TEMPLATES = [
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
-                
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -82,7 +81,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
