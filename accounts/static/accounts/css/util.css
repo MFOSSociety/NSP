@@ -13,27 +13,7 @@
 .text-right {text-align: right;}
 .text-middle {vertical-align: middle;}
 
-/* ------------------------------------ */
-.lh-1-0 {line-height: 1.0;}
-.lh-1-1 {line-height: 1.1;}
-.lh-1-2 {line-height: 1.2;}
-.lh-1-3 {line-height: 1.3;}
-.lh-1-4 {line-height: 1.4;}
-.lh-1-5 {line-height: 1.5;}
-.lh-1-6 {line-height: 1.6;}
-.lh-1-7 {line-height: 1.7;}
-.lh-1-8 {line-height: 1.8;}
-.lh-1-9 {line-height: 1.9;}
-.lh-2-0 {line-height: 2.0;}
-.lh-2-1 {line-height: 2.1;}
-.lh-2-2 {line-height: 2.2;}
-.lh-2-3 {line-height: 2.3;}
-.lh-2-4 {line-height: 2.4;}
-.lh-2-5 {line-height: 2.5;}
-.lh-2-6 {line-height: 2.6;}
-.lh-2-7 {line-height: 2.7;}
-.lh-2-8 {line-height: 2.8;}
-.lh-2-9 {line-height: 2.9;}
+
 
 
 
@@ -100,20 +80,6 @@
 .right-auto {right: auto;}
 
 
-/*[ Opacity ]
------------------------------------------------------------
-*/
-.op-0-0 {opacity: 0;}
-.op-0-1 {opacity: 0.1;}
-.op-0-2 {opacity: 0.2;}
-.op-0-3 {opacity: 0.3;}
-.op-0-4 {opacity: 0.4;}
-.op-0-5 {opacity: 0.5;}
-.op-0-6 {opacity: 0.6;}
-.op-0-7 {opacity: 0.7;}
-.op-0-8 {opacity: 0.8;}
-.op-0-9 {opacity: 0.9;}
-.op-1-0 {opacity: 1;}
 
 /*[ Background ]
 -----------------------------------------------------------
@@ -161,25 +127,8 @@
     -moz-transition: all 0.6s;
     transition: all 0.6s;
 }
-.hov-img-zoom:hover img {
-	-webkit-transform: scale(1.1);
-  	-moz-transform: scale(1.1);
-  	-ms-transform: scale(1.1);
-  	-o-transform: scale(1.1);
-	transform: scale(1.1);
-}
 
 
-
-/*[  ]
------------------------------------------------------------
-*/
-.bo-cir {border-radius: 50%;}
-
-.of-hidden {overflow: hidden;}
-
-.visible-false {visibility: hidden;}
-.visible-true {visibility: visible;}
 
 
 
@@ -211,12 +160,7 @@
     -moz-transition: all 0.4s;
     transition: all 0.4s;
 }
-.trans-0-5 {
-	-webkit-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    transition: all 0.5s;
-}
+
 .trans-0-6 {
 	-webkit-transition: all 0.6s;
     -o-transition: all 0.6s;

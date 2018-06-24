@@ -3,7 +3,9 @@
 {% block title %}
     <title>Login Page</title>
 {% endblock %}
-
+{% block customcss %}
+  <link href="{% static 'accounts/css/main.css' %}" rel="stylesheet">
+{% endblock %}
 {% block body %}
     <div class="limiter">
         <div class="container-login100">
