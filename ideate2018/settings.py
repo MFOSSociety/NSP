@@ -1,9 +1,5 @@
 import os
 
-from machina import MACHINA_MAIN_STATIC_DIR  # it includes the django-machina’s static directory:
-from machina import MACHINA_MAIN_TEMPLATE_DIR
-from machina import get_apps as get_machina_apps  # For Question Answer Forum
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -44,7 +40,7 @@ INSTALLED_APPS = [
                      'haystack',  # provides search capabilities
                      'widget_tweaks',
 
-                 ] + get_machina_apps()
+                 ]
 
 MIDDLEWARE = [
 
@@ -56,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',  # For All Social Authentication
-    'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'ideate2018.urls'
@@ -65,15 +61,12 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': (
-            # ...
-            MACHINA_MAIN_TEMPLATE_DIR,
+
         ),
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
-                # ...
-                # Machina
-                'machina.core.context_processors.metadata',
+                
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -90,10 +83,6 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = (
-    # ...
-    MACHINA_MAIN_STATIC_DIR,
-)
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
@@ -119,10 +108,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     },
-    'machina_attachments': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/tmp',
-    },
+
 }
 
 HAYSTACK_CONNECTIONS = {

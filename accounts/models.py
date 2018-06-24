@@ -92,8 +92,6 @@ class ProjectPeopleInterested(models.Model):
 
 
 
-# Question Answer Views Goes here
-
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
