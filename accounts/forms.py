@@ -8,7 +8,9 @@ from accounts.models import User
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = ProjectDetail
-        exclude = ('Description',)
+        exclude = (
+            'initiated_by',
+        )
         fields = (
             'project_name',
             'mentor_name',
@@ -18,8 +20,11 @@ class ProjectForm(forms.ModelForm):
             'description',
         )
         widgets = {
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'project_name': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
+            'mentor_name': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
+            'branch': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
             'start_date': forms.DateInput(attrs={'class': 'datepicker'}),
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20})
         }
 
     def save(self, commit=True):

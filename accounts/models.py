@@ -97,9 +97,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
     ratings = models.IntegerField(null=True, default=0)
     photo = models.ImageField(upload_to="profile_image", null=True)
-    year = models.IntegerField(null=True)
-    branch = models.CharField(max_length=20, default="", blank=True)
-    stream = models.CharField(max_length=20, default="", blank=True)
+    year = models.IntegerField(null=True, default=1)
+    branch = models.CharField(max_length=20, default="Not Updated", blank=True)
+    stream = models.CharField(max_length=20, default="Not Updated", blank=True)
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
