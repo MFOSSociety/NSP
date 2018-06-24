@@ -25,6 +25,7 @@
     <link href="{% static 'accounts/css/nsp.css' %}" rel="stylesheet">
     <link href="{% static 'accounts/css/landing-page.min.css' %}" rel="stylesheet">
     {% block customcss %}
+        <link href="{% static 'accounts/css/search_bar.css' %}" rel="stylesheet">
     {% endblock %}
   </head>
   <!-- Navigation -->
@@ -33,7 +34,7 @@
           <a class="navbar-brand" href="{% url 'home' %}">NSP</a>
           <form action="#" method="post">
             {% csrf_token %}
-            <input type="text" placeholder="Search..">
+            <input type="text" placeholder="You know, for search!">
           </form>
           <div class="navbar navbar-right">
             {% if user.is_authenticated %}
