@@ -47,7 +47,7 @@ def ProjectDescribeView(request):
     # These forms will be blank, ready for user input.
     else:
         project_form = ProjectForm()
-    return render(request, 'accounts/describe.html',
+    return render(request, 'accounts/start_project.html',
                   {'project_form': project_form, 'project_registered': project_registered})
 
 
