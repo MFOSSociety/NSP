@@ -2,6 +2,7 @@
 {% load static %}
 {% block customcss %}
     <link href="{% static 'accounts/css/main.css' %}" rel="stylesheet">
+
 {% endblock %}
 {% block body %}
 <div class="limiter">
@@ -15,7 +16,7 @@
              <span class="login100-form-title p-b-34 p-t-27">
          Sign up
          </span>
-            <form method="post" class="login100-form validate-form">
+            <form method="post" class="login100-form validate-form" onsubmit="return checkPass()">
                {% csrf_token %}
                <div class="wrap-input100">
                   <input class="input100" type="text" name="username" placeholder="Username" id="username">
@@ -38,12 +39,18 @@
                   <input class="input100" type="password" name="password1" placeholder="Password"
                      id="password1">
                   <span class="focus-input100" data-placeholder="&#xf191;"></span>
+
                </div>
+                <span id="message" style="color:  white;"></span>
+
                <div class="wrap-input100">
                   <input class="input100" type="password" name="password2" placeholder="Confirm password"
                      id="password2">
                   <span class="focus-input100" data-placeholder="&#xf191;"></span>
+
                </div>
+                  <span id="message" style="color:  white;"></span>
+
                <div class="container-login100-form-btn">
                   <button class="login100-form-btn">
                   Sign Up
@@ -54,5 +61,6 @@
       </div>
    </div>
 </div>
+
 {% endblock %}
 

@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {% block title %}
+    <script src="{% static 'accounts/js/password_check.js' %}"></script>
     <title>NSP - Network of Skilled People</title>
     {% endblock %}
 
@@ -27,7 +28,7 @@
     {% block customcss %}
         <link href="{% static 'accounts/css/search_bar.css' %}" rel="stylesheet">
     {% endblock %}
-  </head>
+
   <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
