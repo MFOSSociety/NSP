@@ -15,8 +15,13 @@
 {% block body %}
     <div class="container">
         <div class="card">
-            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-            <p class="title">{{ user.username }}</p>
+            {% if user.userprofile.gender == 'Male' %}
+                <h1>Mr. {{ user.first_name }} {{ user.last_name }}</h1>
+            {% elif user.userprofile.gender == 'Female' %}
+                <h1>Ms. {{ user.first_name }} {{ user.last_name }}</h1>
+            {% else %}
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            {% endif %}
             {% if user.userprofile.photo %}
                 <img class="img-fluid" src="{{ user.userprofile.photo.url }}" width="240">
             {% else %}
@@ -35,6 +40,16 @@
                 {{ user.userprofile.ratings }}
                 <i class="fa fa-star" style="color:dodgerblue"></i>
             </p>
+            <p>Position : {{ user.userprofile.position }}</p>
+            <div class="container">
+            {% if user.userprofile.skills %}
+            {% for skill in user.userprofile.skills.all %}
+                <li>
+                    <p>{{ skill }}</p>
+                </li>
+            {% endfor %}
+            {% endif %}
+            </div>
             <div class="container">
                 {% if follow_value is False %}
                     <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary">Unfollow</a>

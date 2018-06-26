@@ -93,15 +93,15 @@ class ProjectPeopleInterested(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
-    ratings = models.IntegerField(null=True, default=0)
-    photo = models.ImageField(upload_to="profile_image", null=True)
-    year = models.IntegerField(null=True, default=1)
-    branch = models.CharField(max_length=20, default="Not Updated", blank=True)
-    stream = models.CharField(max_length=20, default="Not Updated", blank=True)
-    gender = models.CharField(max_length=20, default="Not Updated", blank=True)
-    position = models.CharField(max_length=20, default="Not Updated", blank=True)   # Student or Teacher
+    ratings = models.IntegerField(null=True, default=0, blank=True)
+    photo = models.ImageField(upload_to="profile_image", null=True, blank=True)
+    year = models.IntegerField(null=True, default=1, blank=True)
+    branch = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
+    stream = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
+    gender = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
+    position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)   # Student or Teacher
     bio = models.CharField(max_length=500, default="", blank=True)
-
+    skills = models.ManyToManyField(Skill, blank=True, null=True)
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
