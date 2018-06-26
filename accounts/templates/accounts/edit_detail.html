@@ -5,9 +5,8 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-   <form class="wrap" method="POST">
+   <form class="form-group" method="POST">
       {% csrf_token %}
-       <table border="1">
       <label>Branch : </label>
       <select id = "branch" name="branch">
          <option value = "{{ user.userprofile.branch }}">{{ user.userprofile.branch }}</option>
@@ -20,6 +19,7 @@
          <option value = "EE">EE</option>
          <option value = "CHEMICAL">CHEMICAL</option>
       </select>
+      <br>
       <label>Year of Study : </label>
       <select id = "year" name="year">
          <option value = "{{ user.userprofile.year }}">{{ user.userprofile.year }}</option>
@@ -28,6 +28,7 @@
          <option value = "3">3</option>
          <option value = "4">4</option>
       </select>
+      <br>
       <label>Stream : </label>
       <select id = "stream" name="stream">
          <option value = "{{ user.userprofile.stream }}">{{ user.userprofile.stream }}</option>
@@ -36,15 +37,16 @@
          <option value = "BJMC">BJMC</option>
          <option value = "BSc">BSc</option>
       </select>
-          <label>Gender : </label>
+      <br>
+      <label>Gender : </label>
       <select id = "gender" name="gender">
          <option value = "{{ user.userprofile.gender }}">{{ user.userprofile.gender }}</option>
          <option value = "Male">Male</option>
          <option value = "Female">Female</option>
          <option value = "Other">Other</option>
-
       </select>
-          <label>What is your position? </label>
+      <br>
+      <label>What is your position? </label>
       <select id = "position" name="position">
          <option value = "{{ user.userprofile.position }}">{{ user.userprofile.position }}</option>
          <option value = "Student">Student</option>
@@ -52,8 +54,10 @@
          <option value = "Teaching Assistant">Teaching Assistant</option>
          <option value = "Company">Company</option>
       </select>
+      <br>
+      {{ form.bio }}
+      <br>
       <button class="btn btn-success">Change</button>
-           </table>
    </form>
 </div>
 {% endblock %}

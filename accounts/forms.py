@@ -79,8 +79,12 @@ class UserProfileForm(forms.ModelForm):
             'branch',
             'stream',
             'gender',
-            'position'
+            'position',
+            'bio'
         )  # Note that we didn't mention user field here.
+        widgets = {
+            'bio': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+        }
 
     def save(self, user=None):
         user_profile = super(UserProfileForm, self).save(commit=False)

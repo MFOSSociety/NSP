@@ -44,6 +44,7 @@
                 <i class="fa fa-star" style="color:dodgerblue"></i>
             </p>
             <p>Position : {{ user.userprofile.position }}</p>
+            <p>Bio : {% if user.userprofile.bio|length == 0 %} No bio yet! {% else %} {{ user.userprofile.bio }} {% endif %}</p>
             <div class="container">
                 <a class="btn btn-success" href="{% url 'addskill' %}">Add Skill</a>
                 <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}">Edit Profile Picture</a>
