@@ -78,6 +78,8 @@ class UserProfileForm(forms.ModelForm):
             'year',
             'branch',
             'stream',
+            'gender',
+            'position'
         )  # Note that we didn't mention user field here.
 
     def save(self, user=None):

@@ -14,9 +14,16 @@
     <link rel="stylesheet" href="{% static 'accounts/css/profiles.css' %}">
 {% endblock %}
 {% block body %}
+    <br>
     <div class="container">
-        <div class="card">
-            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        <div class="card container">
+            {% if user.userprofile.gender == 'Male' %}
+                <h1>Mr. {{ user.first_name }} {{ user.last_name }}</h1>
+            {% elif user.userprofile.gender == 'Female' %}
+                <h1>Ms. {{ user.first_name }} {{ user.last_name }}</h1>
+            {% else %}
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            {% endif %}
             <p>Hey, {{ user.username }}</p>
             {% if user.userprofile.photo %}
                 <img class="img-fluid" src="{{ user.userprofile.photo.url }}" width="240">
@@ -32,9 +39,11 @@
             {% if user.userprofile.stream %}
                 <p>Stream : {{ user.userprofile.stream }}</p>
             {% endif %}
-            <p>    {{ user.userprofile.ratings }}
+
+            <p>{{ user.userprofile.ratings }}
                 <i class="fa fa-star" style="color:dodgerblue"></i>
             </p>
+            <p>Position : {{ user.userprofile.position }}</p>
             <div class="container">
                 <a class="btn btn-success" href="{% url 'addskill' %}">Add Skill</a>
                 <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}">Edit Profile Picture</a>

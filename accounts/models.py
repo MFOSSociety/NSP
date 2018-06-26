@@ -82,15 +82,13 @@ class ProjectDetail(models.Model):
     def __str__(self):
         return self.project_name + " under " + self.mentor_name
 
+
 class ProjectPeopleInterested(models.Model):
-    user = models.ForeignKey(User,related_name="user",on_delete=models.CASCADE,)
+    user = models.ForeignKey(User, related_name="user",on_delete=models.CASCADE,)
     project = models.ForeignKey(ProjectDetail,related_name="project",on_delete=models.CASCADE)
 
     def __str__(self):
         return ("{} is interested in {}".format(self.user,self.project))
-
-
-
 
 
 class UserProfile(models.Model):
@@ -100,6 +98,10 @@ class UserProfile(models.Model):
     year = models.IntegerField(null=True, default=1)
     branch = models.CharField(max_length=20, default="Not Updated", blank=True)
     stream = models.CharField(max_length=20, default="Not Updated", blank=True)
+    gender = models.CharField(max_length=20, default="Not Updated", blank=True)
+    position = models.CharField(max_length=20, default="Not Updated", blank=True)   # Student or Teacher
+    bio = models.CharField(max_length=500, default="No Bio", blank=True)
+
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
