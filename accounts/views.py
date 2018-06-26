@@ -11,7 +11,8 @@ from django.shortcuts import (
     reverse,
     get_object_or_404,
 )
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
@@ -364,3 +365,9 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
+
+
+def handler404(request):
+    response = render_to_response('accounts/error404.html', {})
+    response.status_code = 404
+    return response
