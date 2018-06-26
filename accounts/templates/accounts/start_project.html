@@ -3,6 +3,9 @@
 {% block head %}
         <title>Start a Project</title>
 {% endblock %}
+{% block customcss %}
+
+{% endblock %}
 {% block body %}
     {% if project_registered %}
     <div class="container lead mb-7">
@@ -30,4 +33,5 @@
             </div>
         </div>
     {% endif %}
+    <script src="{% static 'accounts/js/dateselector.js' %}"></script>
 {% endblock %}

@@ -77,15 +77,15 @@ class ProjectDetail(models.Model):
     branch = models.CharField(max_length=50, blank=True)
     description = models.CharField(max_length=2500, blank=False)
     paid = models.BooleanField(default=False)
-    start_date = models.DateField(default=datetime.date.today)
+    start_date = models.DateField()
 
     def __str__(self):
         return self.project_name + " under " + self.mentor_name
 
 
 class ProjectPeopleInterested(models.Model):
-    user = models.ForeignKey(User, related_name="user",on_delete=models.CASCADE,)
-    project = models.ForeignKey(ProjectDetail,related_name="project",on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE,)
+    project = models.ForeignKey(ProjectDetail, related_name="project",on_delete=models.CASCADE)
 
     def __str__(self):
         return ("{} is interested in {}".format(self.user,self.project))
