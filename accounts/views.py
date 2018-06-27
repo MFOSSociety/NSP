@@ -24,7 +24,7 @@ from accounts.forms import (
     ImageFileUploadForm,
     UserProfileForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill
 from django.views.generic import UpdateView
 
 
@@ -79,8 +79,13 @@ def LoginView(request):
 
 @login_required
 def ProfileView(request):
-    args = {'user': request.user}
+    followers = len(Follow.objects.filter(following=request.user))
+    following = len(Follow.objects.filter(follower=request.user))
+    skills = Skill.objects.filter(user=request.user)
+    args = {'user': request.user,"followers":followers
+                ,"following":following,"skills":skills}
     return render(request, 'accounts/profile.html', args)
+
 
 
 def PeopleView(request):
@@ -139,13 +144,14 @@ def FriendProfileView(request, username):
     editable = False
     context = locals()
     template = 'accounts/profile_friend.html'
-
+    skills = Skill.objects.filter(user=user)
     followings = len(Follow.objects.filter(follower=user))
     followers = len(Follow.objects.filter(following=user))
     current_user_following = Follow.objects.filter(follower=request.user,following=user)
     args = {'user': user, 'viewer': request.user,
                 "followings":followings,"followers":followers,
-                "current_user_following":current_user_following}
+                "current_user_following":current_user_following,
+                "skills":skills}
     return render(request, template, args)
 
 
@@ -256,12 +262,10 @@ def SkillsView(request):  # I dont know what this does
 
 def AddSkillView(request):
     if request.method == 'POST':
-        form = SkillForm(request.POST)
-
-        if form.is_valid():
-            skill_inst = form.cleaned_data['skill']
-            skill_inst.save()
-            return render(request, 'accounts/addskill.html')
+        form = SkillForm()
+        skill = request.POST.get("skill")
+        skill_object = Skill.objects.create(owner=request.user,skill_name=skill)
+        return render(request, 'accounts/addskill.html',{'form': form,"successfully":True,"skill":skill_object})
     else:
         form = SkillForm()
     return render(request, 'accounts/addskill.html', {'form': form})

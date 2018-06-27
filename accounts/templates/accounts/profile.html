@@ -44,13 +44,13 @@
                 <i class="fa fa-star" style="color:dodgerblue"></i>
             </p>
             <p>Position : {{ user.userprofile.position }}</p>
-            {% if user.userprofile.skills %}
-            {% for skill in user.userprofile.skills.all %}
+            My skillset :{% for skill in skills %}
                 <li>
-                    skill
+                    {{ skill.skill_name }}
                 </li>
             {% endfor %}
-            {% endif %}
+            <p>Followers : {{ followers }}</p>
+            <p>Following : {{ followings }}</p>
             <p>Bio : {% if user.userprofile.bio|length == 0 %} No bio yet! {% else %} {{ user.userprofile.bio }} {% endif %}</p>
             <div class="container">
                 <a class="btn btn-success" href="{% url 'addskill' %}">Add Skill</a>

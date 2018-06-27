@@ -28,6 +28,7 @@ QA_SETTINGS = {
 }
 
 INSTALLED_APPS = [
+    'bootstrapform',
     'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -35,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mptt',  # to handle the tree of forum instances
     'widget_tweaks',
 
 ]

@@ -64,7 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Skill(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     skill_name = models.CharField(max_length=20, default="", blank=True)
 
     def __str__(self):
@@ -102,7 +102,6 @@ class UserProfile(models.Model):
     gender = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
     position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)   # Student or Teacher
     bio = models.CharField(max_length=500, default="", blank=True)
-    skills = models.ManyToManyField(Skill, blank=True)
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
