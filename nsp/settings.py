@@ -53,7 +53,7 @@ MIDDLEWARE = [
 
 ]
 
-ROOT_URLCONF = 'ideate2018.urls'
+ROOT_URLCONF = 'nsp.urls'
 
 TEMPLATES = [
     {
@@ -88,7 +88,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-WSGI_APPLICATION = 'ideate2018.wsgi.application'
+WSGI_APPLICATION = 'nsp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -153,7 +153,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'ideate2018/../accounts/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'nsp/../accounts/media')
 
 # when you log in you visit your account profile page
 LOGIN_REDIRECT_URL = '/account/'
