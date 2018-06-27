@@ -43,6 +43,12 @@
             <p>{{ user.userprofile.ratings }}
                 <i class="fa fa-star" style="color:dodgerblue"></i>
             </p>
+            <p>Position : {{ user.userprofile.position }}</p>
+            My skillset :{% for skill in skills %}
+                <li>
+                    {{ skill.skill_name }}
+                </li>
+            {% endfor %}
             <p>Followers : {{ followers }}</p>
             <p>Following : {{ followings }}</p>
             <p>Bio : {% if user.userprofile.bio|length == 0 %} No bio yet! {% else %} {{ user.userprofile.bio }} {% endif %}</p>
