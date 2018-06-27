@@ -264,7 +264,7 @@ def AddSkillView(request):
     if request.method == 'POST':
         form = SkillForm()
         skill = request.POST.get("skill")
-        skill_object = Skill.objects.create(owner=request.user,skill_name=skill)
+        skill_object = Skill.objects.create(user=request.user,skill_name=skill)
         return render(request, 'accounts/addskill.html',{'form': form,"successfully":True,"skill":skill_object})
     else:
         form = SkillForm()
