@@ -51,7 +51,7 @@
             {% endif %}
             </div>
             <div class="container">
-                {% if follow_value is False %}
+                {% if follow_value == True %}
                     <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary">Unfollow</a>
                 {% else %}
                     <a href="{% url 'followUser' user.id %}" class="btn btn-primary">Follow</a>

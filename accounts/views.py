@@ -309,12 +309,16 @@ def followUser(request, ID):
 
 
 def unfollowUser(request, ID):
+    friend = User.objects.get(pk=ID)
+    follow_value = False
     follow_args = {
         "follower": request.user,
         "following": User.objects.get(pk=ID)
     }
     Follow.objects.filter(**follow_args).delete()
-    return redirect("/account/profile")
+    follow_value = False
+    args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
+    return redirect("/account/users/" + friend.username + "/", args)
 
 
 # TODO
