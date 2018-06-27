@@ -24,7 +24,7 @@ from accounts.forms import (
     ImageFileUploadForm,
     UserProfileForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill
 from django.views.generic import UpdateView
 
 
@@ -256,12 +256,10 @@ def SkillsView(request):  # I dont know what this does
 
 def AddSkillView(request):
     if request.method == 'POST':
-        form = SkillForm(request.POST)
-
-        if form.is_valid():
-            skill_inst = form.cleaned_data['skill']
-            skill_inst.save()
-            return render(request, 'accounts/addskill.html')
+        form = SkillForm()
+        skill = request.POST.get("skill")
+        skill_object = Skill.objects.create(owner=request.user,skill_name=skill)
+        return render(request, 'accounts/addskill.html',{'form': form,"successfully":True,"skill":skill_object})
     else:
         form = SkillForm()
     return render(request, 'accounts/addskill.html', {'form': form})
