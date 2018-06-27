@@ -64,6 +64,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Skill(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     skill_name = models.CharField(max_length=20, default="", blank=True)
 
     def __str__(self):
