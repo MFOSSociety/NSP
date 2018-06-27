@@ -79,8 +79,13 @@ def LoginView(request):
 
 @login_required
 def ProfileView(request):
-    args = {'user': request.user}
+    followers = len(Follow.objects.filter(following=request.user))
+    following = len(Follow.objects.filter(follower=request.user))
+    skills = Skill.objects.filter(user=request.user)
+    args = {'user': request.user,"followers":followers
+                ,"following":following,"skills":skills}
     return render(request, 'accounts/profile.html', args)
+
 
 
 def PeopleView(request):
