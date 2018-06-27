@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mptt',  # to handle the tree of forum instances
-    'haystack',  # provides search capabilities
     'widget_tweaks',
 
 ]

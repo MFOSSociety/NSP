@@ -75,35 +75,7 @@ def LoginView(request):
         return render(request, 'accounts/login.html', {})
 
 
-def SearchView(request):
-    if request.method == 'POST':
-        srch = request.POST['srh']
-
-        if srch:
-            match1 = User.objects.filter(first_name__icontains=srch).first()
-            # TODO skill name search functionlity to be added
-            match2 = ProjectDetail.objects.filter(project_name__icontains=srch).first()
-            match3 = ProjectDetail.objects.filter(branch__icontains=srch).first()
-            match4 = ProjectDetail.objects.filter(mentor_name__icontains=srch).first()
-            if match1:
-                print("match1")
-                return render(request, 'accounts/searchOld.html', {'sr': match1, 'condition': 'person'})
-            elif match2:
-                print("match2")
-                return render(request, 'accounts/searchOld.html', {'sr': match2, 'condition': 'project'})
-            elif match3:
-                print("match3")
-                return render(request, 'accounts/searchOld.html', {'sr': match3, 'condition': 'branch'})
-            elif match4:
-                print("match4")
-                return render(request, 'accounts/searchOld.html', {'sr': match4, 'condition': 'mentor'})
-            else:
-                return render(request, 'accounts/searchOld.html', {'sr': 'search_fail', 'condition': 'search_fail'})
-
-        else:
-            return HttpResponse('/account/search/')
-    return render(request, 'accounts/searchOld.html')
-
+# TODO Search form to be added
 
 @login_required
 def ProfileView(request):
@@ -371,3 +343,25 @@ def handler404(request):
     response = render_to_response('accounts/error404.html', {})
     response.status_code = 404
     return response
+
+
+def search(request):
+    if request.method == 'POST':
+        srch = request.POST['srh']
+
+        if srch:
+            match1 = User.objects.filter(first_name__icontains=srch)
+            match2 = UserProfile.objects.filter(skills__skill_name__icontains=srch)
+
+            if match1:
+                # for userprofile
+                return render(request, 'accounts/search.html', {'sr': match1, 'condition': 'person'})
+            elif match2:
+                # for user skill
+                return render(request, 'accounts/search.html', {'sr': match2, 'condition': 'skill'})
+            else:
+                return render(request, 'accounts/search.html', {'sr': 'no results found'})
+
+        else:
+            return HttpResponse('/account/search/')
+    return render(request, 'accounts/search.html')

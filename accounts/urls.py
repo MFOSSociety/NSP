@@ -21,7 +21,6 @@ urlpatterns = [
     path("project/active/addInterested/<ID>",views.addInterested,name="addInterested"),
     path("project/active/removeInsterested/<ID>",views.removeInsterested,name="removeInsterested"),
     re_path('project/(\d+)/', views.ProjectDetailView, name='view_project_detail'),
-    path('search/', include('haystack.urls')),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('registersuccess/', views.SuccesfullRegistrationView, name='registersucess'),
@@ -42,7 +41,8 @@ urlpatterns = [
     re_path('reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm, name='password_reset_confirm'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),
-    path('developers/', views.DevelopersView, name='developers')
+    path('developers/', views.DevelopersView, name='developers'),
+    path('search/', views.search, name='search')
 
 ]
 
