@@ -144,13 +144,14 @@ def FriendProfileView(request, username):
     editable = False
     context = locals()
     template = 'accounts/profile_friend.html'
-
+    skills = Skill.objects.filter(user=user)
     followings = len(Follow.objects.filter(follower=user))
     followers = len(Follow.objects.filter(following=user))
     current_user_following = Follow.objects.filter(follower=request.user,following=user)
     args = {'user': user, 'viewer': request.user,
                 "followings":followings,"followers":followers,
-                "current_user_following":current_user_following}
+                "current_user_following":current_user_following,
+                "skills":skills}
     return render(request, template, args)
 
 
