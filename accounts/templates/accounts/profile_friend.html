@@ -49,9 +49,11 @@
                 </li>
             {% endfor %}
             {% endif %}
+            <p>Followers : {{ followers }}</p>
+            <p>Following : {{ followings }}</p>
             </div>
             <div class="container">
-                {% if follow_value == True %}
+                {% if current_user_following %}
                     <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary">Unfollow</a>
                 {% else %}
                     <a href="{% url 'followUser' user.id %}" class="btn btn-primary">Follow</a>
