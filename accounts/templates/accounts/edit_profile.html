@@ -12,10 +12,6 @@
             <form method="POST" style="padding-bottom: 20px;">
                 {% csrf_token %}
                 <div class="form-group">
-                    <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                           placeholder="Username" value="{{ user.username }}">
-                </div>
-                <div class="form-group">
                     <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control"
                            placeholder="First Name" value="{{ user.first_name }}">
                 </div>
