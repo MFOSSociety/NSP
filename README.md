@@ -26,6 +26,6 @@ Visit - http://nsp.pythonanywhere.com/
 ![Change Password](https://github.com/Rishi110/NSP/blob/master/screenshots/6%20Change%20Password.png)
 
 ## Developers:
-#### Backend Developers - Rishi Banerjee, Pratik Jain, Gjergj Kadriu
-#### Frontend Developers - Prachal Goyal
+#### Backend Developers -<a href="https://github.com/rshrc">Rishi Banerjee</a>, <a href="https://github.com/pratikjain04">Pratik Jain</a>, <a hre="https://github.com/gjergjk71">Gjergj Kadriu</a>
+#### Frontend Developers - <a href="https://github.com/prachalgoyal03">Prachal Goyal</a>
 #### Designer - Amit Parameshwar
