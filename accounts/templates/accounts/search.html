@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <form method="post" action="{% url 'search' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="col-lg-5">
+                <input type="text" placeholder="You know, for search!" name="srh" class="form-control">
+            </div>
+            <label class="col-lg-2">
+                <button type="submit" class="btn btn-success">Search</button>
+            </label>
+            </div>
+
+    </form><br><br>
+</div>
+<!-- This Part is Total Crap! -->
+<div>
+    {% if messages %}
+        <ul class="messages">
+            {% for k in messages %}
+            <li style="color: red">{{ k }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div><br>
+
+{% if condition == 'person' %}
+<div class="container">
+<hr>
+    {% for k in sr.all %}
+        <div class="container-fluid">
+        <img style="height: 100px; width: 100px; border-radius: 50%"src={{ k.userprofile.image.url }}>
+        <p class="align-right" style="display: inline-block"> {{ k.first_name }} {{ k.last_name }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endif %}
+{% if condition == 'skill'%}
+<div class="container">
+    {% for k in sr.all %}
+        <p>{{ k }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
