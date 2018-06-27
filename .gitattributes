@@ -1,0 +1,3 @@
+*.html linguist-vendored=false
+*.html linguist-generted=false
+*.html linguist-language=Python
