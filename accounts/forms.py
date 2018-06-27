@@ -23,7 +23,7 @@ class ProjectForm(forms.ModelForm):
             'project_name': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
             'mentor_name': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
             'branch': forms.Textarea(attrs={'cols': 80, 'rows': 1}),
-            'start_date': forms.DateInput(format='%d-%m-%Y', attrs={'class': 'myDateClass', 'readonly':'readonly'}),
+            'start_date': forms.DateInput(attrs={'class': 'datefield'}),
             'description': forms.Textarea(attrs={'cols': 80, 'rows': 20})
         }
 
