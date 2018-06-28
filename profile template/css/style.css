@@ -1,0 +1,37 @@
+body {
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #E4E4E4;
+}
+.first{
+/*	background-color: #bab9bf;*/
+
+}
+.img-thumbnail{
+	   height: 180px;
+    width: 180px;
+/*    border-radius: 50%;*/
+/*    margin-top: 25px;*/
+    margin-left: 140px;
+    border-color: blue;
+
+}
+.username{
+	margin-left: 160px;
+	color: blue;
+	letter-spacing: 1px;
+}
+.second{
+	letter-spacing: 1px;
+	color: blue;
+}
+.third{
+	margin-left: 100px;
+}
+/*.border{
+	border-color: #0094ff;
+}*/
+.move{
+	margin-left: 35px;
+}
