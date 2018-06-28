@@ -378,3 +378,6 @@ def search(request):
         else:
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
+
+
+
