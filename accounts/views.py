@@ -23,9 +23,8 @@ from accounts.forms import (
     EditInformationForm,
     ImageFileUploadForm,
     UserProfileForm,
-    SolutionForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill, Submissions
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill
 from django.views.generic import UpdateView
 
 
@@ -379,16 +378,4 @@ def search(request):
         else:
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
-
-def AddSubmissionView(request):
-    if request.method == 'POST':
-        form = SolutionForm()
-        submission = request.POST.get("solution_link")
-        submission_object = Submissions.objects.create(user=request.user, solution_link=submission)
-        return render(request, 'accounts/addsolution.html', {'form': form, "successfully": True, "skill": submission_object})
-    else:
-        form = SkillForm()
-    return render(request, 'accounts/addsolution.html', {'form': form})
-
-
 
