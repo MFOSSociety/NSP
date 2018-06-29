@@ -1,7 +1,7 @@
 # from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from accounts.models import ProjectDetail, Skill, UserProfile
+from accounts.models import ProjectDetail, Skill, UserProfile, Submissions
 from accounts.models import User
 
 
@@ -136,4 +136,13 @@ class SkillForm(forms.Form):
 
     def clean_skill(self):
         data = self.cleaned_data['skill']
+        return data
+
+
+class SolutionForm(forms.Form):
+    model = Submissions
+    solution_link = forms.CharField(max_length=20, help_text='Enter Your Solution Link')
+
+    def clean_solution(self):
+        data = self.cleaned_data['solution_link']
         return data
