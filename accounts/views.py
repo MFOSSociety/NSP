@@ -153,6 +153,22 @@ def projectIssues(request,ID,status):
     args = {"project":project,"issues":issues,"status":status}
     return render(request,"accounts/projectIssues.html",args)
 
+def projectSolutions(request,ID,status):
+    project = ProjectDetail.objects.get(pk=ID)
+    issues = Issue.objects.filter(project=project,status="1").order_by("-date")
+    if status == "open":
+        solutions = Solution.objects.filter(issue__in=issues,status="0").order_by("-date")
+    elif status == "accepted":
+        solutions = Solution.objects.filter(issue__in=issues,status="1").order_by("-date")
+    elif status == "notaccepted":
+        solutions = Solution.objects.filter(issue__in=issues,status="2").order_by("-date")
+    else:
+        return redirect("/account/project/{}".format(ID))
+    
+    args = {"project":project,"solutions":solutions,"status":status}
+    return render(request,"accounts/projectSolutions.html",args)
+
+
 def FriendProfileView(request, username):
     try:
         user = User.objects.get(username=username)
