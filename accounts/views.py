@@ -83,10 +83,11 @@ def ProfileView(request):
     followers = len(Follow.objects.filter(following=request.user))
     followings = len(Follow.objects.filter(follower=request.user))
     skills = Skill.objects.filter(user=request.user)
+    projects = ProjectPeopleInterested.objects.filter(user=request.user)
     args = {'user': request.user,"followers":followers
                 ,"followings":followings,"skills":skills}
     rating_value = user.userprofile.ratings
-    args = {'user': user, "followers": followers, "following": followings, "skills": skills, 'range': range(rating_value)}
+    args = {'user': user, "followers": followers, "following": followings, "skills": skills, 'range': range(rating_value), 'projects': projects}
     return render(request, 'accounts/profile.html', args)
 
 
@@ -156,10 +157,11 @@ def FriendProfileView(request, username):
     followings = len(Follow.objects.filter(follower=user))
     followers = len(Follow.objects.filter(following=user))
     current_user_following = Follow.objects.filter(follower=request.user, following=user)
+    projects = ProjectPeopleInterested.objects.filter(user=user)
     args = {'user': user, 'viewer': request.user,
                 "followings": followings, "followers": followers,
                 "current_user_following": current_user_following,
-                "skills": skills, 'range': range(rating_value)}
+                "skills": skills, 'range': range(rating_value), 'projects': projects}
     return render(request, template, args)
 
 

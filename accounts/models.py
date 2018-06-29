@@ -90,7 +90,7 @@ class ProjectPeopleInterested(models.Model):
     project = models.ForeignKey(ProjectDetail, related_name="project", on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{} is interested in {}".format(self.user, self.project)
+        return "{} is interested in {}".format(self.user.username, self.project)
 
 
 class UserProfile(models.Model):
