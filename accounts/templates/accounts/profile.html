@@ -31,9 +31,15 @@
                              src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
                     {% endif %}
 
-                    <h3 class="username">{{ user.username }}</h3>
+                    <div class="container">
+                        <h3 class="username">{{ user.username }}</h3>
+                    </div>
 
-                    <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}" style="margin-left: 70px;">Upload Pic</a>
+                    <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}" style="margin-left: -35px">Upload Pic</a>
+                    <a class="btn btn-success" href="{% url 'EditDetails' user.id %}" id="submit"
+                       style="">Edit Profile</a>
+                    <a class="btn btn-success" href="{% url 'addskill' %}" style="">Add Skill</a>
+
                     <br>
                     <br>
                     <table class="table table-striped " style="margin-left: -40px; width: 300px;">
@@ -69,17 +75,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <h5>Ratings : {{ user.userprofile.ratings }}
-                                    <i class="fa fa-star" style="color:dodgerblue"></i></h5>
+                                <h5>Ratings :
+                                    {% for i in range %}
+                                    <i class="fa fa-star" style="color:dodgerblue"></i>
+                                    {% endfor %}
+                                </h5>
                             </td>
                         </tr>
                     </table>
-
-                        <a class="btn btn-success" href="{% url 'EditDetails' user.id %}" id="submit"
-                           style="">Edit Profile</a>
-                        <a class="btn btn-success" href="{% url 'addskill' %}" style="">Add Skill</a>
-                        <br>
-
                 </div>
             </div>
             <div class="col-md-7 ">
