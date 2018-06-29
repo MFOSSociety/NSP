@@ -128,8 +128,8 @@ class Follow(models.Model):
 
 
 class Submissions(models.Model):
-    project = models.ForeignKey(ProjectDetail, on_delete=models.CASCADE, related_name="project")
-    solution_link = models.CharField(max_length=100, default="", blank=True)
+    user = models.ForeignKey(User, related_name="user_solution", on_delete=models.CASCADE)
+    solution_link = models.CharField(max_length=100, default="", blank=True, null=True)
 
     def __str__(self):
         return self.solution_link

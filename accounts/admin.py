@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import ProjectDetail, UserProfile
-from accounts.models import User, Follow, ProjectPeopleInterested, Skill
+from accounts.models import (
+    User,
+    Follow,
+    ProjectPeopleInterested,
+    Skill,
+    Submissions
+)
 
 admin.site.site_title = "NSP"
 admin.site.index_title = "NSP"
@@ -12,3 +18,4 @@ admin.site.register(UserProfile)
 admin.site.register(Follow)
 admin.site.register(ProjectDetail)
 admin.site.register(ProjectPeopleInterested)
+admin.site.register(Submissions)

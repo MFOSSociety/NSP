@@ -41,6 +41,7 @@ urlpatterns = [
     re_path('reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm, name='password_reset_confirm'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),
+    re_path('project/submit', views.AddSubmissionView, name='addsubmission'),
     path('developers/', views.DevelopersView, name='developers'),
     path('search/', views.search, name='search')
 
