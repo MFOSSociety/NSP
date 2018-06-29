@@ -141,7 +141,7 @@ class Solution(models.Model):
     title = models.CharField(max_length=1000)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=1,choices=(("1","Accepted"),("0","Not Accepted")))
-    
+    status = models.CharField(max_length=1,choices=(("0","Open"),("1","Accepted"),("2","Not Accepted")))
+
     def __str__(self):
         return "#{} - {}".format(self.id,self.title)
