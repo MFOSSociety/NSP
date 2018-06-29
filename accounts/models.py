@@ -34,6 +34,7 @@ class MyUserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
+# Custom User definition, making email as the default login
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=20)
     email = models.EmailField(unique=True, null=True)
@@ -50,7 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         help_text='',
 
     )
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'email'    # Using email in the USERNAME_FIELD during login
     objects = MyUserManager()
 
     def __str__(self):
@@ -89,7 +90,7 @@ class ProjectPeopleInterested(models.Model):
     project = models.ForeignKey(ProjectDetail, related_name="project", on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{} is interested in {}".format(self.user,self.project)
+        return "{} is interested in {}".format(self.user, self.project)
 
 
 class UserProfile(models.Model):
