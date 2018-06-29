@@ -127,8 +127,8 @@ def ProjectDetailView(request, project_id):
     except:
         raise Http404
 
-    issues = Issue.objects.filter(project=project,status="1")
-    solutions = Solution.objects.filter(issue__in=issues,status="0")
+    issues = Issue.objects.filter(project=project,status="1").order_by("-date")
+    solutions = Solution.objects.filter(issue__in=issues,status="0").order_by('-date')
     editable = False
     context = locals()
     template = 'accounts/projectdetailview.html'
