@@ -126,10 +126,16 @@ class Follow(models.Model):
     def __str__(self):
         return "{} started following {}".format(self.follower, self.following)
 
+class Issue(models.Model):
+    project = models.ForeignKey(ProjectDetail,on_delete=models.CASCADE)
+    title = models.CharField(max_length=1000)
+    description = models.TextField()
 
-class Submissions(models.Model):
+class Solution(models.Model):
     user = models.ForeignKey(User, related_name="user_solution", on_delete=models.CASCADE)
-    solution_link = models.CharField(max_length=100, default="", blank=True, null=True)
+    issue = models.ForeignKey(Issue,on_delete=models.CASCADE) 
+    title = models.CharField(max_length=1000)
+    description = models.TextField()
 
     def __str__(self):
-        return self.solution_link
+        return "#{} - {}".format(self.id + self.title)
