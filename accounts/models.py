@@ -89,7 +89,7 @@ class ProjectPeopleInterested(models.Model):
     project = models.ForeignKey(ProjectDetail, related_name="project", on_delete=models.CASCADE)
 
     def __str__(self):
-        return ("{} is interested in {}".format(self.user,self.project))
+        return "{} is interested in {}".format(self.user,self.project)
 
 
 class UserProfile(models.Model):
@@ -125,3 +125,11 @@ class Follow(models.Model):
 
     def __str__(self):
         return "{} started following {}".format(self.follower, self.following)
+
+
+class Submissions(models.Model):
+    project = models.ForeignKey(ProjectDetail, on_delete=models.CASCADE, related_name="project")
+    solution_link = models.CharField(max_length=100, default="", blank=True)
+
+    def __str__(self):
+        return self.solution_link
