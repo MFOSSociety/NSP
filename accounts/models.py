@@ -130,6 +130,7 @@ class Issue(models.Model):
     project = models.ForeignKey(ProjectDetail,on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     description = models.TextField()
+    date = models.DateField(auto_now_add=True)
     def __str__(self):
         return "#{} - {}".format(self.id,self.title)
 
@@ -138,6 +139,7 @@ class Solution(models.Model):
     issue = models.ForeignKey(Issue,on_delete=models.CASCADE) 
     title = models.CharField(max_length=1000)
     description = models.TextField()
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return "#{} - {}".format(self.id,self.title)
