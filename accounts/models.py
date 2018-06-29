@@ -129,6 +129,7 @@ class Follow(models.Model):
 
 class Issue(models.Model):
     project = models.ForeignKey(ProjectDetail,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
