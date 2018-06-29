@@ -50,11 +50,7 @@
                         </table>
                     </div>
                     {% if not issues %}
-                        {% if status == "closed" %}
-                            <h3 style="text-align:center;">There are no closed issues!</h3>
-                        {% else %}
-                            <h3 style="text-align:center;">There are no open issues!</h3>
-                        {% endif %}
+                        <h3 style="text-align:center;">There are no {{ status }} issues!</h3>
                     {% endif %}
                     
 
