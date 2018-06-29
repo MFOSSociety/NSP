@@ -86,7 +86,7 @@ def ProfileView(request):
     args = {'user': request.user,"followers":followers
                 ,"followings":followings,"skills":skills}
     rating_value = user.userprofile.ratings
-    args = {'user': user, "followers": followers, "following": following, "skills": skills, 'range': range(rating_value)}
+    args = {'user': user, "followers": followers, "following": followings, "skills": skills, 'range': range(rating_value)}
     return render(request, 'accounts/profile.html', args)
 
 
