@@ -1,36 +1,39 @@
-
-
 {% extends 'base.html' %}
 {% block body %}
-<div class="container">
-   <div class="container">
-      <center>
-         <table border="1" style="width: 100%; height: 100%; border-radius: 25px" cellspacing="10"
-            cellpadding="10">
-            <tr>
-               <td>Username</td>
-               <td>Name</td>
-               <td>Ratings</td>
-            </tr>
-            {% for people in users %}
-            {% if people.is_superuser is False %}
-            <tr>
-               <td class="lead mb-7"><a
-                  href="{% url 'view_friend' people.username %}">{{ people.username }}</a></td>
-               {% if viewer.is_superuser %}
-               <td class="lead mb-7">{{ people.first_name }} {{ people.last_name }}</td>
-               <td class="lead mb-7">{{ people.userprofile.ratings }}</td>
-               {% else %}
-               <td class="lead mb-7">{{ people.first_name }} {{ people.last_name }}</td>
-               <td class="lead mb-7">{{ people.userprofile.ratings}}</td>
-               {% endif %}
-            </tr>
-            {% endif %}
-            {% endfor %}
-         </table>
-      </center>
-   </div>
-   <br><br>
-</div>
+    <div class="container">
+        <div class="container">
+            <center>
+                <table border="1" style="width: 100%; height: 100%; border-radius: 25px" cellspacing="10"
+                       cellpadding="10">
+                    <tr>
+                        <td>Username</td>
+                        <td>Name</td>
+                        <td>Ratings</td>
+                    </tr>
+                    {% for people in users %}
+                        {% if people.is_superuser is False %}
+
+                            <tr>
+                                {% if viewer.username == people.username %}
+                                {% else %}
+                                    <td class="lead mb-7"><a
+                                            href="{% url 'view_friend' people.username %}">{{ people.username }}</a>
+                                    </td>
+                                    {% if viewer.is_superuser %}
+                                        <td class="lead mb-7">{{ people.first_name }} {{ people.last_name }}</td>
+                                        <td class="lead mb-7">{{ people.userprofile.ratings }}</td>
+                                    {% else %}
+                                        <td class="lead mb-7">{{ people.first_name }} {{ people.last_name }}</td>
+                                        <td class="lead mb-7">{{ people.userprofile.ratings }}</td>
+                                    {% endif %}
+                                    </tr>
+                                {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </center>
+        </div>
+        <br><br>
+    </div>
 {% endblock %}
 
