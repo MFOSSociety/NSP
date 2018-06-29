@@ -31,7 +31,7 @@
                              src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
                     {% endif %}
                     <div class="container">
-                    <h3 class="username">{{ user.username }}</h3>
+                        <h3 class="username">{{ user.username }}</h3>
                     </div>
                     <div class="container">
                         {% if current_user_following %}
@@ -45,12 +45,12 @@
                     <table class="table table-striped " style="margin-left: -40px; width: 300px;">
                         <tr>
                             <td>
-                                <h5>Followers : {{ followers }}</h5>
+                                <h5>Followers : {% if followers == 0 %} 0 {% else %} {{ followers }} {% endif %}</h5>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <h5>Following : {{ following }}</h5>
+                                <h5>Following : {% if following == 0 %} 0 {% else %} {{ following }} {% endif %}</h5>
                             </td>
                         </tr>
                         <tr>
@@ -77,7 +77,7 @@
                             <td>
                                 <h5>Ratings :
                                     {% for i in range %}
-                                    <i class="fa fa-star" style="color:dodgerblue"></i>
+                                        <i class="fa fa-star" style="color:dodgerblue"></i>
                                     {% endfor %}
                                 </h5>
                             </td>
