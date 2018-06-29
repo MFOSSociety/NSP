@@ -23,9 +23,8 @@ from accounts.forms import (
     EditInformationForm,
     ImageFileUploadForm,
     UserProfileForm,
-    SolutionForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill, Submissions
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill,Issue,Solution
 from django.views.generic import UpdateView
 
 
@@ -82,8 +81,10 @@ def LoginView(request):
 def ProfileView(request):
     user = request.user
     followers = len(Follow.objects.filter(following=request.user))
-    following = len(Follow.objects.filter(follower=request.user))
+    followings = len(Follow.objects.filter(follower=request.user))
     skills = Skill.objects.filter(user=request.user)
+    args = {'user': request.user,"followers":followers
+                ,"followings":followings,"skills":skills}
     rating_value = user.userprofile.ratings
     args = {'user': user, "followers": followers, "following": following, "skills": skills, 'range': range(rating_value)}
     return render(request, 'accounts/profile.html', args)
@@ -128,10 +129,15 @@ def ProjectDetailView(request, project_id):
     except:
         raise Http404
 
+    issues = Issue.objects.filter(project=project,status="1").order_by("-date")
+    solutions = Solution.objects.filter(issue__in=issues,status="0").order_by('-date')
     editable = False
     context = locals()
     template = 'accounts/projectdetailview.html'
-    args = {'project': project}
+    args = {'project': project,"issues":issues,
+            'issuesNumber':len(issues),
+            "solutions":solutions,
+            "solutionsNumber":len(solutions)}
     return render(request, template, args)
 
 
@@ -380,16 +386,4 @@ def search(request):
         else:
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
-
-def AddSubmissionView(request):
-    if request.method == 'POST':
-        form = SolutionForm()
-        submission = request.POST.get("solution_link")
-        submission_object = Submissions.objects.create(user=request.user, solution_link=submission)
-        return render(request, 'accounts/addsolution.html', {'form': form, "successfully": True, "skill": submission_object})
-    else:
-        form = SkillForm()
-    return render(request, 'accounts/addsolution.html', {'form': form})
-
-
 
