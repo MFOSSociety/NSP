@@ -12,101 +12,103 @@
     <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
 {% endblock %}
 {% block body %}
-<br>
-<div class="container">
-   <div class="row lead mb-7">
-      <div class="col-md-5 ">
-         <div class="container first">
-            {% if user.userprofile.gender == 'Male' %}
-                <h1>Mr. {{ user.first_name }} {{ user.last_name }}</h1>
-            {% elif user.userprofile.gender == 'Female' %}
-                <h1>Ms. {{ user.first_name }} {{ user.last_name }}</h1>
-            {% else %}
-                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-            {% endif %}
-             {% if user.userprofile.photo %}
-                <img  class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}" width="240">
-            {% else %}
-                <img  class="img-thumbnail" alt="user image" src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
-            {% endif %}
-            <br>
-            <h3 class="username">{{ user.username }}</h3>
-            <br>
-            <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}" style="margin-left: 261px;">upload pic</a>
-            <br>
-            <!--    <h5 class="username">followers:</h5>
-               <h5 class="username">following:</h5>    -->
-            <br>
-            <table class="table table-striped " style="margin-left: 100px; width: 300px;">
-               <tr>
-                  <td>
-                     <h5>Followers : {{ followers }}</h5>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <h5>Following : {{ following }}</h5>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <h5>Stream : {{ user.userprofile.stream }}</h5>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <h5>Branch : {{ user.userprofile.branch }}</h5>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <h5>Year : {{ user.userprofile.year }}</h5>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <h5>Email : {{ user.email }}</h5>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <h5>Ratings : {{ user.userprofile.ratings }}
-                <i class="fa fa-star" style="color:dodgerblue"></i></h5>
-                  </td>
-               </tr>
-            </table>
-            <br>
-            <div class="move">
-               <a  class="btn btn-success" href="{% url 'EditDetails' user.id %}" id="submit" style="margin-left: 67px;">Edit Profile</a>
-               <a  class="btn btn-success" href="{% url 'addskill' %}" style="margin-left: 67px;">Add Skill</a>
-               <br>
+    <br>
+    <div class="container">
+        <div class="row lead mb-7">
+            <div class="col-md-5 ">
+                <div class="container first">
+                    {% if user.userprofile.gender == 'Male' %}
+                        <h1>Mr. {{ user.first_name }} {{ user.last_name }}</h1>
+                    {% elif user.userprofile.gender == 'Female' %}
+                        <h1>Ms. {{ user.first_name }} {{ user.last_name }}</h1>
+                    {% else %}
+                        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                    {% endif %}
+                    {% if user.userprofile.photo %}
+                        <img class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}" width="240">
+                    {% else %}
+                        <img class="img-thumbnail" alt="user image"
+                             src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
+                    {% endif %}
+
+                    <div class="container">
+                        <h3 class="username">{{ user.username }}</h3>
+                    </div>
+
+                    <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}" style="margin-left: -35px">Upload Pic</a>
+                    <a class="btn btn-success" href="{% url 'EditDetails' user.id %}" id="submit"
+                       style="">Edit Profile</a>
+                    <a class="btn btn-success" href="{% url 'addskill' %}" style="">Add Skill</a>
+
+                    <br>
+                    <br>
+                    <table class="table table-striped " style="margin-left: -40px; width: 300px;">
+                        <tr>
+                            <td>
+                                <h5>Followers : {{ followers }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Following : {{ following }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Stream : {{ user.userprofile.stream }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Branch : {{ user.userprofile.branch }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Year : {{ user.userprofile.year }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Email : {{ user.email }}</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Ratings :
+                                    {% for i in range %}
+                                    <i class="fa fa-star" style="color:dodgerblue"></i>
+                                    {% endfor %}
+                                </h5>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-         </div>
-      </div>
-      <div class="col-md-7 ">
-         <div class="container bg-light">
-            <center>
-               <h2 class="second">BIO</h2>
-               <br>
-               <h5>{% if user.userprofile.bio|length == 0 %} No bio yet! {% else %} {{ user.userprofile.bio }} {% endif %}</h5>
-               <br>
-            </center>
-         </div>
-         <br>
-         <center>
-            <div>
-               <h2 class="second">Skills</h2>
-         </center>
-         <div class="third">
-         {% for skill in skills %}
-         <li>
-         <ul><h5>{{ skill.skill_name }}</h5></ul>
-         </li>
-         {% endfor %}
-         </div>
-         </div>
-      </div>
-   </div>
-</div>
+            <div class="col-md-7 ">
+                <div class="container bg-light">
+                    <center>
+                        <h2 class="second">BIO</h2>
+                        <br>
+                        <h5>{% if user.userprofile.bio|length == 0 %} No bio yet! {% else %}
+                            {{ user.userprofile.bio }} {% endif %}</h5>
+                        <br>
+                    </center>
+                </div>
+                <br>
+                <center>
+                    <div>
+                        <h2 class="second">Skills</h2>
+                </center>
+                <div class="third">
+                    {% for skill in skills %}
+                        <li>
+                            <ul><h5>{{ skill.skill_name }}</h5></ul>
+                        </li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

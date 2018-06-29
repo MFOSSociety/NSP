@@ -80,13 +80,13 @@ def LoginView(request):
 
 @login_required
 def ProfileView(request):
+    user = request.user
     followers = len(Follow.objects.filter(following=request.user))
     following = len(Follow.objects.filter(follower=request.user))
     skills = Skill.objects.filter(user=request.user)
-    args = {'user': request.user,"followers":followers
-                ,"following":following,"skills":skills}
+    rating_value = user.userprofile.ratings
+    args = {'user': user, "followers": followers, "following": following, "skills": skills, 'range': range(rating_value)}
     return render(request, 'accounts/profile.html', args)
-
 
 
 def PeopleView(request):
@@ -146,13 +146,14 @@ def FriendProfileView(request, username):
     context = locals()
     template = 'accounts/profile_friend.html'
     skills = Skill.objects.filter(user=user)
+    rating_value = user.userprofile.ratings
     followings = len(Follow.objects.filter(follower=user))
     followers = len(Follow.objects.filter(following=user))
-    current_user_following = Follow.objects.filter(follower=request.user,following=user)
+    current_user_following = Follow.objects.filter(follower=request.user, following=user)
     args = {'user': user, 'viewer': request.user,
-                "followings":followings,"followers":followers,
-                "current_user_following":current_user_following,
-                "skills":skills}
+                "followings": followings, "followers": followers,
+                "current_user_following": current_user_following,
+                "skills": skills, 'range': range(rating_value)}
     return render(request, template, args)
 
 

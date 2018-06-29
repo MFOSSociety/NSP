@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/css/profiles.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="card">
+            {% if user.userprofile.gender == 'Male' %}
+                <h1>Mr. {{ user.first_name }} {{ user.last_name }}</h1>
+            {% elif user.userprofile.gender == 'Female' %}
+                <h1>Ms. {{ user.first_name }} {{ user.last_name }}</h1>
+            {% else %}
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            {% endif %}
+            {% if user.userprofile.photo %}
+                <img class="img-fluid" src="{{ user.userprofile.photo.url }}" width="240">
+            {% else %}
+                <img class="img-fluid" src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
+            {% endif %}
+            {% if user.userprofile.branch %}
+                <p>Branch : {{ user.userprofile.branch }}</p>
+            {% endif %}
+            {% if user.userprofile.year %}
+                <p>Year : {{ user.userprofile.year }}</p>
+            {% endif %}
+            {% if user.userprofile.stream %}
+                <p>Stream : {{ user.userprofile.stream }}</p>
+            {% endif %}
+            <p>
+                {{ user.userprofile.ratings }}
+                <i class="fa fa-star" style="color:dodgerblue"></i>
+            </p>
+            <p>Position : {{ user.userprofile.position }}</p>
+            <div class="container">
+            {% if user.userprofile.skills %}
+            {% for skill in user.userprofile.skills.all %}
+                <li>
+                    <p>{{ skill }}</p>
+                </li>
+            {% endfor %}
+            {% endif %}
+            <p>Followers : {{ followers }}</p>
+            <p>Following : {{ followings }}</p>
+            {{ user.first_name|title }} {{ user.last_name|title }} skillset :
+            {% for skill in skills %}
+                <li>
+                    {{ skill.skill_name }}
+                </li>
+            {% empty %}
+                <li>
+                    This user hasn't added any skills yet
+                </li>
+            {% endfor %}
+            </div>
+            <div class="container">
+                {% if current_user_following %}
+                    <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary">Unfollow</a>
+                {% else %}
+                    <a href="{% url 'followUser' user.id %}" class="btn btn-primary">Follow</a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
