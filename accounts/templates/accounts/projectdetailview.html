@@ -6,6 +6,8 @@
     <p>Mentor : {{ project.mentor_name }}</p>
     <p>Description : {{ project.description }}</p>
     <p>Date : {{ project.start_date }}</p>
+    <a href="{% url 'addsubmission' %}">Submit a Solution</a>
     </div>
 {% endblock %}
+
 
