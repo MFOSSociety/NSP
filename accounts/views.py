@@ -24,7 +24,7 @@ from accounts.forms import (
     ImageFileUploadForm,
     UserProfileForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill,Issue,Solution
 from django.views.generic import UpdateView
 
 
@@ -127,10 +127,15 @@ def ProjectDetailView(request, project_id):
     except:
         raise Http404
 
+    issues = Issue.objects.filter(project=project)
+    solutions = Solution.objects.filter(issue__in=issues)
     editable = False
     context = locals()
     template = 'accounts/projectdetailview.html'
-    args = {'project': project}
+    args = {'project': project,"issues":issues,
+            'issuesNumber':len(issues),
+            "solutions":solutions,
+            "solutionsNumber":len(solutions)}
     return render(request, template, args)
 
 
