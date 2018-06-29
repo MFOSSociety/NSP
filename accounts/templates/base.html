@@ -2,241 +2,256 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <link>
+<link>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    {% block title %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+{% block title %}
     <script src="{% static 'accounts/js/password_check.js' %}"></script>
     <title>NSP - Network of Skilled People</title>
-    {% endblock %}
+{% endblock %}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
-    <link href="{% static 'accounts/css/nsp.css' %}" rel="stylesheet">
-    <link href="{% static 'accounts/css/landing-page.min.css' %}" rel="stylesheet">
-    {% block customcss %}
-        <link href="{% static 'accounts/css/search_bar.css' %}" rel="stylesheet">
-    {% endblock %}
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+      type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+      integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+<!-- Custom styles for this template -->
+<link href="{% static 'accounts/css/nsp.css' %}" rel="stylesheet">
+<link href="{% static 'accounts/css/landing-page.min.css' %}" rel="stylesheet">
+{% block customcss %}
+    <link href="{% static 'accounts/css/search_bar.css' %}" rel="stylesheet">
+{% endblock %}
 
-  <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top">
-      <div class="container">
-          <a class="navbar-brand" href="{% url 'home' %}">NSP</a>
-          <form class="navbar-form" method="post" action="{% url 'search' %}">
-                        {% csrf_token %}
-                        <div class="form-group">
-                           <div class="col-lg-5">
-                              <input type="text" placeholder="You know, for Search!" name="srh" class="form-control">
-                           </div>
-                        </div>
-          </form>
-          <div class="navbar navbar-right">
+<!-- Navigation -->
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">NSP</a>
+        <!-- search goes here -->
+        <div class="navbar navbar-right">
             {% if user.is_authenticated %}
-                <a  class="btn btn-link" href="{% url 'view_profile' %}" >Profile</a>
-                <a  class="btn btn-link" href="{% url 'edit_profile' %}" >Edit Profile</a>
+                <a class="btn btn-link" href="{% url 'view_profile' %}">Profile</a>
+                <a class="btn btn-link" href="{% url 'edit_profile' %}">Edit Profile</a>
                 <a class="btn btn-link" href="{% url 'view_people' %}">People</a>
-                <a  class="btn btn-link" href="{% url 'start_project' %}" >Start Project</a>
-                <a  class="btn btn-link" href="{% url 'project_list_view' %}" >Active Projects</a>
+                <a class="btn btn-link" href="{% url 'start_project' %}">Start Project</a>
+                <a class="btn btn-link" href="{% url 'project_list_view' %}">Active Projects</a>
                 <a class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
             {% else %}
                 <a class="btn btn-link" href="{% url 'user_login' %}">Sign In </a>
                 <a class="btn btn-link" href="{% url 'signup' %}">Sign Up</a>
             {% endif %}
 
-          </div>
-      </div>
-    </nav>
-  {% block body %}
-  <body>
+        </div>
+    </div>
+</nav>
+{% block body %}
+    <body>
     <!-- Masthead -->
     <header class="masthead text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h1 class="mb-5">Think. Gather. Build.</h1>
-          </div>
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5">Think. Gather. Build.</h1>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
-
 
 
     <!-- Icons Grid -->
     <section class="features-icons bg-light text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="fa fa-fire m-auto text-primary"></i>
-              </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="fa fa-fire m-auto text-primary"></i>
+                        </div>
 
-              <h3>Active Projects</h3>
-              <p class="lead mb-0">Great for Collaborative Projects</p>
+                        <h3>Active Projects</h3>
+                        <p class="lead mb-0">Great for Collaborative Projects</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="fa fa-users m-auto text-primary"></i>
+                        </div>
+                        <h3>Great Community</h3>
+                        <p class="lead mb-0">Extremely Fast Response Time</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="fa fa-rocket m-auto text-primary"></i>
+                        </div>
+                        <h3>Get Experience</h3>
+                        <p class="lead mb-0">A Social Network with Benefits!</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="fa fa-users m-auto text-primary"></i>
-              </div>
-              <h3>Great Community</h3>
-              <p class="lead mb-0">Extremely Fast Response Time</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="fa fa-rocket m-auto text-primary"></i>
-              </div>
-              <h3>Get Experience</h3>
-              <p class="lead mb-0">A Social Network with Benefits!</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Image Showcases -->
     <section class="showcase">
-      <div class="container-fluid p-0">
-        <div class="row no-gutters">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
 
-          <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url({% static 'accounts/img/bg-showcase-1.jpg' %});"></div>
-          <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2>A Dream</h2>
-            <p class="lead mb-0">A website carved out of curiosity on how to get all the engineers from all the streams under one umbrella and make them work together so as to some with new ideas and solve real world problems with engineering solutions</p>
-          </div>
+                <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                     style="background-image: url({% static 'accounts/img/bg-showcase-1.jpg' %});"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>A Dream</h2>
+                    <p class="lead mb-0">A website carved out of curiosity on how to get all the engineers from all the
+                        streams under one umbrella and make them work together so as to some with new ideas and solve
+                        real world problems with engineering solutions</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img"
+                     style="background-image: url({% static 'accounts/img/bg-showcase-2.jpg' %});"></div>
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2>Highly Ambitious</h2>
+                    <p class="lead mb-0">This website is going to be a community project for college students across
+                        India. It is not just for getting you projects but also for students who want to get into open
+                        source.</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                     style="background-image: url({% static 'accounts/img/bg-showcase-3.jpg' %});"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>Deployed using PythonAnywhere</h2>
+                    <p class="lead mb-0">NSP v0.8 is hosted at nsp.pythonanywhere.com</p>
+                </div>
+            </div>
         </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6 text-white showcase-img" style="background-image: url({% static 'accounts/img/bg-showcase-2.jpg' %});"></div>
-          <div class="col-lg-6 my-auto showcase-text">
-            <h2>Highly Ambitious</h2>
-            <p class="lead mb-0">This website is going to be a community project for college students across India. It is not just for getting you projects but also for students who want to get into open source.</p>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url({% static 'accounts/img/bg-showcase-3.jpg' %});"></div>
-          <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2>Deployed using PythonAnywhere</h2>
-            <p class="lead mb-0">NSP v0.8 is hosted at nsp.pythonanywhere.com</p>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Testimonials -->
     <section class="testimonials text-center bg-light">
-      <div class="container">
-        <h2 class="mb-5">What people are saying...</h2>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/testimonials-1.jpg' %}" alt="">
-              <h5>Margaret E.</h5>
-              <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+        <div class="container">
+            <h2 class="mb-5">What people are saying...</h2>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/testimonials-1.jpg' %}"
+                             alt="">
+                        <h5>Margaret E.</h5>
+                        <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/testimonials-2.jpg' %}"
+                             alt="">
+                        <h5>Fred S.</h5>
+                        <p class="font-weight-light mb-0">"NSP is amazing.Landed me two projects in my even semester
+                            2019"</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/testimonials-3.jpg' %}"
+                             alt="">
+                        <h5>Sarah W.</h5>
+                        <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to
+                            us!"</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/testimonials-2.jpg' %}" alt="">
-              <h5>Fred S.</h5>
-              <p class="font-weight-light mb-0">"NSP is amazing.Landed me two projects in my even semester 2019"</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/testimonials-3.jpg' %}" alt="">
-              <h5>Sarah	W.</h5>
-              <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Call to Action -->
     <section class="call-to-action text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          {% if user.is_authenticated %}
-          <div class="col-xl-9 mx-auto">
-            <h2 class="mb-4">Start a project? Go!</h2>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-                <div class="container">
-                  <a href="{% url 'start_project' %}" class="btn btn-block btn-lg btn-primary">Start</a>
-                </div>
-              </div>
-            </form>
-          </div>
-          {% else %}
-              <div class="col-xl-9 mx-auto">
-            <h2 class="mb-4">Ready to do a project? Sign up now!</h2>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form>
-              <div class="form-row">
-                <div class="container">
-                  <a href="{% url 'signup' %}" class="btn btn-block btn-lg btn-primary">Sign up!</a>
-                </div>
-              </div>
-            </form>
-          </div>
-          {% endif %}
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                {% if user.is_authenticated %}
+                    <div class="col-xl-9 mx-auto">
+                        <h2 class="mb-4">Start a project? Go!</h2>
+                    </div>
+                    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                        <form>
+                            <div class="form-row">
+                                <div class="container">
+                                    <a href="{% url 'start_project' %}"
+                                       class="btn btn-block btn-lg btn-primary">Start</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="col-xl-9 mx-auto">
+                        <h2 class="mb-4">Ready to do a project? Sign up now!</h2>
+                    </div>
+                    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                        <form>
+                            <div class="form-row">
+                                <div class="container">
+                                    <a href="{% url 'signup' %}" class="btn btn-block btn-lg btn-primary">Sign up!</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item">
-                <a href="#">About</a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">Contact</a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">Terms of Use</a>
-              </li>
-               <li class="list-inline-item">
-                <a href="{% url 'developers' %}">Developers</a>
-              </li>
-              </li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">&copy; NSP 2018. GNU License.</p>
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-            <ul class="list-inline mb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Contact</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="{% url 'developers' %}">Developers</a>
+                        </li>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; NSP 2018. GNU License.</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
 
-          <!-- Add font awesome icons -->
-          <a href="https://github.com/rshrc/NSP/" class="fa fa-github fa-3x" target="_blank"></a>
-            </ul>
-          </div>
+                        <!-- Add font awesome icons -->
+                        <a href="https://github.com/rshrc/NSP/" class="fa fa-github fa-3x" target="_blank"></a>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </footer>
 
-  </body>
+    </body>
 {% endblock %}
 
 </html>

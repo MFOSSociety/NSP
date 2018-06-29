@@ -28,6 +28,7 @@ QA_SETTINGS = {
 }
 
 INSTALLED_APPS = [
+    'haystack',
     'bootstrapform',
     'accounts',
     'django.contrib.admin',
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
@@ -86,6 +88,13 @@ AUTHENTICATION_BACKENDS = (
 
     'django.contrib.auth.backends.ModelBackend',
 )
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 
 WSGI_APPLICATION = 'nsp.wsgi.application'
 
