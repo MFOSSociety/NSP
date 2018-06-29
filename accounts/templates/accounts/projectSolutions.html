@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div style="margin: 0px;padding: 10px;" class="col-xl-12 offset-md-1">
+        <div class="Order-list">
+            <div class="card">
+                <div class="card-header">
+                     <h4><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name|title }}</a> - Solutions </h4>
+                </div>
+                <div class="card-body">
+                    {% if status == "notaccepted" %}
+                    <div class="alert alert-info"> <b>Hello {{ user.first_name|title }}, </b>Below are the not Accepted solutions of this project!</div>
+
+                    {% else %}
+                    <div class="alert alert-info"> <b>Hello {{ user.first_name|title }}, </b>Below are the {{ status }} solutions of this project!</div>
+                    {% endif %}
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Solution ID</th>
+                                    <th>Issue ID</th>
+                                    <th>Title</th>
+                                    <th>Created</th>
+                                    <th>Opened</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                {% for solution in solutions %}
+                                    <tr>
+                                      <td>#{{ solution.id }}</td>
+                                      <td>#{{ solution.issue.id }}</td>
+                                      <td>{{ solution.title }}</td>
+                                      <td>{{ solution.date }}</td>
+                                      <td>{{ solution.user.first_name }} {{ solution.user.last_name }}</td>
+                                    
+                                    {% if solution.status == "0" %}
+                                      </td>
+                                      
+                                          <td><span class="badge badge-pill badge-success"> Open </span></td>
+                                      
+                                    </tr>
+                                    {% elif solution.status == "1" %}
+                                      </td>
+                                      
+                                          <td><span class="badge badge-pill badge-success"> Accepted </span></td>
+                                      
+                                    </tr>
+                                    {% elif solution.status == "2" %}
+                                      </td>
+                                      
+                                          <td><span class="badge badge-pill badge-danger"> Not Accepted </span></td>
+                                      
+                                    </tr>                     
+                                    {% endif %}
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if not solutions %}
+                        {% if status == "notaccepted" %}
+                            <h3 style="text-align:center;">There aren't any not accepted solutions!</h3>
+                        {% else %}
+                            <h3 style="text-align:center;">There aren't any {{ status }} solutions!</h3> 
+                        {% endif %}                       
+                    {% endif %}
+                    
+
+                    <div style="text-align: center;" class="alert alert-warning">[Something here]</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ORDER LIST END-->
+    </div>
+
+{% endblock body %}
