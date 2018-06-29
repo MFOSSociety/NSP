@@ -28,6 +28,7 @@ QA_SETTINGS = {
 }
 
 INSTALLED_APPS = [
+    'haystack',
     'bootstrapform',
     'accounts',
     'django.contrib.admin',
@@ -88,6 +89,13 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+
 WSGI_APPLICATION = 'nsp.wsgi.application'
 
 # Database
@@ -107,12 +115,6 @@ CACHES = {
 
 }
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join('home/rishi/Desktop/NSP', 'whoosh_index'),  # edit the path accordingly
-    },
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

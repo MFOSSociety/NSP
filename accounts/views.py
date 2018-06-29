@@ -23,8 +23,9 @@ from accounts.forms import (
     EditInformationForm,
     ImageFileUploadForm,
     UserProfileForm,
+    SolutionForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill
+from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill, Submissions
 from django.views.generic import UpdateView
 
 
@@ -264,8 +265,8 @@ def AddSkillView(request):
     if request.method == 'POST':
         form = SkillForm()
         skill = request.POST.get("skill")
-        skill_object = Skill.objects.create(user=request.user,skill_name=skill)
-        return render(request, 'accounts/addskill.html',{'form': form,"successfully":True,"skill":skill_object})
+        skill_object = Skill.objects.create(user=request.user, skill_name=skill)
+        return render(request, 'accounts/addskill.html', {'form': form, "successfully": True, "skill": skill_object})
     else:
         form = SkillForm()
     return render(request, 'accounts/addskill.html', {'form': form})
@@ -364,7 +365,7 @@ def search(request):
 
         if srch:
             match1 = User.objects.filter(first_name__icontains=srch)
-            match2 = UserProfile.objects.filter(skills__skill_name__icontains=srch)
+            match2 = Skill.objects.filter(skill_name__icontains=srch)
 
             if match1:
                 # for userprofile
@@ -378,3 +379,16 @@ def search(request):
         else:
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
+
+def AddSubmissionView(request):
+    if request.method == 'POST':
+        form = SolutionForm()
+        submission = request.POST.get("solution_link")
+        submission_object = Submissions.objects.create(user=request.user, solution_link=submission)
+        return render(request, 'accounts/addsolution.html', {'form': form, "successfully": True, "skill": submission_object})
+    else:
+        form = SkillForm()
+    return render(request, 'accounts/addsolution.html', {'form': form})
+
+
+
