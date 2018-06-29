@@ -364,7 +364,7 @@ def search(request):
 
         if srch:
             match1 = User.objects.filter(first_name__icontains=srch)
-            match2 = UserProfile.objects.filter(skills__skill_name__icontains=srch)
+            match2 = Skill.objects.filter(skill_name__icontains=srch)
 
             if match1:
                 # for userprofile
