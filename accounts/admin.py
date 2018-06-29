@@ -5,7 +5,8 @@ from accounts.models import (
     Follow,
     ProjectPeopleInterested,
     Skill,
-    Submissions
+    Issue,
+    Solution
 )
 
 admin.site.site_title = "NSP"
@@ -18,4 +19,5 @@ admin.site.register(UserProfile)
 admin.site.register(Follow)
 admin.site.register(ProjectDetail)
 admin.site.register(ProjectPeopleInterested)
-admin.site.register(Submissions)
+admin.site.register(Issue)
+admin.site.register(Solution)	
