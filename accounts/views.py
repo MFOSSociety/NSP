@@ -141,6 +141,17 @@ def ProjectDetailView(request, project_id):
             "solutionsNumber":len(solutions)}
     return render(request, template, args)
 
+def projectIssues(request,ID,status):
+    project = ProjectDetail.objects.get(pk=ID)
+    if status == "open":
+        issues = Issue.objects.filter(project=project,status="1").order_by("-date")
+    elif status == "closed":
+        issues = Issue.objects.filter(project=project,status="0").order_by("-date")
+    else:
+        return redirect("/account/project/{}".format(ID))
+    
+    args = {"project":project,"issues":issues,"status":status}
+    return render(request,"accounts/projectIssues.html",args)
 
 def FriendProfileView(request, username):
     try:
