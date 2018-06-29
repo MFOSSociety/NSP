@@ -130,6 +130,8 @@ class Issue(models.Model):
     project = models.ForeignKey(ProjectDetail,on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     description = models.TextField()
+    def __str__(self):
+        return "#{} - {}".format(self.id,self.title)
 
 class Solution(models.Model):
     user = models.ForeignKey(User, related_name="user_solution", on_delete=models.CASCADE)
@@ -138,4 +140,4 @@ class Solution(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return "#{} - {}".format(self.id + self.title)
+        return "#{} - {}".format(self.id,self.title)
