@@ -41,7 +41,7 @@
                             <td class="lead mb-7">{{ project.start_date }}</td>
                             <td class="lead mb-7">
                                 <center>
-                                        {{ interested.0 }}  <!-- insterested.0 is total number of people interested -->
+                                        <a href="{% url 'interestedList' project.id %}">{{ interested.0 }} </a> <!-- insterested.0 is total number of people interested -->
                                 </center>
                             
                             {% if interested.1 %} <!-- insterested.1 is for current_user, if he "interested" this project then it's True -->
