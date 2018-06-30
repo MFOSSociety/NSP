@@ -20,12 +20,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                        {% for people in users %}
-                        <tr>
-                            <td><a href="{% url 'view_friend' people.username %}">{{ people.username }}</td></a>
-                              <td>{{ people.first_name }} {{ people.last_name }}</td>
-                              <td>{{ people.userprofile.ratings }}</td>
-                            </tr>
+                        {% for user in users %}
+                            {% if not user.is_staff %}
+                            {% if not user.is_superuser %}
+                                <tr>
+                                    <td><a href="{% url 'view_friend' user.username %}">{{ user.username }}</td></a>
+                                      <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                      <td>{{ user.userprofile.ratings }}</td>
+                                    </tr>
+                            {% endif %}
+                            {% endif %}
                         {% endfor %}
                         </table>
                     </div>
