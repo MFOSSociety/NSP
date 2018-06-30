@@ -375,7 +375,10 @@ def RegistrationView(request):
         print(form.is_valid())
         if form.is_valid():
             print("the form is validated")
-            form.save()  # this pretty much creates the user
+            user = form.save()  # this pretty much creates the user
+            user.first_name = request.POST.get("first_name")
+            user.last_name = request.POST.get("last_name")
+            user.save()
             return redirect('/account')  # this is /account
         else:
             form = RegistrationForm(request.POST)
