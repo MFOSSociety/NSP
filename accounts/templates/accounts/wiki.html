@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Wiki</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container lead mb-7">
+        <br>
+        <h1 align="center">Developer's Wiki</h1>
+        <br>
+
+        <h3 class="lead mb-7" style="word-break: break-word">
+
+            <h2> <strong>Python Installation</strong> </h2>
+            <br>
+
+            <p>To see which version of Python 3 you have installed, open a command prompt and run</p>
+            <div class="highlight-console">
+                <div class="highlight"><pre><span></span><span class="gp">$</span> python3 --version
+</pre>
+                </div>
+            </div>
+            <p>If you are using Ubuntu 16.10 or newer, then you can easily install Python 3.6 with the following
+                commands:</p>
+            <div class="highlight-python">
+                <div class="highlight"><pre><span></span>$ sudo apt-get update
+$ sudo apt-get install python3.6
+</pre>
+                </div>
+            </div>
+            <p>If you&#8217;re using another version of Ubuntu (e.g. the latest LTS release), we recommend using the <a
+                    class="reference external" href="https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa" target="_blank">deadsnakes
+                PPA</a> to install Python 3.6:</p>
+            <div class="highlight-python">
+                <div class="highlight"><pre><span></span>$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+$ sudo apt-get update
+$ sudo apt-get install python3.6
+</pre>
+                </div>
+            </div>
+            <p>If you are using other Linux distribution, chances are you already have Python 3
+                pre-installed as well. If not, use your distribution&#8217;s package manager.
+                For example on Fedora, you would use <cite>dnf</cite>:</p>
+            <div class="highlight-console">
+                <div class="highlight"><pre><span></span><span class="gp">$</span> sudo dnf install python3
+</pre>
+                </div>
+            </div>
+             <br>
+            <div class="section" id="setuptools-pip">
+                <h2>Setuptools &amp; Pip<a class="headerlink" href="#setuptools-pip"
+                                           title="Permalink to this headline" target="_blank"></a>
+                </h2>
+                 <br>
+                <p>The two most crucial third-party Python packages are <a class="reference external"
+                                                                           href="https://pypi.python.org/pypi/setuptools" target="_blank">setuptools</a>
+                    and <a class="reference external" href="https://pip.pypa.io/en/stable/" target="_blank">pip</a>.</p>
+                <p>Once installed, you can download, install and uninstall any compliant Python software
+                    product with a single command. It also enables you to add this network installation
+                    capability to your own Python software with very little work.</p>
+                <p>Python 2.7.9 and later (on the python2 series), and Python 3.4 and later include
+                    pip by default.</p>
+                <p>To see if pip is installed, open a command prompt and run</p>
+                <div class="highlight-console">
+                    <div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">command</span> -v pip
+</pre>
+                    </div>
+                </div>
+                <p>To install pip, <a class="reference external" href="https://pip.pypa.io/en/latest/installing/" target="_blank">follow
+                    the official pip installation guide</a> - this will automatically install the latest version of
+                    setuptools.</p>
+                <p>Note that on some Linux distributions including Ubuntu and Fedora the <code class="docutils literal"><span
+                        class="pre">pip</span></code>
+                    command is meant for Python 2, while the <code class="docutils literal"><span
+                            class="pre">pip3</span></code> command is meant for Python 3.</p>
+                <div class="highlight-console">
+                    <div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">command</span> -v pip3
+</pre>
+                    </div>
+                </div>
+                <p>However, when using virtual environments (described below), you don&#8217;t need to
+                    care about that.</p>
+            </div>
+             <br>
+            <div class="section" id="pipenv-virtual-environments">
+                <h2>Pipenv &amp; Virtual Environments<a class="headerlink" href="#pipenv-virtual-environments"
+                                                        title="Permalink to this headline" target="_blank"></a></h2>
+                 <br>
+                <p>The next step is to install Pipenv, so you can install dependencies and manage virtual
+                    environments.</p>
+                <p>A Virtual Environment is a tool to keep the dependencies required by different projects
+                    in separate places, by creating virtual Python environments for them. It solves the
+                    &#8220;Project X depends on version 1.x but, Project Y needs 4.x&#8221; dilemma, and keeps
+                    your global site-packages directory clean and manageable.</p>
+                <p>So, onward! To the <a class="reference external"
+                                         href="http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvironments-ref" target="_blank">
+                    <span>Pipenv &amp; Virtual Environments</span></a>
+                    docs!</p>
+                <br>
+            </div>
+
+
+             <div class="section">
+                <h2>Django Installation<a class="headerlink" target="_blank"></a></h2>
+                 <br>
+
+ <div class="highlight-python">
+                <div class="highlight"><pre><span></span>$ sudo pip3 install Django==2.0.5
+
+</pre>
+                </div>
+            </div>
+                 
+             </div>
+
+        </h3>
+    </div>
+{% endblock %}
