@@ -15,6 +15,8 @@
 		<div class="col">
 			<h3 style="text-align: center;">Latest issues</h3>
 				<a class="btn btn-warning btn-block" href="{% url 'projectIssues' project.id 'all' %}" role="button">All issues</a>
+				<a class="btn btn-success btn-block" href="{% url 'projectIssues' project.id 'all' %}" role="button">New issue</a>
+
 				<div style="margin:5px;" class="list-group">
 				{% for issue in issues %}
 						{% if issue == issues.0 %}
@@ -43,6 +45,7 @@
 			<div class="col">
 				<h3 style="text-align: center;">Latest solutions</h3>
 				<a class="btn btn-warning btn-block" href="{% url 'projectSolutions' project.id 'all' %}" role="button">All solutions</a>
+				<a class="btn btn-success btn-block" href="{% url 'projectIssues' project.id 'all' %}" role="button">New solution</a>
 
 				<div style="margin:5px;" class="list-group">					
 					{% for solution in solutions %}
