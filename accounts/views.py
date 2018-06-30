@@ -131,8 +131,8 @@ def ProjectDetailView(request, project_id):
     except:
         raise Http404
 
-    issues = Issue.objects.filter(project=project,status="1").order_by("-date")
-    solutions = Solution.objects.filter(issue__in=issues,status="0").order_by('-date')
+    issues = Issue.objects.filter(project=project,status="1").order_by("-date")[:5]
+    solutions = Solution.objects.filter(issue__in=issues,status="0").order_by('-date')[:5]
     editable = False
     context = locals()
     template = 'accounts/projectdetailview.html'
@@ -148,6 +148,8 @@ def projectIssues(request,ID,status):
         issues = Issue.objects.filter(project=project,status="1").order_by("-date")
     elif status == "closed":
         issues = Issue.objects.filter(project=project,status="0").order_by("-date")
+    elif status == "all":
+        issues = Issue.objects.filter(project=project).order_by("-date")
     else:
         return redirect("/account/project/{}".format(ID))
     
@@ -164,6 +166,8 @@ def projectSolutions(request, ID, status):
         solutions = Solution.objects.filter(issue__in=issues,status="1").order_by("-date")
     elif status == "notaccepted":
         solutions = Solution.objects.filter(issue__in=issues,status="2").order_by("-date")
+    elif status == "all":
+        solutions = Solution.objects.filter(issue__in=issues).order_by("-date")
     else:
         return redirect("/account/project/{}".format(ID))
     
