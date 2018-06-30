@@ -49,7 +49,59 @@ $ sudo apt-get install python3.6
 </pre>
                 </div>
             </div>
-            
+            <div class="section" id="setuptools-pip">
+                <h2>Setuptools &amp; Pip<a class="headerlink" href="#setuptools-pip" title="Permalink to this headline">¶</a>
+                </h2>
+                <p>The two most crucial third-party Python packages are <a class="reference external"
+                                                                           href="https://pypi.python.org/pypi/setuptools">setuptools</a>
+                    and <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a>.</p>
+                <p>Once installed, you can download, install and uninstall any compliant Python software
+                    product with a single command. It also enables you to add this network installation
+                    capability to your own Python software with very little work.</p>
+                <p>Python 2.7.9 and later (on the python2 series), and Python 3.4 and later include
+                    pip by default.</p>
+                <p>To see if pip is installed, open a command prompt and run</p>
+                <div class="highlight-console">
+                    <div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">command</span> -v pip
+</pre>
+                    </div>
+                </div>
+                <p>To install pip, <a class="reference external" href="https://pip.pypa.io/en/latest/installing/">follow
+                    the official pip installation guide</a> - this will automatically install the latest version of
+                    setuptools.</p>
+                <p>Note that on some Linux distributions including Ubuntu and Fedora the <code class="docutils literal"><span
+                        class="pre">pip</span></code>
+                    command is meant for Python 2, while the <code class="docutils literal"><span
+                            class="pre">pip3</span></code> command is meant for Python 3.</p>
+                <div class="highlight-console">
+                    <div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">command</span> -v pip3
+</pre>
+                    </div>
+                </div>
+                <p>However, when using virtual environments (described below), you don&#8217;t need to
+                    care about that.</p>
+            </div>
+            <div class="section" id="pipenv-virtual-environments">
+                <h2>Pipenv &amp; Virtual Environments<a class="headerlink" href="#pipenv-virtual-environments"
+                                                        title="Permalink to this headline">¶</a></h2>
+                <p>The next step is to install Pipenv, so you can install dependencies and manage virtual
+                    environments.</p>
+                <p>A Virtual Environment is a tool to keep the dependencies required by different projects
+                    in separate places, by creating virtual Python environments for them. It solves the
+                    &#8220;Project X depends on version 1.x but, Project Y needs 4.x&#8221; dilemma, and keeps
+                    your global site-packages directory clean and manageable.</p>
+                <p>For example, you can work on a project which requires Django 1.10 while also
+                    maintaining a project which requires Django 1.8.</p>
+                <p>So, onward! To the <a class="reference internal"
+                                         href="../../../dev/virtualenvs/#virtualenvironments-ref"><span>Pipenv &amp; Virtual Environments</span></a>
+                    docs!</p>
+                <hr class="docutils"/>
+                <p>This page is a remixed version of <a class="reference external"
+                                                        href="http://www.stuartellis.eu/articles/python-development-windows/">another
+                    guide</a>,
+                    which is available under the same license.</p>
+            </div>
+
         </h3>
     </div>
 {% endblock %}
