@@ -31,7 +31,6 @@ class ProjectForm(forms.ModelForm):
         project.project_name = self.cleaned_data['project_name']
         project.mentor_name = self.cleaned_data['mentor_name']
         project.branch = self.cleaned_data['branch']
-        project.start_date = self.cleaned_data['start_date']
         project.paid = self.cleaned_data['paid']
         project.description = self.cleaned_data['description']
 
