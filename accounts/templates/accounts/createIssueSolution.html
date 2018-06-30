@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="twt-wrapper" style="margin: 50px">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+            </div>
+            <h2><a href="/account/project/1/">minitweet</a> - issue
+                #1 </h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-title p-2 p-t">
+                            <a href="">
+                                
+                                    <img class="rounded-circle img-thumbnail" src="{{ user_profile.photo.url }}"
+                                         width="64" height="64" alt="Avatar">
+                                    <span class="badge badge-dark"><b></b></a> -
+                                    <em>June 29, 2018</em></span>
+                                    </div>
+                <form method="POST">
+                    <div style="margin: 10px;" class="card-block">
+					<div class="form-group row">
+					  <div class="col-10">
+					    <input class="form-control" type="text" value="Title.." id="example-text-input">
+					  </div>
+				  		<div style="margin:5px;" class="col-lg-12 form-group">
+				    	<textarea class="form-control" id="exampleTextarea" rows="15"></textarea>
+				  		</div>
+                   			 <div class="clearfix"></div>
+                		</div>
+            		</div>
+            		<button class="btn btn-success btn-block" type="submit">Create {{type}}</button>
+            	</form>
+        </div>
+    </div>
+</div>
+{% endblock body %}
