@@ -18,6 +18,11 @@
              <span class="login100-form-title p-b-34 p-t-27">
                  Sign up
               </span>
+                    {% for error,message in form.errors.items %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                    </div>
+                    {% endfor %}
                         <form method="post" class="login100-form validate-form" onsubmit="return checkPass()">
                             {% csrf_token %}
                             <div class="wrap-input100">
