@@ -22,6 +22,7 @@ urlpatterns = [
     path('project/<project_id>/', views.ProjectDetailView, name='view_project_detail'),
     path('project/<ID>/issues/<status>', views.projectIssues, name='projectIssues'),
     path('project/<ID>/solutions/<status>', views.projectSolutions, name='projectSolutions'),
+    path('project/<projectID>/<type_>/create', views.createIssueSolution, name='createIssueSolution'),
     path('project/<projectID>/<type_>/<ID>', views.viewIssueSolution, name='viewIssueSolution'),
     path('project/<projectID>/<type_>/<ID>/comment', views.commentIssueSolution, name='commentIssueSolution'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
