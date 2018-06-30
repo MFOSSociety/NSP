@@ -174,6 +174,16 @@ def projectSolutions(request, ID, status):
     args = {"project": project, "solutions": solutions, "status": status}
     return render(request, "accounts/projectSolutions.html", args)
 
+def createIssueSolution(request,projectID,type_):
+    project = ProjectDetail.objects.get(pk=projectID)
+    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == "POST":
+        pass
+    else:
+        args = {"project":project,"user_profile":user_profile,
+                "type":type_}
+        return render(request,"accounts/createIssueSolution.html",args)
+
 def viewIssueSolution(request,projectID,type_,ID):
     project = ProjectDetail.objects.get(pk=projectID)
     if type_ == "issue":
