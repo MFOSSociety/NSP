@@ -13,7 +13,7 @@ width:250px;
 
 {% block body %}
 	{% if successfully %}
-		<div class="alert alert-success">
+		<div style="margin:5px;" class="alert alert-success">
 		  <strong>Success!</strong> You've added {{ skill }} to your skillset
 		</div>
 	{% endif %}
@@ -24,6 +24,7 @@ width:250px;
             {{ form|bootstrap }}
         </table>
         <input class="btn btn-primary btn-block" type="submit" value="Submit" />
+        <a class="btn btn-warning btn-block" href="{% url 'view_profile' %}" role="button">Back</a>
     </form>
 {% endblock body %}
 

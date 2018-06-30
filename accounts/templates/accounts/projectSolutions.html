@@ -32,11 +32,11 @@
                             
                                 {% for solution in solutions %}
                                     <tr>
-                                      <td>#{{ solution.id }}</td>
-                                      <td>#{{ solution.issue.id }}</td>
+                                      <td><a href="{% url 'viewIssueSolution' project.id 'solution' solution.id %}">#{{ solution.id }}</td></a>
+                                      <td><a href="{% url 'viewIssueSolution' project.id 'issue' solution.issue.id %}">#{{ solution.issue.id }}</td></a>
                                       <td>{{ solution.title }}</td>
                                       <td>{{ solution.date }}</td>
-                                      <td>{{ solution.user.username }}</td>
+                                      <td><a href="{% url 'view_friend' solution.user.username %}">{{ solution.user.username }}</td></a>
                                     
                                     {% if solution.status == "0" %}
                                       </td>

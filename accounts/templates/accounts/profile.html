@@ -127,26 +127,47 @@
                         <h2 class="second">Skills</h2>
                     </div>
                 </center>
-                <div class="third">
+                <table class="table">
+                  <thead>
+                  </thead>
+                  <tbody style="text-align: center;">
                     {% for skill in skills %}
-                        <li>
-                            <ul><h5>{{ skill.skill_name }}</h5>
-                                <a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></ul>
-                        </li>
+                        <tr>
+                          <td>{{skill}}</td>
+                            <td><a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></ul></td>
+                        </tr>
+                    <tr>
+                    {% empty %}
+                      <td>You haven't added any skills to your profile!</td>
+                        <td><a class="fa fa-trash"></a></td>
+                    </tr>
                     {% endfor %}
-                </div>
+                  </tbody>
+                </table>
                 <center>
                     <div>
-                        <h2 class="second">Projects</h2>
+                        <h2 class="second">Interested in</h2>
                     </div>
                 </center>
-                <div class="third">
+                <table class="table">
+                  <thead>
+                  </thead>
+                  <tbody style="text-align: center;">
                     {% for project in projects %}
-                        <li>
-                            <ul><h5>{{ project }}</h5></ul>
-                        </li>
+                        <tr>
+                          <td><a href="{% url 'view_project_detail' project.project.id %}">{{project.project.project_name}}</td></a>
+                        </tr>
+                    {% empty %}
+                    <tr>
+                      <td>You're not interested in any projects right now.</td>
+                    </tr>
+                    <tr><td>
+                          <a class="btn btn-warning" href="{% url 'project_list_view' %}" style="width: 100%">Browse active projects!</a>
+                      </td>
+                      </tr>
                     {% endfor %}
-                </div>
+                  </tbody>
+                </table>
             </div>
         </div>
     </div>
