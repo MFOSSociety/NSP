@@ -6,7 +6,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                         </div>
-                        <h2>{{ project.project_name }} - {{ type }} #{{ post.id }} </h2>
+                        <h2><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a> - {{ type }} #{{ post.id }} </h2>
                         <div class="row">
                                         <div class="col-lg-8">
                                             <div class="card">
