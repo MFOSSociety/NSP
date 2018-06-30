@@ -421,3 +421,7 @@ def search(request):
 
 def AboutUsView(request):
     return render(request, 'accounts/aboutus.html')
+
+
+def WikiView(request):
+    return render(request, 'accounts/wiki.html')

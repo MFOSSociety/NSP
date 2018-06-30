@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Wiki</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container lead mb-7">
+        <br>
+        <h1 align="center">Developer's Wiki</h1>
+        <br>
+
+        <h3 class="lead mb-7" style="word-break: break-word">
+
+            <strong>Python Installation</strong>
+            <br>
+            <br>
+
+            <p>To see which version of Python 3 you have installed, open a command prompt and run</p>
+            <div class="highlight-console">
+                <div class="highlight"><pre><span></span><span class="gp">$</span> python3 --version
+</pre>
+                </div>
+            </div>
+            <p>If you are using Ubuntu 16.10 or newer, then you can easily install Python 3.6 with the following
+                commands:</p>
+            <div class="highlight-python">
+                <div class="highlight"><pre><span></span>$ sudo apt-get update
+$ sudo apt-get install python3.6
+</pre>
+                </div>
+            </div>
+            <p>If you&#8217;re using another version of Ubuntu (e.g. the latest LTS release), we recommend using the <a
+                    class="reference external" href="https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa">deadsnakes
+                PPA</a> to install Python 3.6:</p>
+            <div class="highlight-python">
+                <div class="highlight"><pre><span></span>$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+$ sudo apt-get update
+$ sudo apt-get install python3.6
+</pre>
+                </div>
+            </div>
+            <p>If you are using other Linux distribution, chances are you already have Python 3
+                pre-installed as well. If not, use your distribution&#8217;s package manager.
+                For example on Fedora, you would use <cite>dnf</cite>:</p>
+            <div class="highlight-console">
+                <div class="highlight"><pre><span></span><span class="gp">$</span> sudo dnf install python3
+</pre>
+                </div>
+            </div>
+            
+        </h3>
+    </div>
+{% endblock %}
