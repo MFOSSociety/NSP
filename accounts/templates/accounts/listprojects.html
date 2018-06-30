@@ -43,8 +43,9 @@
                                 <center>
                                         {{ interested.0 }}  <!-- insterested.0 is total number of people interested -->
                                 </center>
-                            </td>
+                            
                             {% if interested.1 %} <!-- insterested.1 is for current_user, if he "interested" this project then it's True -->
+                                </td>
                                 <td class="lead mb-7"><a href="{% url 'removeInsterested' project.id %}" class="btn btn-primary">Uninterested</a></td>
                             {% else %}
                                 <td class="lead mb-7"><a href="{% url 'addInterested' project.id %}" class="btn btn-primary">Interested</a></td>
