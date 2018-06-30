@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 {% load static %}
 {% block title %}
         <title>Start a Project</title>
@@ -25,7 +26,7 @@
             <form id="user_form" method="post">
                 <table border = "1">
                 {% csrf_token %}
-                {{ project_form }}
+                {{ project_form|bootstrap }}
                 </table>
                 <button type="submit" name="submit" value="Register" class="btn btn-success">Get Started!</button>
             </form>
