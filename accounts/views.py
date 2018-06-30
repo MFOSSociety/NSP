@@ -498,6 +498,18 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
 
+@login_required
+def interestedList(request,ID):
+    project = ProjectDetail.objects.get(pk=ID)
+    people_profile = {}
+
+    peopleInterested = ProjectPeopleInterested.objects.filter(project=project)
+    for interested in peopleInterested:
+        people_profile[interested] = UserProfile.objects.get(user=interested.user)
+
+    args = {"project":project,"people_profile":people_profile}
+    return render(request,"accounts/interestedList.html",args)
+
 
 def handler404(request):
     response = render_to_response('accounts/error404.html', {})
