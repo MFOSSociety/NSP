@@ -16,13 +16,13 @@
                                 {% if userProfile.photo %}
                                     <img class="rounded-circle img-thumbnail" src="{{ userProfile.photo.url }}"
                                          width="64" height="64" alt="Avatar">
-                                    <span class="badge badge-dark"><b>{{ post.user.first_name }} {{ post.user.last_name }}</b></a> -
+                                    <span class="badge badge-dark"><b>{{ post.user.username }}</b></a> -
                                     <em>{{ post.date }}</em></span>
                                     </div>
                                 {% else %}
                                     <img class="rounded-circle img-thumbnail"
                                          src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
-                                         width="64" height="64" alt="Avatar"><span class="badge badge-dark"><b>{{ post.user.first_name }} {{ post.user.last_name }}</b></a>
+                                         width="64" height="64" alt="Avatar"><span class="badge badge-dark"><b>{{ post.user.username }}</b></a>
                                     - <em>{{ post.date }}</em></span>                                           </div>
                                 {% endif %}
                     <div style="margin: 10px;" class="card-block">
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="comment-content col-md-11 col-sm-10">
                                         <h6 class="small comment-meta"><a
-                                                href="#">{{ profile_comment.0.user.first_name }} {{ profile_comment.0.user.last_name }} </a> {{ profile_comment.1.date }}
+                                                href="#">{{ profile_comment.0.user.username }}</a> {{ profile_comment.1.date }}
                                         </h6>
                                         <div class="comment-body">
                                             <p>
