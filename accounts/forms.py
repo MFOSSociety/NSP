@@ -15,7 +15,6 @@ class ProjectForm(forms.ModelForm):
             'project_name',
             'mentor_name',
             'branch',
-            'start_date',
             'paid',
             'description',
         )
