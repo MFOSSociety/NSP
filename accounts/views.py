@@ -420,4 +420,4 @@ def search(request):
 
 
 def AboutUsView(request):
-    pass
+    return render(request, 'accounts/aboutus.html')
