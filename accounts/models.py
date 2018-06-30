@@ -79,7 +79,7 @@ class ProjectDetail(models.Model):
     branch = models.CharField(max_length=50, blank=True)
     description = models.CharField(max_length=2500, blank=False)
     paid = models.BooleanField(default=False)
-    start_date = models.DateField(default=datetime.datetime.now)
+    start_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.project_name + " under " + self.mentor_name

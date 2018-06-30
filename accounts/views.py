@@ -308,6 +308,13 @@ def AddSkillView(request):
     return render(request, 'accounts/addskill.html', {'form': form})
 
 
+def DeleteSkillView(request):
+    request.skill.delete()
+    return redirect("view_profile")
+
+
+
+
 def SuccesfullRegistrationView(request):
     return render(request, 'accounts/registersuccess.html')
 
@@ -365,11 +372,6 @@ def unfollowUser(request, ID):
     follow_value = False
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
     return redirect("/account/users/" + friend.username + "/", args)
-
-
-# TODO
-def EditDetails(request):
-    return redirect("/account/profile")
 
 
 class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and not FormView

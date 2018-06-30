@@ -12,7 +12,7 @@ from accounts.views import EditUserProfileView
 
 
 urlpatterns = [
-    path("change_profilepic", views.ChangeProfilePicture,name="ChangeProfilePicture"),
+    path("change_profilepic", views.ChangeProfilePicture, name="ChangeProfilePicture"),
     path('testing/', views.django_image_and_file_upload_ajax, name='testing'),
     path('', views.HomeView, name='home'),
     path('upload/', views.SimpleUploadView, name='upload'),
@@ -43,6 +43,7 @@ urlpatterns = [
     re_path('reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/', password_reset_confirm, name='password_reset_confirm'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),
+    path('profile/deleteskill', views.DeleteSkillView, name='deleteskill'),
     path('developers/', views.DevelopersView, name='developers'),
     path('search/', views.search, name='search')
 ]
