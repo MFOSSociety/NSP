@@ -17,7 +17,7 @@
 				<div class="list-group">
 				{% for issue in issues %}
 						{% if issue == issues.0 %}
-						  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+						  <a href="issue/{{issue.id}}" class="list-group-item list-group-item-action flex-column align-items-start active">
 						    <div class="d-flex w-100 justify-content-between">
 						      <h5 class="mb-1">{{ issue.title }}</h5>
 						      <small>{{ issue.date}}</small>
@@ -26,7 +26,7 @@
 							    <!-- <small class="text-muted">Donec id elit non mi porta.</small> -->
 						  </a>
 						 {% else %}
-						  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+						  <a href="issue/{{issue.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
 						    <div class="d-flex w-100 justify-content-between">
 						      <h5 class="mb-1">{{ issue.title }}</h5>
 						      <small class="text-muted">{{ issue.date}}</small>
@@ -44,7 +44,7 @@
 					<div class="list-group">
 					{% for solution in solutions %}
 							{% if solution == solutions.0 %}
-							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+							  <a href="solution/{{solution.id}}" class="list-group-item list-group-item-action flex-column align-items-start active">
 							    <div class="d-flex w-100 justify-content-between">
 							      <h5 class="mb-1">{{ solution.title }}</h5>
 							      <small>{{ solution.date}}</small>
@@ -53,7 +53,7 @@
 							    <!-- <small class="text-muted">Donec id elit non mi porta.</small> -->
 							  </a>
 							 {% else %}
-							  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+							  <a href="solution/{{solution.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
 							    <div class="d-flex w-100 justify-content-between">
 							      <h5 class="mb-1">{{ solution.title }}</h5>
 							      <small class="text-muted">{{ solution.date}}</small>

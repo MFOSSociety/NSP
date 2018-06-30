@@ -25,7 +25,7 @@ from accounts.forms import (
     ImageFileUploadForm,
     UserProfileForm,
 )
-from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill,Issue,Solution
+from accounts.models import *
 from django.views.generic import UpdateView, DeleteView
 
 
@@ -71,7 +71,7 @@ def LoginView(request):
             else:
                 return HttpResponse("Your NSP account is disabled.")  # This is not working
         else:
-            return HttpResponse("<h2>Invalid login details supplied.</h2>")  # By Default, Django's message is working
+            return HttpResponse("<h2>   Invalid login details supplied.</h2>   ")  # By Default, Django's message is working
     else:
         return render(request, 'accounts/login.html', {})
 
@@ -170,6 +170,49 @@ def projectSolutions(request, ID, status):
     args = {"project": project, "solutions": solutions, "status": status}
     return render(request, "accounts/projectSolutions.html", args)
 
+def viewIssueSolution(request,projectID,type_,ID):
+    project = ProjectDetail.objects.get(pk=projectID)
+    if type_ == "issue":
+        post = Issue.objects.get(pk=ID)
+        comments = IssueComment.objects.filter(issue=post)
+    elif type_ == "solution":
+        post = Solution.objects.get(pk=ID)
+        comments = SolutionComment.objects.filter(solution=post)
+    else:
+        return redirect("/account/project/{}".format(projectID))
+    
+    profile_comment = {}
+    for comment in comments:
+        profile = UserProfile.objects.get(user=comment.user)
+        profile_comment[comment.id] = profile,comment
+
+    userProfile = UserProfile.objects.get(user=post.user)
+    args = {"project":project,"post":post,"comments":comments,
+        "userProfile":userProfile,"type":type_,
+        "profile_comment":profile_comment}
+
+    return render(request,"accounts/post.html",args)
+
+def commentIssueSolution(request,projectID,type_,ID):
+    if request.method == "POST":
+        comment = request.POST.get("comment")
+        if type_ == "issue":
+            post = Issue.objects.get(pk=ID)
+            IssueComment.objects.create(user=request.user,issue=post,
+                                        comment=comment)
+        elif type_ == "solution":
+            post = Solution.objects.get(pk=ID)
+            SolutionComment.objects.create(user=request.user,solution=post,
+                                        comment=comment)
+        else:
+            return redirect("/account/project/{}/{}/{}".format(projectID,type_,ID))
+        lastPage = request.POST.get("path")
+        return HttpResponseRedirect(lastPage)
+
+    else:
+        return redirect("/account/project/{}/{}/{}".format(projectID,type_,ID))
+
+
 
 def FriendProfileView(request, username):
     try:
@@ -201,7 +244,7 @@ def DevelopersView(request):
 
 
 def AboutView(request):
-    return HttpResponse("<h1>About Us</h1>")
+    return HttpResponse("<h1>   About Us</h1>  ")
 
 
 # pass, if you don't want to write the method yet

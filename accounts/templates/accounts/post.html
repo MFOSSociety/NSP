@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="twt-wrapper" style="margin: 50px">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                        </div>
+                        <h2><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a> - {{ type }} #{{ post.id }} </h2>
+                        <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="card">
+                                                <div class="card-title p-2 p-t">
+                                                    <a href=""><img class="rounded-circle img-thumbnail" src="{{ userProfile.photo.url }}"
+                                                    width="64" height="64" alt="Avatar">  <span class="badge badge-dark"><b>{{ post.user.username }}</b></a> - <em>{{ post.date}}</em></span>
+                                                </div>
+                                                <div style="margin: 10px;" class="card-block">
+                                                    <h3>{{post.title }}</h3>
+                                                    <p class="card-text">{{ post.description}}</p>
+                                      <a class="btn btn-sm btn-primary-outline float-right"><i class="fa fa-comments-o"></i> 0</a>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                                <div class="container">
+    <div class="row">
+        <div class="comments col-md-9" id="comments">
+            <h3 class="mb-2">Comments</h3>
+            <!-- comment -->
+            {% for key,profile_comment in profile_comment.items %}
+                <div class="comment mb-2 row">
+                    <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
+                        <a href=""><img class="mx-auto rounded-circle img-fluid" src="{{ profile_comment.0.photo.url }}" alt="avatar"></a>
+                    </div>
+                    <div class="comment-content col-md-11 col-sm-10">
+                        <h6 class="small comment-meta"><a href="#">{{ profile_comment.0.user.first_name }} {{ profile_comment.0.user.last_name }} </a> {{ profile_comment.1.date }}</h6>
+                        <div class="comment-body">
+                            <p>
+                                {{profile_comment.1.comment}}
+                                <br>
+                                    </p>
+                        </div>
+                    </div>
+                   <!-- /reply is indented -->
+                </div>
+            {% endfor %}
+            <!-- /comment -->
+
+        </div>
+    </div>
+</div>
+        <form method="POST" action="{{ post.id}}/comment"> {% csrf_token %}
+            <div class="card-footer text-muted">
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+                  </div>
+                    <button class="btn btn-primary-outline" type="submit"><i class="fa fa-edit"></i></button>
+            </div>
+            <input id="path" name="path" type="hidden" name="path" value="{{ request.path }}">
+
+        </form>
+                                              </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+{% endblock body %}

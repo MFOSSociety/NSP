@@ -150,3 +150,16 @@ class Solution(models.Model):
 
     def __str__(self):
         return "#{} - {}".format(self.id, self.title)
+
+class IssueComment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    issue = models.ForeignKey(Issue,on_delete=models.CASCADE)
+    comment = models.TextField()
+    date = models.DateField(auto_now_add=True)
+
+
+class SolutionComment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    solution = models.ForeignKey(Solution,on_delete=models.CASCADE) 
+    comment = models.TextField()
+    date = models.DateField(auto_now_add=True)
