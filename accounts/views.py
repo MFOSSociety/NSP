@@ -377,6 +377,12 @@ def RegistrationView(request):
             print("the form is validated")
             form.save()  # this pretty much creates the user
             return redirect('/account')  # this is /account
+        else:
+            form = RegistrationForm(request.POST)
+            args = {'form': form}
+            # this refers to the template, so accounts/reg_form.html
+            return render(request, 'accounts/signup.html', args)
+
         # giving them the opportunity to get the form
         # the else condition is working
     else:

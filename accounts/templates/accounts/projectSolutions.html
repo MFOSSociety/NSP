@@ -10,10 +10,10 @@
                 </div>
                 <div class="card-body">
                     {% if status == "notaccepted" %}
-                    <div class="alert alert-info"> <b>Hello {{ user.first_name|title }}, </b>Below are the not Accepted solutions of this project!</div>
+                    <div class="alert alert-info"> <b>Hello {{ user.username }}, </b>Below are the not Accepted solutions of this project!</div>
 
                     {% else %}
-                    <div class="alert alert-info"> <b>Hello {{ user.first_name|title }}, </b>Below are the {{ status }} solutions of this project!</div>
+                    <div class="alert alert-info"> <b>Hello {{ user.username }}, </b>Below are the {{ status }} solutions of this project!</div>
                     {% endif %}
                     <hr>
                     <div class="table-responsive">
@@ -36,7 +36,7 @@
                                       <td>#{{ solution.issue.id }}</td>
                                       <td>{{ solution.title }}</td>
                                       <td>{{ solution.date }}</td>
-                                      <td>{{ solution.user.first_name }} {{ solution.user.last_name }}</td>
+                                      <td>{{ solution.user.username }}</td>
                                     
                                     {% if solution.status == "0" %}
                                       </td>
