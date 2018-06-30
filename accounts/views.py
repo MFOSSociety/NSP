@@ -12,7 +12,8 @@ from django.shortcuts import (
     get_object_or_404,
 )
 from django.shortcuts import render, render_to_response
-from django.template import RequestContext
+from django.urls import reverse_lazy
+
 
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
@@ -25,7 +26,7 @@ from accounts.forms import (
     UserProfileForm,
 )
 from accounts.models import User, ProjectDetail, UserProfile, ProjectPeopleInterested, Follow, Skill,Issue,Solution
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DeleteView
 
 
 @login_required
@@ -153,7 +154,8 @@ def projectIssues(request,ID,status):
     args = {"project":project,"issues":issues,"status":status}
     return render(request,"accounts/projectIssues.html",args)
 
-def projectSolutions(request,ID,status):
+
+def projectSolutions(request, ID, status):
     project = ProjectDetail.objects.get(pk=ID)
     issues = Issue.objects.filter(project=project,status="1").order_by("-date")
     if status == "open":
@@ -165,8 +167,8 @@ def projectSolutions(request,ID,status):
     else:
         return redirect("/account/project/{}".format(ID))
     
-    args = {"project":project,"solutions":solutions,"status":status}
-    return render(request,"accounts/projectSolutions.html",args)
+    args = {"project": project, "solutions": solutions, "status": status}
+    return render(request, "accounts/projectSolutions.html", args)
 
 
 def FriendProfileView(request, username):
@@ -308,11 +310,9 @@ def AddSkillView(request):
     return render(request, 'accounts/addskill.html', {'form': form})
 
 
-def DeleteSkillView(request):
-    request.skill.delete()
-    return redirect("view_profile")
-
-
+class DeleteSkillView(DeleteView):
+    model = Skill
+    success_url = reverse_lazy("view_profile")
 
 
 def SuccesfullRegistrationView(request):
