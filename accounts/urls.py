@@ -45,7 +45,8 @@ urlpatterns = [
     path('profile/addskill/', views.AddSkillView, name='addskill'),
     path('profile/deleteskill/', DeleteSkillView.as_view(), name='deleteskill'),
     path('developers/', views.DevelopersView, name='developers'),
-    path('search/', views.search, name='search')
+    path('search/', views.search, name='search'),
+    path('about_us/', views.AboutUsView, name='AboutUs')
 ]
 
 # setting up a local mail server for testing and debugging

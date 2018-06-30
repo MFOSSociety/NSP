@@ -418,3 +418,6 @@ def search(request):
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
 
+
+def AboutUsView(request):
+    pass
