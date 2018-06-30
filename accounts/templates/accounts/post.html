@@ -22,8 +22,7 @@
                                 {% else %}
                                     <img class="rounded-circle img-thumbnail"
                                          src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
-                                         width="64" height="64" alt="Avatar"><span class="badge badge-dark"><b
-                                        href="{% url 'view_friend' post.user.username %}">{{ post.user.first_name }} {{ post.user.last_name }}</b></a>
+                                         width="64" height="64" alt="Avatar"><span class="badge badge-dark"><b>{{ post.user.first_name }} {{ post.user.last_name }}</b></a>
                                     - <em>{{ post.date }}</em></span>                                           </div>
                                 {% endif %}
                     <div style="margin: 10px;" class="card-block">
