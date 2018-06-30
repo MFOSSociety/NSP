@@ -30,10 +30,7 @@
                         <img class="img-thumbnail" alt="user image"
                              src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
                     {% endif %}
-
-                    <div class="container">
-                        <h3 class="username">{{ user.username }}</h3>
-                    </div>
+                    <h3 class="username">{{ user.username }}</h3>
 
                     <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}" style="margin-left: -35px">Upload
                         Pic</a>
