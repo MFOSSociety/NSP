@@ -131,8 +131,9 @@ def ProjectDetailView(request, project_id):
     except:
         raise Http404
 
-    issues = Issue.objects.filter(project=project,status="1").order_by("-date")[:5]
-    solutions = Solution.objects.filter(issue__in=issues,status="0").order_by('-date')[:5]
+    issues = Issue.objects.filter(project=project,status="1").order_by("-id")[:5]
+    allIssues = Issue.objects.filter(project=project,status="1").order_by("-id")
+    solutions = Solution.objects.filter(issue__in=allIssues,status="0").order_by('-id')[:5]
     editable = False
     context = locals()
     template = 'accounts/projectdetailview.html'
@@ -145,11 +146,11 @@ def ProjectDetailView(request, project_id):
 def projectIssues(request,ID,status):
     project = ProjectDetail.objects.get(pk=ID)
     if status == "open":
-        issues = Issue.objects.filter(project=project,status="1").order_by("-date")
+        issues = Issue.objects.filter(project=project,status="1").order_by("-id")
     elif status == "closed":
-        issues = Issue.objects.filter(project=project,status="0").order_by("-date")
+        issues = Issue.objects.filter(project=project,status="0").order_by("-id")
     elif status == "all":
-        issues = Issue.objects.filter(project=project).order_by("-date")
+        issues = Issue.objects.filter(project=project).order_by("-id")
     else:
         return redirect("/account/project/{}".format(ID))
     
@@ -159,20 +160,47 @@ def projectIssues(request,ID,status):
 
 def projectSolutions(request, ID, status):
     project = ProjectDetail.objects.get(pk=ID)
-    issues = Issue.objects.filter(project=project,status="1").order_by("-date")
+    issues = Issue.objects.filter(project=project,status="1").order_by("-id")
     if status == "open":
-        solutions = Solution.objects.filter(issue__in=issues,status="0").order_by("-date")
+        solutions = Solution.objects.filter(issue__in=issues,status="0").order_by("-id")
     elif status == "accepted":
-        solutions = Solution.objects.filter(issue__in=issues,status="1").order_by("-date")
+        solutions = Solution.objects.filter(issue__in=issues,status="1").order_by("-id")
     elif status == "notaccepted":
-        solutions = Solution.objects.filter(issue__in=issues,status="2").order_by("-date")
+        solutions = Solution.objects.filter(issue__in=issues,status="2").order_by("-id")
     elif status == "all":
-        solutions = Solution.objects.filter(issue__in=issues).order_by("-date")
+        solutions = Solution.objects.filter(issue__in=issues).order_by("-id")
     else:
         return redirect("/account/project/{}".format(ID))
     
     args = {"project": project, "solutions": solutions, "status": status}
     return render(request, "accounts/projectSolutions.html", args)
+
+def createIssueSolution(request,projectID,type_):
+    project = ProjectDetail.objects.get(pk=projectID)
+    user_profile = UserProfile.objects.get(user=request.user)
+    openIssues = ""
+    if type_ == "solution":
+        openIssues = Issue.objects.filter(project=project,status="1")
+    
+    if request.method == "POST":
+        if type_ == "issue":
+            title = request.POST.get("title")
+            description = request.POST.get("description")
+            issue = Issue.objects.create(project=project,user=request.user,
+                title=title,description=description,status="1")
+            return redirect("/account/project/{}/issue/{}".format(project.id,issue.id))
+        elif type_ == "solution":
+            title = request.POST.get("title")
+            description = request.POST.get("description")
+            issueID = request.POST.get("value")
+            issue = Issue.objects.get(pk=int(issueID))
+            solution = Solution.objects.create(issue=issue,user=request.user,
+                title=title,description=description,status="0")
+            return redirect("/account/project/{}/solution/{}".format(project.id,solution.id))       
+    else:
+        args = {"project":project,"user_profile":user_profile,
+                "type":type_,"openIssues":openIssues}
+        return render(request,"accounts/createIssueSolution.html",args)
 
 def viewIssueSolution(request,projectID,type_,ID):
     project = ProjectDetail.objects.get(pk=projectID)
