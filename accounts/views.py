@@ -335,6 +335,10 @@ def RegistrationView(request):
         return render(request, 'accounts/signup.html', args)
 
 
+def deleteSkill(request,ID):
+    Skill.objects.get(pk=ID).delete()
+    return redirect("/account/profile/")
+
 def SkillsView(request):  # I dont know what this does
     pass
 
