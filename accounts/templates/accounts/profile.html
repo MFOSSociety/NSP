@@ -108,7 +108,7 @@
                     {% for skill in skills %}
                         <li>
                             <ul><h5>{{ skill.skill_name }}</h5>
-                                <a class="fa fa-trash" href="{% url 'deleteskill' %}"></a></ul>
+                                <a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></ul>
                         </li>
                     {% endfor %}
                 </div>
