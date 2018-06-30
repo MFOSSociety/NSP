@@ -92,12 +92,14 @@ def ProfileView(request):
     return render(request, 'accounts/profile.html', args)
 
 
+@login_required
 def PeopleView(request):
     users = User.objects.all()  # do not use filter() with User object
     args = {'users': users, 'viewer': request.user}
     return render(request, 'accounts/people.html', args)
 
 
+@login_required
 def ProjectsListView(request):
     current_user = request.user
     projects = ProjectDetail.objects.all()
@@ -110,6 +112,8 @@ def ProjectsListView(request):
     args = {"dict_": dict_}
     return render(request, 'accounts/listprojects.html', args)
 
+
+@login_required
 def addInterested(request,ID):
     current_user = request.user
     project = ProjectDetail.objects.get(pk=ID)
@@ -118,6 +122,8 @@ def addInterested(request,ID):
         ProjectPeopleInterested.objects.create(user=current_user,project=project)
     return redirect("/account/project/active/")
 
+
+@login_required
 def removeInsterested(request,ID):
     current_user = request.user
     project = ProjectDetail.objects.get(pk=ID)
@@ -125,6 +131,8 @@ def removeInsterested(request,ID):
     return redirect("/account/project/active/")
 
 
+
+@login_required
 def ProjectDetailView(request, project_id):
     try:
         project = ProjectDetail.objects.get(id=project_id)
@@ -143,6 +151,8 @@ def ProjectDetailView(request, project_id):
             "solutionsNumber":len(solutions)}
     return render(request, template, args)
 
+
+@login_required
 def projectIssues(request,ID,status):
     project = ProjectDetail.objects.get(pk=ID)
     if status == "open":
@@ -158,6 +168,7 @@ def projectIssues(request,ID,status):
     return render(request,"accounts/projectIssues.html",args)
 
 
+@login_required
 def projectSolutions(request, ID, status):
     project = ProjectDetail.objects.get(pk=ID)
     issues = Issue.objects.filter(project=project,status="1").order_by("-id")
@@ -175,6 +186,8 @@ def projectSolutions(request, ID, status):
     args = {"project": project, "solutions": solutions, "status": status}
     return render(request, "accounts/projectSolutions.html", args)
 
+
+@login_required
 def createIssueSolution(request,projectID,type_):
     project = ProjectDetail.objects.get(pk=projectID)
     user_profile = UserProfile.objects.get(user=request.user)
@@ -202,6 +215,8 @@ def createIssueSolution(request,projectID,type_):
                 "type":type_,"openIssues":openIssues}
         return render(request,"accounts/createIssueSolution.html",args)
 
+
+@login_required
 def viewIssueSolution(request,projectID,type_,ID):
     project = ProjectDetail.objects.get(pk=projectID)
     if type_ == "issue":
@@ -225,6 +240,8 @@ def viewIssueSolution(request,projectID,type_,ID):
 
     return render(request,"accounts/post.html",args)
 
+
+@login_required
 def commentIssueSolution(request,projectID,type_,ID):
     if request.method == "POST":
         comment = request.POST.get("comment")
@@ -245,7 +262,7 @@ def commentIssueSolution(request,projectID,type_,ID):
         return redirect("/account/project/{}/{}/{}".format(projectID,type_,ID))
 
 
-
+@login_required
 def FriendProfileView(request, username):
     try:
         user = User.objects.get(username=username)
@@ -270,6 +287,8 @@ def FriendProfileView(request, username):
 
 
 # return render(request, 'accounts/profile_friend.html', args)
+
+
 
 def DevelopersView(request):
     return render(request, 'accounts/team.html')
@@ -367,6 +386,7 @@ def RegistrationView(request):
         return render(request, 'accounts/signup.html', args)
 
 
+@login_required
 def deleteSkill(request,ID):
     Skill.objects.get(pk=ID).delete()
     return redirect("/account/profile/")
@@ -377,7 +397,7 @@ def SkillsView(request):  # I dont know what this does
 
 # SKILL FORM VIEW LATEST CREATION
 
-
+@login_required
 def AddSkillView(request):
     if request.method == 'POST':
         form = SkillForm()
@@ -399,6 +419,7 @@ def SuccesfullRegistrationView(request):
 
 
 # This is for the file upload
+@login_required
 def SimpleUploadView(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
@@ -425,6 +446,7 @@ def django_image_and_file_upload_ajax(request):
         return render(request, 'accounts/profile_pic_upload.html', {'form': form})
 
 
+@login_required
 def followUser(request, ID):
     friend = User.objects.get(pk=ID)
     follow_value = False
@@ -439,7 +461,7 @@ def followUser(request, ID):
     # redirecting to the same page
     return redirect("/account/users/" + friend.username + "/", args)
 
-
+@login_required
 def unfollowUser(request, ID):
     friend = User.objects.get(pk=ID)
     follow_value = False
@@ -451,6 +473,7 @@ def unfollowUser(request, ID):
     follow_value = False
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
     return redirect("/account/users/" + friend.username + "/", args)
+
 
 
 class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and not FormView
@@ -475,7 +498,7 @@ def handler404(request):
     response.status_code = 404
     return response
 
-
+@login_required
 def search(request):
     if request.method == 'POST':
         srch = request.POST['srh']
