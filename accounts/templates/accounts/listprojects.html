@@ -35,7 +35,9 @@
                             <td class="lead mb-7">{{ project.initiated_by }}</td>
                             <td class="lead mb-7">{% if project.paid %} Yes {% else %} {{ No }} {% endif %}</td>
                             <td class="lead mb-7"><center>{{ project.branch }}</center></td>
-                            <td class="lead mb-7">{{ project.description }}</td>
+                            <td class="lead mb-7">
+                                {{ project.description|slice:"150" }}{% if project.description|length > 150 %}...{% endif %}
+                                    </td>
                             <td class="lead mb-7">{{ project.start_date }}</td>
                             <td class="lead mb-7">
                                 <center>
