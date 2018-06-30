@@ -14,8 +14,8 @@
 	<div class="row">
 		<div class="col">
 			<h3 style="text-align: center;">Latest issues</h3>
-				<a class="btn btn-warning btn-block" href="{% url 'projectIssues' project.id 'all' %}" role="button">All issues</a>
-				<a class="btn btn-success btn-block" href="{% url 'createIssueSolution' project.id 'issue' %}" role="button">New issue</a>
+				<a class="btn btn-primary btn-block" href="{% url 'projectIssues' project.id 'all' %}" role="button">All issues</a>
+				<a class="btn btn-default btn-block" href="{% url 'createIssueSolution' project.id 'issue' %}" role="button">New issue</a>
 
 				<div style="margin:5px;" class="list-group">
 				{% for issue in issues %}
@@ -26,7 +26,6 @@
 						      <small>{{ issue.date}}</small>
 						    </div>
 						    <p class="mb-1">{{issue.description}}</p>
-							    <!-- <small class="text-muted">Donec id elit non mi porta.</small> -->
 						  </a>
 						 {% else %}
 						  <a href="issue/{{issue.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -44,8 +43,8 @@
 			</div>
 			<div class="col">
 				<h3 style="text-align: center;">Latest solutions</h3>
-				<a class="btn btn-warning btn-block" href="{% url 'projectSolutions' project.id 'all' %}" role="button">All solutions</a>
-				<a class="btn btn-success btn-block" href="{% url 'createIssueSolution' project.id 'solution' %}" role="button">New solution</a>
+				<a class="btn btn-primary btn-block" href="{% url 'projectSolutions' project.id 'all' %}" role="button">All solutions</a>
+				<a class="btn btn-default btn-block" href="{% url 'createIssueSolution' project.id 'solution' %}" role="button">New solution</a>
 
 				<div style="margin:5px;" class="list-group">					
 					{% for solution in solutions %}
@@ -65,7 +64,6 @@
 							      <small class="text-muted">{{ solution.date}}</small>
 							    </div>
 							    <p class="mb-1">{{solution.description}}</p>
-							    <!-- <small class="text-muted">Donec id elit non mi porta.</small> -->
 							  </a>
 						  	{% endif %}
 						  	{% empty %}
@@ -73,10 +71,6 @@
 					{% endfor %}
 					</div>
 			</div>
-	</div>
+    </div>
 </div>
-
 {% endblock %}
-
-
-

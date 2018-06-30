@@ -31,19 +31,35 @@
                              src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
                     {% endif %}
 
-                    <div class="container">
-                        <h3 class="username">{{ user.username }}</h3>
-                    </div>
-
-                    <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}" style="margin-left: -35px">Upload
-                        Pic</a>
-                    <a class="btn btn-success" href="{% url 'EditDetails' user.id %}" id="submit"
-                       style="">Edit Profile</a>
-                    <a class="btn btn-success" href="{% url 'addskill' %}" style="">Add Skill</a>
-
-                    <br>
-                    <br>
                     <table class="table table-striped " style="margin-left: -40px; width: 300px;">
+                        <tr>
+                            <td>
+                                <h5>
+                                    Username : {{ user.username }}
+                                </h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>
+                                    <a class="btn btn-primary" href="{% url 'ChangeProfilePicture' %}" style="width: 100%">Upload Pic</a>
+                                </h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>
+                                    <a class="btn btn-primary" href="{% url 'EditDetails' user.id %}" style="width: 100%">Update Info</a>
+                                </h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>
+                                    <a class="btn btn-primary" href="{% url 'addskill' %}" style="width: 100%">Add Skil</a>
+                                </h5>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <h5>Followers : {{ followers }}</h5>
@@ -80,6 +96,13 @@
                                     {% for i in range %}
                                         <i class="fa fa-star" style="color:dodgerblue"></i>
                                     {% endfor %}
+                                </h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>
+                                    <a class="btn btn-danger" href="{% url 'change_password' %}" style="width: 100%">Change Password</a>
                                 </h5>
                             </td>
                         </tr>
