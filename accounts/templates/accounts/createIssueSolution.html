@@ -1,52 +1,58 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block body %}
 
-<div class="twt-wrapper" style="margin: 50px">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-            </div>
-            <h2><a href="/account/project/1/">minitweet</a> - issue
-                #1 </h2>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-title p-2 p-t">
-                            <a href="">
-                                
-                                    <img class="rounded-circle img-thumbnail" src="{{ user_profile.photo.url }}"
-                                         width="64" height="64" alt="Avatar">
-                                    <span class="badge badge-dark"><b>{{ user.first_name }} {{ user.last_name }}</b></a> -
-                                    <em>June 29, 2018</em></span>
-                                    </div>
+    <div class="twt-wrapper" style="margin: 50px">
+    <div class="panel panel-info">
+    <div class="panel-heading">
+    </div>
+    <h2><a href="/account/project/1/">{{ project.project_name }}</a> - issue
+        #1 </h2>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-title p-2 p-t">
+                    <a href="">
+                        {% if user_profile.photo %}
+                            <img class="rounded-circle img-thumbnail" src="{{ user_profile.photo.url }}"
+                                 width="64" height="64" alt="Avatar">
+                        {% else %}
+                            <img class="rounded-circle img-thumbnail" src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                 width="64" height="64" alt="Avatar">
+                        {% endif %}
+                        <span class="badge badge-dark"><b>{{ user.first_name }} {{ user.last_name }}</b></a> -
+                    <em>June 29, 2018</em></span>
+                </div>
                 <form method="POST"> {% csrf_token %}
                     <div style="margin: 10px;" class="card-block">
-					<div class="form-group row">
-					  <div class="col-10">
-					    <input class="form-control" name="title" type="text" value="Title.." id="example-text-input">
-					  </div>
-					  {% if type == "solution" %}
-					      <div class="form-group col-md-4">
-						      <label for="inputState">Issue</label>
-						      <select name="value" id="inputState" class="form-control">
-						        <option selected>Choose...</option>
-						        {% for issue in openIssues %}
-						        	<option value="{{ issue.id }}">{{ issue }}</option>
-						        {% empty %}
-						        	<option>There are no open issues!</option>
-						        {% endfor %}
-						      </select>
-						  </div>
-    					{% endif %}
-				  		<div style="margin:5px;" class="col-lg-12 form-group">
-				    	<textarea class="form-control" name="description" id="exampleTextarea" rows="15"></textarea>
-				  		</div>
-                   			 <div class="clearfix"></div>
-                		</div>
-            		</div>
-            		<button class="btn btn-success btn-block" type="submit">Create {{type}}</button>
-            	</form>
+                        <div class="form-group row">
+                            <div class="col-10">
+                                <input class="form-control" name="title" type="text" value="Title.."
+                                       id="example-text-input">
+                            </div>
+                            {% if type == "solution" %}
+                                <div class="form-group col-md-4">
+                                    <label for="inputState">Issue</label>
+                                    <select name="value" id="inputState" class="form-control">
+                                        <option selected>Choose...</option>
+                                        {% for issue in openIssues %}
+                                            <option value="{{ issue.id }}">{{ issue }}</option>
+                                        {% empty %}
+                                            <option>There are no open issues!</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+                            <div style="margin:5px;" class="col-lg-12 form-group">
+                                <textarea class="form-control" name="description" id="exampleTextarea"
+                                          rows="15"></textarea>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block" type="submit">Create {{ type }}</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock body %}
