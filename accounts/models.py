@@ -15,7 +15,7 @@ class Skill(models.Model):
 
 class ProjectDetail(models.Model):
     project_name = models.CharField(max_length=50, default="", blank=False)
-    initiated_by = models.CharField(max_length=50, default="", blank=True)
+    initiated_by = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     mentor_name = models.CharField(max_length=50, default="", blank=False)
     branch = models.CharField(max_length=50, blank=True)
     description = models.CharField(max_length=2500, blank=False)
