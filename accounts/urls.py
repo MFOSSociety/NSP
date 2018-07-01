@@ -20,6 +20,7 @@ urlpatterns = [
     path("project/interested/<ID>", views.interestedList, name="interestedList"),
     path("project/addInterested/<ID>", views.addInterested, name="addInterested"),
     path("project/active/removeInsterested/<ID>", views.removeInsterested, name="removeInsterested"),
+    path('project/<ID>/edit', views.projectEdit, name='projectEdit'),
     path('project/<project_id>/', views.ProjectDetailView, name='view_project_detail'),
     path('project/<ID>/issues/<status>', views.projectIssues, name='projectIssues'),
     path('project/<ID>/solutions/<status>', views.projectSolutions, name='projectSolutions'),
