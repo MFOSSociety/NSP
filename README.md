@@ -1,5 +1,5 @@
 # The Network Of Skilled People - NSP
-Visit - http://nsp.pythonanywhere.com/
+Visit - http://thensp.pythonanywhere.com/
 
 ## Registration Page
 ![The Registration Page](https://github.com/Rishi110/NSP/blob/master/screenshots/1%20Register.png)

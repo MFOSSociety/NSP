@@ -3,11 +3,11 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '<Secret-Key>'
+SECRET_KEY = '\"5T/Ebh!qHEZSp3"_J~u=xvKNEr,MZ"[V4](hN!79tr>5D}ae'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['thensp.pythonanywhere.com']
 
 # Application definition
 
@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'widget_tweaks',
 
 ]
 
@@ -145,7 +144,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'nsp/../accounts/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'accounts/media')
 
 # when you log in you visit your account profile page
 LOGIN_REDIRECT_URL = '/account/'
