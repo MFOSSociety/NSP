@@ -216,6 +216,19 @@ def projectSolutions(request, ID, status):
     args = {"project": project, "solutions": solutions, "status": status}
     return render(request, "accounts/projectSolutions.html", args)
 
+@login_required
+def deleteIssueSolution(request,type_,ID):
+    if type_ == "issue":
+        instance = Issue.objects.get(pk=ID)
+        project = instance.project
+    elif type_ == "solution":
+        instance = Solution.objects.get(pk=ID)
+        project = instance.issue.project
+    else:
+        return redirect("/account/")
+    if request.user == instance.user:
+        instance.delete()
+    return redirect("/account/project/{}/{}/all".format(project.id,type_+"s"))
 
 @login_required
 def createIssueSolution(request,projectID,type_):

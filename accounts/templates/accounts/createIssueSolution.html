@@ -18,7 +18,7 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-title p-2 p-t">
-                    <a href="">
+                    <a href="{% url 'view_friend' request.user %}">
                         {% if user_profile.photo %}
                             <img class="rounded-circle img-thumbnail" src="{{ user_profile.photo.url }}"
                                  width="64" height="64" alt="Avatar">
@@ -26,7 +26,7 @@
                             <img class="rounded-circle img-thumbnail" src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
                                  width="64" height="64" alt="Avatar">
                         {% endif %}
-                        <span class="badge badge-dark"><b>{{ user.first_name }} {{ user.last_name }}</b></a> -
+                        <span class="badge badge-dark"><b>{{ user }}</b></a> -
                     <em>June 29, 2018</em></span>
                 </div>
                 <form method="POST"> {% csrf_token %}

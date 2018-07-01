@@ -15,6 +15,7 @@ urlpatterns = [
     path('testing/', views.django_image_and_file_upload_ajax, name='testing'),
     path('', views.HomeView, name='home'),
     path('upload/', views.SimpleUploadView, name='upload'),
+    path('delete/<type_>/<ID>',views.deleteIssueSolution,name="deleteIssueSolution"),
     path('project/delete/<ID>', views.deleteProject,name="deleteProject"),
     path('project/start/', views.ProjectDescribeView, name='start_project'),
     path('project/active/', views.ProjectsListView, name='project_list_view'),
