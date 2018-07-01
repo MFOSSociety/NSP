@@ -8,6 +8,9 @@
     <p>Date : {{ project.start_date }}</p>
     <p>Issues: {{ issuesNumber }}</p>
     <p>Solutions: {{ solutionsNumber }}</p>
+    {% if request.user == project.initiated_by %}
+    				<a class="btn btn-warning btn-block" href="{% url 'projectEdit' project.id %}" role="button">Edit</a>
+    {% endif %}
     </div>
 
 <div class="container">

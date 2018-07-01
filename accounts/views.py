@@ -35,6 +35,7 @@ def ProjectHomeView(request):
     return render(request, 'accounts/home.html', args)
 
 
+
 @login_required
 def ProjectDescribeView(request):
     project_registered = False
@@ -52,6 +53,23 @@ def ProjectDescribeView(request):
         project_form = ProjectForm()
     return render(request, 'accounts/start_project.html',
                   {'project_form': project_form, 'project_registered': project_registered})
+
+
+@login_required
+def projectEdit(request,ID):
+    project = ProjectDetail.objects.get(pk=ID)
+    if request.method == 'POST':
+        project.project_name = request.POST.get("project_name")
+        project.mentor_name = request.POST.get("mentor_name")
+        project.branch = request.POST.get("branch")
+        project.description = request.POST.get("description")
+        project.save()
+        return redirect("/account/project/{}".format(str(project.id)))
+    args = {"project":project}
+    if project.initiated_by == request.user:
+        return render(request, 'accounts/editProject.html',args)
+    else:
+        raise Http404
 
 
 def HomeView(request):
