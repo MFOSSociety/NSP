@@ -55,6 +55,15 @@ def ProjectDescribeView(request):
                   {'project_form': project_form, 'project_registered': project_registered})
 
 
+def deleteProject(request,ID):
+    project = ProjectDetail.objects.get(pk=ID)
+    if request.user == project.initiated_by:
+        project.delete()
+        return redirect("/account/project/active")
+    else:
+        return redirect("/account/project/active")
+        
+
 @login_required
 def projectEdit(request,ID):
     project = ProjectDetail.objects.get(pk=ID)
