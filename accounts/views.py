@@ -38,13 +38,14 @@ def ProjectHomeView(request):
 @login_required
 def ProjectDescribeView(request):
     project_registered = False
-    initiator = request.user  # TODO
+    initiator = request.user
     if request.method == 'POST':
         project_form = ProjectForm(data=request.POST)
         if project_form.is_valid():
             ProjectDetail = project_form.save()
-            ProjectDetail = project_form.save(commit=False)
             project_registered = True
+            ProjectDetail.initiated_by = request.user
+            ProjectDetail.save()
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     else:
