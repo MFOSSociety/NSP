@@ -65,7 +65,10 @@ def projectEdit(request,ID):
         project.description = request.POST.get("description")
         project.save()
     args = {"project":project}
-    return render(request, 'accounts/editProject.html',args)
+    if project.initiated_by == request.user:
+        return render(request, 'accounts/editProject.html',args)
+    else:
+        raise Http404
 
 
 def HomeView(request):
