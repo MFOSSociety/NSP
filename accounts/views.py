@@ -64,6 +64,7 @@ def projectEdit(request,ID):
         project.branch = request.POST.get("branch")
         project.description = request.POST.get("description")
         project.save()
+        return redirect("/account/project/{}".format(str(project.id)))
     args = {"project":project}
     if project.initiated_by == request.user:
         return render(request, 'accounts/editProject.html',args)
