@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block  title %}
+<title>{{ user.first_name }}</title>
+{% endblock %}
 {% block head %}
 <meta charset="UTF-8">
     <head>
-<title>{{ user.first_name }}</title>
+
     </head>
 {% endblock %}
 {% block body %}
