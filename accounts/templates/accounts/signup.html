@@ -4,8 +4,147 @@
     <link href="{% static 'accounts/css/main.css' %}" rel="stylesheet">
 {% endblock %}
 {% block body %}
+
+<div class="container" style="margin-bottom:50px;">
+    <form class="form-horizontal" role="form" method="POST"> {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2>Register New User</h2>
+                <hr>
+            </div>
+        </div>
+                    {% for error,message in form.errors.items %}
+                        <div class="alert alert-danger" role="alert">
+                            {{error }} {{ message }}
+                    </div>
+                    {% endfor %}
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="name">First Name</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        <input type="text" name="first_name" class="form-control" id="name"
+                               placeholder="John Doe" required autofocus>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put name validation error messages here -->
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="name">Last Name</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        <input type="text" name="last_name" class="form-control" id="last_name"
+                               placeholder="John Doe" required autofocus>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put name validation error messages here -->
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="name">Username</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                        <input type="text" name="username" class="form-control" id="name"
+                               placeholder="John Doe" required autofocus>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put name validation error messages here -->
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="email">E-Mail Address</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                        <input type="text" name="email" class="form-control" id="email"
+                               placeholder="you@example.com" required autofocus>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put e-mail validation error messages here -->
+                        </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="password">Password</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-danger">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                        <input type="password" name="password1" class="form-control" id="password1"
+                               placeholder="Password" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 field-label-responsive">
+                <label for="password">Confirm Password</label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" style="width: 2.6rem">
+                            <i class="fa fa-repeat"></i>
+                        </div>
+                        <input type="password" name="password2" class="form-control"
+                               id="password2" placeholder="Password" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
     <div class="limiter">
-        <div class="container-login100">
+        <div class="">
             <div class="row">
                 <div class="col-md-7">
 
@@ -23,7 +162,7 @@
                             {{ message }}
                     </div>
                     {% endfor %}
-                        <form method="post" class="login100-form validate-form" onsubmit="return checkPass()">
+                        <form >
                             {% csrf_token %}
                             <div class="wrap-input100">
                                 <input class="input100" type="text" name="username" placeholder="Username"
@@ -71,5 +210,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
+<br>
