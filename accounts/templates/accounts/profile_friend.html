@@ -121,7 +121,6 @@
                     {% for skill in skills %}
                         <tr>
                           <td>{{skill}}</td>
-                            <td><a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></ul></td>
                         </tr>
                     {% empty %}
                     <tr>
