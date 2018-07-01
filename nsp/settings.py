@@ -3,11 +3,11 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = '\"5T/Ebh!qHEZSp3"_J~u=xvKNEr,MZ"[V4](hN!79tr>5D}ae'
+SECRET_KEY = '<SECRET_KEY>' # Changed on the production server again
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['thensp.pythonanywhere.com']
+DEBUG = True
+ALLOWED_HOSTS = []
 
 # Application definition
 

@@ -58,19 +58,21 @@ def ProjectDescribeView(request):
 @login_required
 def projectEdit(request,ID):
     project = ProjectDetail.objects.get(pk=ID)
-    if request.method == 'POST':
-        project.project_name = request.POST.get("project_name")
-        project.mentor_name = request.POST.get("mentor_name")
-        project.branch = request.POST.get("branch")
-        project.description = request.POST.get("description")
-        project.save()
-        return redirect("/account/project/{}".format(str(project.id)))
-    args = {"project":project}
-    if project.initiated_by == request.user:
-        return render(request, 'accounts/editProject.html',args)
+    if request.user == project.initiated_by:
+        if request.method == 'POST':
+            project.project_name = request.POST.get("project_name")
+            project.mentor_name = request.POST.get("mentor_name")
+            project.branch = request.POST.get("branch")
+            project.description = request.POST.get("description")
+            project.save()
+            return redirect("/account/project/{}".format(str(project.id)))
+        args = {"project":project}
+        if project.initiated_by == request.user:
+            return render(request, 'accounts/editProject.html',args)
+        else:
+            raise Http404
     else:
-        raise Http404
-
+        return redirect("/account/project/{}".format(str(project.id)))
 
 def HomeView(request):
     name = "NSP - Network Of Skilled People"
@@ -416,7 +418,11 @@ def RegistrationView(request):
 
 @login_required
 def deleteSkill(request,ID):
-    Skill.objects.get(pk=ID).delete()
+    skill = Skill.objects.get(pk=ID)
+    if skill.user == request.user:
+        skill.delete()
+    else:
+        return redirect("/account/profile/")
     return redirect("/account/profile/")
 
 def SkillsView(request):  # I dont know what this does
