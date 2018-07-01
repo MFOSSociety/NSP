@@ -10,6 +10,8 @@
     <p>Solutions: {{ solutionsNumber }}</p>
     {% if request.user == project.initiated_by %}
     				<a class="btn btn-warning btn-block" href="{% url 'projectEdit' project.id %}" role="button">Edit</a>
+    				<a class="btn btn-danger btn-block" href="{% url 'deleteProject' project.id %}" role="button">DELETE</a>
+    				<p>WARNING! Be sure that you want to delete this project before clicking DELETE!</p>
     {% endif %}
     </div>
 
