@@ -418,7 +418,11 @@ def RegistrationView(request):
 
 @login_required
 def deleteSkill(request,ID):
-    Skill.objects.get(pk=ID).delete()
+    skill = Skill.objects.get(pk=ID)
+    if skill.user == request.user:
+        skill.delete()
+    else:
+        return redirect("/account/profile/")
     return redirect("/account/profile/")
 
 def SkillsView(request):  # I dont know what this does
