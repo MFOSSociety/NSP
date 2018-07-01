@@ -487,7 +487,7 @@ def followUser(request, ID):
         follow_value = True
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
     # redirecting to the same page
-    return redirect("/account/users/" + friend.username + "/", args)
+    return redirect("/account/users/" + friend.username)
 
 @login_required
 def unfollowUser(request, ID):
@@ -500,7 +500,7 @@ def unfollowUser(request, ID):
     Follow.objects.filter(**follow_args).delete()
     follow_value = False
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
-    return redirect("/account/users/" + friend.username + "/", args)
+    return redirect("/account/users/" + friend.username)
 
 
 
