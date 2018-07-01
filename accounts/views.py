@@ -375,7 +375,10 @@ def RegistrationView(request):
         print(form.is_valid())
         if form.is_valid():
             print("the form is validated")
-            form.save()  # this pretty much creates the user
+            user = form.save()  # this pretty much creates the user
+            user.first_name = request.POST.get("first_name")
+            user.last_name = request.POST.get("last_name")
+            user.save()
             return redirect('/account')  # this is /account
         else:
             form = RegistrationForm(request.POST)
@@ -497,6 +500,18 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
+
+@login_required
+def interestedList(request,ID):
+    project = ProjectDetail.objects.get(pk=ID)
+    people_profile = {}
+
+    peopleInterested = ProjectPeopleInterested.objects.filter(project=project)
+    for interested in peopleInterested:
+        people_profile[interested] = UserProfile.objects.get(user=interested.user)
+
+    args = {"project":project,"people_profile":people_profile}
+    return render(request,"accounts/interestedList.html",args)
 
 
 def handler404(request):

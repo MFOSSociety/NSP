@@ -26,10 +26,10 @@
                             
                                 {% for issue in issues %}
                                     <tr>
-                                      <td>#{{ issue.id }}</td>
+                                      <td><a href="{% url 'viewIssueSolution' project.id 'issue' issue.id %}">#{{ issue.id }}</td></a>
                                       <td>{{ issue.title }}</td>
                                       <td>{{ issue.date }}</td>
-                                      <td>{{ issue.user.username }}</td>
+                                      <td><a href="{% url 'view_friend' issue.user.username %}">{{ issue.user.username }}</td></a>
                                     
                                     {% if issue.status == "1" %}
                                       </td>
