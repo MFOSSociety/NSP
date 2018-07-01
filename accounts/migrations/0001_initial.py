@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(max_length=2500)),
                 ('paid', models.BooleanField(default=False)),
                 ('start_date', models.DateField(default=datetime.datetime.now)),
-                ('initiated_by', models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('initiated_by', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(

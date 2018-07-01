@@ -27,7 +27,7 @@ class ProjectDetail(models.Model):
 
 
 class ProjectPeopleInterested(models.Model):
-    user = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE,)
+    user = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE, )
     project = models.ForeignKey(ProjectDetail, related_name="project", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -42,7 +42,7 @@ class UserProfile(models.Model):
     branch = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
     stream = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
     gender = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
-    position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)   # Student or Teacher
+    position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)  # Student or Teacher
     bio = models.CharField(max_length=500, default="", blank=True)
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
@@ -70,12 +70,12 @@ class Follow(models.Model):
 
 
 class Issue(models.Model):
-    project = models.ForeignKey(ProjectDetail,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    project = models.ForeignKey(ProjectDetail, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=1,choices=(("1", "Open"), ("0", "Closed")))
+    status = models.CharField(max_length=1, choices=(("1", "Open"), ("0", "Closed")))
 
     def __str__(self):
         return "#{} - {}".format(self.id, self.title)
@@ -83,24 +83,25 @@ class Issue(models.Model):
 
 class Solution(models.Model):
     user = models.ForeignKey(User, related_name="user_solution", on_delete=models.CASCADE)
-    issue = models.ForeignKey(Issue,on_delete=models.CASCADE) 
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=1,choices=(("0", "Open"), ("1", "Accepted"), ("2", "Not Accepted")))
+    status = models.CharField(max_length=1, choices=(("0", "Open"), ("1", "Accepted"), ("2", "Not Accepted")))
 
     def __str__(self):
         return "#{} - {}".format(self.id, self.title)
 
+
 class IssueComment(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    issue = models.ForeignKey(Issue,on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     comment = models.TextField()
     date = models.DateField(auto_now_add=True)
 
 
 class SolutionComment(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    solution = models.ForeignKey(Solution,on_delete=models.CASCADE) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    solution = models.ForeignKey(Solution, on_delete=models.CASCADE)
     comment = models.TextField()
     date = models.DateField(auto_now_add=True)

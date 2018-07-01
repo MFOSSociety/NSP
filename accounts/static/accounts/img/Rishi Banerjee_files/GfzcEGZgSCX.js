@@ -1,0 +1,4 @@
+if (self.CavalryLogger) { CavalryLogger.start_js(["k5FHv"]); }
+
+__d("AdsCFSpecViewerHelper",["jsdiff"],(function(a,b,c,d,e,f){"use strict";function g(a){a=JSON.stringify(a,null,"  ");return a.replace(/\"(?:[^\"\\]|\\.)*\"|[\s\S]/g,function(a){return a.replace(/^,/," ,")})}function a(a,c){return b("jsdiff")(g(a),g(c))}e.exports={diff:a,format:g}}),null);
+__d("AdsDataAtomDebugger",["URI"],(function(a,b,c,d,e,f){"use strict";__p&&__p();var g={shouldLog:!!new(b("URI"))(window.location.href).getQueryData().dispatcherevents,toggleLogging:function(){g.shouldLog=!g.shouldLog},isLogging:function(){return g.shouldLog},attach:function(a){__p&&__p();a.register(function(a){__p&&__p();a=a.action;if(a){console.timeStamp&&console.timeStamp(a.type);if(g.shouldLog){var b=a.type,c=a.actionType;a=babelHelpers.objectWithoutProperties(a,["type","actionType"]);console.groupCollapsed(b||c,a);console.trace();console.groupEnd()}}})}};e.exports=g}),null);
