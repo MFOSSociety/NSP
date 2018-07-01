@@ -32,6 +32,9 @@
                         <h3>Issue: <a href="{% url 'viewIssueSolution' project.id 'issue' post.issue.id %}">{{post.issue}}</h3></a>
                         {% endif %}
                         <a class="btn btn-sm btn-primary-outline float-right"><i class="fa fa-comments"></i> {{ comments|length }}</a>
+                        {% if request.user == post.user %}
+                        <a href="{% url 'deleteIssueSolution' type post.id %}" class="btn btn-sm btn-primary-outline float-right btn-danger">Delete</a>
+                        {% endif %}
                     </div>
                     <div class="clearfix"></div>
                 </div>
