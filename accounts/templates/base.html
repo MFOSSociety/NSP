@@ -6,6 +6,8 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <meta name="description" content="">
 <meta name="author" content="">
 {% block title %}
@@ -27,6 +29,12 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+        <link href="{% static 'accounts/css/plugins.css'  %}" rel="stylesheet" type="text/css" media="all">
+        <link href="{% static 'accounts/css/theme.css'  %}" rel="stylesheet" type="text/css" media="all">
+        <link href="{% static 'accounts/css/icon-fonts.css'  %}" rel="stylesheet" type="text/css" media="all">
+        <link href="{% static 'accounts/css/custom.css'  %}" rel="stylesheet" type="text/css" media="all">
+        <link href="{% static 'accounts/css/blue.css'  %}" rel="stylesheet" type="text/css" media="all">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300' rel='stylesheet' type='text/css'>
 
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
       type="text/css">
@@ -35,218 +43,419 @@
 <!-- Custom styles for this template -->
 <link href="{% static 'accounts/css/nsp.css' %}" rel="stylesheet">
 <link href="{% static 'accounts/css/landing-page.min.css' %}" rel="stylesheet">
+<link rel="icon" href="../../static/accounts/img/assets/favicon.png" type="image/png">
+<link href="../../static/accounts/css/plugins.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../static/accounts/css/theme.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../static/accounts/css/icon-fonts.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../static/accounts/css/custom.css" rel="stylesheet" type="text/css" media="all">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300' rel='stylesheet' type='text/css'>
+
+<link href="../../static/accounts/fonts/bebas/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../static/accounts/css/colors/blue.css" rel="stylesheet" type="text/css" media="all">
+
 {% block customcss %}
     <link href="{% static 'accounts/css/search_bar.css' %}" rel="stylesheet">
 {% endblock %}
 
 <!-- Navigation -->
-<nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">NSP</a>
-        <!-- search goes here -->
-        <div class="navbar navbar-right">
-            {% if user.is_authenticated %}
-                <a class="btn btn-link" href="{% url 'view_profile' %}">Profile</a>
-                <a class="btn btn-link" href="{% url 'edit_profile' %}">Edit Profile</a>
-                <a class="btn btn-link" href="{% url 'view_people' %}">People</a>
-                <a class="btn btn-link" href="{% url 'start_project' %}">Start Project</a>
-                <a class="btn btn-link" href="{% url 'project_list_view' %}">Active Projects</a>
-                <a class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
-            {% else %}
-                <a class="btn btn-link" href="{% url 'user_login' %}">Sign In </a>
-                <a class="btn btn-link" href="{% url 'signup' %}">Sign Up</a>
-            {% endif %}
 
-        </div>
-    </div>
-</nav>
+
 {% block body %}
-    <body>
-    <!-- Masthead -->
-    <header class="masthead text-white text-center">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 mx-auto">
-                    <h1 class="mb-5">Think. Gather. Build.</h1>
-                </div>
+<nav class="navbar navbar-default transparent-dark">
+    <div class="container">
+
+        <div class="navbar-header">
+            <div class="container">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                </button>
+                <a class="navbar-brand logo-light" href="#" ><img src="../../static/accounts/img/assets/logo-light.png" alt="#" ></a>
+                <a class="navbar-brand logo-dark" href="#"><img src="../../static/accounts/img/assets/logo-dark.png" alt="#"></a>
             </div>
         </div>
-    </header>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="container">
+                <ul class="nav navbar-nav menu-right">
+  {% if user.is_authenticated %}
+
+                    <li class=" "><a href="{% url 'view_profile' %}" class=" customhover">Profile</a>
+
+                    <a href="{% url 'edit_profile' %}" class=" customhover">Edit Profile</a>
+
+                  <a href="{% url 'view_people' %}" class=" customhover">People</a>
+
+                  <a href="{% url 'start_project' %}" class=" customhover">Start Project</a>
+<a href="{% url 'project_list_view' %}" class=" customhover">Active Projects</a>
+
+                    <a href="{% url 'logout' %}" class=" customhover">Log Out</a>
+
+                    </li>
+                      {% else %}
+
+                      <li class=""><a href="{% url 'signup' %}" class=" customhover">Sign Up</a>
+                      <a href="{% url 'user_login' %}" class=" customhover">Sign In</a>
+
+                                </li>
+                      {% endif %}
+
+                        </ul>
+            </div>
+        </div>
+
+    </div>
+</nav>
+    <body>
+
+    <!-- Masthead -->
+    <section class="hero-fullscreen">
+        <div class="hero-slider hero-parallax-fullscreen owl-carousel navigation-thin">
+
+
+            <div class="slide bg-fitness-2">
+                <div class="hero-container container">
+                    <div class="hero-content scroll-opacity">
+                        <div class="appear container text-center fitness-hero">
+
+                            <h4 style="color: white;font-weight:bold;">Think. Gather. Build.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Slide 2 -->
+
+        </div>
+    </section>
 
 
     <!-- Icons Grid -->
-    <section class="features-icons bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex">
-                            <i class="fa fa-fire m-auto text-primary"></i>
+    <div class="site-wrapper">
+
+        <!-- Text Section -->
+  <section class="pt100 pb100 bg-color">
+    <div class="container">
+
+                <div class="row" style="margin-top:-220px">
+                    <div class="col-md-12">
+
+                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
+                            <a href="#" class="a-box box-hover">
+                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                                    <div class="text-left pt10 pb30">
+                                        <h3 class="fitness-font700 mb0">Active Projects</h3>
+                                        <h6 class="md-grey fitness-font400 mt0">Great for Collaborative Projects</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0;">
+                            <a href="#" class="a-box box-hover-featured">
+                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                                    <div class="text-left pt10 pb30">
+                                      <h3 class="fitness-font700 mb0">Great Community</h3>
+                                      <h6 class="md-grey fitness-font400 mt0">Extremely Fast Response Time</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
+                            <a href="#" class="a-box box-hover">
+                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                                    <div class="text-left pt10 pb30">
+                                      <h3 class="fitness-font700 mb0">Get Experience</h3>
+                                      <h6 class="md-grey fitness-font400 mt0">A Social Network with Benefits!</h6>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
 
-                        <h3>Active Projects</h3>
-                        <p class="lead mb-0">Great for Collaborative Projects</p>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex">
-                            <i class="fa fa-users m-auto text-primary"></i>
+
+      <div class="row mt60">
+
+        <div class="col-md-8 col-md-offset-2 text-left">
+
+          <h4  style="color:white;">A Dream</h4>
+
+
+          <p class="white">A website carved out of curiosity on how to get all the engineers from all the streams under one umbrella and make them work together so as to come up with new ideas and solve real world problems.</p>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </section>
+  <!-- End Text Section -->
+
+<section>
+<div class="pt100 pb100 bg-color" style="background:#111111">
+
+<div class="row mt60">
+
+  <div class="col-md-8 col-md-offset-2 text-right">
+    <h4 style="color:white;">Highly Ambitious</h4>
+
+    <p class="white">This website is going to be a community project for college students across India. It is not just for getting you projects but also for students who want to get into open source.</p>
+  </div>
+
+</div>
+
+
+</div>
+</section>
+<section>
+<div class="pt100 pb100 bg-color" >
+
+<div class="row mt60">
+
+  <div class="col-md-8 col-md-offset-2 text-center">
+    <h4 style="color:white;">Deployed using PythonAnywhere</h4>
+    <p class="white">NSP v1.0 is hosted at nsp.com
+
+</p>
+  </div>
+
+</div>
+
+
+</div>
+</section>
+        <!-- Team 3 Columns Hover Style 3 -->
+        <section class="pt100 pb100 bg-dark">
+            <div class="container">
+                <div class="row text-center">
+
+                    <div class="col-md-12 text-center fitness-section-heading mb80">
+                        <h4 class="white">Developers</h4>
+                        <h6 class="md-grey mb15">Working for the development of coding culture.</h6>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 fitness-trainer">
+                        <a href="#">
+                            <div class="team-member">
+                                <div class="team-member-image">
+                                    <img src="../../static/accounts/img/rishi.jpg" class="img-responsive" alt="#"/>
+                                    <div class="team-member-detail">
+                                        <h3 class="white fitness-font700 mb0">Rishi Banerjee</h3>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Knows how to copy paste code.</h4>
+                                        <h4 class="fitness-label" style="font-size:12px;">rshrc404@gmail.com</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 fitness-trainer trainer-featured">
+                        <a href="#">
+                            <div class="team-member">
+                                <div class="team-member-image">
+                                    <img src="../../static/accounts/img/pratik.jpg" class="img-responsive" alt="#"/>
+                                    <div class="team-member-detail">
+                                        <h3 class="white fitness-font700 mb0">Pratik Jain</h3>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Wanted to use Node.js, ended up doing it in Django</h4>
+                                        <h4 class="fitness-label" style="font-size:12px;">pratikjain0411@gmail.com</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 fitness-trainer">
+                        <a href="#">
+                            <div class="team-member">
+                                <div class="team-member-image">
+                                    <img src="../../static/accounts/img/prachu.jpg" class="img-responsive" alt="#"/>
+                                    <div class="team-member-detail">
+                                        <h3 class="white fitness-font700 mb0">Prachal Goyal</h3>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">I dont know what I am doing! Ajax?</h4>
+                                        <h4 class="fitness-label" style="font-size:12px;">prachalgoyal03@gmail.com</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 fitness-trainer">
+                        <a href="#">
+                            <div class="team-member">
+                                <div class="team-member-image">
+                                    <img src="../../static/accounts/img/gjerjgk.jpg" class="img-responsive" alt="#"/>
+                                    <div class="team-member-detail">
+                                        <h3 class="white fitness-font700 mb0">Gjergj Kadriu</h3>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Our friend from Kosova, a brilliant coder</h4>
+                                        <h4 class=""><a href="https://github.com/gjergjk71">Check His Repos</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- End Team 3 Columns Hover Style 3 -->
+
+        <!-- Start Tabs -->
+
+        <!-- End Tabs -->
+
+        <!-- Services -->
+
+        <!-- End Services -->
+
+        <!-- Testimonials Slider -->
+        <section class="pt120 pb80 bg-fitness-3">
+            <div class="container" style="background-attachment:fixed;">
+                <div class="row">
+
+                    <div class="col-md-12 text-center fitness-section-heading">
+                        <h3 class="white" style="font-size:54px;">Around the World</h3>
+                        <h5 class="md-grey mb15">People are talking</h5>
+                    </div>
+
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <div id="owl-testimonials" class="owl-carousel light-pagination">
+
+                            <!-- Testimonial 1 -->
+                            <div class="testimonial-slide">
+                                <h4 class="fitness-label"><span>Siddharth Jaikda</span></h4>
+                                  <h5 class="white"><span>The Creator of MUJ Files</span></h5>
+                                <p class="fitness-font400 mb20">This guys are amazing! They were so quick to respond and let me tell you, they are all knowing! I highly recommend their themes! They are all about making their clients happy!</p>
+                                <img src="../../static/accounts/img/assets/quotes.png" alt="#" class="img-responsive quote-logo">
+                            </div>
+
+                            <!-- Testimonial 2 -->
+                            <div class="testimonial-slide">
+                                <h4 class="fitness-label"><span>Tushar Sadana</span></h4>
+                                <h5 class="white"><span>MUJ ACM SCHAP - Chair</span></h5>
+
+                                <p class="fitness-font400 mb20">I have purchased tens of templates from ThemeForest and this one is undoubtedly the best I ever tried. Easy to edit, nicely coded. You guys, you did a great job here!</p>
+                                <img src="../../static/accounts/img/assets/quotes.png" alt="#" class="img-responsive quote-logo">
+                            </div>
+
+                            <!-- Testimonial 3 -->
+                            <div class="testimonial-slide">
+                                <h4 class="fitness-label"><span>Anmol Garg</span></h4>
+                                <h5 class="white"><span>MUJ ACM SCHAP - V. Chair</span></h5>
+
+                                <p class="fitness-font400 mb20">This is one of the best themes that I bought on ThemeForest. It is well documented and well coded but the best of all is the friendly and quick support behind.</p>
+                                <img src="../../static/accounts/img/assets/quotes.png" alt="#" class="img-responsive quote-logo">
+                            </div>
+
                         </div>
-                        <h3>Great Community</h3>
-                        <p class="lead mb-0">Extremely Fast Response Time</p>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex">
-                            <i class="fa fa-rocket m-auto text-primary"></i>
-                        </div>
-                        <h3>Get Experience</h3>
-                        <p class="lead mb-0">A Social Network with Benefits!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Image Showcases -->
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row no-gutters">
+                </div>
+            </div>
+        </section>
+        <!-- End Testimonials Slider -->
 
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                     style="background-image: url({% static 'accounts/img/bg-showcase-1.jpg' %});"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>A Dream</h2>
-                    <p class="lead mb-0">A website carved out of curiosity on how to get all the engineers from all the
-                        streams under one umbrella and make them work together so as to come up with new ideas and solve
-                        real world problems.</p>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-lg-6 text-white showcase-img"
-                     style="background-image: url({% static 'accounts/img/bg-showcase-2.jpg' %});"></div>
-                <div class="col-lg-6 my-auto showcase-text">
-                    <h2>Highly Ambitious</h2>
-                    <p class="lead mb-0">This website is going to be a community project for college students across
-                        India. It is not just for getting you projects but also for students who want to get into open
-                        source.</p>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                     style="background-image: url({% static 'accounts/img/bg-showcase-3.jpg' %});"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Deployed using PythonAnywhere</h2>
-                    <p class="lead mb-0">NSP v1.0 is hosted at nsp.com</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Start Contact Form Section -->
 
-    <!-- Testimonials -->
-    <section class="testimonials text-center bg-light">
-        <div class="container">
-            <h2 class="mb-5">What cartoons are saying...</h2>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/doraemon.png' %}"
-                             alt="">
-                        <h5>Doraemon</h5>
-                        <p class="font-weight-light mb-0">"Literally a 22nd Century Website"</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/shin.png' %}"
-                             alt="">
-                        <h5>Shinchan</h5>
-                        <p class="font-weight-light mb-0">"Ye website utni bhi kuch khaas nahi"</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="{% static 'accounts/img/naruto.png' %}"
-                             alt="">
-                        <h5>Naruto</h5>
-                        <p class="font-weight-light mb-0">"Thank you so much for making these free resources available to
-                            us!"</p>
-                    </div>
-                </div>
+        <!-- End Contact Form Section -->
+
+
+
+        <!-- Google Map -->
+        <!-- End Google Map -->
+        <section>
+          <div class="pt100 pb100 bg-color" >
+
+            <div class="row mt60">
+
+              <div class="col-md-10 col-md-offset-1 text-justify">
+                <h4 style="color:white;">About Us</h4>
+                <p class="white">We want development to be fun and add a competitive touch to it, and what can be better than teaming up with the fellas of your own University?
+
+We want to bring every talented engineers/students/developers who have immense potential but do not have any project ideas to work on and get experienced in. Not just that, we also made this website Open Source so that even developers/students can learn how things work at Industrial level.<br><br>
+
+Create your own projects, make a team, divide the workload and build exciting projects right here at NSP - where ideas come to life!
+
+Well, this website was never intended to be launched as it was just a learning project for Pratik and Rishi. After days of Googling, Stackoverflow , Ctrl+C and Ctrl+V, this is the best we could come up with.
+
+Prachal, the sole Front-end Developer of the team sat hours understanding the templates he copied, fortunately he did.<br>
+
+Well later, Tushar Sadana Contributed to the Front end and the changed UI was loved by everyone! <br><br>
+This was our brief introduction. It's time for you to connect with the developers around the globe and start working on your own projects. Your profile page will be your introduction to the world, make sure to make it worth watching.            </p>
+              </div>
+
             </div>
-        </div>
-    </section>
+
+
+          </div>
+        </section>
 
     <!-- Call to Action -->
-    <section class="call-to-action text-white text-center">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                {% if user.is_authenticated %}
-                    <div class="col-xl-9 mx-auto">
-                        <h2 class="mb-4">Start a project? Go!</h2>
-                    </div>
-                    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                        <form>
-                            <div class="form-row">
-                                <div class="container">
-                                    <a href="{% url 'start_project' %}"
-                                       class="btn btn-block btn-lg btn-primary">Start</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                {% else %}
-                    <div class="col-xl-9 mx-auto">
-                        <h2 class="mb-4">Ready to do a project? Sign up now!</h2>
-                    </div>
-                    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                        <form>
-                            <div class="form-row">
-                                <div class="container">
-                                    <a href="{% url 'signup' %}" class="btn btn-block btn-lg btn-primary">Sign up!</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                {% endif %}
-            </div>
+
+    <section>
+      <div class="pt100 pb100 bg-fitness-3" >
+
+        <div class="row mt60">
+
+          <div class="col-md-8 col-md-offset-2 text-right">
+              {% if user.is_authenticated %}
+            <h4 style="color:white;">Start a Project, Go!</h4>
+            <a href="{% url 'start_project' %}"> <h4 class="fitness-label">Start</h4></a>
+              {% else %}
+              <h4 style="color:white;">Ready to take up a Project? Sign up now!</h4>
+              <a href="{% url 'signup' %}"> <h4 class="fitness-label"> SIGN UP</h4></a>
+              {% endif %}
+
+          </div>
+
         </div>
+
+
+      </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer bg-light">
+    <footer id="footer-1" class="pt60 pb50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                    <ul class="list-inline mb-2">
-                        <li class="list-inline-item">
-                            <a href="{% url 'AboutUs' %}">About</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="{% url 'Wiki' %}">Wiki</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="{% url 'developers' %}">Developers</a>
-                        </li>
-                        </li>
-                    </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">&copy; NSP 2018. GNU License.</p>
-                </div>
-                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-                    <ul class="list-inline mb-0">
 
-                        <!-- Add font awesome icons -->
-                        <a href="https://github.com/rshrc/NSP/"  target="_blank">Github</a>
-                    </ul>
+                <div class="col-md-8">
+                    <h4 style="font-weight:normal; font-size:15px;">Initiative by MUJ ACM SCHAP collaboration with Team NSP!</h4>
+                    <p>We at ACM believe that everyone should get a chance to prove themselves and work!<br>
+                    We thought why not let's just provide this opportunity to EVERYONE!</p>
+                    <p><a href="#" target="_blank">© 2018 NSP · <img src="../../static/accounts/img/acm.png" style="max-height:20px" alt=""> · GNU License. <br> </a>Made with love for great people.</p>
                 </div>
+
+
+                <div class="col-md-4">
+                    <div class="subscription">
+                        <h4></h4>
+
+
+<ul class="menu-right nav navbar-nav">
+<li class="dropdown megamenu"><a href="" class=" customhover">Wiki</a></li>
+<li class="dropdown megamenu"><a href="index.html" class=" customhover">Github</a></li>
+</ul>
+
+                    </div>
+                </div>
+
             </div>
         </div>
-    </footer>
 
+</footer>
+    <!-- End Footer 1 -->
+
+    <!-- Start Back To Top -->
+    <a id="back-to-top">^</a>
+    <!-- End Back To Top -->
+
+</div><!-- Site Wrapper -->
+
+<!-- Scripts -->
+<script src="../../static/accounts/js/jquery.min.js"></script>
+<script src="../../static/accounts/js/plugins.js"></script>
+<script src="../../static/accounts/js/scripts.js"></script>
     </body>
 {% endblock %}
 
