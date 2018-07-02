@@ -12,17 +12,19 @@
     <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
 {% endblock %}
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
+
     <br>
     <div class="container">
         <div class="row lead mb-7">
             <div class="col-md-5 ">
                 <div class="container first">
                     {% if user.userprofile.gender == 'Male' %}
-                        <h1>Mr. {{ user.first_name }} {{ user.last_name }}</h1>
+                        <h2>Mr. {{ user.first_name }} {{ user.last_name }}</h2>
                     {% elif user.userprofile.gender == 'Female' %}
-                        <h1>Ms. {{ user.first_name }} {{ user.last_name }}</h1>
+                        <h2>Ms. {{ user.first_name }} {{ user.last_name }}</h2>
                     {% else %}
-                        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
                     {% endif %}
                     {% if user.userprofile.photo %}
                         <img class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}" width="240">
@@ -109,8 +111,8 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-7 ">
-                <div class="container bg-light">
+            <div class="col-md-6 " style="margin-top:80px;">
+                <div class=" bg-light" >
                     <center>
                         <h2 class="second">BIO</h2>
                         <br>
@@ -170,5 +172,6 @@
             </div>
         </div>
     </div>
-{% endblock %}
+  </div>
 
+{% endblock %}

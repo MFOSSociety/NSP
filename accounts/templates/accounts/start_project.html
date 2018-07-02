@@ -8,6 +8,8 @@
 
 {% endblock %}
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
+
     {% if project_registered %}
     <div class="container lead mb-7">
     <h1>Thank you for Starting a Project!</h1>
@@ -35,4 +37,5 @@
         </div>
     {% endif %}
     <script src="{% static 'accounts/js/dateselector.js' %}"></script>
+  </div>
 {% endblock %}

@@ -1,0 +1,37 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("../fonts/et-icons/flaticon.eot");
+	src: url("../fonts/et-icons/flaticon.eot#iefix") format("embedded-opentype"),
+	url("../fonts/et-icons/flaticon.woff") format("woff"),
+	url("../fonts/et-icons/flaticon.ttf") format("truetype"),
+	url("../fonts/et-icons/flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-chef15:before {
+	content: "\e000";
+}
+.flaticon-cocktails1:before {
+	content: "\e001";
+}
+.flaticon-cup74:before {
+	content: "\e002";
+}
+.flaticon-dessert4:before {
+	content: "\e003";
+}
+.flaticon-fastfood1:before {
+	content: "\e004";
+}
+.flaticon-italian1:before {
+	content: "\e005";
+}
+.flaticon-salad:before {
+	content: "\e006";
+}

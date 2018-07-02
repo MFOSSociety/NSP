@@ -1,0 +1,96 @@
+a:hover,
+.navbar-default.transparent.small .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:hover,
+.connected-icon a i,
+.testimonial-name,
+.testimonial-name small,
+.highlight,
+.btn-ghost-color,
+.contact-details-social li a:hover,
+.portfolioContainer li .info i,
+.project-changer li a,
+#footer-2 #social-icons li a, 
+#iconTabs li.active a span,
+.box a,
+.box.box-style6 a,
+.box.box-style8b a,
+.coming-soon-2 a,
+.coming-soon a, 
+.about-me-social li a:hover,
+.megamenu h4:hover, 
+.restaurant-icon:before,
+.food-tabs li.active a,
+.food-tabs li.active a:focus,
+.restaurant-tabs li.active a,
+.restaurant-tabs li.active a:focus,
+.icon-box-hover i,
+.music-play-btn i:before
+{
+    color: #f02424
+}
+#contact input.submit,
+.cbp-l-filters-button .cbp-filter-item.cbp-filter-item-active,
+.cbp-l-loadMore-button .cbp-l-loadMore-link:hover,
+.cbp-l-filters-button .cbp-filter-counter,
+.bg-color,
+#price-list .button:hover,
+#price-list .featured .button,
+.progress-bar,
+#back-to-top,
+.portfolioFilter a.current,
+.portfolioFilter a:hover,  
+.label-primary,
+.panel-title,
+#buttonTabs li.active a,
+.box-style5,
+.box-style7,
+.box-style10,
+.progress-bars-4 .progress-bar-tooltip, 
+.timeline::before,
+h4.fitness-label
+{
+    background-color: #f02424
+}
+.btn-primary,
+.btn-primary:hover, 
+.btn-primary.active, .btn-primary:active, 
+.open>.dropdown-toggle.btn-primary,
+.btn-primary.focus, .btn-primary:focus,
+.btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled].active, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover, .btn-ghost-color:hover
+{
+    background-color: #f02424!important
+}
+.btn-primary,
+.btn-primary:hover,
+.btn-ghost-color,
+.btn-ghost-color:hover
+{ 
+    border-color: #f02424!important
+}
+.accordian-style2 .panel-title,
+.food-tabs li.active a,
+.food-tabs li.active a:focus,
+.music-bottom .play-btn,
+.play-bottom .play-btn,
+.timeline-bullet 
+{ 
+    border-color: #f02424
+}
+#video .play-btn:after,
+.music-bottom .play-btn:after,
+.play-bottom .play-btn:after
+{ 
+    border-left-color: #f02424
+}
+.ytp-cued-thumbnail-overlay:hover 
+.ytp-large-play-button-bg {
+    fill: #fff!important;
+} 
+.box-style4 {
+    border-top: 2px solid #f02424
+}
+#price-list .featured .price-table,
+.progress-bars-4 .progress-bar-tooltip:after
+{
+    border-top-color: #f02424
+} 

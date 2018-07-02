@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
 
     <div style="margin: 0px;padding: 10px;" class="col-xl-12 offset-md-1">
         <div class="Order-list">
@@ -29,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+
                                 {% for solution in solutions %}
                                     <tr>
                                       <td><a href="{% url 'viewIssueSolution' project.id 'solution' solution.id %}">#{{ solution.id }}</td></a>
@@ -37,28 +38,28 @@
                                       <td>{{ solution.title }}</td>
                                       <td>{{ solution.date }}</td>
                                       <td><a href="{% url 'view_friend' solution.user.username %}">{{ solution.user.username }}</td></a>
-                                    
+
                                     {% if solution.status == "0" %}
                                       </td>
-                                      
+
                                           <td><span class="badge badge-pill badge-success"> Open </span></td>
-                                      
+
                                     </tr>
                                     {% elif solution.status == "1" %}
                                       </td>
-                                      
+
                                           <td><span class="badge badge-pill badge-success"> Accepted </span></td>
-                                      
+
                                     </tr>
                                     {% elif solution.status == "2" %}
                                       </td>
-                                      
+
                                           <td><span class="badge badge-pill badge-danger"> Not Accepted </span></td>
-                                      
-                                    </tr>                     
+
+                                    </tr>
                                     {% endif %}
                                 {% endfor %}
-                            
+
                             </tbody>
                         </table>
                     </div>
@@ -66,10 +67,10 @@
                         {% if status == "notaccepted" %}
                             <h3 style="text-align:center;">There aren't any not accepted solutions!</h3>
                         {% else %}
-                            <h3 style="text-align:center;">There aren't any {{ status }} solutions!</h3> 
-                        {% endif %}                       
+                            <h3 style="text-align:center;">There aren't any {{ status }} solutions!</h3>
+                        {% endif %}
                     {% endif %}
-                    
+
 
                     <div style="text-align: center;" class="alert alert-warning">[Something here]</b>
                     </div>
@@ -78,5 +79,6 @@
         </div>
         <!-- ORDER LIST END-->
     </div>
+  </div>
 
 {% endblock body %}

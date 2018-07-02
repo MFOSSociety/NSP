@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
 
     <div style="margin: 0px;padding: 10px;" class="col-xl-12 offset-md-1">
         <div class="Order-list">
@@ -23,36 +24,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+
                                 {% for issue in issues %}
                                     <tr>
                                       <td><a href="{% url 'viewIssueSolution' project.id 'issue' issue.id %}">#{{ issue.id }}</td></a>
                                       <td>{{ issue.title }}</td>
                                       <td>{{ issue.date }}</td>
                                       <td><a href="{% url 'view_friend' issue.user.username %}">{{ issue.user.username }}</td></a>
-                                    
+
                                     {% if issue.status == "1" %}
                                       </td>
-                                      
+
                                           <td><span class="badge badge-pill badge-success"> Open </span></td>
-                                      
+
                                     </tr>
                                     {% else %}
                                       </td>
-                                      
+
                                           <td><span class="badge badge-pill badge-danger"> Closed </span></td>
-                                      
+
                                     </tr>
                                     {% endif %}
                                 {% endfor %}
-                            
+
                             </tbody>
                         </table>
                     </div>
                     {% if not issues %}
                         <h3 style="text-align:center;">There are no {{ status }} issues!</h3>
                     {% endif %}
-                    
+
 
                     <div style="text-align: center;" class="alert alert-warning">[Something here]</b>
                     </div>
@@ -61,5 +62,6 @@
         </div>
         <!-- ORDER LIST END-->
     </div>
+  </div>
 
 {% endblock body %}

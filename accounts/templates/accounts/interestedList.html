@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
 
 <div class="container-fluid">
     <h3 style="text-align: center;">Users interested in {{ project.project_name }}</h3>
@@ -35,5 +36,6 @@ Message</button>
         </div>
         {% endfor %}
     </div>
+</div>
 </div>
 {% endblock body %}
