@@ -73,8 +73,8 @@ window.open(self.location.href, '_top');
                     <span class="icon-bar middle-bar"></span>
                     <span class="icon-bar bottom-bar"></span>
                 </button>
-                <a class="navbar-brand logo-light" href="#" style="margin-top:-30px;"><img src="{% static 'accounts/img/assets/logo-light.png' %}" alt="#"></a>
-                <a class="navbar-brand logo-dark" href="#"><img src="../../static/accounts/img/assets/logo-dark.png" alt="#"></a>
+                <a class="navbar-brand logo-light" href="{% url 'home' %}" style="margin-top:-30px;"><img src="{% static 'accounts/img/assets/logo-light.png' %}" alt="#"></a>
+                <a class="navbar-brand logo-dark" href="{% url 'home' %}"><img src="{% static 'accounts/img/assets/logo-dark.png' %}" alt="#"></a>
             </div>
         </div>
 
