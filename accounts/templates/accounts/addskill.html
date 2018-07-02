@@ -2,16 +2,18 @@
 {% load bootstrap %}
 <html>
 <style>
-form { 
-margin: 0 auto; 
+form {
+margin: 0 auto;
 width:250px;
 }
-</style>		
+</style>
 {% block title %}
     <title>Add Skill</title>
 {% endblock %}
 
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
+
 	{% if successfully %}
 		<div style="margin:5px;" class="alert alert-success">
 		  <strong>Success!</strong> You've added {{ skill }} to your skillset
@@ -26,6 +28,7 @@ width:250px;
         <input class="btn btn-primary btn-block" type="submit" value="Submit" />
         <a class="btn btn-warning btn-block" href="{% url 'view_profile' %}" role="button">Back</a>
     </form>
+  </div>
 {% endblock body %}
 
 </html>

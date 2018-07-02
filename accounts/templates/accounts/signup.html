@@ -4,6 +4,7 @@
     <link href="{% static 'accounts/css/main.css' %}" rel="stylesheet">
 {% endblock %}
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
 
 <div class="container" style="margin-bottom:50px;">
     <form class="form-horizontal" role="form" method="POST"> {% csrf_token %}
@@ -211,3 +212,4 @@
         </div>
     </div>
 <br>
+</div>

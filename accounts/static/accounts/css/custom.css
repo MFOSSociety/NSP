@@ -1,0 +1,165 @@
+/*--- PLACE YOUR CUSTOM STYLES HERE ---*/
+
+/*--- Background Images ---*/
+.bg-shortcodes {
+    background-image: url(../img/backgrounds/bg-shortcodes.jpg);
+}
+.bg-light {
+    background-image: url(../img/backgrounds/bg-light.jpg);
+}
+.bg-shop {
+    background-image: url(../img/backgrounds/bg-shop.jpg);
+}
+.bg-about-me {
+    background-image: url(../img/backgrounds/bg-about-me.jpg);
+}
+.bg-restaurant-1 {
+    background-image: url(../img/restaurant/bg-restaurant-1.jpg);
+}
+.bg-restaurant-2 {
+    background-image: url(../img/restaurant/bg-restaurant-2.jpg);
+}
+.bg-pattern-1 {
+    background-image: url(../img/backgrounds/bg-pattern-1.jpg);
+}
+.bg-pattern-2 {
+    background-image: url(../img/backgrounds/bg-pattern-2.jpg);
+}
+.bg-pattern-3 {
+    background-image: url(../img/backgrounds/bg-pattern-3.jpg);
+}
+.bg-pattern-4 {
+    background-image: url(../img/backgrounds/bg-pattern-4.jpg);
+}
+.bg-music-1 {
+    background-image: url(../img/music/bg-music-1.jpg);
+}
+.bg-photography-1 {
+    background-image: url(../img/photography/bg-photography-1.jpg);
+}
+.bg-photography-2 {
+    background-image: url(../img/photography/bg-photography-2.jpg);
+}
+.bg-photography-3 {
+    background-image: url(../img/photography/bg-photography-3.jpg);
+}
+.bg-fitness-1 {
+    background-image: url(../img/fitness/bg-fitness-1.jpg);
+    background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
+}
+.bg-fitness-2 {
+    background-image: url(../img/fitness/bg-fitness-2.jpg);
+    background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
+}
+.bg-fitness-3 {
+    background-image: url(../img/fitness/bg-fitness-3.jpg);
+    background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
+
+}
+.bg-fitness-4 {
+    background-image: url(../img/fitness/bg-fitness-4.jpg);
+}
+.bg-event-1 {
+	background-image: url(../img/event/bg-event-1.jpg);
+}
+.bg-event-2 {
+	background-image: url(../img/event/bg-event-2.jpg);
+}
+.bg-food-1 {
+    background-image: url(../img/food/bg-food-1.jpg);
+}
+.bg-food-2 {
+    background-image: url(../img/food/bg-food-2.jpg);
+}
+.bg-food-3 {
+    background-image: url(../img/food/bg-food-3.jpg);
+}
+.bg-agency-1 {
+	background-image: url(../img/agency/bg-agency-1.jpg);
+}
+.bg-agency-2 {
+	background-image: url(../img/agency/bg-agency-2.jpg);
+}
+.bg-launching-1 {
+    background-image: url(../img/launching/bg-launching-1.jpg);
+}
+.bg-launching-2 {
+    background-image: url(../img/launching/bg-launching-2.jpg);
+}
+.bg-product-1 {
+    background-image: url(../img/product/bg-product-1.jpg);
+}
+.bg-product-2 {
+    background-image: url(../img/product/bg-product-2.jpg);
+}
+.bg-education-1 {
+    background-image: url(../img/education/bg-education-1.jpg);
+}
+.bg-education-2 {
+    background-image: url(../img/education/bg-education-2.jpg);
+}
+.bg-concepts-1 {
+    background-image: url(../img/concepts/bg-concepts-1.jpg);
+}
+.bg-video-1 {
+    background-image: url(../img/video/bg-video-1.jpg);
+}
+.bg-img-1 {
+    background-image: url(../img/backgrounds/bg-1.jpg);
+}
+.bg-img-2 {
+    background-image: url(../img/backgrounds/bg-2.jpg);
+}
+.bg-img-3 {
+    background-image: url(../img/backgrounds/bg-3.jpg);
+}
+.bg-img-4 {
+    background-image: url(../img/backgrounds/bg-4.jpg);
+}
+.bg-img-5 {
+    background-image: url(../img/backgrounds/bg-5.jpg);
+}
+.bg-img-6 {
+    background-image: url(../img/backgrounds/bg-6.jpg);
+}
+.bg-img-7 {
+    background-image: url(../img/backgrounds/bg-7.jpg);
+}
+.bg-img-8 {
+    background-image: url(../img/backgrounds/bg-8.jpg);
+}
+.bg-img-9 {
+    background-image: url(../img/backgrounds/bg-9.jpg);
+}
+.bg-img-10 {
+    background-image: url(../img/backgrounds/bg-10.jpg);
+}
+.bg-img-11 {
+    background-image: url(../img/backgrounds/bg-11.jpg);
+}
+.bg-img-12 {
+    background-image: url(../img/backgrounds/bg-12.jpg);
+}
+.bg-img-13 {
+    background-image: url(../img/backgrounds/bg-13.jpg);
+}
+.bg-img-14 {
+    background-image: url(../img/backgrounds/bg-14.jpg);
+}
+.bg-img-15 {
+    background-image: url(../img/backgrounds/bg-15.jpg);
+}
+
+.customhover{
+
+}
+
+.customhover:hover{
+  color: #009fe3!important;
+}

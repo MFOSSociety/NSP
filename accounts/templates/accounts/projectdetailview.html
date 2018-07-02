@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
+
+
     <div style="text-align: center;" class="container">
     <h1>{{ project.project_name }}</h1>
     <p>Mentor : {{ project.mentor_name }}</p>
@@ -51,7 +54,7 @@
 				<a class="btn btn-primary btn-block" href="{% url 'projectSolutions' project.id 'all' %}" role="button">All solutions</a>
 				<a class="btn btn-success btn-block" href="{% url 'createIssueSolution' project.id 'solution' %}" role="button">New solution</a>
 
-				<div style="margin:5px;" class="list-group">					
+				<div style="margin:5px;" class="list-group">
 					{% for solution in solutions %}
 							{% if solution == solutions.0 %}
 							  <a href="solution/{{solution.id}}" class="list-group-item list-group-item-action flex-column align-items-start active">
@@ -77,5 +80,6 @@
 					</div>
 			</div>
     </div>
+</div>
 </div>
 {% endblock %}

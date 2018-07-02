@@ -12,6 +12,8 @@ width:50px;
 {% endblock %}
 
 {% block body %}
+<div class="site-wrapper" style="margin-top:75px;">
+
 	{% if successfully %}
 		<div class="alert alert-success">
 		  <strong>Success!</strong> You've added {{ solution_link }}
@@ -27,6 +29,7 @@ width:50px;
         <input class="btn btn-primary btn-block" type="submit" value="Submit" />
     </form>
     </div>
+  </div>
 {% endblock body %}
 
 </html>
