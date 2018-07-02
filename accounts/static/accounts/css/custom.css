@@ -45,13 +45,22 @@
 }
 .bg-fitness-1 {
     background-image: url(../img/fitness/bg-fitness-1.jpg);
+    background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
 }
 .bg-fitness-2 {
     background-image: url(../img/fitness/bg-fitness-2.jpg);
+    background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
 }
 .bg-fitness-3 {
     background-image: url(../img/fitness/bg-fitness-3.jpg);
-    
+    background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
+
 }
 .bg-fitness-4 {
     background-image: url(../img/fitness/bg-fitness-4.jpg);
