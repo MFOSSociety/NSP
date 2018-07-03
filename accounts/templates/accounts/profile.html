@@ -119,7 +119,7 @@
 
                         <h5 style="word-break: break-all">{% if user.userprofile.bio|length == 0 %} No bio
                             yet! {% else %}
-                            {{ user.userprofile.bio }} {% endif %}</h5>
+                            {{ user.userprofile.bio|linebreaks }} {% endif %}</h5>
                         <br>
                     </center>
                 </div>
