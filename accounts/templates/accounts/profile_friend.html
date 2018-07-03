@@ -47,6 +47,13 @@
     {% for i in range %}
         <i class="fa fa-star" style="color:dodgerblue"></i>
     {% endfor %}</li>
+    <div class="">
+        {% if current_user_following %}
+            <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary" style="width: 100%">Unfollow</a>
+        {% else %}
+            <a href="{% url 'followUser' user.id %}" class="btn btn-primary" style="width: 100%">Follow</a>
+        {% endif %}
+    </div>
 </ul>
 
 
