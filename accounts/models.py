@@ -43,7 +43,7 @@ class UserProfile(models.Model):
     stream = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
     gender = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
     position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)  # Student or Teacher
-    bio = models.CharField(max_length=500, default="", blank=True)
+    bio = models.TextField()
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
