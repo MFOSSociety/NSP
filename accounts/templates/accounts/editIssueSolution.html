@@ -60,6 +60,7 @@
                         </div>
                     </div>
                     <button class="btn btn-success btn-block" type="submit">Edit {{ type }}</button>
+                    <a href="{% url 'viewIssueSolution' project.id type object.id %}" class="btn btn-warning btn-block">Back</a>
                 </form>
             </div>
         </div>
