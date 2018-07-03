@@ -163,3 +163,18 @@ background-position:center;
 .customhover:hover{
   color: #009fe3!important;
 }
+
+.ham{
+  padding-right:10px;
+}
+@media only screen and (max-width: 415px) and (min-width: 374px) {
+    .ham {
+        padding-right:4em!important;
+    }
+}
+
+@media only screen and (max-width: 374px) {
+    .ham {
+        padding-right:7em!important;
+    }
+}

@@ -29,11 +29,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-        <link href="{% static 'accounts/css/plugins.css'  %}" rel="stylesheet" type="text/css" media="all">
-        <link href="{% static 'accounts/css/theme.css'  %}" rel="stylesheet" type="text/css" media="all">
-        <link href="{% static 'accounts/css/icon-fonts.css'  %}" rel="stylesheet" type="text/css" media="all">
-        <link href="{% static 'accounts/css/custom.css'  %}" rel="stylesheet" type="text/css" media="all">
-        <link href="{% static 'accounts/css/blue.css'  %}" rel="stylesheet" type="text/css" media="all">
+
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300' rel='stylesheet' type='text/css'>
 
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
@@ -44,30 +40,43 @@
 <link href="{% static 'accounts/css/nsp.css' %}" rel="stylesheet">
 <link href="{% static 'accounts/css/landing-page.min.css' %}" rel="stylesheet">
 <link rel="icon" href="../../static/accounts/img/assets/favicon.png" type="image/png">
-<link href="../../static/accounts/css/plugins.css" rel="stylesheet" type="text/css" media="all">
-<link href="../../static/accounts/css/theme.css" rel="stylesheet" type="text/css" media="all">
-<link href="../../static/accounts/css/icon-fonts.css" rel="stylesheet" type="text/css" media="all">
-<link href="../../static/accounts/css/custom.css" rel="stylesheet" type="text/css" media="all">
+
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300' rel='stylesheet' type='text/css'>
 
-<link href="../../static/accounts/fonts/bebas/stylesheet.css" rel="stylesheet" type="text/css" media="all">
-<link href="../../static/accounts/css/colors/blue.css" rel="stylesheet" type="text/css" media="all">
+{% block sadana %}
 <script type="text/javascript">
 if(top != self) {
 window.open(self.location.href, '_top');
 }
 </script>
+<link href="{% static 'accounts/css/plugins.css'  %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'accounts/css/theme.css'  %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'accounts/css/icon-fonts.css'  %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'accounts/css/custom.css'  %}" rel="stylesheet" type="text/css" media="all">
+<link href="{% static 'accounts/css/blue.css'  %}" rel="stylesheet" type="text/css" media="all">
+<script src="{% static 'accounts/js/jquery.min.js'  %}" > </script>
+<script src="{% static 'accounts/js/plugins.js'  %}" > </script>
+<script src="{% static 'accounts/js/scripts.js'  %}" > </script>
+
+
+
+
+{% endblock %}
+
 {% block customcss %}
     <link href="{% static 'accounts/css/search_bar.css' %}" rel="stylesheet">
 {% endblock %}
 
 <!-- Navigation -->
+<script src="../../static/accounts/js/jquery.min.js"></script>
+<script src="../../static/accounts/js/plugins.js"></script>
+<script src="../../static/accounts/js/scripts.js"></script>
 <nav class="navbar navbar-default dark">
     <div class="container">
 
         <div class="navbar-header">
             <div class="container">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <button type="button" class="navbar-toggle collapsed ham" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar top-bar"></span>
                     <span class="icon-bar middle-bar"></span>
@@ -136,48 +145,57 @@ window.open(self.location.href, '_top');
 
 
     <!-- Icons Grid -->
-    <div class="site-wrapper" >
+    <div class="site-wrapper" style="margin-bottom:-170px;padding-bottom: -20px;z-index:100;">
+
+    <section class="pt100 pb100 bg-color" >
+      <div class="container" >
+    <div class="row" style="margin-top:-220px;" >
+        <div class="col-md-12" >
+
+            <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
+                <a href="#" class="a-box box-hover">
+                    <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                        <div class="text-left pt10 pb30">
+                            <h3 class="fitness-font700 mb0">Active Projects</h3>
+                            <h6 class="md-grey fitness-font400 mt0">Great for Collaborative Projects</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb30 fitness-overlay" style="padding:0;">
+                <a href="#" class="a-box box-hover-featured">
+                    <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                        <div class="text-left pt10 pb30">
+                          <h3 class="fitness-font700 mb0">Great Community</h3>
+                          <h6 class="md-grey fitness-font400 mt0">Extremely Fast Response Time</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
+                <a href="#" class="a-box box-hover">
+                    <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                        <div class="text-left pt10 pb30">
+                          <h3 class="fitness-font700 mb0">Get Experience</h3>
+                          <h6 class="md-grey fitness-font400 mt0">A Social Network with Benefits!</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+  </div>
+</section>
+</div>
+
+    <div class="site-wrapper" style="overflow: hidden;">
 
         <!-- Text Section -->
-  <section class="pt100 pb100 bg-color">
-    <div class="container">
+  <section class="pt100 pb100 bg-color" >
+    <div class="container" >
 
-                <div class="row" style="margin-top:-220px">
-                    <div class="col-md-12">
 
-                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
-                            <a href="#" class="a-box box-hover">
-                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
-                                    <div class="text-left pt10 pb30">
-                                        <h3 class="fitness-font700 mb0">Active Projects</h3>
-                                        <h6 class="md-grey fitness-font400 mt0">Great for Collaborative Projects</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0;">
-                            <a href="#" class="a-box box-hover-featured">
-                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
-                                    <div class="text-left pt10 pb30">
-                                      <h3 class="fitness-font700 mb0">Great Community</h3>
-                                      <h6 class="md-grey fitness-font400 mt0">Extremely Fast Response Time</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
-                            <a href="#" class="a-box box-hover">
-                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
-                                    <div class="text-left pt10 pb30">
-                                      <h3 class="fitness-font700 mb0">Get Experience</h3>
-                                      <h6 class="md-grey fitness-font400 mt0">A Social Network with Benefits!</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
 
       <div class="row mt60">
 
@@ -438,7 +456,9 @@ This was our brief introduction. It's time for you to connect with the developer
 
 <ul class="menu-right nav navbar-nav">
 <li class="dropdown megamenu"><a href="https://github.com/rshrc/NSP" class=" customhover">Github</a></li>
+
 <p> <br>NSP 1.1V</p>
+
 </ul>
 
 
@@ -452,7 +472,7 @@ This was our brief introduction. It's time for you to connect with the developer
     <!-- End Footer 1 -->
 
     <!-- Start Back To Top -->
-    <a id="back-to-top">^</a>
+    <!-- <a id="back-to-top">^</a> -->
     <!-- End Back To Top -->
 
 </div><!-- Site Wrapper -->
