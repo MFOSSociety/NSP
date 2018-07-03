@@ -12,6 +12,7 @@ def redirectToAccount(request):
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('account/', include('accounts.urls')),
+                  path('notifications/',include('notifications.urls')),
                   path('', redirectToAccount, name="redirectToAccount")
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
