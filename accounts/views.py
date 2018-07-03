@@ -245,7 +245,7 @@ def editIssueSolution(request,projectID,type_,ID):
     if request.user != object_.user:
         return redirect("/account/project/{}/{}/{}".format(project.id,type_,object_.id))
     user_profile = UserProfile.objects.get(user=object_.user)
-    if request.user == object_.user:
+    if request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
         object_.title = title
