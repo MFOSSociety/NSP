@@ -330,18 +330,6 @@ def FriendProfileView(request, username):
             "skills": skills, 'range': range(rating_value), 'projects': projects}
     return render(request, template, args)
 
-
-# return render(request, 'accounts/profile_friend.html', args)
-
-
-def DevelopersView(request):
-    return render(request, 'accounts/team.html')
-
-
-def AboutView(request):
-    return HttpResponse("<h1>   About Us</h1>  ")
-
-
 # pass, if you don't want to write the method yet
 
 @login_required
@@ -467,27 +455,8 @@ def AddSkillView(request):
     return render(request, 'accounts/addskill.html', {'form': form})
 
 
-class DeleteSkillView(DeleteView):
-    model = Skill
-    success_url = reverse_lazy("view_profile")
-
-
 def SuccesfullRegistrationView(request):
     return render(request, 'accounts/registersuccess.html')
-
-
-# This is for the file upload
-@login_required
-def SimpleUploadView(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'accounts/simple_upload.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'accounts/simple_upload.html')
 
 
 # TODO
@@ -592,10 +561,3 @@ def search(request):
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
 
-
-def AboutUsView(request):
-    return render(request, 'accounts/aboutus.html')
-
-
-def WikiView(request):
-    return render(request, 'accounts/wiki.html')
