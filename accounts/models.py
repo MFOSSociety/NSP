@@ -18,7 +18,7 @@ class ProjectDetail(models.Model):
     initiated_by = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     mentor_name = models.CharField(max_length=50, default="", blank=False)
     branch = models.CharField(max_length=50, blank=True)
-    description = models.CharField(max_length=2500, blank=False)
+    description = models.TextField()
     paid = models.BooleanField(default=False)
     start_date = models.DateField(default=datetime.datetime.now)
 

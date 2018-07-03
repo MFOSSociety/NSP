@@ -7,7 +7,7 @@
     <div style="text-align: center;" class="container">
     <h1>{{ project.project_name }}</h1>
     <p>Mentor : {{ project.mentor_name }}</p>
-    <p>Description : {{ project.description }}</p>
+    <p>Description : {{ project.description|linebreaks }}</p>
     <p>Date : {{ project.start_date }}</p>
     <p>Issues: {{ issuesNumber }}</p>
     <p>Solutions: {{ solutionsNumber }}</p>
@@ -33,7 +33,7 @@
 						      <h5 class="mb-1">{{ issue.title }}</h5>
 						      <small>{{ issue.date}}</small>
 						    </div>
-						    <p class="mb-1">{{issue.description}}</p>
+						    <p class="mb-1">{{issue.description|linebreaks}}</p>
 						  </a>
 						 {% else %}
 						  <a href="issue/{{issue.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -41,7 +41,7 @@
 						      <h5 class="mb-1">{{ issue.title }}</h5>
 						      <small class="text-muted">{{ issue.date }}</small>
 						    </div>
-						    <p class="mb-1">{{issue.description}}</p>
+						    <p class="mb-1">{{issue.description|linebreaks}}</p>
 						  </a>
 					  	{% endif %}
 						{% empty %}
@@ -62,7 +62,7 @@
 							      <h5 class="mb-1">{{ solution.title }}</h5>
 							      <small>{{ solution.date}}</small>
 							    </div>
-							    <p class="mb-1">{{solution.description}}</p>
+							    <p class="mb-1">{{solution.description|linebreaks}}</p>
 							    <!-- <small class="text-muted">Donec id elit non mi porta.</small> -->
 							  </a>
 							 {% else %}
@@ -71,7 +71,7 @@
 							      <h5 class="mb-1">{{ solution.title }}</h5>
 							      <small class="text-muted">{{ solution.date}}</small>
 							    </div>
-							    <p class="mb-1">{{solution.description}}</p>
+							    <p class="mb-1">{{solution.description|linebreaks}}</p>
 							  </a>
 						  	{% endif %}
 						  	{% empty %}
