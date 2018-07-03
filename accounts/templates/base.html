@@ -57,6 +57,7 @@ window.open(self.location.href, '_top');
 <script src="{% static 'accounts/js/jquery.min.js'  %}" > </script>
 <script src="{% static 'accounts/js/plugins.js'  %}" > </script>
 <script src="{% static 'accounts/js/scripts.js'  %}" > </script>
+<script src="{% static 'accounts/js/bootstrap.min.js'  %}" > </script>
 
 
 
@@ -68,27 +69,30 @@ window.open(self.location.href, '_top');
 {% endblock %}
 
 <!-- Navigation -->
-<script src="../../static/accounts/js/jquery.min.js"></script>
-<script src="../../static/accounts/js/plugins.js"></script>
-<script src="../../static/accounts/js/scripts.js"></script>
-<nav class="navbar navbar-default dark">
-    <div class="container">
 
-        <div class="navbar-header">
-            <div class="container">
-                <button type="button" class="navbar-toggle collapsed ham" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar top-bar"></span>
-                    <span class="icon-bar middle-bar"></span>
-                    <span class="icon-bar bottom-bar"></span>
-                </button>
-                <a class="navbar-brand logo-light" href="{% url 'home' %}" style="margin-top:-30px;"><img src="{% static 'accounts/img/assets/logo-light.png' %}" alt="#"></a>
-                <a class="navbar-brand logo-dark" href="{% url 'home' %}"><img src="{% static 'accounts/img/assets/logo-dark.png' %}" alt="#"></a>
-            </div>
-        </div>
 
-        <div id="navbar" class="navbar-collapse collapse">
-            <div class="container">
+
+
+
+              <!-- Start Header -->
+              <nav class="navbar navbar-default dark">
+                  <div class="container">
+
+                      <div class="navbar-header">
+                          <div class="container">
+                              <button type="button" class="navbar-toggle collapsed ham" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                  <span class="sr-only">Toggle navigation</span>
+                                  <span class="icon-bar top-bar"></span>
+                                  <span class="icon-bar middle-bar"></span>
+                                  <span class="icon-bar bottom-bar"></span>
+                              </button>
+                              <a class="navbar-brand logo-light" href="{% url 'home' %}" style="margin-top:-30px;"><img src="{% static 'accounts/img/assets/logo-light.png' %}" alt="#"></a>
+                              <a class="navbar-brand logo-dark" href="{% url 'home' %}"><img src="{% static 'accounts/img/assets/logo-dark.png' %}" alt="#"></a>
+                          </div>
+                      </div>
+
+                      <div id="navbar" class="navbar-collapse collapse">
+                          <div class="container">
                 <ul class="nav navbar-nav menu-right">
   {% if user.is_authenticated %}
 
@@ -478,9 +482,10 @@ This was our brief introduction. It's time for you to connect with the developer
 </div><!-- Site Wrapper -->
 
 <!-- Scripts -->
-<script src="../../static/accounts/js/jquery.min.js"></script>
 <script src="../../static/accounts/js/plugins.js"></script>
 <script src="../../static/accounts/js/scripts.js"></script>
+<script src="../../static/accounts/js/jquery.min.js"></script>
+
     </body>
 {% endblock %}
 
