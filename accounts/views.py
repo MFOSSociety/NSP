@@ -52,7 +52,7 @@ def ProjectDescribeView(request):
     return render(request, 'accounts/start_project.html',
                   {'project_form': project_form, 'project_registered': project_registered})
 
-
+@login_required
 def deleteProject(request, ID):
     project = ProjectDetail.objects.get(pk=ID)
     if request.user == project.initiated_by:
@@ -60,7 +60,6 @@ def deleteProject(request, ID):
         return redirect("/account/project/active")
     else:
         return redirect("/account/project/active")
-
 
 @login_required
 def projectEdit(request, ID):
@@ -230,6 +229,34 @@ def deleteIssueSolution(request, type_, ID):
     if request.user == instance.user:
         instance.delete()
     return redirect("/account/project/{}/{}/all".format(project.id, type_ + "s"))
+
+@login_required
+def editIssueSolution(request,projectID,type_,ID):
+    project = ProjectDetail.objects.get(pk=projectID)
+    openIssues = ""
+    if type_ == "solution":
+        openIssues = Issue.objects.filter(project=project, status="1")
+        object_ = Solution.objects.get(pk=ID)
+    elif type_ == "issue":
+        object_ = Issue.objects.get(pk=ID)
+    else:
+        return redirect("/account/project/{}".format(project.id))
+    user_profile = UserProfile.objects.get(user=object_.user)
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        object_.title = title
+        object_.description = description
+        if type_ == "solution":
+            issue = Issue.objects.get(pk=int(request.POST.get("value")))
+            object_.issue = issue
+        object_.save()
+        return redirect("/account/project/{}/{}/{}".format(project.id,type_,object_.id))
+    else:
+        args = {"project":project,"type":type_,"openIssues":openIssues,
+                    "object":object_,"user_profile":user_profile}
+        return render(request,"accounts/editIssueSolution.html",args)
+
 
 
 @login_required
