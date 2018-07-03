@@ -2,28 +2,28 @@
 Visit - http://thensp.pythonanywhere.com/
 
 ## Registration Page
-![The Registration Page](https://github.com/Rishi110/NSP/blob/master/screenshots/1%20Register.png)
+![The Registration Page](https://i.imgur.com/S3qYQxv.jpg)
 
 ## Login Page
-![The Login Page](https://github.com/Rishi110/NSP/blob/master/screenshots/2%20Login.png)
+![The Login Page](https://i.imgur.com/lSky9uy.jpg)
 
 ## Home Page Part 1
-![Home Page Part 1](https://github.com/Rishi110/NSP/blob/master/screenshots/3%20Home1.png)
+![Home Page Part 1](https://i.imgur.com/IX9xsXz.jpg)
 
 ## Home Page Part 2
-![Home Page Part 2](https://github.com/Rishi110/NSP/blob/master/screenshots/3%20Home2.png)
+![Home Page Part 2](https://i.imgur.com/gQt5lho.jpg)
 
 ## Home Page Part 3
-![Home Page Part 3](https://github.com/Rishi110/NSP/blob/master/screenshots/3%20Home3.png)
+![Home Page Part 3](https://i.imgur.com/SFmL81J.jpg)
 
 ## Profile Page 
-![The Profile Page](https://github.com/Rishi110/NSP/blob/master/screenshots/4%20Profile%20Page.png)
+![The Profile Page](https://i.imgur.com/agKJpHR.jpg)
 
 ## Start Project Page
-![Edit Profile Page](https://github.com/Rishi110/NSP/blob/master/screenshots/5%20Start%20Project.png)
+![Edit Profile Page](https://i.imgur.com/lmOrIwY.jpg)
 
 ## Change Password Page
-![Change Password](https://github.com/Rishi110/NSP/blob/master/screenshots/6%20Change%20Password.png)
+![Change Password](https://i.imgur.com/CBat1bD.jpg)
 
 ## Developers:
 #### Backend Developers - <a href="https://github.com/rshrc">Rishi Banerjee</a> , <a href="https://github.com/pratikjain04">Pratik Jain</a> , <a href="https://github.com/gjergjk71">Gjergj Kadriu</a>

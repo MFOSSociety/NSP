@@ -1,5 +1,5 @@
 import datetime
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Skill(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
-    skill_name = models.CharField(max_length=20, default="", blank=True)
+    skill_name = models.CharField(max_length=100, default="", blank=True)
 
     def __str__(self):
         return self.skill_name
@@ -18,7 +18,7 @@ class ProjectDetail(models.Model):
     initiated_by = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     mentor_name = models.CharField(max_length=50, default="", blank=False)
     branch = models.CharField(max_length=50, blank=True)
-    description = models.CharField(max_length=2500, blank=False)
+    description = models.TextField()
     paid = models.BooleanField(default=False)
     start_date = models.DateField(default=datetime.datetime.now)
 
@@ -43,7 +43,7 @@ class UserProfile(models.Model):
     stream = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
     gender = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
     position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)  # Student or Teacher
-    bio = models.CharField(max_length=500, default="", blank=True)
+    bio = models.TextField()
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
