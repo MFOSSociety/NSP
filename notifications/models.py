@@ -13,10 +13,12 @@ class SolutionNotification(models.Model):
 class InterestedNotification(models.Model):
 	issue = models.ForeignKey(Issue,on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
+	date = models.DateField(auto_now_add=True)
 
 class FollowNotification(models.Model):
 	follow = models.ForeignKey(Follow,on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
+	date = models.DateField(auto_now_add=True)
 
 class IssueCommentNotification(models.Model):
 	issueComment = models.ForeignKey(IssueComment,on_delete=models.CASCADE)
