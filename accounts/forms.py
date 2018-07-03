@@ -125,8 +125,6 @@ class RegistrationForm(UserCreationForm):  # extending from superclass
 
         return user
 
-        # SKILL FORM
-
 
 class SkillForm(forms.Form):
     model = Skill

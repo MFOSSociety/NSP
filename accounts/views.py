@@ -14,7 +14,6 @@ from django.shortcuts import (
 from django.shortcuts import render, render_to_response
 from django.urls import reverse_lazy
 
-
 # from django.contrib.auth.forms import UserCreationForm use this for not custom
 from accounts.forms import (
     EditProfileForm,
@@ -33,7 +32,6 @@ from django.views.generic import UpdateView, DeleteView
 def ProjectHomeView(request):
     args = {}
     return render(request, 'accounts/home.html', args)
-
 
 
 @login_required
@@ -55,17 +53,17 @@ def ProjectDescribeView(request):
                   {'project_form': project_form, 'project_registered': project_registered})
 
 
-def deleteProject(request,ID):
+def deleteProject(request, ID):
     project = ProjectDetail.objects.get(pk=ID)
     if request.user == project.initiated_by:
         project.delete()
         return redirect("/account/project/active")
     else:
         return redirect("/account/project/active")
-        
+
 
 @login_required
-def projectEdit(request,ID):
+def projectEdit(request, ID):
     project = ProjectDetail.objects.get(pk=ID)
     if request.user == project.initiated_by:
         if request.method == 'POST':
@@ -75,13 +73,14 @@ def projectEdit(request,ID):
             project.description = request.POST.get("description")
             project.save()
             return redirect("/account/project/{}".format(str(project.id)))
-        args = {"project":project}
+        args = {"project": project}
         if project.initiated_by == request.user:
-            return render(request, 'accounts/editProject.html',args)
+            return render(request, 'accounts/editProject.html', args)
         else:
             raise Http404
     else:
         return redirect("/account/project/{}".format(str(project.id)))
+
 
 def HomeView(request):
     name = "NSP - Network Of Skilled People"
@@ -101,7 +100,8 @@ def LoginView(request):
             else:
                 return HttpResponse("Your NSP account is disabled.")  # This is not working
         else:
-            return HttpResponse("<h2>   Invalid login details supplied.</h2>   ")  # By Default, Django's message is working
+            return HttpResponse(
+                "<h2>   Invalid login details supplied.</h2>   ")  # By Default, Django's message is working
     else:
         return render(request, 'accounts/login.html', {})
 
@@ -115,10 +115,11 @@ def ProfileView(request):
     followings = len(Follow.objects.filter(follower=request.user))
     skills = Skill.objects.filter(user=request.user)
     projects = ProjectPeopleInterested.objects.filter(user=request.user)
-    args = {'user': request.user,"followers":followers
-                ,"followings":followings,"skills":skills}
+    args = {'user': request.user, "followers": followers
+        , "followings": followings, "skills": skills}
     rating_value = user.userprofile.ratings
-    args = {'user': user, "followers": followers, "following": followings, "skills": skills, 'range': range(rating_value), 'projects': projects}
+    args = {'user': user, "followers": followers, "following": followings, "skills": skills,
+            'range': range(rating_value), 'projects': projects}
     return render(request, 'accounts/profile.html', args)
 
 
@@ -133,33 +134,32 @@ def PeopleView(request):
 def ProjectsListView(request):
     current_user = request.user
     projects = ProjectDetail.objects.all()
-    dict_ = {} 
+    dict_ = {}
     for project in projects:
         interested = ProjectPeopleInterested.objects.filter(project=project)
-        current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user,project=project)
-        dict_[project] = len(interested),current_user_interested
+        current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
+        dict_[project] = len(interested), current_user_interested
 
     args = {"dict_": dict_}
     return render(request, 'accounts/listprojects.html', args)
 
 
 @login_required
-def addInterested(request,ID):
+def addInterested(request, ID):
     current_user = request.user
     project = ProjectDetail.objects.get(pk=ID)
-    current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user,project=project)
+    current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
     if not current_user_interested:
-        ProjectPeopleInterested.objects.create(user=current_user,project=project)
+        ProjectPeopleInterested.objects.create(user=current_user, project=project)
     return redirect("/account/project/active/")
 
 
 @login_required
-def removeInsterested(request,ID):
+def removeInsterested(request, ID):
     current_user = request.user
     project = ProjectDetail.objects.get(pk=ID)
-    ProjectPeopleInterested.objects.get(user=current_user,project=project).delete()
+    ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
     return redirect("/account/project/active/")
-
 
 
 @login_required
@@ -169,55 +169,56 @@ def ProjectDetailView(request, project_id):
     except:
         raise Http404
 
-    issues = Issue.objects.filter(project=project,status="1").order_by("-id")[:5]
-    allIssues = Issue.objects.filter(project=project,status="1").order_by("-id")
-    solutions = Solution.objects.filter(issue__in=allIssues,status="0").order_by('-id')[:5]
+    issues = Issue.objects.filter(project=project, status="1").order_by("-id")[:5]
+    allIssues = Issue.objects.filter(project=project, status="1").order_by("-id")
+    solutions = Solution.objects.filter(issue__in=allIssues, status="0").order_by('-id')[:5]
     editable = False
     context = locals()
     template = 'accounts/projectdetailview.html'
-    args = {'project': project,"issues":issues,
-            'issuesNumber':len(issues),
-            "solutions":solutions,
-            "solutionsNumber":len(solutions)}
+    args = {'project': project, "issues": issues,
+            'issuesNumber': len(issues),
+            "solutions": solutions,
+            "solutionsNumber": len(solutions)}
     return render(request, template, args)
 
 
 @login_required
-def projectIssues(request,ID,status):
+def projectIssues(request, ID, status):
     project = ProjectDetail.objects.get(pk=ID)
     if status == "open":
-        issues = Issue.objects.filter(project=project,status="1").order_by("-id")
+        issues = Issue.objects.filter(project=project, status="1").order_by("-id")
     elif status == "closed":
-        issues = Issue.objects.filter(project=project,status="0").order_by("-id")
+        issues = Issue.objects.filter(project=project, status="0").order_by("-id")
     elif status == "all":
         issues = Issue.objects.filter(project=project).order_by("-id")
     else:
         return redirect("/account/project/{}".format(ID))
-    
-    args = {"project":project,"issues":issues,"status":status}
-    return render(request,"accounts/projectIssues.html",args)
+
+    args = {"project": project, "issues": issues, "status": status}
+    return render(request, "accounts/projectIssues.html", args)
 
 
 @login_required
 def projectSolutions(request, ID, status):
     project = ProjectDetail.objects.get(pk=ID)
-    issues = Issue.objects.filter(project=project,status="1").order_by("-id")
+    issues = Issue.objects.filter(project=project, status="1").order_by("-id")
     if status == "open":
-        solutions = Solution.objects.filter(issue__in=issues,status="0").order_by("-id")
+        solutions = Solution.objects.filter(issue__in=issues, status="0").order_by("-id")
     elif status == "accepted":
-        solutions = Solution.objects.filter(issue__in=issues,status="1").order_by("-id")
+        solutions = Solution.objects.filter(issue__in=issues, status="1").order_by("-id")
     elif status == "notaccepted":
-        solutions = Solution.objects.filter(issue__in=issues,status="2").order_by("-id")
+        solutions = Solution.objects.filter(issue__in=issues, status="2").order_by("-id")
     elif status == "all":
         solutions = Solution.objects.filter(issue__in=issues).order_by("-id")
     else:
         return redirect("/account/project/{}".format(ID))
-    
+
     args = {"project": project, "solutions": solutions, "status": status}
     return render(request, "accounts/projectSolutions.html", args)
 
+
 @login_required
-def deleteIssueSolution(request,type_,ID):
+def deleteIssueSolution(request, type_, ID):
     if type_ == "issue":
         instance = Issue.objects.get(pk=ID)
         project = instance.project
@@ -228,39 +229,40 @@ def deleteIssueSolution(request,type_,ID):
         return redirect("/account/")
     if request.user == instance.user:
         instance.delete()
-    return redirect("/account/project/{}/{}/all".format(project.id,type_+"s"))
+    return redirect("/account/project/{}/{}/all".format(project.id, type_ + "s"))
+
 
 @login_required
-def createIssueSolution(request,projectID,type_):
+def createIssueSolution(request, projectID, type_):
     project = ProjectDetail.objects.get(pk=projectID)
     user_profile = UserProfile.objects.get(user=request.user)
     openIssues = ""
     if type_ == "solution":
-        openIssues = Issue.objects.filter(project=project,status="1")
-    
+        openIssues = Issue.objects.filter(project=project, status="1")
+
     if request.method == "POST":
         if type_ == "issue":
             title = request.POST.get("title")
             description = request.POST.get("description")
-            issue = Issue.objects.create(project=project,user=request.user,
-                title=title,description=description,status="1")
-            return redirect("/account/project/{}/issue/{}".format(project.id,issue.id))
+            issue = Issue.objects.create(project=project, user=request.user,
+                                         title=title, description=description, status="1")
+            return redirect("/account/project/{}/issue/{}".format(project.id, issue.id))
         elif type_ == "solution":
             title = request.POST.get("title")
             description = request.POST.get("description")
             issueID = request.POST.get("value")
             issue = Issue.objects.get(pk=int(issueID))
-            solution = Solution.objects.create(issue=issue,user=request.user,
-                title=title,description=description,status="0")
-            return redirect("/account/project/{}/solution/{}".format(project.id,solution.id))       
+            solution = Solution.objects.create(issue=issue, user=request.user,
+                                               title=title, description=description, status="0")
+            return redirect("/account/project/{}/solution/{}".format(project.id, solution.id))
     else:
-        args = {"project":project,"user_profile":user_profile,
-                "type":type_,"openIssues":openIssues}
-        return render(request,"accounts/createIssueSolution.html",args)
+        args = {"project": project, "user_profile": user_profile,
+                "type": type_, "openIssues": openIssues}
+        return render(request, "accounts/createIssueSolution.html", args)
 
 
 @login_required
-def viewIssueSolution(request,projectID,type_,ID):
+def viewIssueSolution(request, projectID, type_, ID):
     project = ProjectDetail.objects.get(pk=projectID)
     if type_ == "issue":
         post = Issue.objects.get(pk=ID)
@@ -270,39 +272,39 @@ def viewIssueSolution(request,projectID,type_,ID):
         comments = SolutionComment.objects.filter(solution=post)
     else:
         return redirect("/account/project/{}".format(projectID))
-    
+
     profile_comment = {}
     for comment in comments:
         profile = UserProfile.objects.get(user=comment.user)
-        profile_comment[comment.id] = profile,comment
+        profile_comment[comment.id] = profile, comment
 
     userProfile = UserProfile.objects.get(user=post.user)
-    args = {"project":project,"post":post,"comments":comments,
-        "userProfile":userProfile,"type":type_,
-        "profile_comment":profile_comment}
+    args = {"project": project, "post": post, "comments": comments,
+            "userProfile": userProfile, "type": type_,
+            "profile_comment": profile_comment}
 
-    return render(request,"accounts/post.html",args)
+    return render(request, "accounts/post.html", args)
 
 
 @login_required
-def commentIssueSolution(request,projectID,type_,ID):
+def commentIssueSolution(request, projectID, type_, ID):
     if request.method == "POST":
         comment = request.POST.get("comment")
         if type_ == "issue":
             post = Issue.objects.get(pk=ID)
-            IssueComment.objects.create(user=request.user,issue=post,
+            IssueComment.objects.create(user=request.user, issue=post,
                                         comment=comment)
         elif type_ == "solution":
             post = Solution.objects.get(pk=ID)
-            SolutionComment.objects.create(user=request.user,solution=post,
-                                        comment=comment)
+            SolutionComment.objects.create(user=request.user, solution=post,
+                                           comment=comment)
         else:
-            return redirect("/account/project/{}/{}/{}".format(projectID,type_,ID))
+            return redirect("/account/project/{}/{}/{}".format(projectID, type_, ID))
         lastPage = request.POST.get("path")
         return HttpResponseRedirect(lastPage)
 
     else:
-        return redirect("/account/project/{}/{}/{}".format(projectID,type_,ID))
+        return redirect("/account/project/{}/{}/{}".format(projectID, type_, ID))
 
 
 @login_required
@@ -323,23 +325,10 @@ def FriendProfileView(request, username):
     current_user_following = Follow.objects.filter(follower=request.user, following=user)
     projects = ProjectPeopleInterested.objects.filter(user=user)
     args = {'user': user, 'viewer': request.user,
-                "followings": followings, "followers": followers,
-                "current_user_following": current_user_following,
-                "skills": skills, 'range': range(rating_value), 'projects': projects}
+            "followings": followings, "followers": followers,
+            "current_user_following": current_user_following,
+            "skills": skills, 'range': range(rating_value), 'projects': projects}
     return render(request, template, args)
-
-
-# return render(request, 'accounts/profile_friend.html', args)
-
-
-
-def DevelopersView(request):
-    return render(request, 'accounts/team.html')
-
-
-def AboutView(request):
-    return HttpResponse("<h1>   About Us</h1>  ")
-
 
 # pass, if you don't want to write the method yet
 
@@ -439,13 +428,14 @@ def RegistrationView(request):
 
 
 @login_required
-def deleteSkill(request,ID):
+def deleteSkill(request, ID):
     skill = Skill.objects.get(pk=ID)
     if skill.user == request.user:
         skill.delete()
     else:
         return redirect("/account/profile/")
     return redirect("/account/profile/")
+
 
 def SkillsView(request):  # I dont know what this does
     pass
@@ -465,27 +455,8 @@ def AddSkillView(request):
     return render(request, 'accounts/addskill.html', {'form': form})
 
 
-class DeleteSkillView(DeleteView):
-    model = Skill
-    success_url = reverse_lazy("view_profile")
-
-
 def SuccesfullRegistrationView(request):
     return render(request, 'accounts/registersuccess.html')
-
-
-# This is for the file upload
-@login_required
-def SimpleUploadView(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'accounts/simple_upload.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'accounts/simple_upload.html')
 
 
 # TODO
@@ -517,6 +488,7 @@ def followUser(request, ID):
     # redirecting to the same page
     return redirect("/account/users/" + friend.username)
 
+
 @login_required
 def unfollowUser(request, ID):
     friend = User.objects.get(pk=ID)
@@ -529,7 +501,6 @@ def unfollowUser(request, ID):
     follow_value = False
     args = {'user': friend, 'viewer': request.user, 'follow_value': follow_value}
     return redirect("/account/users/" + friend.username)
-
 
 
 class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and not FormView
@@ -548,8 +519,9 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
 
+
 @login_required
-def interestedList(request,ID):
+def interestedList(request, ID):
     project = ProjectDetail.objects.get(pk=ID)
     people_profile = {}
 
@@ -557,14 +529,15 @@ def interestedList(request,ID):
     for interested in peopleInterested:
         people_profile[interested] = UserProfile.objects.get(user=interested.user)
 
-    args = {"project":project,"people_profile":people_profile}
-    return render(request,"accounts/interestedList.html",args)
+    args = {"project": project, "people_profile": people_profile}
+    return render(request, "accounts/interestedList.html", args)
 
 
 def handler404(request):
     response = render_to_response('accounts/error404.html', {})
     response.status_code = 404
     return response
+
 
 @login_required
 def search(request):
@@ -588,10 +561,3 @@ def search(request):
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
 
-
-def AboutUsView(request):
-    return render(request, 'accounts/aboutus.html')
-
-
-def WikiView(request):
-    return render(request, 'accounts/wiki.html')
