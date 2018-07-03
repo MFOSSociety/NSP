@@ -100,7 +100,7 @@ class IssueComment(models.Model):
     date = models.DateField(auto_now_add=True)
 
 
-class   (models.Model):
+class SolutionComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     solution = models.ForeignKey(Solution, on_delete=models.CASCADE)
     comment = models.TextField()
