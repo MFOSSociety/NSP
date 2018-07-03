@@ -234,6 +234,7 @@ def deleteIssueSolution(request, type_, ID):
 def editIssueSolution(request,projectID,type_,ID):
     project = ProjectDetail.objects.get(pk=projectID)
     openIssues = ""
+
     if type_ == "solution":
         openIssues = Issue.objects.filter(project=project, status="1")
         object_ = Solution.objects.get(pk=ID)
@@ -241,8 +242,10 @@ def editIssueSolution(request,projectID,type_,ID):
         object_ = Issue.objects.get(pk=ID)
     else:
         return redirect("/account/project/{}".format(project.id))
+    if request.user != object_.user:
+        return redirect("/account/project/{}/{}/{}".format(project.id,type_,object_.id))
     user_profile = UserProfile.objects.get(user=object_.user)
-    if request.method == "POST":
+    if request.user == object_.user:
         title = request.POST.get("title")
         description = request.POST.get("description")
         object_.title = title
