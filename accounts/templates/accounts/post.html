@@ -27,9 +27,9 @@
                                 {% endif %}
                     <div style="margin: 10px;" class="card-block">
                         <h3>{{ post.title }}</h3>
-                        <p class="card-text">{{ post.description }}</p>
+                        <p class="card-text">{{ post.description|linebreaks }}</p>
                         {% if type == "solution" %}
-                        <h3>Issue: <a href="{% url 'viewIssueSolution' project.id 'issue' post.issue.id %}">{{post.issue}}</h3></a>
+                        <h3>Issue: <a href="{% url 'viewIssueSolution' project.id 'issue' post.issue.id %}">{{post.issue|linebreaks}}</h3></a>
                         {% endif %}
                         <a class="btn btn-sm btn-primary-outline float-right"><i class="fa fa-comments"></i> {{ comments|length }}</a>
                         {% if request.user == post.user %}
@@ -61,7 +61,7 @@
                                         </h6>
                                         <div class="comment-body">
                                             <p>
-                                                {{ profile_comment.1.comment }}
+                                                {{ profile_comment.1.comment|linebreaks }}
                                                 <br>
                                             </p>
                                         </div>
