@@ -23,6 +23,6 @@ def createInterestedNotification(sender, instance, **kwargs):
 								project=instance.project,text=notificationText)
 
 @receiver(post_save, sender=Follow)
-def createIssueNotification(sender, instance, **kwargs):
+def createFollowNotification(sender, instance, **kwargs):
 	notificationText = "{} started following you".format(instance.follower)
 	notifications.models.FollowNotification.objects.create(user=instance.following,follow=instance,text=notificationText)
