@@ -4,9 +4,15 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
+class customUser(User):
+    number = models.CharField(max_length=10)
+    email2 = models.EmailField()
+    first_name2 = models.CharField(max_length=20)
+    last_name2 = models.CharField(max_length=20)
+    
 
 class Skill(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
+    user = models.ForeignKey(customUser, on_delete=models.CASCADE, related_name="owner")
     skill_name = models.CharField(max_length=100, default="", blank=True)
 
     def __str__(self):
@@ -15,7 +21,7 @@ class Skill(models.Model):
 
 class ProjectDetail(models.Model):
     project_name = models.CharField(max_length=50, default="", blank=False)
-    initiated_by = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
+    initiated_by = models.ForeignKey(customUser,on_delete=models.CASCADE,default=1)
     mentor_name = models.CharField(max_length=50, default="", blank=False)
     branch = models.CharField(max_length=50, blank=True)
     description = models.TextField()
@@ -27,7 +33,7 @@ class ProjectDetail(models.Model):
 
 
 class ProjectPeopleInterested(models.Model):
-    user = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE, )
+    user = models.ForeignKey(customUser, related_name="user", on_delete=models.CASCADE, )
     project = models.ForeignKey(ProjectDetail, related_name="project", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -35,7 +41,7 @@ class ProjectPeopleInterested(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
+    user = models.OneToOneField(customUser, on_delete=models.CASCADE, null=False)
     ratings = models.IntegerField(null=True, default=0, blank=True)
     photo = models.ImageField(upload_to="profile_image", null=True, blank=True)
     year = models.IntegerField(null=True, default=1, blank=True)
@@ -58,12 +64,12 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
 
-post_save.connect(create_profile, sender=User)
+post_save.connect(create_profile, sender=customUser)
 
 
 class Follow(models.Model):
-    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
+    follower = models.ForeignKey(customUser, on_delete=models.CASCADE, related_name="follower")
+    following = models.ForeignKey(customUser, on_delete=models.CASCADE, related_name="following")
 
     def __str__(self):
         return "{} started following {}".format(self.follower, self.following)
@@ -71,7 +77,7 @@ class Follow(models.Model):
 
 class Issue(models.Model):
     project = models.ForeignKey(ProjectDetail, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(customUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
@@ -82,7 +88,7 @@ class Issue(models.Model):
 
 
 class Solution(models.Model):
-    user = models.ForeignKey(User, related_name="user_solution", on_delete=models.CASCADE)
+    user = models.ForeignKey(customUser, related_name="user_solution", on_delete=models.CASCADE)
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     description = models.TextField()
@@ -94,14 +100,14 @@ class Solution(models.Model):
 
 
 class IssueComment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(customUser, on_delete=models.CASCADE)
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     comment = models.TextField()
     date = models.DateField(auto_now_add=True)
 
 
 class SolutionComment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(customUser, on_delete=models.CASCADE)
     solution = models.ForeignKey(Solution, on_delete=models.CASCADE)
     comment = models.TextField()
     date = models.DateField(auto_now_add=True)
