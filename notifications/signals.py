@@ -38,11 +38,13 @@ def createIssueCommentNotification(sender, instance, **kwargs):
 						issueComment=instance,text=notificationText)
 
 
-"""#SolutionCommentNotification
-@receiver(post_save, sender=IssueComment)
-def createIssueCommentNotification(sender, instance, **kwargs):
-	notificationText = "{} commented on issue #{} of project {}".format(instance.user,
-							instance.issue.id,instance.issue.project.project_name)
-	notifications.models.IssueCommentNotification.objects.create(user=instance.issue.project.initiated_by,
-						issueComment=instance,text=notificationText)
-"""
+@receiver(post_save, sender=SolutionComment)
+def createSolutionCommentNotification(sender, instance, **kwargs):
+	notificationText = "{} commented on solution #{} of project {}".format(instance.user,
+							instance.solution.id,instance.solution.issue.project.project_name)
+	notifications.models.SolutionCommentNotification.objects.create(user=instance.solution.issue.project.initiated_by,
+						solutionComment=instance,text=notificationText)
+	notifications.models.SolutionCommentNotification.objects.create(user=instance.solution.issue.user,
+						solutionComment=instance,text=notificationText)
+	notifications.models.SolutionCommentNotification.objects.create(user=instance.solution.user,
+						solutionComment=instance,text=notificationText)
