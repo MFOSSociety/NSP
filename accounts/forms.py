@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from accounts.models import ProjectDetail, Skill, UserProfile
+from accounts.models import customUser
 from accounts.models import User
 
 
@@ -93,16 +94,18 @@ class UserProfileForm(forms.ModelForm):
 
 class RegistrationForm(UserCreationForm):  # extending from superclass
     email = forms.EmailField(required=True)
+    number = forms.RegexField(regex=r'^\+?1?\d{9,15}$')
 
     # define meta data
 
     class Meta:
-        model = User
+        model =customUser
         fields = (
             'username',
             'first_name',
             'last_name',
             'email',
+            'number',
             'password1',
             'password2'
         )
@@ -119,6 +122,10 @@ class RegistrationForm(UserCreationForm):  # extending from superclass
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
+        user.number = self.cleaned_data['number']
+        user.email2 = user.email
+        user.first_name2 = user.first_name
+        user.last_name2 = user.last_name
 
         if commit:
             user.save()
