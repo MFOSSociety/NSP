@@ -474,11 +474,7 @@ def RegistrationView(request):
 
         # giving them the opportunity to get the form
         # the else condition is working
-    else:
-        form = RegistrationForm()
-        args = {'form': form}
-        # this refers to the template, so accounts/reg_form.html
-        return render(request, 'accounts/signup.html', args)
+    
 
 
 @login_required
