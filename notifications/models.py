@@ -40,3 +40,4 @@ class SolutionCommentNotification(models.Model):
 	text = models.CharField(max_length=300)
 
 post_save.connect(notifications.signals.createIssueNotification,sender=Issue)
+post_save.connect(notifications.signals.createSolutionNotification,sender=Solution)
