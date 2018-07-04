@@ -19,7 +19,7 @@ class SolutionNotification(models.Model):
 
 class InterestedNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	interested = models.ForeignKey('accounts.ProjectPeopleInterested',on_delete=models.CASCADE)
+	project = models.ForeignKey('accounts.ProjectDetail',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
 
@@ -41,3 +41,4 @@ class SolutionCommentNotification(models.Model):
 
 post_save.connect(notifications.signals.createIssueNotification,sender=Issue)
 post_save.connect(notifications.signals.createSolutionNotification,sender=Solution)
+post_save.connect(notifications.signals.createInterestedNotification,sender=ProjectPeopleInterested)
