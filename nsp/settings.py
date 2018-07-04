@@ -29,8 +29,8 @@ QA_SETTINGS = {
 
 INSTALLED_APPS = [
     'bootstrapform',
-    'accounts',
     'notifications',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
