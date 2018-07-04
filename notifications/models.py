@@ -19,7 +19,7 @@ class SolutionNotification(models.Model):
 
 class InterestedNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	issue = models.ForeignKey('accounts.Issue',on_delete=models.CASCADE)
+	interested = models.ForeignKey('accounts.ProjectPeopleInterested',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
 
