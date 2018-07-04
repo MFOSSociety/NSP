@@ -15,6 +15,7 @@ def createSolutionNotification(sender, instance, **kwargs):
 	notificationText = "{} created solution #{} to issue #{} on {}".format(instance.user,instance.id,
 						instance.issue.id,instance.issue.project.project_name)
 	notifications.models.SolutionNotification.objects.create(user=instance.issue.project.initiated_by,solution=instance,text=notificationText)
+	notifications.models.SolutionNotification.objects.create(user=instance.issue.user,solution=instance,text=notificationText)
 
 @receiver(post_save, sender=ProjectPeopleInterested)
 def createInterestedNotification(sender, instance, **kwargs):
@@ -31,4 +32,17 @@ def createFollowNotification(sender, instance, **kwargs):
 def createIssueCommentNotification(sender, instance, **kwargs):
 	notificationText = "{} commented on issue #{} of project {}".format(instance.user,
 							instance.issue.id,instance.issue.project.project_name)
-	notifications.models.IssueCommentNotification.objects.create(user=instance.user,issueComment=instance,text=notificationText)
+	notifications.models.IssueCommentNotification.objects.create(user=instance.issue.project.initiated_by,
+						issueComment=instance,text=notificationText)
+	notifications.models.IssueCommentNotification.objects.create(user=instance.issue.user,
+						issueComment=instance,text=notificationText)
+
+
+"""#SolutionCommentNotification
+@receiver(post_save, sender=IssueComment)
+def createIssueCommentNotification(sender, instance, **kwargs):
+	notificationText = "{} commented on issue #{} of project {}".format(instance.user,
+							instance.issue.id,instance.issue.project.project_name)
+	notifications.models.IssueCommentNotification.objects.create(user=instance.issue.project.initiated_by,
+						issueComment=instance,text=notificationText)
+"""
