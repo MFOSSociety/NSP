@@ -38,7 +38,3 @@ class SolutionCommentNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	solutionComment = models.ForeignKey('accounts.SolutionComment',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
-
-post_save.connect(notifications.signals.createIssueNotification,sender=Issue)
-post_save.connect(notifications.signals.createSolutionNotification,sender=Solution)
-post_save.connect(notifications.signals.createInterestedNotification,sender=ProjectPeopleInterested)
