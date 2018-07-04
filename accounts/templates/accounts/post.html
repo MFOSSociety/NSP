@@ -33,6 +33,7 @@
                         {% endif %}
                         <a class="btn btn-sm btn-primary-outline float-right"><i class="fa fa-comments"></i> {{ comments|length }}</a>
                         {% if request.user == post.user %}
+                        <a href="{% url 'editIssueSolution' project.id type post.id %}" class="btn btn-sm btn-warning-outline float-right btn-warning">Edit</a>
                         <a href="{% url 'deleteIssueSolution' type post.id %}" class="btn btn-sm btn-primary-outline float-right btn-danger">Delete</a>
                         {% endif %}
                     </div>
