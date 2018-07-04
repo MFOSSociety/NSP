@@ -15,3 +15,9 @@ def createSolutionNotification(sender, instance, **kwargs):
 	notificationText = "{} created solution #{} to issue #{} on {}".format(instance.user,instance.id,
 						instance.issue.id,instance.issue.project.project_name)
 	notifications.models.SolutionNotification.objects.create(user=instance.issue.project.initiated_by,solution=instance,text=notificationText)
+
+@receiver(post_save, sender=ProjectPeopleInterested)
+def createInterestedNotification(sender, instance, **kwargs):
+	notificationText = "{} is interested in {}".format(instance.user,instance.project.project_name)
+	notifications.models.InterestedNotification.objects.create(user=instance.project.initiated_by,
+								project=instance.project,text=notificationText)
