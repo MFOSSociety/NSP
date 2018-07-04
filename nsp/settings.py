@@ -10,6 +10,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LecWGIUAAAAAFZIgG1f3Rt92pabYQx--bnPHjqb'
 
 QA_SETTINGS = {
     'qa_messages': True,

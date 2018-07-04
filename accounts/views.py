@@ -399,6 +399,12 @@ def ChangeProfilePicture(request):
 
 # Go through this, this is important
 
+import json
+import urllib
+from django.shortcuts import render, redirect
+from django.conf import settings
+from django.contrib import messages
+
 
 def RegistrationView(request):
     if request.method == 'POST':
@@ -407,11 +413,29 @@ def RegistrationView(request):
         print(form.is_valid())
         if form.is_valid():
             print("the form is validated")
-            user = form.save()  # this pretty much creates the user
-            user.first_name = request.POST.get("first_name")
-            user.last_name = request.POST.get("last_name")
-            user.save()
-            return redirect('/account')  # this is /account
+            
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            if result['success']:
+                user = form.save()  # this pretty much creates the user
+                user.first_name = request.POST.get("first_name")
+                user.last_name = request.POST.get("last_name")
+                user.save()
+                messages.success(request, 'New comment added with success!')
+                return redirect('/account')
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+                return redirect('/account')
+
+              # this is /account
         else:
             form = RegistrationForm(request.POST)
             args = {'form': form}
