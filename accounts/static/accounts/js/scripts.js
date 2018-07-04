@@ -1,14 +1,14 @@
 (function($) {
     "use strict";
-  
+
     /*--------------------
     Header Dropdown
-    --------------------*/ 
+    --------------------*/
     $('.nav>li>a>i, .dropdown-submenu>a>i').click(function() {
         $(this).closest('.dropdown').siblings().removeClass('open');
-        $(this).closest('.dropdown').toggleClass('open');  
-        return false; 
-    });     
+        $(this).closest('.dropdown').toggleClass('open');
+        return false;
+    });
 
     /* -------------------
     Scroll functions
@@ -18,11 +18,11 @@
         /* -------------------
         Header Animation
         ---------------------*/
-        if ($(this).scrollTop() > 30){   
+        if ($(this).scrollTop() > 30){
             $('nav').addClass("small");
             $('.secondary-header').addClass("fixed");
         }
-        else { 
+        else {
             $('nav').removeClass("small");
             $('.secondary-header').removeClass("fixed");
         }
@@ -31,44 +31,46 @@
         ---------------------*/
         if ($(window).scrollTop() > 400){
             $("#back-to-top").stop().animate({ bottom:'16px' },300,'easeInOutCubic')
-        } 
+        }
         else {
             $("#back-to-top").stop().animate({ bottom:'-50px' },300,'easeInOutCubic')
         }
     });
     /* -------------------
     Home Parallax
-    ---------------------*/ 
+    ---------------------*/
     function parallax(){
         var scrolled = $(window).scrollTop();
         if ($(window).width() > 992) {
-            $('.hero-parallax-fullscreen,.hero-parallax-fullwidth,.page-hero-parallax').css('top',-(scrolled*0.4)+'px'); 
-            $('.hero-container').css('top',-(scrolled*0.2)+'px'); 
-            $('.scroll-opacity').css('opacity',1-(scrolled*.00105)); 
+            $('.hero-parallax-fullscreen,.hero-parallax-fullwidth,.page-hero-parallax').css('top',-(scrolled*0.4)+'px');
+            $('.hero-container').css('top',-(scrolled*0.2)+'px');
+            $('.scroll-opacity').css('opacity',1-(scrolled*.00105));
         };
-    }; 
- 
+    };
+
     /* -------------------
     Lightbox
-    ---------------------*/ 
+    ---------------------*/
+    
+
     $(".gallery-item").magnificPopup({
         type: 'image',
         gallery: { enabled: true },
         mainClass: 'my-mfp-slide-bottom'
-    }); 
+    });
     // Video Popup
     $('.popup-youtube,.popup-vimeo,.popup-gmaps').magnificPopup({
         disableOn: 700,
         type: 'iframe',
         mainClass: 'mfp-fade',
         removalDelay: 160,
-        preloader: false, 
+        preloader: false,
         fixedContentPos: false
-    }); 
+    });
 
     /* -------------------
     Search Modal
-    ---------------------*/   
+    ---------------------*/
     $('.popup-with-zoom-anim').magnificPopup({
         type: 'inline',
         fixedContentPos: false,
@@ -79,20 +81,20 @@
         midClick: true,
         removalDelay: 300,
         mainClass: 'my-mfp-slide-bottom'
-    });  
-    
-    $('.search').click(function(){ 
-        setTimeout ( function timeoutFunction () { 
+    });
+
+    $('.search').click(function(){
+        setTimeout ( function timeoutFunction () {
             $('#search-modal-input').focus();
         }, 100);
     });
-     
+
     /* -------------------
     Smooth scrolling to anchor
     ---------------------*/
     $('.scroll-btn,.btn-scroll').bind('click', function(event) {
         var $anchor = $(this);
-        
+
         if ($(window).width() > 992) {
             $('html, body').stop().animate({
                 scrollTop: $($anchor.attr('href')).offset().top - 53
@@ -104,11 +106,11 @@
             }, 1000, 'easeInOutExpo');
             event.preventDefault();
         }
-    }); 
+    });
 
     /* -------------------
     Owl Slider callings
-    ---------------------*/ 
+    ---------------------*/
     $(".hero-slider").owlCarousel({
         autoPlay : true,
         navigation : true,
@@ -120,16 +122,16 @@
         paginationSpeed : 400,
         singleItem: true,
         items:1,
-        autoHeight: true,  
-        addClassActive: true, 
+        autoHeight: true,
+        addClassActive: true,
         beforeMove: function(){
-            // BEFORE going to the next slide (hide captions) 
-        }, 
+            // BEFORE going to the next slide (hide captions)
+        },
         afterMove: function(){
-            // AFTER going to next slide (show captions)   
+            // AFTER going to next slide (show captions)
         }
-    }); 
- 
+    });
+
     $(".image-slider1,.image-slider2,.image-slider5,.image-slider6,.image-slider7").owlCarousel({
         navigation : true,
         navigationText: [
@@ -141,43 +143,43 @@
         paginationSpeed : 400,
         singleItem: true,
         items:1,
-        autoHeight: true,  
+        autoHeight: true,
         addClassActive: true
     });
- 
+
     $(".image-slider3,.image-slider4").owlCarousel({
-        navigation : false,  
+        navigation : false,
         pagination: true,
         paginationSpeed : 400,
         singleItem: true,
         items:1,
-        autoHeight: true,  
+        autoHeight: true,
         addClassActive: true
     });
-      
+
 
 
     $("#owl-music").owlCarousel({
         autoPlay : true,
-        items: 3, 
+        items: 3,
         pagination: false,
         navigation: false
     });
 
     $("#clients-slider").owlCarousel({
         autoPlay : true,
-        items: 3, 
+        items: 3,
         pagination: true,
         navigation: false
     });
-    
+
     $("#clients-slider-2").owlCarousel({
         autoPlay : true,
-        items: 6, 
+        items: 6,
         pagination: false,
         navigation: false
     });
-     
+
     $("#quote-slider").owlCarousel({
         autoPlay : false,
         singleItem : true,
@@ -201,29 +203,29 @@
           "<i class='ion-ios-arrow-left size-2x'></i>",
           "<i class='ion-ios-arrow-right size-2x'></i>"
           ],
-    }); 
+    });
 
-    $("#blog-slider").owlCarousel({ 
+    $("#blog-slider").owlCarousel({
         autoPlay : true,
         singleItem : true,
         pagination: false,
         navigation: false,
-    });   
-    
+    });
+
     $("#owl-slider1").owlCarousel({
         autoPlay : false,
         singleItem : true,
         pagination: false,
         navigation: false
     });
-    
+
     $("#slider-features-1,#slider-features-2").owlCarousel({
         autoPlay : false,
         items: 3,
         pagination: false,
         navigation: false
     });
-     
+
     /* -------------------
     Contact form
     ---------------------*/
@@ -236,7 +238,7 @@
                 .attr('disabled','disabled');
             $.post(action, {
                 name: $('#name').val(),
-                email: $('#email').val(), 
+                email: $('#email').val(),
                 comments: $('#comments').val(),
             },
                 function(data){
@@ -250,10 +252,10 @@
 		});
 		return false;
 	});
-    
+
     /* -------------------
     Subscribe form
-    ---------------------*/ 
+    ---------------------*/
     $('#subscribe-form,#subscribe-form2').on( 'submit', function( e ) {
         e.preventDefault();
         var $el = $( this ),
@@ -272,7 +274,7 @@
                 if ( response.status == 'error' ) {
                     $alert.html( response.message );
                     $alert.addClass( 'alert-danger' ).fadeIn( 500 );
-                } 
+                }
                 else {
                     $el.trigger( 'reset' );
                     $alert.html( response.message );
@@ -282,15 +284,15 @@
             },
         })
     });
-    
+
     /* --------------------
     Google Maps
-    --------------------- */ 
+    --------------------- */
 
     /*-Google Map 1-*/
     $(".map1").gmap3({
-        marker:{     
-        address:"38.740527, -79.443050", 
+        marker:{
+        address:"38.740527, -79.443050",
         options:{ icon: "img/assets/marker.png"}},
         map:{
         options:{
@@ -300,11 +302,11 @@
         draggable:!0
         }}
     });
-            
+
     /*-Google Map 2-*/
     $(".map2").gmap3({
-        marker:{     
-        address:"44 W 66th St, New York, NY", 
+        marker:{
+        address:"44 W 66th St, New York, NY",
         options:{ icon: "img/assets/marker.png"}},
         map:{
         options:{
@@ -314,11 +316,11 @@
         draggable:!0
         }}
     });
-            
+
     /*-Google Map 3-*/
     $(".map3").gmap3({
-        marker:{     
-        address:"44 W 66th St, New York, NY", 
+        marker:{
+        address:"44 W 66th St, New York, NY",
         options:{ icon: "img/assets/marker.png"}},
         map:{
         options:{
@@ -339,7 +341,7 @@
             },800);
         });
         }, { offset: '100%',
-             triggerOnce: true 
+             triggerOnce: true
     });
 
     /* -------------------
@@ -352,7 +354,7 @@
 
     /* -------------------
     Portfolio
-    ---------------------*/ 
+    ---------------------*/
     $(window).load(function(){
         var $container = $('.portfolioContainer,.blog-masonry');
         $container.isotope({
@@ -381,27 +383,27 @@
                     queue: false
                 }
              });
-             return false; 
-        });    
-        $container.isotope() 
-    });    
+             return false;
+        });
+        $container.isotope()
+    });
 
     /* ------------------------------
     Accordion, Toggle, Tooltips, Tabs
-    --------------------------------*/  
+    --------------------------------*/
     $('#accordion,#accordion2').on('show.bs.collapse', function () {
         if (true) $('#accordion .in').collapse('hide');
-    }); 
-    $("[data-toggle='tooltip']").tooltip();  
+    });
+    $("[data-toggle='tooltip']").tooltip();
     $(".alert").alert();
     $('#buttonTabs a,#iconTabs a').click(function (e) {
       e.preventDefault()
       $(this).tab('show')
-    }); 
-    
+    });
+
     /*--------------------
     Countdown Timers
-    --------------------*/ 
+    --------------------*/
     $('.countdown-timer').each(function() {
         var date = $(this).attr('data-date');
         $(this).countdown(date, function(event) {
@@ -409,7 +411,7 @@
                 event.strftime('%D days %H:%M:%S')
             );
         });
-    });   
+    });
 
     /* -------------------
     Back to top buttons
@@ -422,12 +424,12 @@
     /*--------------------
     Hero Video
     --------------------*/
-    $(function () { 
+    $(function () {
         var vid = document.getElementById("bgvid");
         var pauseButton = document.querySelector(".hero-video .play-pause-btn");
         function vidFade() {
             vid.classList.add("stopfade");
-        } 
+        }
         if (pauseButton){
             pauseButton.addEventListener("click", function() {
                 vid.classList.toggle("stopfade");
@@ -440,6 +442,6 @@
                 }
             });
         }
-    });  
-    
+    });
+
 })(jQuery);
