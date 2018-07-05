@@ -2,6 +2,60 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style type="text/css">
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+  background-color: #17A2B8;
+}
+.dropdown-menu{
+  top: 60px;
+  right: 0px;
+  left: unset;
+  width: 300px;
+  box-shadow: 0px 5px 7px -1px #c1c1c1;
+  padding-bottom: 0px;
+  padding: 0px;
+}
+.dropdown-menu:before{
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 12px;
+  border:10px solid #343A40;
+  border-color: transparent transparent #343A40 transparent;
+}
+.head{
+  padding:5px 15px;
+  border-radius: 3px 3px 0px 0px;
+}
+.footer{
+  padding:5px 15px;
+  border-radius: 0px 0px 3px 3px; 
+}
+.notification-box{
+  padding: 10px 0px; 
+}
+.bg-gray{
+  background-color: #eee;
+}
+@media (max-width: 640px) {
+    .dropdown-menu{
+      top: 50px;
+      left: -16px;  
+      width: 140px;
+    } 
+    .nav{
+      display: block;
+    }
+    .nav .nav-item,.nav .nav-item a{
+      padding-left: 0px;
+    }
+    .message{
+      font-size: 13px;
+    }
+}
+
+</style>
+
 <link>
 
 <meta charset="utf-8">
@@ -58,6 +112,8 @@ window.open(self.location.href, '_top');
 <script src="{% static 'accounts/js/plugins.js'  %}" > </script>
 <script src="{% static 'accounts/js/scripts.js'  %}" > </script>
 <script src="{% static 'accounts/js/bootstrap.min.js'  %}" > </script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 
 
 
@@ -118,9 +174,75 @@ window.open(self.location.href, '_top');
 
                         </ul>
             </div>
-        </div>
+
 
     </div>
+    {% if notifications %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: unset !important;">
+            <ul class="nav nav-pills mr-auto justify-content-end">
+                <li class="nav-item dropdown">
+                  <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bell"></i>
+                  </a>Notifications {{notifications}}
+                    <ul class="dropdown-menu">
+                      <li class="head text-light bg-dark">
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12 col-12">
+                            <span>Notifications (3)</span>
+                            <a href="" class="float-right text-light">Mark all as read</a>
+                          </div>
+                      </li>
+                      <li class="notification-box">
+                        <div class="row">
+                          <div class="col-lg-3 col-sm-3 col-3 text-center">
+                            <img src="https://avatars1.githubusercontent.com/u/37782595?s=64&v=4" class="w-50 rounded-circle">
+                          </div>    
+                          <div class="col-lg-8 col-sm-8 col-8">
+                            <strong class="text-info">David John</strong>
+                            <div>
+                              Lorem ipsum dolor sit amet, consectetur
+                            </div>
+                            <small class="text-warning">27.11.2015, 15:00</small>
+                          </div>    
+                        </div>
+                      </li>
+                      <li class="notification-box bg-gray">
+                        <div class="row">
+                          <div class="col-lg-3 col-sm-3 col-3 text-center">
+                            <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
+                          </div>    
+                          <div class="col-lg-8 col-sm-8 col-8">
+                            <strong class="text-info">David John</strong>
+                            <div>
+                              Lorem ipsum dolor sit amet, consectetur
+                            </div>
+                            <small class="text-warning">27.11.2015, 15:00</small>
+                          </div>    
+                        </div>
+                      </li>
+                      <li class="notification-box">
+                        <div class="row">
+                          <div class="col-lg-3 col-sm-3 col-3 text-center">
+                            <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
+                          </div>    
+                          <div class="col-lg-8 col-sm-8 col-8">
+                            <strong class="text-info">David John</strong>
+                            <div>
+                              Lorem ipsum dolor sit amet, consectetur
+                            </div>
+                            <small class="text-warning">27.11.2015, 15:00</small>
+                          </div>    
+                        </div>
+                      </li>
+                      <li class="footer bg-dark text-center">
+                        <a href="" class="text-light">View All</a>
+                      </li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+        </div>
+        {% endif %}
 </nav>
 
 {% block body %}
@@ -153,7 +275,7 @@ window.open(self.location.href, '_top');
 
     <section class="pt100 pb100 bg-color" >
       <div class="container" >
-    <div class="row" style="margin-top:-220px;" >
+    <div class="row" style="margin-top:-120px;" >
         <div class="col-md-12" >
 
             <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
