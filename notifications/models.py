@@ -11,11 +11,13 @@ class IssueNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	issue = models.ForeignKey('accounts.Issue',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
+	date = models.DateField(auto_now_add=True)
 
 class SolutionNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	solution = models.ForeignKey('accounts.Solution',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
+	date = models.DateField(auto_now_add=True)
 
 class InterestedNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -33,8 +35,10 @@ class IssueCommentNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	issueComment = models.ForeignKey('accounts.IssueComment',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
+	date = models.DateField(auto_now_add=True)
 
 class SolutionCommentNotification(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	solutionComment = models.ForeignKey('accounts.SolutionComment',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
+	date = models.DateField(auto_now_add=True)
