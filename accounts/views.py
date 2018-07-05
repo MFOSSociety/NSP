@@ -443,7 +443,6 @@ def RegistrationView(request):
         print(form.is_valid())
         if form.is_valid():
             print("the form is validated")
-            
             recaptcha_response = request.POST.get('g-recaptcha-response')
             url = 'https://www.google.com/recaptcha/api/siteverify'
             values = {
@@ -463,7 +462,7 @@ def RegistrationView(request):
                 return redirect('/account')
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-                return redirect('/account')
+                return render(request, 'accounts/signup.html')
 
               # this is /account
         else:
@@ -472,6 +471,11 @@ def RegistrationView(request):
             # this refers to the template, so accounts/reg_form.html
             return render(request, 'accounts/signup.html', args)
 
+    else:
+        form = RegistrationForm()
+        args = {'form': form}
+        # this refers to the template, so accounts/reg_form.html
+        return render(request, 'accounts/signup.html', args)
         # giving them the opportunity to get the form
         # the else condition is working
     
