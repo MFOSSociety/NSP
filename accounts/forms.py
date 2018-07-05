@@ -93,7 +93,6 @@ class UserProfileForm(forms.ModelForm):
 
 class RegistrationForm(UserCreationForm):  # extending from superclass
     email = forms.EmailField(required=True)
-    number = forms.RegexField(regex=r'^\+?1?\d{9,15}$')
 
     # define meta data
 
