@@ -29,17 +29,6 @@ from django.views.generic import UpdateView, DeleteView
 from notifications.models import *
 from itertools import chain
 
-def getNotifications(request):
-    issueNotifications = IssueNotification.objects.filter(user=request.user).order_by("-date")
-    solutionNotifications = SolutionNotification.objects.filter(user=request.user).order_by("-date")
-    followNotifications = FollowNotification.objects.filter(user=request.user).order_by("-date")
-    issueCommentNotifications = IssueCommentNotification.objects.filter(user=request.user).order_by("-date")
-    solutionCommentNotification = SolutionCommentNotification.objects.filter(user=request.user).order_by("-date")
-    result_dict = {"issueNotifications":issueNotifications,"solutionNotifications":solutionNotifications,
-        "followNotifications":followNotifications,"issueCommentNotifications":issueCommentNotifications,
-        "solutionCommentNotification":solutionCommentNotification}
-    return result_dict
-
 
 @login_required
 def ProjectHomeView(request):
