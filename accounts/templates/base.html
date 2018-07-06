@@ -244,6 +244,30 @@ window.open(self.location.href, '_top');
                             </li>
                           {% endfor %}
                         {% endif %}
+                        {% if type == "followNotifc" %}
+                          {% for notification,profile in notifications.items %}
+                            <li class="notification-box">
+
+                                  {% if profile.photo %}
+                                  <img src="{{ profile.photo.url}}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                  {% else %}
+                                  <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                  {% endif %}
+                              <div class="row">
+                                <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
+                                </div>    
+                                <div class="col-lg-8 col-sm-8 col-8">
+                                  <strong class="text-info">{{ profile.user }}</strong>
+                                  
+                                  <div></a><a href="{% url 'view_friend' notification.follow.follower %}">
+                                    {{ notification.text }}
+                                  </div></a>
+                                  <small class="text-warning">{{ notification.date }}</small>
+                                </div>    
+                              </div>
+                            </li>
+                          {% endfor %}
+                        {% endif %}
                       {% endfor %}
                       <li class="footer bg-dark text-center">
                         <a href="" class="text-light">View All</a>
