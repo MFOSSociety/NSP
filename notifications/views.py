@@ -7,17 +7,17 @@ def getNotifications(request):
     issueNotifications = IssueNotification.objects.filter(user=request.user).order_by("id")
     issueNotification_profile = {}
     for issueNotifc in issueNotifications:
-    	issueNotification_profile[issueNotifc] = UserProfile.objects.get(user=issueNotifc.user)
+    	issueNotification_profile[issueNotifc] = UserProfile.objects.get(user=issueNotifc.issue.user)
 
     solutionNotification_profile = {}
     solutionNotifications = SolutionNotification.objects.filter(user=request.user).order_by("id")
     for solutionNotifc in solutionNotifications:
-    	solutionNotification_profile[solutionNotifc] = UserProfile.objects.get(user=solutionNotifc.user)
+    	solutionNotification_profile[solutionNotifc] = UserProfile.objects.get(user=solutionNotifc.solution.user)
 
     followNotification_profile = {}
     followNotifications = FollowNotification.objects.filter(user=request.user).order_by("id")
     for followNotifc in followNotifications:
-    	followNotification_profile[followNotifc] = UserProfile.objects.get(user=followNotifc.user)
+    	followNotification_profile[followNotifc] = UserProfile.objects.get(user=followNotifc.follow.follower)
 
     followNotifications = FollowNotification.objects.filter(follow__following=request.user).order_by("id")
     issueCommentNotifications = IssueCommentNotification.objects.filter(issueComment__user=request.user).order_by("id")
