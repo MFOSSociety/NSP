@@ -26,7 +26,7 @@ from accounts.forms import (
 )
 from accounts.models import *
 from django.views.generic import UpdateView, DeleteView
-from notifications.models import *
+from notifications.views import getNotifications
 from itertools import chain
 
 
