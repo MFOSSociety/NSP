@@ -12,6 +12,7 @@ class IssueNotification(models.Model):
 	issue = models.ForeignKey('accounts.Issue',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
+	status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")))
 	def __str__(self):
 		return self.text
 
@@ -20,6 +21,7 @@ class SolutionNotification(models.Model):
 	solution = models.ForeignKey('accounts.Solution',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
+	status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")))
 	def __str__(self):
 		return self.text
 
@@ -28,6 +30,7 @@ class InterestedNotification(models.Model):
 	project = models.ForeignKey('accounts.ProjectDetail',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
+	status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")))
 	def __str__(self):
 		return elf.text
 
@@ -36,6 +39,7 @@ class FollowNotification(models.Model):
 	follow = models.ForeignKey('accounts.Follow',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
+	status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")))
 	def __str__(self):
 		return self.text
 
@@ -44,6 +48,7 @@ class IssueCommentNotification(models.Model):
 	issueComment = models.ForeignKey('accounts.IssueComment',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
+	status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")))
 	def __str__(self):
 		return self.text
 
@@ -52,5 +57,6 @@ class SolutionCommentNotification(models.Model):
 	solutionComment = models.ForeignKey('accounts.SolutionComment',on_delete=models.CASCADE)
 	text = models.CharField(max_length=300)
 	date = models.DateField(auto_now_add=True)
+	status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")))
 	def __str__(self):
 		return self.text
