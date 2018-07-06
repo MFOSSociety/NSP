@@ -209,7 +209,7 @@ window.open(self.location.href, '_top');
                                 <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
                                 </div>    
                                 <div class="col-lg-8 col-sm-8 col-8">
-                                  <strong class="text-info">{{ profile.user }}</strong>
+                                  <strong class="text-info">{{ notification.issue.user }}</strong>
                                   
                                   <div></a><a href="{% url 'viewIssueSolution' notification.issue.project.id 'issue' notification.issue.id %}">
                                     {{ notification.text }}
@@ -233,7 +233,7 @@ window.open(self.location.href, '_top');
                                 <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
                                 </div>    
                                 <div class="col-lg-8 col-sm-8 col-8">
-                                  <strong class="text-info">{{ profile.user }}</strong>
+                                  <strong class="text-info">{{ notification.solution.user }}</strong>
                                   
                                   <div></a><a href="{% url 'viewIssueSolution' notification.solution.issue.project.id 'solution' notification.solution.id %}">
                                     {{ notification.text }}
@@ -257,7 +257,7 @@ window.open(self.location.href, '_top');
                                 <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
                                 </div>    
                                 <div class="col-lg-8 col-sm-8 col-8">
-                                  <strong class="text-info">{{ profile.user }}</strong>
+                                  <strong class="text-info">{{ notification.follow.follower }}</strong>
                                   
                                   <div></a><a href="{% url 'view_friend' notification.follow.follower %}">
                                     {{ notification.text }}
