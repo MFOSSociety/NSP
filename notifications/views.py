@@ -17,7 +17,7 @@ def getNotifications(request):
     followNotifications = FollowNotification.objects.filter(follow__following=request.user).order_by("-id")
     issueCommentNotifications = IssueCommentNotification.objects.filter(issueComment__user=request.user).order_by("-id")
     solutionCommentNotification = SolutionCommentNotification.objects.filter(solutionComment__user=request.user).order_by("-id")
-    result_list = {"issuesNotifc":issueNotification_profile,"solutionsNotifc":solutionNotifications,
+    result_list = {"issuesNotifc":issueNotification_profile,"solutionsNotifc":solutionNotification_profile,
                     "followNotifcs":followNotifications,"issueCommentNotifc":issueCommentNotifications,
                     "solutionCommentNotifc":solutionCommentNotification}
     return result_list
