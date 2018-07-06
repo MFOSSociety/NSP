@@ -97,7 +97,7 @@ class RegistrationForm(UserCreationForm):  # extending from superclass
     # define meta data
 
     class Meta:
-        model = User
+        model =User
         fields = (
             'username',
             'first_name',
@@ -119,6 +119,7 @@ class RegistrationForm(UserCreationForm):  # extending from superclass
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
+        
 
         if commit:
             user.save()
