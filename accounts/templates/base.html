@@ -3,14 +3,18 @@
 <html lang="en">
 
 <style type="text/css">
-  .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+body{
+  margin-top: 50px;
+  background-color: #f1f1f1;
+} 
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
   background-color: #17A2B8;
 }
 .dropdown-menu{
   top: 60px;
   right: 0px;
   left: unset;
-  width: 300px;
+  width: 460px;
   box-shadow: 0px 5px 7px -1px #c1c1c1;
   padding-bottom: 0px;
   padding: 0px;
@@ -41,7 +45,7 @@
     .dropdown-menu{
       top: 50px;
       left: -16px;  
-      width: 140px;
+      width: 290px;
     } 
     .nav{
       display: block;
@@ -53,7 +57,6 @@
       font-size: 13px;
     }
 }
-
 </style>
 
 <link>
@@ -178,12 +181,12 @@ window.open(self.location.href, '_top');
 
     </div>
     {% if notifications %}
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: unset !important;">
+        <div class="collapse navbar-collapse" style="overflow-y: scroll; margin-right: 200px;" id="navbarSupportedContent" style="display: unset !important;">
             <ul class="nav nav-pills mr-auto justify-content-end">
                 <li class="nav-item dropdown">
                   <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-bell"></i>
-                  </a>Notifications {{notifications}}
+                  </a>Notifications 
                     <ul class="dropdown-menu">
                       <li class="head text-light bg-dark">
                         <div class="row">
@@ -192,48 +195,32 @@ window.open(self.location.href, '_top');
                             <a href="" class="float-right text-light">Mark all as read</a>
                           </div>
                       </li>
-                      <li class="notification-box">
-                        <div class="row">
-                          <div class="col-lg-3 col-sm-3 col-3 text-center">
-                            <img src="https://avatars1.githubusercontent.com/u/37782595?s=64&v=4" class="w-50 rounded-circle">
-                          </div>    
-                          <div class="col-lg-8 col-sm-8 col-8">
-                            <strong class="text-info">David John</strong>
-                            <div>
-                              Lorem ipsum dolor sit amet, consectetur
-                            </div>
-                            <small class="text-warning">27.11.2015, 15:00</small>
-                          </div>    
-                        </div>
-                      </li>
-                      <li class="notification-box bg-gray">
-                        <div class="row">
-                          <div class="col-lg-3 col-sm-3 col-3 text-center">
-                            <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
-                          </div>    
-                          <div class="col-lg-8 col-sm-8 col-8">
-                            <strong class="text-info">David John</strong>
-                            <div>
-                              Lorem ipsum dolor sit amet, consectetur
-                            </div>
-                            <small class="text-warning">27.11.2015, 15:00</small>
-                          </div>    
-                        </div>
-                      </li>
-                      <li class="notification-box">
-                        <div class="row">
-                          <div class="col-lg-3 col-sm-3 col-3 text-center">
-                            <img src="/demo/man-profile.jpg" class="w-50 rounded-circle">
-                          </div>    
-                          <div class="col-lg-8 col-sm-8 col-8">
-                            <strong class="text-info">David John</strong>
-                            <div>
-                              Lorem ipsum dolor sit amet, consectetur
-                            </div>
-                            <small class="text-warning">27.11.2015, 15:00</small>
-                          </div>    
-                        </div>
-                      </li>
+                      {% for type,notifications in notifications.items %}
+                        {% if type == "issuesNotifc" %}
+                          {% for notification,profile in notifications.items %}
+                            <li class="notification-box">
+
+                                  {% if profile.photo %}
+                                  <img src="{{ profile.photo.url}}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                  {% else %}
+                                  <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                  {% endif %}
+                              <div class="row">
+                                <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
+                                </div>    
+                                <div class="col-lg-8 col-sm-8 col-8">
+                                  <strong class="text-info">{{ notification.issue.user }}</strong>
+                                  
+                                  <div></a><a href="{% url 'viewIssueSolution' notification.issue.project.id 'issue' notification.issue.id %}">
+                                    {{ notification.text }}
+                                  </div></a>
+                                  <small class="text-warning">{{ notification.date}}</small>
+                                </div>    
+                              </div>
+                            </li>
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
                       <li class="footer bg-dark text-center">
                         <a href="" class="text-light">View All</a>
                       </li>
