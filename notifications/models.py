@@ -12,8 +12,8 @@ class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.CharField(max_length=300)
     redirect = models.CharField(max_length=500)
-    status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")))
-    
+    status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")),default="1")
+
     date = models.DateField(auto_now_add=True)
     time = models.DateField(auto_now_add=True)
     def __str__(self):
