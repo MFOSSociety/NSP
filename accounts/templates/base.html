@@ -3,60 +3,71 @@
 <html lang="en">
 
 <style type="text/css">
-body{
-  margin-top: 50px;
-  background-color: #f1f1f1;
-} 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
-  background-color: #17A2B8;
-}
-.dropdown-menu{
-  top: 60px;
-  right: 0px;
-  left: unset;
-  width: 460px;
-  box-shadow: 0px 5px 7px -1px #c1c1c1;
-  padding-bottom: 0px;
-  padding: 0px;
-}
-.dropdown-menu:before{
-  content: "";
-  position: absolute;
-  top: -20px;
-  right: 12px;
-  border:10px solid #343A40;
-  border-color: transparent transparent #343A40 transparent;
-}
-.head{
-  padding:5px 15px;
-  border-radius: 3px 3px 0px 0px;
-}
-.footer{
-  padding:5px 15px;
-  border-radius: 0px 0px 3px 3px; 
-}
-.notification-box{
-  padding: 10px 0px; 
-}
-.bg-gray{
-  background-color: #eee;
-}
-@media (max-width: 640px) {
-    .dropdown-menu{
-      top: 50px;
-      left: -16px;  
-      width: 290px;
-    } 
-    .nav{
-      display: block;
+    body {
+        margin-top: 50px;
+        background-color: #f1f1f1;
     }
-    .nav .nav-item,.nav .nav-item a{
-      padding-left: 0px;
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        background-color: #17A2B8;
     }
-    .message{
-      font-size: 13px;
+
+    .dropdown-menu {
+        top: 60px;
+        right: 0px;
+        left: unset;
+        width: 460px;
+        box-shadow: 0px 5px 7px -1px #c1c1c1;
+        padding-bottom: 0px;
+        padding: 0px;
     }
-}
+
+    .dropdown-menu:before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        right: 12px;
+        border: 10px solid #343A40;
+        border-color: transparent transparent #343A40 transparent;
+    }
+
+    .head {
+        padding: 5px 15px;
+        border-radius: 3px 3px 0px 0px;
+    }
+
+    .footer {
+        padding: 5px 15px;
+        border-radius: 0px 0px 3px 3px;
+    }
+
+    .notification-box {
+        padding: 10px 0px;
+    }
+
+    .bg-gray {
+        background-color: #eee;
+    }
+
+    @media (max-width: 640px) {
+        .dropdown-menu {
+            top: 50px;
+            left: -16px;
+            width: 290px;
+        }
+
+        .nav {
+            display: block;
+        }
+
+        .nav .nav-item, .nav .nav-item a {
+            padding-left: 0px;
+        }
+
+        .message {
+            font-size: 13px;
+        }
+    }
 </style>
 
 <link>
@@ -87,7 +98,8 @@ body{
         crossorigin="anonymous"></script>
 
 
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300'
+      rel='stylesheet' type='text/css'>
 
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
       type="text/css">
@@ -98,24 +110,25 @@ body{
 <link href="{% static 'accounts/css/landing-page.min.css' %}" rel="stylesheet">
 <link rel="icon" href="../../static/accounts/img/assets/favicon.png" type="image/png">
 
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300'
+      rel='stylesheet' type='text/css'>
 
 {% block sadana %}
-<script type="text/javascript">
-if(top != self) {
-window.open(self.location.href, '_top');
-}
-</script>
-<link href="{% static 'accounts/css/plugins.css'  %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static 'accounts/css/theme.css'  %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static 'accounts/css/icon-fonts.css'  %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static 'accounts/css/custom.css'  %}" rel="stylesheet" type="text/css" media="all">
-<link href="{% static 'accounts/css/blue.css'  %}" rel="stylesheet" type="text/css" media="all">
-<script src="{% static 'accounts/js/jquery.min.js'  %}" > </script>
-<script src="{% static 'accounts/js/plugins.js'  %}" > </script>
-<script src="{% static 'accounts/js/scripts.js'  %}" > </script>
-<script src="{% static 'accounts/js/bootstrap.min.js'  %}" > </script>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+    <script type="text/javascript">
+        if (top != self) {
+            window.open(self.location.href, '_top');
+        }
+    </script>
+    <link href="{% static 'accounts/css/plugins.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static 'accounts/css/theme.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static 'accounts/css/icon-fonts.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static 'accounts/css/custom.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static 'accounts/css/blue.css' %}" rel="stylesheet" type="text/css" media="all">
+    <script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+    <script src="{% static 'accounts/js/plugins.js' %}"></script>
+    <script src="{% static 'accounts/js/scripts.js' %}"></script>
+    <script src="{% static 'accounts/js/bootstrap.min.js' %}"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 
 
@@ -130,153 +143,172 @@ window.open(self.location.href, '_top');
 <!-- Navigation -->
 
 
+<!-- Start Header -->
+<nav class="navbar navbar-default dark">
+    <div class="container">
 
-
-
-              <!-- Start Header -->
-              <nav class="navbar navbar-default dark">
-                  <div class="container">
-
-                      <div class="navbar-header">
-                          <div class="container">
-                              <button type="button" class="navbar-toggle collapsed ham" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                  <span class="sr-only">Toggle navigation</span>
-                                  <span class="icon-bar top-bar"></span>
-                                  <span class="icon-bar middle-bar"></span>
-                                  <span class="icon-bar bottom-bar"></span>
-                              </button>
-                              <a class="navbar-brand logo-light" href="{% url 'home' %}" style="margin-top:-30px;"><img src="{% static 'accounts/img/assets/logo-light.png' %}" alt="#"></a>
-                              <a class="navbar-brand logo-dark" href="{% url 'home' %}"><img src="{% static 'accounts/img/assets/logo-dark.png' %}" alt="#"></a>
-                          </div>
-                      </div>
-
-                      <div id="navbar" class="navbar-collapse collapse">
-                          <div class="container">
-                <ul class="nav navbar-nav menu-right">
-  {% if user.is_authenticated %}
-
-                    <li class=" "><a href="{% url 'view_profile' %}" class=" customhover">Profile</a>
-
-                    <a href="{% url 'edit_profile' %}" class=" customhover">Edit Profile</a>
-
-                  <a href="{% url 'view_people' %}" class=" customhover">People</a>
-
-                  <a href="{% url 'start_project' %}" class=" customhover">Start Project</a>
-<a href="{% url 'project_list_view' %}" class=" customhover">Active Projects</a>
-
-                    <a href="{% url 'logout' %}" class=" customhover">Log Out</a>
-
-                    </li>
-                      {% else %}
-
-                      <li class=""><a href="{% url 'signup' %}" class=" customhover">Sign Up</a>
-                      <a href="{% url 'user_login' %}" class=" customhover">Sign In</a>
-
-                                </li>
-                      {% endif %}
-
-                        </ul>
-            </div>
-
-
-    </div>
-    {% if notifications %}
-        <div class="collapse navbar-collapse" style="overflow-y: scroll; margin-right: 200px;" id="navbarSupportedContent" style="display: unset !important;">
-            <ul class="nav nav-pills mr-auto justify-content-end">
-                <li class="nav-item dropdown">
-                  <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-bell"></i>
-                  </a>Notifications 
-                    <ul class="dropdown-menu">
-                      <li class="head text-light bg-dark">
-                        <div class="row">
-                          <div class="col-lg-12 col-sm-12 col-12">
-                            <span>Notifications</span>
-                            <a href="" class="float-right text-light">Mark all as read</a>
-                          </div>
-                      </li>
-                      {% for type,notifications in notifications.items %}
-                        {% if type == "issuesNotifc" %}
-                          {% for notification,profile in notifications.items %}
-                            <li class="notification-box">
-
-                                  {% if profile.photo %}
-                                  <img src="{{ profile.photo.url}}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                  {% else %}
-                                  <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                  {% endif %}
-                              <div class="row">
-                                <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
-                                </div>    
-                                <div class="col-lg-8 col-sm-8 col-8">
-                                  <strong class="text-info">{{ notification.issue.user }}</strong>
-                                  
-                                  <div></a><a href="{% url 'viewIssueSolution' notification.issue.project.id 'issue' notification.issue.id %}">
-                                    {{ notification.text }}
-                                  </div></a>
-                                  <small class="text-warning">{{ notification.date}}</small>
-                                </div>    
-                              </div>
-                            </li>
-                          {% endfor %}
-                        {% endif %}
-                        {% if type == "solutionsNotifc" %}
-                          {% for notification,profile in notifications.items %}
-                            <li class="notification-box">
-
-                                  {% if profile.photo %}
-                                  <img src="{{ profile.photo.url}}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                  {% else %}
-                                  <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                  {% endif %}
-                              <div class="row">
-                                <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
-                                </div>    
-                                <div class="col-lg-8 col-sm-8 col-8">
-                                  <strong class="text-info">{{ notification.solution.user }}</strong>
-                                  
-                                  <div></a><a href="{% url 'viewIssueSolution' notification.solution.issue.project.id 'solution' notification.solution.id %}">
-                                    {{ notification.text }}
-                                  </div></a>
-                                  <small class="text-warning">{{ notification.date}}</small>
-                                </div>    
-                              </div>
-                            </li>
-                          {% endfor %}
-                        {% endif %}
-                        {% if type == "followNotifc" %}
-                          {% for notification,profile in notifications.items %}
-                            <li class="notification-box">
-
-                                  {% if profile.photo %}
-                                  <img src="{{ profile.photo.url}}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                  {% else %}
-                                  <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                  {% endif %}
-                              <div class="row">
-                                <a href="{% url 'view_friend' profile.user %}"><div class="col-lg-3 col-sm-3 col-3 text-center">
-                                </div>    
-                                <div class="col-lg-8 col-sm-8 col-8">
-                                  <strong class="text-info">{{ notification.follow.follower }}</strong>
-                                  
-                                  <div></a><a href="{% url 'view_friend' notification.follow.follower %}">
-                                    {{ notification.text }}
-                                  </div></a>
-                                  <small class="text-warning">{{ notification.date }}</small>
-                                </div>    
-                              </div>
-                            </li>
-                          {% endfor %}
-                        {% endif %}
-                      {% endfor %}
-                      <li class="footer bg-dark text-center">
-                        <a href="" class="text-light">View All</a>
-                      </li>
-                    </ul>
-                </li>
-              </ul>
+        <div class="navbar-header">
+            <div class="container">
+                <button type="button" class="navbar-toggle collapsed ham" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                </button>
+                <a class="navbar-brand logo-light" href="{% url 'home' %}" style="margin-top:-30px;"><img
+                        src="{% static 'accounts/img/assets/logo-light.png' %}" alt="#"></a>
+                <a class="navbar-brand logo-dark" href="{% url 'home' %}"><img
+                        src="{% static 'accounts/img/assets/logo-dark.png' %}" alt="#"></a>
             </div>
         </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="container">
+                <ul class="nav navbar-nav menu-right">
+                    {% if user.is_authenticated %}
+
+                        <li class=" "><a href="{% url 'view_profile' %}" class=" customhover">Profile</a>
+
+                            <a href="{% url 'edit_profile' %}" class=" customhover">Edit Profile</a>
+
+                            <a href="{% url 'view_people' %}" class=" customhover">People</a>
+
+                            <a href="{% url 'start_project' %}" class=" customhover">Start Project</a>
+                            <a href="{% url 'project_list_view' %}" class=" customhover">Active Projects</a>
+
+                            <a href="{% url 'logout' %}" class=" customhover">Log Out</a>
+
+                        </li>
+                    {% else %}
+
+                        <li class=""><a href="{% url 'signup' %}" class=" customhover">Sign Up</a>
+                            <a href="{% url 'user_login' %}" class=" customhover">Sign In</a>
+
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+
+        </div>
+        {% if notifications %}
+            <div class="collapse navbar-collapse" style="overflow-y: scroll; margin-right: 200px;"
+                 id="navbarSupportedContent" style="display: unset !important;">
+                <ul class="nav nav-pills mr-auto justify-content-end">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                        </a>Notifications
+                        <ul class="dropdown-menu">
+                            <li class="head text-light bg-dark">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <span>Notifications</span>
+                                        <a href="" class="float-right text-light">Mark all as read</a>
+                                    </div>
+                            </li>
+                            {% for type,notifications in notifications.items %}
+                                {% if type == "issuesNotifc" %}
+                                    {% for notification,profile in notifications.items %}
+                                        <li class="notification-box">
+
+                                            {% if profile.photo %}
+                                                <img src="{{ profile.photo.url }}"
+                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                            {% else %}
+                                                <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                            {% endif %}
+                                            <div class="row">
+                                                <a href="{% url 'view_friend' profile.user %}">
+                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                                    </div>
+                                                    <div class="col-lg-8 col-sm-8 col-8">
+                                                        <strong class="text-info">{{ notification.issue.user }}</strong>
+
+                                                        <div>
+                                                </a><a
+                                                    href="{% url 'viewIssueSolution' notification.issue.project.id 'issue' notification.issue.id %}">
+                                                {{ notification.text }}
+                                            </div>
+                                            </a>
+                                            <small class="text-warning">{{ notification.date }}</small>
+                                        </div>
+                                        </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if type == "solutionsNotifc" %}
+                                    {% for notification,profile in notifications.items %}
+                                        <li class="notification-box">
+
+                                            {% if profile.photo %}
+                                                <img src="{{ profile.photo.url }}"
+                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                            {% else %}
+                                                <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                            {% endif %}
+                                            <div class="row">
+                                                <a href="{% url 'view_friend' profile.user %}">
+                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                                    </div>
+                                                    <div class="col-lg-8 col-sm-8 col-8">
+                                                        <strong class="text-info">{{ notification.solution.user }}</strong>
+
+                                                        <div>
+                                                </a><a
+                                                    href="{% url 'viewIssueSolution' notification.solution.issue.project.id 'solution' notification.solution.id %}">
+                                                {{ notification.text }}
+                                            </div>
+                                            </a>
+                                            <small class="text-warning">{{ notification.date }}</small>
+                                            </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if type == "followNotifc" %}
+                                    {% for notification,profile in notifications.items %}
+                                        <li class="notification-box">
+
+                                            {% if profile.photo %}
+                                                <img src="{{ profile.photo.url }}"
+                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                            {% else %}
+                                                <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                            {% endif %}
+                                            <div class="row">
+                                                <a href="{% url 'view_friend' profile.user %}">
+                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                                    </div>
+                                                    <div class="col-lg-8 col-sm-8 col-8">
+                                                        <strong class="text-info">{{ notification.follow.follower }}</strong>
+
+                                                        <div>
+                                                </a><a href="{% url 'view_friend' notification.follow.follower %}">
+                                                {{ notification.text }}
+                                            </div>
+                                            </a>
+                                            <small class="text-warning">{{ notification.date }}</small>
+                                            </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+            <li class="footer bg-dark text-center">
+                <a href="" class="text-light">View All</a>
+            </li>
+            </ul>
+            </li>
+            </ul>
+            </div>
+            </div>
         {% endif %}
 </nav>
 
@@ -308,107 +340,109 @@ window.open(self.location.href, '_top');
     <!-- Icons Grid -->
     <div class="site-wrapper" style="margin-bottom:-170px;padding-bottom: -20px;z-index:100;">
 
-    <section class="pt100 pb100 bg-color" >
-      <div class="container" >
-    <div class="row" style="margin-top:-120px;" >
-        <div class="col-md-12" >
+        <section class="pt100 pb100 bg-color">
+            <div class="container">
+                <div class="row" style="margin-top:-120px;">
+                    <div class="col-md-12">
 
-            <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
-                <a href="#" class="a-box box-hover">
-                    <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
-                        <div class="text-left pt10 pb30">
-                            <h3 class="fitness-font700 mb0">Active Projects</h3>
-                            <h6 class="md-grey fitness-font400 mt0">Great for Collaborative Projects</h6>
+                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
+                            <a href="#" class="a-box box-hover">
+                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                                    <div class="text-left pt10 pb30">
+                                        <h3 class="fitness-font700 mb0">Active Projects</h3>
+                                        <h6 class="md-grey fitness-font400 mt0">Great for Collaborative Projects</h6>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 mb30 fitness-overlay" style="padding:0;">
-                <a href="#" class="a-box box-hover-featured">
-                    <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
-                        <div class="text-left pt10 pb30">
-                          <h3 class="fitness-font700 mb0">Great Community</h3>
-                          <h6 class="md-grey fitness-font400 mt0">Extremely Fast Response Time</h6>
+                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0;">
+                            <a href="#" class="a-box box-hover-featured">
+                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                                    <div class="text-left pt10 pb30">
+                                        <h3 class="fitness-font700 mb0">Great Community</h3>
+                                        <h6 class="md-grey fitness-font400 mt0">Extremely Fast Response Time</h6>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
-                <a href="#" class="a-box box-hover">
-                    <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
-                        <div class="text-left pt10 pb30">
-                          <h3 class="fitness-font700 mb0">Get Experience</h3>
-                          <h6 class="md-grey fitness-font400 mt0">A Social Network with Benefits!</h6>
+                        <div class="col-md-4 mb30 fitness-overlay" style="padding:0">
+                            <a href="#" class="a-box box-hover">
+                                <div class="box" style="padding-left:50px;opacity:.9;background:#f9f9f9;">
+                                    <div class="text-left pt10 pb30">
+                                        <h3 class="fitness-font700 mb0">Get Experience</h3>
+                                        <h6 class="md-grey fitness-font400 mt0">A Social Network with Benefits!</h6>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                </a>
-            </div>
 
-        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
-</section>
-</div>
 
     <div class="site-wrapper" style="overflow: hidden;">
 
         <!-- Text Section -->
-  <section class="pt100 pb100 bg-color" >
-    <div class="container" >
+        <section class="pt100 pb100 bg-color">
+            <div class="container">
 
 
+                <div class="row mt60">
 
-      <div class="row mt60">
+                    <div class="col-md-8 col-md-offset-2 text-left">
 
-        <div class="col-md-8 col-md-offset-2 text-left">
-
-          <h4  style="color:white;">A Dream</h4>
-
-
-          <p class="white">A website carved out of curiosity on how to get all the engineers from all the streams under one umbrella and make them work together so as to come up with new ideas and solve real world problems.</p>
-        </div>
+                        <h4 style="color:white;">A Dream</h4>
 
 
-
-      </div>
-
-    </div>
-  </section>
-  <!-- End Text Section -->
-
-<section>
-<div class="pt100 pb100 bg-color" style="background:#111111">
-
-<div class="row mt60">
-
-  <div class="col-md-8 col-md-offset-2 text-right">
-    <h4 style="color:white;">Highly Ambitious</h4>
-
-    <p class="white">This website is going to be a community project for college students across India. It is not just for getting you projects but also for students who want to get into open source.</p>
-  </div>
-
-</div>
+                        <p class="white">A website carved out of curiosity on how to get all the engineers from all the
+                            streams under one umbrella and make them work together so as to come up with new ideas and
+                            solve real world problems.</p>
+                    </div>
 
 
-</div>
-</section>
-<section>
-<div class="pt100 pb100 bg-color" >
+                </div>
 
-<div class="row mt60">
+            </div>
+        </section>
+        <!-- End Text Section -->
 
-  <div class="col-md-8 col-md-offset-2 text-center">
-    <h4 style="color:white;">Deployed using PythonAnywhere</h4>
-    <p class="white">NSP v1.0 is hosted at thensp.pythonanywhere.com
+        <section>
+            <div class="pt100 pb100 bg-color" style="background:#111111">
 
-</p>
-  </div>
+                <div class="row mt60">
 
-</div>
+                    <div class="col-md-8 col-md-offset-2 text-right">
+                        <h4 style="color:white;">Highly Ambitious</h4>
+
+                        <p class="white">This website is going to be a community project for college students across
+                            India. It is not just for getting you projects but also for students who want to get into
+                            open source.</p>
+                    </div>
+
+                </div>
 
 
-</div>
-</section>
+            </div>
+        </section>
+        <section>
+            <div class="pt100 pb100 bg-color">
+
+                <div class="row mt60">
+
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <h4 style="color:white;">Deployed using PythonAnywhere</h4>
+                        <p class="white">NSP v1.0 is hosted at thensp.pythonanywhere.com
+
+                        </p>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
         <!-- Team 3 Columns Hover Style 3 -->
         <section class="pt100 pb100 bg-dark">
             <div class="container">
@@ -426,7 +460,8 @@ window.open(self.location.href, '_top');
                                     <img src="../../static/accounts/img/rishi.jpg" class="img-responsive" alt="#"/>
                                     <div class="team-member-detail">
                                         <h3 class="white fitness-font700 mb0">Rishi Banerjee</h3>
-                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Knows how to copy paste code.</h4>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Knows how to
+                                            copy paste code.</h4>
                                         <h4 class="fitness-label" style="font-size:12px;">rshrc404@gmail.com</h4>
                                     </div>
                                 </div>
@@ -441,7 +476,8 @@ window.open(self.location.href, '_top');
                                     <img src="../../static/accounts/img/pratik.jpg" class="img-responsive" alt="#"/>
                                     <div class="team-member-detail">
                                         <h3 class="white fitness-font700 mb0">Pratik Jain</h3>
-                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Wanted to use Node.js, ended up doing it in Django</h4>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Wanted to use
+                                            Node.js, ended up doing it in Django</h4>
                                         <h4 class="fitness-label" style="font-size:12px;">pratikjain0411@gmail.com</h4>
                                     </div>
                                 </div>
@@ -456,7 +492,8 @@ window.open(self.location.href, '_top');
                                     <img src="../../static/accounts/img/prachu.jpg" class="img-responsive" alt="#"/>
                                     <div class="team-member-detail">
                                         <h3 class="white fitness-font700 mb0">Prachal Goyal</h3>
-                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">I dont know what I am doing! Ajax?</h4>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">I dont know what
+                                            I am doing! Ajax?</h4>
                                         <h4 class="fitness-label" style="font-size:12px;">prachalgoyal03@gmail.com</h4>
                                     </div>
                                 </div>
@@ -467,10 +504,12 @@ window.open(self.location.href, '_top');
                         <a href="#">
                             <div class="team-member">
                                 <div class="team-member-image">
-                                    <img style="height: 60%;" src="../../static/accounts/img/gjerjgk.jpg" class="img-responsive" alt="#"/>
+                                    <img style="height: 60%;" src="../../static/accounts/img/gjerjgk.jpg"
+                                         class="img-responsive" alt="#"/>
                                     <div class="team-member-detail">
                                         <h3 class="white fitness-font700 mb0">Gjergj Kadriu</h3>
-                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Our friend from Kosova, a brilliant coder</h4>
+                                        <h4 class="md-grey fitness-font400 mt0" style="font-size:18px;">Our friend from
+                                            Kosova, a brilliant coder</h4>
                                         <h4 class=""><a href="https://github.com/gjergjk71">Check His Repos</a></h4>
                                     </div>
                                 </div>
@@ -507,9 +546,12 @@ window.open(self.location.href, '_top');
                             <!-- Testimonial 1 -->
                             <div class="testimonial-slide">
                                 <h4 class="fitness-label"><span>Siddharth Jaidka</span></h4>
-                                  <h5 class="white"><span>The Creator of MUJ Files</span></h5>
-                                <p class="fitness-font400 mb20">It is like a dream come true. Now students can show their skills and improve a lot! I am happy to see the coding culture in MUJ is growing so positively.</p>
-                                <img src="../../static/accounts/img/assets/quotes.png" alt="#" class="img-responsive quote-logo">
+                                <h5 class="white"><span>The Creator of MUJ Files</span></h5>
+                                <p class="fitness-font400 mb20">It is like a dream come true. Now students can show
+                                    their skills and improve a lot! I am happy to see the coding culture in MUJ is
+                                    growing so positively.</p>
+                                <img src="../../static/accounts/img/assets/quotes.png" alt="#"
+                                     class="img-responsive quote-logo">
                             </div>
 
                             <!-- Testimonial 2 -->
@@ -517,8 +559,12 @@ window.open(self.location.href, '_top');
                                 <h4 class="fitness-label"><span>Tushar Sadana</span></h4>
                                 <h5 class="white"><span>MUJ ACM SCHAP - Chair</span></h5>
 
-                                <p class="fitness-font400 mb20">I believe the initiative taken was much required to improve the practical and industrial knowledge of students which a college fails to provide. Students here can contribute and learn. It feels so great to work for the betterment of people. </p>
-                                <img src="../../static/accounts/img/assets/quotes.png" alt="#" class="img-responsive quote-logo">
+                                <p class="fitness-font400 mb20">I believe the initiative taken was much required to
+                                    improve the practical and industrial knowledge of students which a college fails to
+                                    provide. Students here can contribute and learn. It feels so great to work for the
+                                    betterment of people. </p>
+                                <img src="../../static/accounts/img/assets/quotes.png" alt="#"
+                                     class="img-responsive quote-logo">
                             </div>
 
                             <!-- Testimonial 3 -->
@@ -526,8 +572,11 @@ window.open(self.location.href, '_top');
                                 <h4 class="fitness-label"><span>Anmol Garg</span></h4>
                                 <h5 class="white"><span>MUJ ACM SCHAP - V. Chair</span></h5>
 
-                                <p class="fitness-font400 mb20">NSP is a great platform to collaborate and work with like minded, tech-oriented peers to build and deploy newer technologies. A great initiative to help students gain ample experience in their respective fields.</p>
-                                <img src="../../static/accounts/img/assets/quotes.png" alt="#" class="img-responsive quote-logo">
+                                <p class="fitness-font400 mb20">NSP is a great platform to collaborate and work with
+                                    like minded, tech-oriented peers to build and deploy newer technologies. A great
+                                    initiative to help students gain ample experience in their respective fields.</p>
+                                <img src="../../static/accounts/img/assets/quotes.png" alt="#"
+                                     class="img-responsive quote-logo">
                             </div>
 
                         </div>
@@ -543,105 +592,120 @@ window.open(self.location.href, '_top');
         <!-- End Contact Form Section -->
 
 
-
         <!-- Google Map -->
         <!-- End Google Map -->
         <section>
-          <div class="pt100 pb100 bg-color" >
+            <div class="pt100 pb100 bg-color">
 
-            <div class="row mt60">
+                <div class="row mt60">
 
-              <div class="col-md-10 col-md-offset-1 text-justify">
-                <h4 style="color:white;">About Us</h4>
-                <p class="white">We want development to be fun and add a competitive touch to it, and what can be better than teaming up with the fellas of your own University?
+                    <div class="col-md-10 col-md-offset-1 text-justify">
+                        <h4 style="color:white;">About Us</h4>
+                        <p class="white">We want development to be fun and add a competitive touch to it, and what can
+                            be better than teaming up with the fellas of your own University?
 
-We want to bring every talented engineers/students/developers who have immense potential but do not have any project ideas to work on and get experienced in. Not just that, we also made this website Open Source so that even developers/students can learn how things work at Industrial level.<br><br>
+                            We want to bring every talented engineers/students/developers who have immense potential but
+                            do not have any project ideas to work on and get experienced in. Not just that, we also made
+                            this website Open Source so that even developers/students can learn how things work at
+                            Industrial level.<br><br>
 
-Create your own projects, make a team, divide the workload and build exciting projects right here at NSP - where ideas come to life!
+                            Create your own projects, make a team, divide the workload and build exciting projects right
+                            here at NSP - where ideas come to life!
 
-Well, this website was never intended to be launched as it was just a learning project for Pratik and Rishi. After days of Googling, Stackoverflow , Ctrl+C and Ctrl+V, this is the best we could come up with.
+                            Well, this website was never intended to be launched as it was just a learning project for
+                            Pratik and Rishi. After days of Googling, Stackoverflow , Ctrl+C and Ctrl+V, this is the
+                            best we could come up with.
 
-Prachal, the sole Front-end Developer of the team sat hours understanding the templates he copied, fortunately he did.<br>
+                            Prachal, the sole Front-end Developer of the team sat hours understanding the templates he
+                            copied, fortunately he did.<br>
 
-Well later, Tushar Sadana Contributed to the Front end and the changed UI was loved by everyone! <br><br>
-This was our brief introduction. It's time for you to connect with the developers around the globe and start working on your own projects. Your profile page will be your introduction to the world, make sure to make it worth watching.            </p>
-              </div>
+                            Well later, Tushar Sadana Contributed to the Front end and the changed UI was loved by
+                            everyone! <br><br>
+                            This was our brief introduction. It's time for you to connect with the developers around the
+                            globe and start working on your own projects. Your profile page will be your introduction to
+                            the world, make sure to make it worth watching. </p>
+                    </div>
+
+                </div>
+
 
             </div>
-
-
-          </div>
         </section>
 
-    <!-- Call to Action -->
+        <!-- Call to Action -->
 
-    <section>
-      <div class="pt100 pb100 bg-fitness-3" >
+        <section>
+            <div class="pt100 pb100 bg-fitness-3">
 
-        <div class="row mt60">
+                <div class="row mt60">
 
-          <div class="col-md-8 col-md-offset-2 text-right">
-              {% if user.is_authenticated %}
-            <h4 style="color:white;">Start a Project, Go!</h4>
-            <a href="{% url 'start_project' %}"> <h4 class="fitness-label">Start</h4></a>
-              {% else %}
-              <h4 style="color:white;">Ready to take up a Project? Sign up now!</h4>
-              <a href="{% url 'signup' %}"> <h4 class="fitness-label"> SIGN UP</h4></a>
-              {% endif %}
-
-          </div>
-
-        </div>
-
-
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer-1" class="pt60 pb50">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-8">
-                    <h4 style="font-weight:normal; font-size:15px;">Initiative by MUJ ACM SCHAP collaboration with Team NSP!</h4>
-                    <p>We at MUJ ACM SCHAP believe that everyone should get a chance to prove themselves and work!<br>
-                    We thought why not let's just provide this opportunity to EVERYONE!</p>
-                    <p><a href="#" target="_blank">© 2018 NSP · <img src="../../static/accounts/img/acm.png" style="max-height:20px" alt=""> · GNU License. <br> </a>Made with love for great people. </p>
-                </div>
-
-
-                <div class="col-md-4">
-                    <div class="subscription">
-                        <h4></h4>
-
-
-<ul class="menu-right nav navbar-nav">
-<li class="dropdown megamenu"><a href="https://github.com/rshrc/NSP" class=" customhover">Github</a></li>
-
-<p> <br>NSP 1.1V</p>
-
-</ul>
-
+                    <div class="col-md-8 col-md-offset-2 text-right">
+                        {% if user.is_authenticated %}
+                            <h4 style="color:white;">Start a Project, Go!</h4>
+                            <a href="{% url 'start_project' %}"><h4 class="fitness-label">Start</h4></a>
+                        {% else %}
+                            <h4 style="color:white;">Ready to take up a Project? Sign up now!</h4>
+                            <a href="{% url 'signup' %}"><h4 class="fitness-label"> SIGN UP</h4></a>
+                        {% endif %}
 
                     </div>
+
                 </div>
 
+
             </div>
-        </div>
+        </section>
 
-</footer>
-    <!-- End Footer 1 -->
+        <!-- Footer -->
+        <footer id="footer-1" class="pt60 pb50">
+            <div class="container">
+                <div class="row">
 
-    <!-- Start Back To Top -->
-    <!-- <a id="back-to-top">^</a> -->
-    <!-- End Back To Top -->
+                    <div class="col-md-8">
+                        <h4 style="font-weight:normal; font-size:15px;">Initiative by MUJ ACM SCHAP collaboration with
+                            Team NSP!</h4>
+                        <p>We at MUJ ACM SCHAP believe that everyone should get a chance to prove themselves and
+                            work!<br>
+                            We thought why not let's just provide this opportunity to EVERYONE!</p>
+                        <p><a href="#" target="_blank">© 2018 NSP · <img src="../../static/accounts/img/acm.png"
+                                                                         style="max-height:20px" alt=""> · GNU License.
+                            <br> </a>Made with love for great people. </p>
+                    </div>
 
-</div><!-- Site Wrapper -->
 
-<!-- Scripts -->
-<script src="../../static/accounts/js/plugins.js"></script>
-<script src="../../static/accounts/js/scripts.js"></script>
-<script src="../../static/accounts/js/jquery.min.js"></script>
+                    <div class="col-md-4">
+                        <div class="subscription">
+                            <h4></h4>
+
+
+                            <ul class="menu-right nav navbar-nav">
+                                <li class="dropdown megamenu"><a href="https://github.com/rshrc/NSP"
+                                                                 class=" customhover">Github</a></li>
+
+                                <p><br>NSP 1.1V</p>
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </footer>
+        <!-- End Footer 1 -->
+
+        <!-- Start Back To Top -->
+        <!-- <a id="back-to-top">^</a> -->
+        <!-- End Back To Top -->
+
+    </div><!-- Site Wrapper -->
+
+    <!-- Scripts -->
+    <script src="../../static/accounts/js/plugins.js"></script>
+    <script src="../../static/accounts/js/scripts.js"></script>
+    <script src="../../static/accounts/js/jquery.min.js"></script>
 
     </body>
 {% endblock %}
