@@ -10,6 +10,7 @@ from accounts.models import *
 
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    from_user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="from_user")
     text = models.CharField(max_length=300)
     redirect = models.CharField(max_length=500)
     status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")),default="0")
