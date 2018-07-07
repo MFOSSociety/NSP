@@ -34,6 +34,6 @@ def createFollowNotification(sender, instance, **kwargs):
 	redirect = "accounts/users/{}".format(instance.follower.username)
 	notifications.models.Notification.objects.create(
 					user=instance.following,
-					from_user=instance.user,
+					from_user=instance.follower,
 					redirect=redirect,
 					text=notificationText)
