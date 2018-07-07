@@ -9,3 +9,12 @@ def createIssueNotification(sender, instance, **kwargs):
 	notificationText = "{} created issue #{} on {}".format(instance.user,instance.id,instance.project.project_name)
 	redirect = "project/{}/issue/{}".format(instance.project.id,instance.id)
 	notifications.models.Notification.objects.create(user=instance.project.initiated_by,redirect=redirect,text=notificationText)
+
+@receiver(post_save, sender=Solution)
+def createSolutionNotification(sender, instance, **kwargs):
+	notificationText = "{} created solution #{} to issue #{} on {}".format(
+							instance.user,instance.id,instance.issue.id,
+							instance.issue.project.project_name)
+	redirect = "project/{}/solution/{}".format(instance.issue.project.id,instance.id)
+	notifications.models.Notification.objects.create(user=instance.issue.project.initiated_by,redirect=redirect,text=notificationText)
+
