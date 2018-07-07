@@ -26,6 +26,8 @@ from accounts.forms import (
 )
 from accounts.models import *
 from django.views.generic import UpdateView, DeleteView
+from notifications.views import getNotifications
+from itertools import chain
 
 
 @login_required
@@ -82,8 +84,11 @@ def projectEdit(request, ID):
 
 
 def HomeView(request):
+    notifications = []
+    if request.user.is_authenticated:
+        notifications = getNotifications(request)
     name = "NSP - Network Of Skilled People"
-    args = {'name': name}
+    args = {'name': name,"notifications":notifications}
     return render(request, 'accounts/index.html', args)
 
 
