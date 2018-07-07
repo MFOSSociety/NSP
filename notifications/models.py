@@ -16,6 +16,6 @@ class Notification(models.Model):
     status = models.CharField(max_length=1, choices=(("1", "Seen"), ("0", "Unseen")),default="0")
 
     date = models.DateField(auto_now_add=True)
-    time = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
     def __str__(self):
         return self.text
