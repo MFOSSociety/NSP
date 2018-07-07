@@ -32,9 +32,8 @@ def createSolutionNotification(sender, instance, **kwargs):
 def createFollowNotification(sender, instance, **kwargs):
 	notificationText = "{} started following you.".format(instance.follower.username)
 	redirect = "accounts/users/{}".format(instance.follower.username)
-	if request.user != instance.user:
-		notifications.models.Notification.objects.create(
-						user=instance.following,
-						from_user=instance.user,
-						redirect=redirect,
-						text=notificationText)
+	notifications.models.Notification.objects.create(
+					user=instance.following,
+					from_user=instance.user,
+					redirect=redirect,
+					text=notificationText)
