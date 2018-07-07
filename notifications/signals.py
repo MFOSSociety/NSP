@@ -4,47 +4,36 @@ from django.dispatch import receiver
 from accounts.models import Issue,Solution,ProjectPeopleInterested,Follow,IssueComment,SolutionComment
 import notifications.models
 
-
 @receiver(post_save, sender=Issue)
 def createIssueNotification(sender, instance, **kwargs):
 	notificationText = "{} created issue #{} on {}".format(instance.user,instance.id,instance.project.project_name)
-	notifications.models.IssueNotification.objects.create(user=instance.project.initiated_by,issue=instance,text=notificationText)
+	redirect = "/account/project/{}/issue/{}".format(instance.project.id,instance.id)
+	if instance.project.initiated_by != instance.user:
+		notifications.models.Notification.objects.create(
+								user=instance.project.initiated_by,
+								from_user=instance.user,
+								redirect=redirect,
+								text=notificationText)
 
 @receiver(post_save, sender=Solution)
 def createSolutionNotification(sender, instance, **kwargs):
-	notificationText = "{} created solution #{} to issue #{} on {}".format(instance.user,instance.id,
-						instance.issue.id,instance.issue.project.project_name)
-	notifications.models.SolutionNotification.objects.create(user=instance.issue.project.initiated_by,solution=instance,text=notificationText)
-	notifications.models.SolutionNotification.objects.create(user=instance.issue.user,solution=instance,text=notificationText)
-
-@receiver(post_save, sender=ProjectPeopleInterested)
-def createInterestedNotification(sender, instance, **kwargs):
-	notificationText = "{} is interested in {}".format(instance.user,instance.project.project_name)
-	notifications.models.InterestedNotification.objects.create(user=instance.project.initiated_by,
-								project=instance.project,text=notificationText)
+	notificationText = "{} created solution #{} to issue #{} on {}".format(
+							instance.user,instance.id,instance.issue.id,
+							instance.issue.project.project_name)
+	redirect = "/account/project/{}/solution/{}".format(instance.issue.project.id,instance.id)
+	if instance.issue.project.initiated_by != instance.user:
+		notifications.models.Notification.objects.create(
+							user=instance.issue.project.initiated_by,
+							from_user=instance.user,
+							redirect=redirect,
+							text=notificationText)
 
 @receiver(post_save, sender=Follow)
 def createFollowNotification(sender, instance, **kwargs):
-	notificationText = "{} started following you".format(instance.follower)
-	notifications.models.FollowNotification.objects.create(user=instance.following,follow=instance,text=notificationText)
-
-@receiver(post_save, sender=IssueComment)
-def createIssueCommentNotification(sender, instance, **kwargs):
-	notificationText = "{} commented on issue #{} of project {}".format(instance.user,
-							instance.issue.id,instance.issue.project.project_name)
-	notifications.models.IssueCommentNotification.objects.create(user=instance.issue.project.initiated_by,
-						issueComment=instance,text=notificationText)
-	notifications.models.IssueCommentNotification.objects.create(user=instance.issue.user,
-						issueComment=instance,text=notificationText)
-
-
-@receiver(post_save, sender=SolutionComment)
-def createSolutionCommentNotification(sender, instance, **kwargs):
-	notificationText = "{} commented on solution #{} of project {}".format(instance.user,
-							instance.solution.id,instance.solution.issue.project.project_name)
-	notifications.models.SolutionCommentNotification.objects.create(user=instance.solution.issue.project.initiated_by,
-						solutionComment=instance,text=notificationText)
-	notifications.models.SolutionCommentNotification.objects.create(user=instance.solution.issue.user,
-						solutionComment=instance,text=notificationText)
-	notifications.models.SolutionCommentNotification.objects.create(user=instance.solution.user,
-						solutionComment=instance,text=notificationText)
+	notificationText = "{} started following you.".format(instance.follower.username)
+	redirect = "/account/users/{}".format(instance.follower.username)
+	notifications.models.Notification.objects.create(
+					user=instance.following,
+					from_user=instance.follower,
+					redirect=redirect,
+					text=notificationText)

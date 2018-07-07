@@ -193,7 +193,6 @@
 
 
         </div>
-        {% if notifications %}
             <div class="collapse navbar-collapse" style="overflow-y: scroll; margin-right: 200px;"
                  id="navbarSupportedContent" style="display: unset !important;">
                 <ul class="nav nav-pills mr-auto justify-content-end">
@@ -210,96 +209,31 @@
                                         <a href="" class="float-right text-light">Mark all as read</a>
                                     </div>
                             </li>
-                            {% for type,notifications in notifications.items %}
-                                {% if type == "issuesNotifc" %}
-                                    {% for notification,profile in notifications.items %}
-                                        <li class="notification-box">
+                            {% for notification,profile in notifications.items %}
+                                <li class="notification-box">
 
-                                            {% if profile.photo %}
-                                                <img src="{{ profile.photo.url }}"
-                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                            {% else %}
-                                                <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
-                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                            {% endif %}
-                                            <div class="row">
-                                                <a href="{% url 'view_friend' profile.user %}">
-                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                                    </div>
-                                                    <div class="col-lg-8 col-sm-8 col-8">
-                                                        <strong class="text-info">{{ notification.issue.user }}</strong>
-
-                                                        <div>
-                                                </a><a
-                                                    href="{% url 'viewIssueSolution' notification.issue.project.id 'issue' notification.issue.id %}">
+                                    {% if profile.photo %}
+                                        <img src="{{ profile.photo.url }}"
+                                             class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                    {% else %}
+                                        <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                             class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                    {% endif %}
+                                    <div class="row">
+                                        <a href="{% url 'view_friend' notification.from_user %}">
+                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                    </div>
+                                    <div class="col-lg-8 col-sm-8 col-8">
+                                        <strong class="text-info">{{ notification.from_user }}</strong>
+                                                <div>
+                                    </a><a href="{{notification.redirect}}">
                                                 {{ notification.text }}
                                             </div>
                                             </a>
-                                            <small class="text-warning">{{ notification.date }}</small>
+                                            <small class="text-warning">{{ notification.date }} {{ notification.time }}</small>
                                         </div>
                                         </div>
                                         </li>
-                                    {% endfor %}
-                                {% endif %}
-                                {% if type == "solutionsNotifc" %}
-                                    {% for notification,profile in notifications.items %}
-                                        <li class="notification-box">
-
-                                            {% if profile.photo %}
-                                                <img src="{{ profile.photo.url }}"
-                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                            {% else %}
-                                                <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
-                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                            {% endif %}
-                                            <div class="row">
-                                                <a href="{% url 'view_friend' profile.user %}">
-                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                                    </div>
-                                                    <div class="col-lg-8 col-sm-8 col-8">
-                                                        <strong class="text-info">{{ notification.solution.user }}</strong>
-
-                                                        <div>
-                                                </a><a
-                                                    href="{% url 'viewIssueSolution' notification.solution.issue.project.id 'solution' notification.solution.id %}">
-                                                {{ notification.text }}
-                                            </div>
-                                            </a>
-                                            <small class="text-warning">{{ notification.date }}</small>
-                                            </div>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-                                {% if type == "followNotifc" %}
-                                    {% for notification,profile in notifications.items %}
-                                        <li class="notification-box">
-
-                                            {% if profile.photo %}
-                                                <img src="{{ profile.photo.url }}"
-                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                            {% else %}
-                                                <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
-                                                     class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                            {% endif %}
-                                            <div class="row">
-                                                <a href="{% url 'view_friend' profile.user %}">
-                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                                    </div>
-                                                    <div class="col-lg-8 col-sm-8 col-8">
-                                                        <strong class="text-info">{{ notification.follow.follower }}</strong>
-
-                                                        <div>
-                                                </a><a href="{% url 'view_friend' notification.follow.follower %}">
-                                                {{ notification.text }}
-                                            </div>
-                                            </a>
-                                            <small class="text-warning">{{ notification.date }}</small>
-                                            </div>
-                                            </div>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
                             {% endfor %}
             <li class="footer bg-dark text-center">
                 <a href="" class="text-light">View All</a>
@@ -309,7 +243,6 @@
             </ul>
             </div>
             </div>
-        {% endif %}
 </nav>
 
 {% block body %}
