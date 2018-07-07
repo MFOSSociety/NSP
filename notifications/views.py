@@ -5,7 +5,7 @@ from accounts.models import UserProfile
 
 def getNotifications(request):
     notification_profile = {}
-    notifications = Notification.objects.all(request.user)
+    notifications = Notification.objects.filter(user=request.user)
     for notification in  notifications:
         notification_profile[notification] = UserProfile.objects.get(user=notification.from_user)
     return notification_profile
