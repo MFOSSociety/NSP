@@ -7,7 +7,7 @@ import notifications.models
 @receiver(post_save, sender=Issue)
 def createIssueNotification(sender, instance, **kwargs):
 	notificationText = "{} created issue #{} on {}".format(instance.user,instance.id,instance.project.project_name)
-	redirect = "accounts/project/{}/issue/{}".format(instance.project.id,instance.id)
+	redirect = "/account/project/{}/issue/{}".format(instance.project.id,instance.id)
 	if instance.project.initiated_by != instance.user:
 		notifications.models.Notification.objects.create(
 								user=instance.project.initiated_by,
@@ -20,7 +20,7 @@ def createSolutionNotification(sender, instance, **kwargs):
 	notificationText = "{} created solution #{} to issue #{} on {}".format(
 							instance.user,instance.id,instance.issue.id,
 							instance.issue.project.project_name)
-	redirect = "accounts/project/{}/solution/{}".format(instance.issue.project.id,instance.id)
+	redirect = "/account/project/{}/solution/{}".format(instance.issue.project.id,instance.id)
 	if instance.issue.project.initiated_by != instance.user:
 		notifications.models.Notification.objects.create(
 							user=instance.issue.project.initiated_by,
@@ -31,7 +31,7 @@ def createSolutionNotification(sender, instance, **kwargs):
 @receiver(post_save, sender=Follow)
 def createFollowNotification(sender, instance, **kwargs):
 	notificationText = "{} started following you.".format(instance.follower.username)
-	redirect = "accounts/users/{}".format(instance.follower.username)
+	redirect = "/account/users/{}".format(instance.follower.username)
 	notifications.models.Notification.objects.create(
 					user=instance.following,
 					from_user=instance.follower,
