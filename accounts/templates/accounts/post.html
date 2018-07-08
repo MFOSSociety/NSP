@@ -26,12 +26,38 @@
                                     - <em>{{ post.date }}</em></span>                                           </div>
                                 {% endif %}
                     <div style="margin: 10px;" class="card-block">
+
                         <h3>{{ post.title }}</h3>
                         <p class="card-text">{{ post.description|linebreaks }}</p>
                         {% if type == "solution" %}
                         <h3>Issue: <a href="{% url 'viewIssueSolution' project.id 'issue' post.issue.id %}">{{post.issue|linebreaks}}</h3></a>
                         {% endif %}
                         <a class="btn btn-sm btn-primary-outline float-right"><i class="fa fa-comments"></i> {{ comments|length }}</a>
+                        {% if project.initiated_by == request.user %}
+                            {% if type == "issue" %}
+                                {% if post.status == "0" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'open' %}" class="btn btn-sm btn-success-outline float-right btn-success">Open</a>
+                                {% endif %}
+                                {% if post.status == "1" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'closed' %}" class="btn btn-sm btn-danger-outline float-right btn-danger">Close</a>
+                                {% endif %}
+                            {% endif %}
+                            {% if type == "solution" %}
+                                {% if post.status == "0" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'accepted' %}" class="btn btn-sm btn-success-outline float-right btn-success">Accept</a>
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'notaccepted' %}" class="btn btn-sm btn-warning-outline float-right btn-warning">Don't accept</a>
+                                {% endif %}
+                                {% if post.status == "1" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'open' %}" class="btn btn-sm btn-success-outline float-right btn-success">Open</a>
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'notaccepted' %}" class="btn btn-sm btn-warning-outline float-right btn-warning">Don't accept</a>
+                                {% endif %}
+                                {% if post.status == "2" %}
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'open' %}" class="btn btn-sm btn-success-outline float-right btn-success">Open</a>
+                                    <a href="{% url 'changeStatusIssueSolution' project.id type post.id 'accepted' %}" class="btn btn-sm btn-warning-outline float-right btn-warning">Accept</a>
+                                {% endif %}
+
+                            {% endif %}
+                        {% endif %}
                         {% if request.user == post.user %}
                         <a href="{% url 'editIssueSolution' project.id type post.id %}" class="btn btn-sm btn-warning-outline float-right btn-warning">Edit</a>
                         <a href="{% url 'deleteIssueSolution' type post.id %}" class="btn btn-sm btn-primary-outline float-right btn-danger">Delete</a>
