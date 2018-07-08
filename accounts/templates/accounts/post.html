@@ -8,6 +8,7 @@
             </div>
             <h2><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name }}</a> - {{ type }}
                 #{{ post.id }} </h2>
+
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card">
@@ -25,8 +26,27 @@
                                          width="64" height="64" alt="Avatar"><span class="badge badge-dark"><b>{{ post.user.username }}</b></a>
                                     - <em>{{ post.date }}</em></span>                                           </div>
                                 {% endif %}
-                    <div style="margin: 10px;" class="card-block">
 
+                    <div style="margin: 10px;" class="card-block">
+                        {% if type == "issue" %}
+                            {% if post.status == "1" %}
+                            <td><span class="badge badge-pill badge-success"> Open</span></td>
+                            {% endif %}
+                            {% if post.status == "0" %}
+                            <td><span class="badge badge-pill badge-success"> Closed</span></td>
+                            {% endif %}
+                        {% elif type == "solution" %}
+                            {% if post.status == "0" %}
+                            <td><span class="badge badge-pill badge-success"> Open</span></td>
+                            {% endif %}
+                            {% if post.status == "1" %}
+                            <td><span class="badge badge-pill badge-success"> Accepted</span></td>
+                            {% endif %}
+                            {% if post.status == "2" %}
+                            <td><span class="badge badge-pill badge-danger"> Not accepted</span></td>
+                            {% endif %}
+
+                        {% endif %}             
                         <h3>{{ post.title }}</h3>
                         <p class="card-text">{{ post.description|linebreaks }}</p>
                         {% if type == "solution" %}
