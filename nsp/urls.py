@@ -19,6 +19,7 @@ project_detail_resource = ProjectDetailResource()
 project_people_interested_resource = ProjectPeopleInterestedResource()
 issue_resource = IssueResource()
 issue_comment_resource = IssueCommentResource()
+follow_resource  = FollowResource()
 
 
 def redirectToAccount(request):
@@ -35,6 +36,7 @@ urlpatterns = [
                   path('api/project_people_interested_api/', include(project_people_interested_resource.urls)),
                   path('api/issue_api/', include(issue_resource.urls)),
                   path('api/issue_comment_api/', include(issue_comment_resource.urls)),
+                  path('api/follow_api/', include(follow_resource.urls)),
                   path('', redirectToAccount, name="redirectToAccount")
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
