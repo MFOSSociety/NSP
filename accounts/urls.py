@@ -28,6 +28,7 @@ urlpatterns = [
     path('project/<projectID>/<type_>/<ID>/edit', views.editIssueSolution, name='editIssueSolution'),
     path('project/<projectID>/<type_>/create', views.createIssueSolution, name='createIssueSolution'),
     path('project/<projectID>/<type_>/<ID>', views.viewIssueSolution, name='viewIssueSolution'),
+    path('project/<projectID>/<type_>/<ID>/<status>', views.changeStatusIssueSolution, name='changeStatusIssueSolution'),
     path('project/<projectID>/<type_>/<ID>/comment', views.commentIssueSolution, name='commentIssueSolution'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
     path('registersuccess/', views.SuccesfullRegistrationView, name='registersucess'),
