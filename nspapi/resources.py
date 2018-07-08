@@ -34,3 +34,10 @@ class ProjectPeopleInterestedResource(ModelResource):
     class Meta:
         queryset = ProjectPeopleInterested.objects.all()
         resource_name = 'project_people_interested'
+
+
+class FollowResource(ModelResource):
+    class Meta:
+        queryset = Follow.objects.all()
+        resource_name = 'follow'
+       
