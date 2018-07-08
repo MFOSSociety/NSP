@@ -15,12 +15,18 @@ from accounts.models import (
 class UserProfileResource(ModelResource):
     class Meta:
         queryset = UserProfile.objects.all()
-        resource_name = 'userprofile'
+        resource_name = 'user_profile'
 
 
 class SkillResource(ModelResource):
     class Meta:
         queryset = Skill.objects.all()
         resource_name = 'skill'
+
+
+class ProjectDetailResource(ModelResource):
+    class Meta:
+        queryset = ProjectDetail.objects.all()
+        resource_name = 'project_detail'
 
 
