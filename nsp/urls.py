@@ -3,7 +3,9 @@ from django.shortcuts import redirect
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from nspapi.resources import UserProfileResource
+from nspapi.resources import (
+    UserProfileResource,
+)
 
 user_profile_resource = UserProfileResource()
 
