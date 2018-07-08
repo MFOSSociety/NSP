@@ -14,6 +14,7 @@ from nspapi.resources import (
 )
 
 user_profile_resource = UserProfileResource()
+skill_resource = SkillResource()
 
 
 
@@ -25,7 +26,8 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('account/', include('accounts.urls')),
                   path('notifications/', include('notifications.urls')),
-                  path('api/', include(user_profile_resource.urls)),
+                  path('api/users_api/', include(user_profile_resource.urls)),
+                  path('api/skills_api/', include(skill_resource.urls)),
                   path('', redirectToAccount, name="redirectToAccount")
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
