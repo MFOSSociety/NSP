@@ -40,4 +40,10 @@ class FollowResource(ModelResource):
     class Meta:
         queryset = Follow.objects.all()
         resource_name = 'follow'
-       
+
+
+class IssueResource(ModelResource):
+    class Meta:
+        queryset = IssueComment.objects.all()
+        resource_name = 'issue'
+
