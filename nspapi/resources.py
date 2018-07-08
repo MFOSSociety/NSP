@@ -47,3 +47,8 @@ class IssueResource(ModelResource):
         queryset = IssueComment.objects.all()
         resource_name = 'issue'
 
+
+class IssueCommentResource(ModelResource):
+    class Meta:
+        queryset = IssueComment.objects.all()
+        resource_name = 'issue_comment'
