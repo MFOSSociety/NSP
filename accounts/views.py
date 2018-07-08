@@ -320,6 +320,32 @@ def viewIssueSolution(request, projectID, type_, ID):
 
     return render(request, "accounts/post.html", args)
 
+@login_required
+def changeStatusIssueSolution(request,projectID,type_,ID,status):
+    project = ProjectDetail.objects.get(pk=projectID)
+    if project.initiated_by == request.user:
+        if type_ == "issue":
+            instance = Issue.objects.get(pk=ID)
+            if status == "open":
+                instance.status = "1"
+            elif status == "closed":
+                instance.status = "0"
+            instance.save()
+        elif type_ == "solution":
+            instance = Solution.objects.get(pk=ID)
+            if status == "open":
+                instance.status = "0"
+            elif status == "accepted":
+                instance.status = "1"
+            elif status == "notaccepted":
+                instance.status = "2"
+            instance.save()
+        else:
+            redirect("/account/project/{}".format(projectID))
+
+    return redirect("/account/project/{}/{}/{}".format(projectID,type_,ID))
+
+
 
 @login_required
 def commentIssueSolution(request, projectID, type_, ID):
