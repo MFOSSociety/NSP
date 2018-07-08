@@ -11,6 +11,7 @@
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info"> <b>Hello {{ user.username|title }}, </b>Below are the {{ status    }} issues of this project!</div>
+                        <a class="btn btn-primary" href="{% url 'projectIssues' project.id 'all' %}" role="button">All issues</a>
                         <a class="btn btn-primary" href="{% url 'projectIssues' project.id 'open' %}" role="button">Open issues</a>
                         <a class="btn btn-primary" href="{% url 'projectIssues' project.id 'closed' %}" role="button">Closed issues</a>
                     <hr>
