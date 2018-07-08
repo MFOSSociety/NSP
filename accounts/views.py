@@ -28,6 +28,7 @@ from accounts.models import *
 from django.views.generic import UpdateView, DeleteView
 from notifications.views import getNotifications
 from itertools import chain
+from nspmessage.models import Message
 
 
 @login_required
@@ -54,6 +55,7 @@ def ProjectDescribeView(request):
     return render(request, 'accounts/start_project.html',
                   {'project_form': project_form, 'project_registered': project_registered})
 
+
 @login_required
 def deleteProject(request, ID):
     project = ProjectDetail.objects.get(pk=ID)
@@ -62,6 +64,7 @@ def deleteProject(request, ID):
         return redirect("/account/project/active")
     else:
         return redirect("/account/project/active")
+
 
 @login_required
 def projectEdit(request, ID):
@@ -88,7 +91,7 @@ def HomeView(request):
     if request.user.is_authenticated:
         notifications = getNotifications(request)
     name = "NSP - Network Of Skilled People"
-    args = {'name': name,"notifications":notifications}
+    args = {'name': name, "notifications": notifications}
     return render(request, 'accounts/index.html', args)
 
 
@@ -235,8 +238,9 @@ def deleteIssueSolution(request, type_, ID):
         instance.delete()
     return redirect("/account/project/{}/{}/all".format(project.id, type_ + "s"))
 
+
 @login_required
-def editIssueSolution(request,projectID,type_,ID):
+def editIssueSolution(request, projectID, type_, ID):
     project = ProjectDetail.objects.get(pk=projectID)
     openIssues = ""
 
@@ -248,7 +252,7 @@ def editIssueSolution(request,projectID,type_,ID):
     else:
         return redirect("/account/project/{}".format(project.id))
     if request.user != object_.user:
-        return redirect("/account/project/{}/{}/{}".format(project.id,type_,object_.id))
+        return redirect("/account/project/{}/{}/{}".format(project.id, type_, object_.id))
     user_profile = UserProfile.objects.get(user=object_.user)
     if request.method == "POST":
         title = request.POST.get("title")
@@ -259,12 +263,11 @@ def editIssueSolution(request,projectID,type_,ID):
             issue = Issue.objects.get(pk=int(request.POST.get("value")))
             object_.issue = issue
         object_.save()
-        return redirect("/account/project/{}/{}/{}".format(project.id,type_,object_.id))
+        return redirect("/account/project/{}/{}/{}".format(project.id, type_, object_.id))
     else:
-        args = {"project":project,"type":type_,"openIssues":openIssues,
-                    "object":object_,"user_profile":user_profile}
-        return render(request,"accounts/editIssueSolution.html",args)
-
+        args = {"project": project, "type": type_, "openIssues": openIssues,
+                "object": object_, "user_profile": user_profile}
+        return render(request, "accounts/editIssueSolution.html", args)
 
 
 @login_required
@@ -320,8 +323,9 @@ def viewIssueSolution(request, projectID, type_, ID):
 
     return render(request, "accounts/post.html", args)
 
+
 @login_required
-def changeStatusIssueSolution(request,projectID,type_,ID,status):
+def changeStatusIssueSolution(request, projectID, type_, ID, status):
     project = ProjectDetail.objects.get(pk=projectID)
     if project.initiated_by == request.user:
         if type_ == "issue":
@@ -343,8 +347,7 @@ def changeStatusIssueSolution(request,projectID,type_,ID,status):
         else:
             redirect("/account/project/{}".format(projectID))
 
-    return redirect("/account/project/{}/{}/{}".format(projectID,type_,ID))
-
+    return redirect("/account/project/{}/{}/{}".format(projectID, type_, ID))
 
 
 @login_required
@@ -390,6 +393,7 @@ def FriendProfileView(request, username):
             "current_user_following": current_user_following,
             "skills": skills, 'range': range(rating_value), 'projects': projects}
     return render(request, template, args)
+
 
 # pass, if you don't want to write the method yet
 
@@ -481,7 +485,7 @@ def RegistrationView(request):
                 'response': recaptcha_response
             }
             data = urllib.parse.urlencode(values).encode()
-            req =  urllib.request.Request(url, data=data)
+            req = urllib.request.Request(url, data=data)
             response = urllib.request.urlopen(req)
             result = json.loads(response.read().decode())
             if result['success']:
@@ -495,7 +499,7 @@ def RegistrationView(request):
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
                 return render(request, 'accounts/signup.html')
 
-              # this is /account
+            # this is /account
         else:
             form = RegistrationForm(request.POST)
             args = {'form': form}
@@ -509,7 +513,6 @@ def RegistrationView(request):
         return render(request, 'accounts/signup.html', args)
         # giving them the opportunity to get the form
         # the else condition is working
-    
 
 
 @login_required
@@ -645,4 +648,12 @@ def search(request):
         else:
             return HttpResponse('/account/search/')
     return render(request, 'accounts/search.html')
+
+
+@login_required
+def send_message(request, ID):
+    receiver = User.objects.get(pk=ID)
+    receiver = Message.objects.filter(receiver=receiver)
+    sender = Message.objects.filter(sender=request.user)
+    print("{} and {} are talking".format(receiver, sender))
 
