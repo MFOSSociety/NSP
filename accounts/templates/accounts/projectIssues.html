@@ -11,16 +11,21 @@
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info"> <b>Hello {{ user.username|title }}, </b>Below are the {{ status    }} issues of this project!</div>
+                        <a class="btn btn-primary" href="{% url 'projectIssues' project.id 'open' %}" role="button">Open issues</a>
+                        <a class="btn btn-primary" href="{% url 'projectIssues' project.id 'closed' %}" role="button">Closed issues</a>
                     <hr>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
+
                             <thead>
+
                                 <tr>
                                     <th>Issue ID</th>
                                     <th>Title</th>
                                     <th>Created</th>
                                     <th>Opened</th>
-                                    <th>Status</th>
+                                    <th>Status 
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
