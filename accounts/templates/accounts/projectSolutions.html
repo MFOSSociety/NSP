@@ -16,6 +16,10 @@
                     {% else %}
                     <div class="alert alert-info"> <b>Hello {{ user.username }}, </b>Below are the {{ status }} solutions of this project!</div>
                     {% endif %}
+                        <a class="btn btn-primary" href="{% url 'projectSolutions' project.id 'all' %}" role="button">All solutions</a>
+                        <a class="btn btn-primary" href="{% url 'projectSolutions' project.id 'open' %}" role="button">Open solutions</a>
+                        <a class="btn btn-primary" href="{% url 'projectSolutions' project.id 'accepted' %}" role="button">Accepted solutions</a>
+                        <a class="btn btn-primary" href="{% url 'projectSolutions' project.id 'notaccepted' %}" role="button">Not accepted solutions</a>
                     <hr>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
