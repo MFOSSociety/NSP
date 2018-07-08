@@ -30,3 +30,7 @@ class ProjectDetailResource(ModelResource):
         resource_name = 'project_detail'
 
 
+class ProjectPeopleInterestedResource(ModelResource):
+    class Meta:
+        queryset = ProjectPeopleInterested.objects.all()
+        resource_name = 'project_people_interested'
