@@ -5,9 +5,16 @@ from django.conf.urls.static import static
 from django.conf import settings
 from nspapi.resources import (
     UserProfileResource,
+    SkillResource,
+    ProjectDetailResource,
+    ProjectPeopleInterestedResource,
+    IssueResource,
+    IssueCommentResource,
+    FollowResource,
 )
 
 user_profile_resource = UserProfileResource()
+
 
 
 def redirectToAccount(request):
