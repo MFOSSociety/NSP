@@ -11,7 +11,7 @@ def chatFriend(request,username):
 	current_user_profile = UserProfile.objects.get(user=request.user)
 	receiver_user_profile = UserProfile.objects.get(user=receiver)
 	participants = [sender,receiver]
-	messages = Message.objects.filter(sender__in=participants,receiver__in=participants)
+	messages = Message.objects.filter(sender__in=participants,receiver__in=participants).order_by("id")
 	context = {"messages":messages,"receiver":receiver,"sender_user_profile":current_user_profile,
 						"receiver_user_profile":receiver_user_profile}
 	return render(request,"chat.html",context)
