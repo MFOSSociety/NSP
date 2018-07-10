@@ -169,8 +169,15 @@ Website: http://emilcarlsson.se/
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-			<p style="margin-top: 20px">Harvey Specter</p>
+			<a href="{% url 'view_friend' receiver %}">
+          <li class="sent">
+            {% if receiver_user_profile.photo %}
+                <a href="{% url 'view_friend' receiver %}"><img src="{{ receiver_user_profile.photo.url }}"></a>
+            {% else %}
+                 <a href="{% url 'view_friend' receiver %}"><img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" ></a>
+            {% endif %}   
+			<p style="margin-top: 20px">{% if receiver.first_name  and receiver.last_name %} {{ receiver.first_name }} {{receiver.last_name}}
+          {% else %} {{ receiver }}{% endif %}</p></a>
 			<div class="social-media">
 				<i class="fa fa-facebook" aria-hidden="true"></i>
 				<i class="fa fa-twitter" aria-hidden="true"></i>
@@ -193,9 +200,9 @@ Website: http://emilcarlsson.se/
           {% else %}
   				<li class="replies">
             {% if receiver_user_profile.photo %}
-                <img src="{{ receiver_user_profile.photo.url }}">
+                <a href="{% url 'view_friend' receiver %}"><img src="{{ receiver_user_profile.photo.url }}"></a>
             {% else %}
-                <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" >
+                 <a href="{% url 'view_friend' receiver %}"><img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" ></a>
             {% endif %}   
   					<p>{{ message.msg_content }}</p>
   				</li>
@@ -205,9 +212,11 @@ Website: http://emilcarlsson.se/
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<input style="font-size: 15px;" type="text" name="sender_message" placeholder="Write your message..." />
-			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        <form method="POST" action="{% url 'newMessage' receiver %}"> {% csrf_token %}
+			     <input style="font-size: 15px;" type="text" name="sender_message" placeholder="Write your message..." />
+			     <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+			     <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
 			</div>
 		</div>
 	</div>
