@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'notifications',
     'accounts',
     'nspapi',
+    'nspmessage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
