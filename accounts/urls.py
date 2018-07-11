@@ -6,7 +6,8 @@ from django.contrib.auth.views import (
     password_reset_confirm,
     password_reset_complete,
 )
-from django.urls.conf import path, re_path
+from django.urls.conf import path, re_path, include
+
 from accounts import views
 from accounts.views import EditUserProfileView
 
@@ -52,5 +53,6 @@ urlpatterns = [
     path('profile/addskill/', views.AddSkillView, name='addskill'),
     path('profile/deleteskill/<ID>', views.deleteSkill, name='deleteskill'),
     path('search/', views.search, name='search'),
-    path('message/', views.send_message, name='message')
+    path('message/', views.send_message, name='message'),
+    path("chat/", include("nspmessage.urls")),
 ]
