@@ -58,13 +58,17 @@ Website: http://emilcarlsson.se/
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
 			<input type="text" placeholder="Search contacts..." />
 		</div>
-		<div id="contacts">
+		<div style="margin-top:2px;" id="contacts">
 			<ul>
         
         {% for conversation in conversations.items %}
          <!-- conversation.0 is friend user -->
          <a href="{% url 'chatFriend' conversation.0 %}">
-      				<li class="contact">
+         {% if conversation.0 == receiver %}
+      				<li class="contact active">
+          {% else %}
+              <li class="contact">
+          {% endif %}
       					<div class="wrap">
       						<span class="contact-status online"></span>
                   {% if conversation.1.profile.photo %}
