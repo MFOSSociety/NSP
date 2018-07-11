@@ -49,7 +49,7 @@ def chatFriend(request,username):
 
 	context = {"messages":messages,"receiver":receiver,"sender_user_profile":current_user_profile,
 						"receiver_user_profile":receiver_user_profile,"conversations":conversations}
-	return render(request,"chat.html",context)
+	return render(request,"chatFriend.html",context)
 
 def newMessage(request,username):
 	sender = request.user
