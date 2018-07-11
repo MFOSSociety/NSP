@@ -1,8 +1,8 @@
 import datetime
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
 
 
 class Skill(models.Model):
@@ -15,7 +15,7 @@ class Skill(models.Model):
 
 class ProjectDetail(models.Model):
     project_name = models.CharField(max_length=50, default="", blank=False)
-    initiated_by = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
+    initiated_by = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     mentor_name = models.CharField(max_length=50, default="", blank=False)
     branch = models.CharField(max_length=50, blank=True)
     description = models.TextField()

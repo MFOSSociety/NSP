@@ -1,5 +1,4 @@
-from django.urls.conf import path, re_path, include
-from accounts import views
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import (
     logout,
     password_reset,
@@ -7,7 +6,8 @@ from django.contrib.auth.views import (
     password_reset_confirm,
     password_reset_complete,
 )
-from django.contrib.auth import views as auth_views
+from django.urls.conf import path, re_path
+from accounts import views
 from accounts.views import EditUserProfileView
 
 urlpatterns = [
@@ -28,7 +28,8 @@ urlpatterns = [
     path('project/<projectID>/<type_>/<ID>/edit', views.editIssueSolution, name='editIssueSolution'),
     path('project/<projectID>/<type_>/create', views.createIssueSolution, name='createIssueSolution'),
     path('project/<projectID>/<type_>/<ID>', views.viewIssueSolution, name='viewIssueSolution'),
-    path('project/<projectID>/<type_>/<ID>/<status>', views.changeStatusIssueSolution, name='changeStatusIssueSolution'),
+    path('project/<projectID>/<type_>/<ID>/<status>', views.changeStatusIssueSolution,
+         name='changeStatusIssueSolution'),
     path('project/<projectID>/<type_>/<ID>/comment', views.commentIssueSolution, name='commentIssueSolution'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
     path('registersuccess/', views.SuccesfullRegistrationView, name='registersucess'),

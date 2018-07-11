@@ -42,25 +42,25 @@
             </p>
             <p>Position : {{ user.userprofile.position }}</p>
             <div class="container">
-            {% if user.userprofile.skills %}
-            {% for skill in user.userprofile.skills.all %}
-                <li>
-                    <p>{{ skill }}</p>
-                </li>
-            {% endfor %}
-            {% endif %}
-            <p>Followers : {{ followers }}</p>
-            <p>Following : {{ followings }}</p>
-            {{ user.first_name|title }} {{ user.last_name|title }} skillset :
-            {% for skill in skills %}
-                <li>
-                    {{ skill.skill_name }}
-                </li>
-            {% empty %}
-                <li>
-                    This user hasn't added any skills yet
-                </li>
-            {% endfor %}
+                {% if user.userprofile.skills %}
+                    {% for skill in user.userprofile.skills.all %}
+                        <li>
+                            <p>{{ skill }}</p>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+                <p>Followers : {{ followers }}</p>
+                <p>Following : {{ followings }}</p>
+                {{ user.first_name|title }} {{ user.last_name|title }} skillset :
+                {% for skill in skills %}
+                    <li>
+                        {{ skill.skill_name }}
+                    </li>
+                {% empty %}
+                    <li>
+                        This user hasn't added any skills yet
+                    </li>
+                {% endfor %}
             </div>
             <div class="container">
                 {% if current_user_following %}

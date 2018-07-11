@@ -129,21 +129,10 @@
     <script src="{% static 'accounts/js/scripts.js' %}"></script>
     <script src="{% static 'accounts/js/bootstrap.min.js' %}"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
-
-
-
-
-
 {% endblock %}
-
 {% block customcss %}
     <link href="{% static 'accounts/css/search_bar.css' %}" rel="stylesheet">
 {% endblock %}
-
-<!-- Navigation -->
-
-
-<!-- Start Header -->
 <nav class="navbar navbar-default dark">
     <div class="container">
 
@@ -190,63 +179,61 @@
 
                 </ul>
             </div>
-
-
         </div>
-            <div class="collapse navbar-collapse" style="overflow-y: scroll; margin-right: 200px;"
-                 id="navbarSupportedContent" style="display: unset !important;">
-                <ul class="nav nav-pills mr-auto justify-content-end">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bell"></i>
-                        </a>Notifications
-                        <ul class="dropdown-menu">
-                            <li class="head text-light bg-dark">
-                                <div class="row">
-                                    <div class="col-lg-12 col-sm-12 col-12">
-                                        <span>Notifications</span>
-                                        <a href="" class="float-right text-light">Mark all as read</a>
-                                    </div>
-                            </li>
-                            {% for notification,profile in notifications.items %}
-                                <li class="notification-box">
+        <div class="collapse navbar-collapse" style="overflow-y: scroll; margin-right: 200px;"
+             id="navbarSupportedContent" style="display: unset !important;">
+            <ul class="nav nav-pills mr-auto justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bell"></i>
+                    </a>Notifications
+                    <ul class="dropdown-menu">
+                        <li class="head text-light bg-dark">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <span>Notifications</span>
+                                    <a href="" class="float-right text-light">Mark all as read</a>
+                                </div>
+                        </li>
+                        {% for notification,profile in notifications.items %}
+                            <li class="notification-box">
 
-                                    {% if profile.photo %}
-                                        <img src="{{ profile.photo.url }}"
-                                             class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                    {% else %}
-                                        <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
-                                             class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                    {% endif %}
-                                    <div class="row">
-                                        <a href="{% url 'view_friend' notification.from_user %}">
-                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                    </div>
-                                    <div class="col-lg-8 col-sm-8 col-8">
-                                        <strong class="text-info">{{ notification.from_user }}</strong>
-                                                <div>
-                                    </a><a href="{{notification.redirect}}">
-                                                {{ notification.text }}
-                                            </div>
-                                            </a>
-                                            <small class="text-warning">{{ notification.date }} {{ notification.time }}</small>
+                                {% if profile.photo %}
+                                    <img src="{{ profile.photo.url }}"
+                                         class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                {% else %}
+                                    <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                         class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                {% endif %}
+                                <div class="row">
+                                    <a href="{% url 'view_friend' notification.from_user %}">
+                                        <div class="col-lg-3 col-sm-3 col-3 text-center">
                                         </div>
-                                        </div>
-                                        </li>
-                            {% endfor %}
-            <li class="footer bg-dark text-center">
-                <a href="" class="text-light">View All</a>
-            </li>
-            </ul>
-            </li>
-            </ul>
-            </div>
-            </div>
+                                        <div class="col-lg-8 col-sm-8 col-8">
+                                            <strong class="text-info">{{ notification.from_user }}</strong>
+                                            <div>
+                                    </a><a href="{{ notification.redirect }}">
+                                    {{ notification.text }}
+                                </div>
+                                </a>
+                                <small class="text-warning">{{ notification.date }} {{ notification.time }}</small>
+                            </div>
+                            </div>
+                            </li>
+                        {% endfor %}
+    <li class="footer bg-dark text-center">
+        <a href="" class="text-light">View All</a>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    </div>
 </nav>
 
 
-    <body style="margin-top:50px;">
+<body style="margin-top:50px;">
 {% block body %}
 
     <!-- Masthead -->
@@ -268,8 +255,6 @@
 
         </div>
     </section>
-
-
     <!-- Icons Grid -->
     <div class="site-wrapper" style="margin-bottom:-170px;padding-bottom: -20px;z-index:100;">
 
@@ -320,60 +305,39 @@
         <!-- Text Section -->
         <section class="pt100 pb100 bg-color">
             <div class="container">
-
-
                 <div class="row mt60">
-
                     <div class="col-md-8 col-md-offset-2 text-left">
-
                         <h4 style="color:white;">A Dream</h4>
-
-
                         <p class="white">A website carved out of curiosity on how to get all the engineers from all the
                             streams under one umbrella and make them work together so as to come up with new ideas and
                             solve real world problems.</p>
                     </div>
-
-
                 </div>
-
             </div>
         </section>
         <!-- End Text Section -->
-
         <section>
             <div class="pt100 pb100 bg-color" style="background:#111111">
-
                 <div class="row mt60">
-
                     <div class="col-md-8 col-md-offset-2 text-right">
                         <h4 style="color:white;">Highly Ambitious</h4>
-
                         <p class="white">This website is going to be a community project for college students across
                             India. It is not just for getting you projects but also for students who want to get into
                             open source.</p>
                     </div>
-
                 </div>
-
-
             </div>
         </section>
         <section>
             <div class="pt100 pb100 bg-color">
-
                 <div class="row mt60">
-
                     <div class="col-md-8 col-md-offset-2 text-center">
                         <h4 style="color:white;">Deployed using PythonAnywhere</h4>
                         <p class="white">NSP v1.2 is hosted at thensp.pythonanywhere.com
 
                         </p>
                     </div>
-
                 </div>
-
-
             </div>
         </section>
         <!-- Team 3 Columns Hover Style 3 -->
@@ -453,17 +417,6 @@
                 </div>
             </div>
         </section>
-        <!-- End Team 3 Columns Hover Style 3 -->
-
-        <!-- Start Tabs -->
-
-        <!-- End Tabs -->
-
-        <!-- Services -->
-
-        <!-- End Services -->
-
-        <!-- Testimonials Slider -->
         <section class="pt120 pb80 bg-fitness-3">
             <div class="container" style="background-attachment:fixed;">
                 <div class="row">
@@ -582,10 +535,7 @@
                         {% endif %}
 
                     </div>
-
                 </div>
-
-
             </div>
         </section>
 
@@ -616,31 +566,16 @@
                                                                  class=" customhover" target="_blank">Github</a></li>
 
                                 <p><br>NSP 1.2V</p>
-
                             </ul>
-
-
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </footer>
-        <!-- End Footer 1 -->
-
-        <!-- Start Back To Top -->
-        <!-- <a id="back-to-top">^</a> -->
-        <!-- End Back To Top -->
-
-    </div><!-- Site Wrapper -->
-
-    <!-- Scripts -->
+    </div>
     <script src="../../static/accounts/js/plugins.js"></script>
     <script src="../../static/accounts/js/scripts.js"></script>
     <script src="../../static/accounts/js/jquery.min.js"></script>
-
 {% endblock %}
-    </body>
-
+</body>
 </html>

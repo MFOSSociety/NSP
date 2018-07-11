@@ -2,34 +2,34 @@
 {% load bootstrap %}
 <html>
 <style>
-form {
-margin: 0 auto;
-width:50px;
-}
+    form {
+        margin: 0 auto;
+        width: 50px;
+    }
 </style>
 {% block title %}
     <title>Add Solution</title>
 {% endblock %}
 
 {% block body %}
-<div class="site-wrapper" style="margin-top:75px;">
+    <div class="site-wrapper" style="margin-top:75px;">
 
-	{% if successfully %}
-		<div class="alert alert-success">
-		  <strong>Success!</strong> You've added {{ solution_link }}
-		</div>
-	{% endif %}
-    <h1 style="text-align: center;">Add Your Solution Link</h1>
-    <div class="container-fluid">
-    <form style="text-align: center;" action="" method="POST">
-        {% csrf_token %}
-        <table>
-            {{ form|bootstrap }}
-        </table>
-        <input class="btn btn-primary btn-block" type="submit" value="Submit" />
-    </form>
+        {% if successfully %}
+            <div class="alert alert-success">
+                <strong>Success!</strong> You've added {{ solution_link }}
+            </div>
+        {% endif %}
+        <h1 style="text-align: center;">Add Your Solution Link</h1>
+        <div class="container-fluid">
+            <form style="text-align: center;" action="" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form|bootstrap }}
+                </table>
+                <input class="btn btn-primary btn-block" type="submit" value="Submit"/>
+            </form>
+        </div>
     </div>
-  </div>
 {% endblock body %}
 
 </html>
