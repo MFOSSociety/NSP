@@ -43,6 +43,10 @@ def getConversations(request):
 				conversations[participant] = {"profile":contact_profile,"last_message":"Nothing to show"}
 	return conversations
 
+def chat(request):
+	conversations = getConversations(request)
+	context = {"conversations":conversations}
+	return render(request,"chat.html",context)
 
 def chatFriend(request,username):
 	sender = request.user
