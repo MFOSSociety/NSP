@@ -45,7 +45,9 @@ def getConversations(request):
 
 def chat(request):
 	conversations = getConversations(request)
-	context = {"conversations":conversations}
+	current_user_profile = UserProfile.objects.get(user=request.user)
+
+	context = {"conversations":conversations,"sender_user_profile":current_user_profile}
 	return render(request,"chat.html",context)
 
 def chatFriend(request,username):
