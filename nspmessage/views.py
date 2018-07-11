@@ -38,6 +38,14 @@ def chatFriend(request,username):
 			except KeyError:
 				contact_profile = UserProfile.objects.get(user=conv_participants[0])
 				conversations[conv_participants[0]] = {"profile":contact_profile,"last_message":last_message}	
+	for participant in participants:
+		if participant != request.user:
+			contact_profile = UserProfile.objects.get(user=participant)
+			try:
+				if not conversations[participant]:
+					conversations[participant] = {"profile":contact_profile,"last_message":"Nothing to show"}
+			except KeyError:
+				conversations[participant] = {"profile":contact_profile,"last_message":"Nothing to show"}
 
 	context = {"messages":messages,"receiver":receiver,"sender_user_profile":current_user_profile,
 						"receiver_user_profile":receiver_user_profile,"conversations":conversations}
