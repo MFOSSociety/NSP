@@ -28,4 +28,4 @@ Visit - http://thensp.pythonanywhere.com/
 ## Developers:
 #### Backend Developers - <a href="https://github.com/rshrc">Rishi Banerjee</a> , <a href="https://github.com/pratikjain04">Pratik Jain</a> , <a href="https://github.com/gjergjk71">Gjergj Kadriu</a>
 #### Frontend Developers - <a href="https://github.com/prachalgoyal03">Prachal Goyal</a>
-#### Designer - <a href="https://github.com/mythio">Amit Parameshwar</a>
+
