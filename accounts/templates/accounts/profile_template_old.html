@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
@@ -45,13 +43,14 @@
             </p>
             <p>Position : {{ user.userprofile.position }}</p>
             My skillset :{% for skill in skills %}
-                <li>
-                    {{ skill.skill_name }}
-                </li>
-            {% endfor %}
+            <li>
+                {{ skill.skill_name }}
+            </li>
+        {% endfor %}
             <p>Followers : {{ followers }}</p>
             <p>Following : {{ followings }}</p>
-            <p>Bio : {% if user.userprofile.bio|length == 0 %} No bio yet! {% else %} {{ user.userprofile.bio }} {% endif %}</p>
+            <p>Bio : {% if user.userprofile.bio|length == 0 %} No bio yet! {% else %}
+                {{ user.userprofile.bio }} {% endif %}</p>
             <div class="container">
                 <a class="btn btn-success" href="{% url 'addskill' %}">Add Skill</a>
                 <a class="btn btn-success" href="{% url 'ChangeProfilePicture' %}">Edit Profile Picture</a>

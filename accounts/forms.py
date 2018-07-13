@@ -1,9 +1,12 @@
-# from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from accounts.models import ProjectDetail, Skill, UserProfile
-from accounts.models import User
 
+from accounts.models import (
+    ProjectDetail,
+    Skill,
+    UserProfile,
+    User,
+)
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -97,7 +100,7 @@ class RegistrationForm(UserCreationForm):  # extending from superclass
     # define meta data
 
     class Meta:
-        model =User
+        model = User
         fields = (
             'username',
             'first_name',
@@ -119,7 +122,6 @@ class RegistrationForm(UserCreationForm):  # extending from superclass
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
-        
 
         if commit:
             user.save()

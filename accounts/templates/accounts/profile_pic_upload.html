@@ -5,49 +5,49 @@
 </head>
 
 <body>
-    {% if current_user_profile.photo %}
-    <img style="position: center;" src="{{ current_user_profile.photo.url }}"> 
-    {%endif%}
-    <form enctype="multipart/form-data" id="id_ajax_upload_form" method="POST" novalidate="">
-        {% csrf_token %}
-        <p>
-            <label for="id_photo">Photo:</label>
-            <input type="file" name="photo" required id="id_photo" />
-        </p>
-        <input type="submit" />
-    </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        // form upload
-        $('#id_ajax_upload_form').submit(function (e) {
-            e.preventDefault();
-            $form = $(this)
-            var formData = new FormData(this);
-            $.ajax({
-                url: window.location.pathname,
-                type: 'POST',
-                data: formData,
-                success: function (response) {
-                    $('.error').remove();
-                    console.log(response)
-                    if (response.error) {
-                        $.each(response.errors, function (name, error) {
-                            error = '<small class="text-muted error">' + error + '</small>'
-                            $form.find('[name=' + name + ']').after(error);
-                        })
-                    }
-                    else {
-                        alert(response.message)
-                        window.location = ""
-                    }
-                },
-                cache: false,
-                contentType: false,
-                processData: false
-            });
+{% if current_user_profile.photo %}
+    <img style="position: center;" src="{{ current_user_profile.photo.url }}">
+{% endif %}
+<form enctype="multipart/form-data" id="id_ajax_upload_form" method="POST" novalidate="">
+    {% csrf_token %}
+    <p>
+        <label for="id_photo">Photo:</label>
+        <input type="file" name="photo" required id="id_photo"/>
+    </p>
+    <input type="submit"/>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    // form upload
+    $('#id_ajax_upload_form').submit(function (e) {
+        e.preventDefault();
+        $form = $(this)
+        var formData = new FormData(this);
+        $.ajax({
+            url: window.location.pathname,
+            type: 'POST',
+            data: formData,
+            success: function (response) {
+                $('.error').remove();
+                console.log(response)
+                if (response.error) {
+                    $.each(response.errors, function (name, error) {
+                        error = '<small class="text-muted error">' + error + '</small>'
+                        $form.find('[name=' + name + ']').after(error);
+                    })
+                }
+                else {
+                    alert(response.message)
+                    window.location = ""
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
         });
+    });
     // end
-    </script>
+</script>
 </body>
 
 </html>

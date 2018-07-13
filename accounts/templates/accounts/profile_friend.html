@@ -12,173 +12,121 @@
     <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
 {% endblock %}
 {% block body %}
-<div class="site-wrapper" style="margin-top:75px;">
-
-
+    <div class="site-wrapper" style="margin-top:75px;">
     <br>
     <div class="container">
-        <div class="row lead mb-7">
-            <div class="col-md-5 ">
-                <div class="container first">
-                    {% if user.userprofile.gender == 'Male' %}
-                        <h2>Mr. {{ user.first_name }} {{ user.last_name }}</h2>
-                    {% elif user.userprofile.gender == 'Female' %}
-                        <h2>Ms. {{ user.first_name }} {{ user.last_name }}</h2>
-                    {% else %}
-                        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-                    {% endif %}
-                    {% if user.userprofile.photo %}
-                        <img class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}" width="240">
-                    {% else %}
-                        <img class="img-thumbnail" alt="user image"
-                             src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
-                    {% endif %}
-                    <br><br>
-<div class="col-md-4" style="margin-left:-20px;">
-<ul class="list-group list-group-flush">
-  <li class="list-group-item" style="font-weight:bold;"> Username : {{ user.username }}</li>
-  <li class="list-group-item" style="font-weight:bold;"> Followers : {% if followers == 0 %} 0 {% else %} {{ followers }} {% endif %}</li>
-  <li class="list-group-item" style="font-weight:bold;">Following : {% if following == 0 %} 0 {% else %} {{ followings }} {% endif %}</li>
-<li class="list-group-item" style="font-weight:bold;">Stream : {{ user.userprofile.stream }}</li>
-<li class="list-group-item" style="font-weight:bold;">Branch : {{ user.userprofile.branch }}</li>
-<li class="list-group-item" style="font-weight:bold;">Year : {{ user.userprofile.year }}</li>
-<li class="list-group-item" style="font-weight:bold;">Email : {{ user.email }}</li>
-<li class="list-group-item" style="font-weight:bold;">Ratings :
-    {% for i in range %}
-        <i class="fa fa-star" style="color:dodgerblue"></i>
-    {% endfor %}</li>
-    <div class="">
-        {% if current_user_following %}
-            <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary" style="width: 100%">Unfollow</a>
-        {% else %}
-            <a href="{% url 'followUser' user.id %}" class="btn btn-primary" style="width: 100%">Follow</a>
-        {% endif %}
-    </div>
-</ul>
-
-
-                    <!-- <table class="table table-striped" style="margin-left: -40px; max-width: 300px;">
-                        <tr>
-                            <td>
-                                <h5 style="width: 100%;">
-                                    Username : {{ user.username }}
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Followers : {% if followers == 0 %} 0 {% else %} {{ followers }} {% endif %}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Following : {% if following == 0 %} 0 {% else %} {{ followings }} {% endif %}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Stream : {{ user.userprofile.stream }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Branch : {{ user.userprofile.branch }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Year : {{ user.userprofile.year }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Email : {{ user.email }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Ratings :
-                                    {% for i in range %}
-                                        <i class="fa fa-star" style="color:dodgerblue"></i>
-                                    {% endfor %}
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="container">
-                                    {% if current_user_following %}
-                                        <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary" style="width: 100%">Unfollow</a>
-                                    {% else %}
-                                        <a href="{% url 'followUser' user.id %}" class="btn btn-primary" style="width: 100%">Follow</a>
-                                    {% endif %}
-                                </div>
-                            </td>
-                        </tr>
-                    </table> -->
-                  </div>
-
+    <div class="row lead mb-7">
+    <div class="col-md-5 ">
+        <div class="container first">
+            {% if user.userprofile.gender == 'Male' %}
+                <h2>Mr. {{ user.first_name }} {{ user.last_name }}</h2>
+            {% elif user.userprofile.gender == 'Female' %}
+                <h2>Ms. {{ user.first_name }} {{ user.last_name }}</h2>
+            {% else %}
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+            {% endif %}
+            {% if user.userprofile.photo %}
+                <img class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}" width="240">
+            {% else %}
+                <img class="img-thumbnail" alt="user image"
+                     src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
+            {% endif %}
+            <br><br>
+            <div class="col-md-4" style="margin-left:-20px;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="font-weight:bold;"> Username : {{ user.username }}</li>
+                    <li class="list-group-item" style="font-weight:bold;"> Followers : {% if followers == 0 %}
+                        0 {% else %} {{ followers }} {% endif %}</li>
+                    <li class="list-group-item" style="font-weight:bold;">Following : {% if following == 0 %}
+                        0 {% else %} {{ followings }} {% endif %}</li>
+                    <li class="list-group-item" style="font-weight:bold;">Stream
+                        : {{ user.userprofile.stream }}</li>
+                    <li class="list-group-item" style="font-weight:bold;">Branch
+                        : {{ user.userprofile.branch }}</li>
+                    <li class="list-group-item" style="font-weight:bold;">Year : {{ user.userprofile.year }}</li>
+                    <li class="list-group-item" style="font-weight:bold;">Email : {{ user.email }}</li>
+                    <li class="list-group-item" style="font-weight:bold;">Ratings :
+                        {% for i in range %}
+                            <i class="fa fa-star" style="color:dodgerblue"></i>
+                        {% endfor %}</li>
+                    <div class="">
+                        {% if current_user_following %}
+                            <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary" style="width: 100%">Unfollow</a>
+                        {% else %}
+                            <a href="{% url 'followUser' user.id %}" class="btn btn-primary"
+                               style="width: 100%">Follow</a>
+                        {% endif %}
+                    </div>
+                </ul>
+                <br>
+            </div>
+        </div>
+        <div class="col-md-6 " style="margin-bottom:30px;">
+            <div class=" bg-light">
+                <center>
+                    <h2 class="second">BIO</h2>
                     <br>
 
-                </div>
-            </div>
-            <div class="col-md-6 " style="margin-bottom:30px;">
-                <div class=" bg-light">
-                    <center>
-                        <h2 class="second">BIO</h2>
-                        <br>
-
-                        <h5 style="word-break: break-all">{% if user.userprofile.bio|length == 0 %} No bio
-                            yet! {% else %}
-                            {{ user.userprofile.bio|linebreaks }} {% endif %}</h5>
-                        <br>
-                    </center>
-                </div>
-                <br>
-                <center>
-                    <div>
-                        <h2 class="second">Skills</h2>
-                    </div>
+                    <h5 style="word-break: break-all">{% if user.userprofile.bio|length == 0 %} No bio
+                        yet! {% else %}
+                        {{ user.userprofile.bio|linebreaks }} {% endif %}</h5>
+                    <br>
                 </center>
-                <table class="table">
-                  <thead>
-                  </thead>
-                  <tbody style="text-align: center;">
-                    {% for skill in skills %}
-                        <tr>
-                          <td>{{skill}}</td>
-                        </tr>
-                    {% empty %}
-                    <tr>
-                      <td>{{ user.first_name|title }} {{ user.last_name|title }} hasn't added any skills to his profile!</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-                <center>
-                    <div>
-                        <h2 class="second">Interested in</h2>
-                    </div>
-                </center>
-                <table class="table">
-                  <thead>
-                  </thead>
-                  <tbody style="text-align: center;">
-                    {% for project in projects %}
-                        <tr>
-                          <td><a href="{% url 'view_project_detail' project.project.id %}">{{project.project.project_name}}</td></a>
-                        </tr>
-                    {% empty %}
-                    <tr>
-                      <td>{{ user.first_name|title }} {{ user.last_name|title }} is  not interested in any projects right now.</td>
-                    </tr>
-                    <tr><td>
-                          <a class="btn btn-warning" href="{% url 'project_list_view' %}" style="width: 100%">Browse active projects!</a>
-                      </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
             </div>
-          </div>
+            <br>
+            <center>
+                <div>
+                    <h2 class="second">Skills</h2>
+                </div>
+            </center>
+            <table class="table">
+                <thead>
+                </thead>
+                <tbody style="text-align: center;">
+                {% for skill in skills %}
+                    <tr>
+                        <td>{{ skill }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>{{ user.first_name|title }} {{ user.last_name|title }} hasn't added any skills to his
+                            profile!
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <center>
+                <div>
+                    <h2 class="second">Interested in</h2>
+                </div>
+            </center>
+            <table class="table">
+                <thead>
+                </thead>
+                <tbody style="text-align: center;">
+                {% for project in projects %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'view_project_detail' project.project.id %}">{{ project.project.project_name }}
+                        </td>
+                        </a>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>{{ user.first_name|title }} {{ user.last_name|title }} is not interested in any projects
+                            right now.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="btn btn-warning" href="{% url 'project_list_view' %}" style="width: 100%">Browse
+                                active projects!</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

@@ -1,20 +1,16 @@
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.shortcuts import (
-    redirect,
     HttpResponse,
     HttpResponseRedirect,
     Http404,
     reverse,
     get_object_or_404,
 )
-from django.shortcuts import render, render_to_response
-from django.urls import reverse_lazy
-
-# from django.contrib.auth.forms import UserCreationForm use this for not custom
+from django.shortcuts import render_to_response
+from django.views.generic import UpdateView
 from accounts.forms import (
     EditProfileForm,
     ProjectForm,
@@ -25,9 +21,7 @@ from accounts.forms import (
     UserProfileForm,
 )
 from accounts.models import *
-from django.views.generic import UpdateView, DeleteView
 from notifications.views import getNotifications
-from itertools import chain
 from nspmessage.models import Message
 
 
@@ -656,4 +650,3 @@ def send_message(request, ID):
     receiver = Message.objects.filter(receiver=receiver)
     sender = Message.objects.filter(sender=request.user)
     print("{} and {} are talking".format(receiver, sender))
-

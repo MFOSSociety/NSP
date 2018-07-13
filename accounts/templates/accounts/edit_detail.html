@@ -5,68 +5,68 @@
     <title>This is to be Changed</title>
 {% endblock %}
 {% block head %}
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
 {% endblock %}
 {% block body %}
-<div class="site-wrapper" style="margin-top:75px;">
+    <div class="site-wrapper" style="margin-top:75px;">
 
-<div class="container">
-   <form class="form-group" method="POST">
-      {% csrf_token %}
-      <label>Branch : </label>
-      <select id = "branch" name="branch">
-         <option value = "{{ user.userprofile.branch }}">{{ user.userprofile.branch }}</option>
-         <option value = "CSE">CSE</option>
-         <option value = "IT">IT</option>
-         <option value = "CCE">CCE</option>
-         <option value = "MECHANICAL">MECHNICAL</option>
-         <option value = "MECHANICAL">MECHATRONICS</option>
-         <option value = "CIVIL">CIVIL</option>
-         <option value = "ECE">ECE</option>
-         <option value = "EE">EE</option>
-         <option value = "CHEMICAL">CHEMICAL</option>
-      </select>
-      <br>
-      <label>Year of Study : </label>
-      <select id = "year" name="year">
-         <option value = "{{ user.userprofile.year }}">{{ user.userprofile.year }}</option>
-         <option value = "1">1</option>
-         <option value = "2">2</option>
-         <option value = "3">3</option>
-         <option value = "4">4</option>
-      </select>
-      <br>
-      <label>Stream : </label>
-      <select id = "stream" name="stream">
-         <option value = "{{ user.userprofile.stream }}">{{ user.userprofile.stream }}</option>
-         <option value = "B.Tech">B.Tech</option>
-         <option value = "B.Hons">B.Hons</option>
-         <option value = "BJMC">BJMC</option>
-         <option value = "BSc">BSc</option>
-      </select>
-      <br>
-      <label>Gender : </label>
-      <select id = "gender" name="gender">
-         <option value = "{{ user.userprofile.gender }}">{{ user.userprofile.gender }}</option>
-         <option value = "Male">Male</option>
-         <option value = "Female">Female</option>
-         <option value = "Other">Other</option>
-      </select>
-      <br>
-      <label>What is your position? </label>
-      <select id = "position" name="position">
-         <option value = "{{ user.userprofile.position }}">{{ user.userprofile.position }}</option>
-         <option value = "Student">Student</option>
-         <option value = "Professor">Professor</option>
-         <option value = "Teaching Assistant">Teaching Assistant</option>
-         <option value = "Company">Company</option>
-      </select>
-      <br>
-      {{ form.bio }}
-      <br>
-      <button class="btn btn-success">Change</button>
-   </form>
-</div>
-</div>
+        <div class="container">
+            <form class="form-group" method="POST">
+                {% csrf_token %}
+                <label>Branch : </label>
+                <select id="branch" name="branch">
+                    <option value="{{ user.userprofile.branch }}">{{ user.userprofile.branch }}</option>
+                    <option value="CSE">CSE</option>
+                    <option value="IT">IT</option>
+                    <option value="CCE">CCE</option>
+                    <option value="MECHANICAL">MECHNICAL</option>
+                    <option value="MECHANICAL">MECHATRONICS</option>
+                    <option value="CIVIL">CIVIL</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EE">EE</option>
+                    <option value="CHEMICAL">CHEMICAL</option>
+                </select>
+                <br>
+                <label>Year of Study : </label>
+                <select id="year" name="year">
+                    <option value="{{ user.userprofile.year }}">{{ user.userprofile.year }}</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <br>
+                <label>Stream : </label>
+                <select id="stream" name="stream">
+                    <option value="{{ user.userprofile.stream }}">{{ user.userprofile.stream }}</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="B.Hons">B.Hons</option>
+                    <option value="BJMC">BJMC</option>
+                    <option value="BSc">BSc</option>
+                </select>
+                <br>
+                <label>Gender : </label>
+                <select id="gender" name="gender">
+                    <option value="{{ user.userprofile.gender }}">{{ user.userprofile.gender }}</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <br>
+                <label>What is your position? </label>
+                <select id="position" name="position">
+                    <option value="{{ user.userprofile.position }}">{{ user.userprofile.position }}</option>
+                    <option value="Student">Student</option>
+                    <option value="Professor">Professor</option>
+                    <option value="Teaching Assistant">Teaching Assistant</option>
+                    <option value="Company">Company</option>
+                </select>
+                <br>
+                {{ form.bio }}
+                <br>
+                <button class="btn btn-success">Change</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

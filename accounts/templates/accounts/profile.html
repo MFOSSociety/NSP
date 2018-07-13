@@ -12,166 +12,176 @@
     <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
 {% endblock %}
 {% block body %}
-<div class="site-wrapper" style="margin-top:75px;">
+    <div class="site-wrapper" style="margin-top:75px;">
 
-    <br>
-    <div class="container">
-        <div class="row lead mb-7">
-            <div class="col-md-5 ">
-                <div class="container first">
-                    {% if user.userprofile.gender == 'Male' %}
-                        <h2>Mr. {{ user.first_name }} {{ user.last_name }}</h2>
-                    {% elif user.userprofile.gender == 'Female' %}
-                        <h2>Ms. {{ user.first_name }} {{ user.last_name }}</h2>
-                    {% else %}
-                        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-                    {% endif %}
-                    {% if user.userprofile.photo %}
-                        <img class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}" width="240">
-                    {% else %}
-                        <img class="img-thumbnail" alt="user image"
-                             src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
-                    {% endif %}
+        <br>
+        <div class="container">
+            <div class="row lead mb-7">
+                <div class="col-md-5 ">
+                    <div class="container first">
+                        {% if user.userprofile.gender == 'Male' %}
+                            <h2>Mr. {{ user.first_name }} {{ user.last_name }}</h2>
+                        {% elif user.userprofile.gender == 'Female' %}
+                            <h2>Ms. {{ user.first_name }} {{ user.last_name }}</h2>
+                        {% else %}
+                            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                        {% endif %}
+                        {% if user.userprofile.photo %}
+                            <img class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}"
+                                 width="240">
+                        {% else %}
+                            <img class="img-thumbnail" alt="user image"
+                                 src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
+                        {% endif %}
 
-                    <table class="table table-striped " style="margin-left: -40px; width: 300px;">
-                        <tr>
-                            <td>
-                                <h5>
-                                    Username : {{ user.username }}
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>
-                                    <a class="btn btn-primary" href="{% url 'ChangeProfilePicture' %}" style="width: 100%">Upload Pic</a>
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>
-                                    <a class="btn btn-primary" href="{% url 'EditDetails' user.id %}" style="width: 100%">Update Info</a>
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>
-                                    <a class="btn btn-primary" href="{% url 'addskill' %}" style="width: 100%">Add Skill</a>
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Followers : {{ followers }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Following : {{ following }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Stream : {{ user.userprofile.stream }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Branch : {{ user.userprofile.branch }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Year : {{ user.userprofile.year }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Email : {{ user.email }}</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Ratings :
-                                    {% for i in range %}
-                                        <i class="fa fa-star" style="color:dodgerblue"></i>
-                                    {% endfor %}
-                                </h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>
-                                    <a class="btn btn-danger" href="{% url 'change_password' %}" style="width: 100%">Change Password</a>
-                                </h5>
-                            </td>
-                        </tr>
+                        <table class="table table-striped " style="margin-left: -40px; width: 300px;">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        Username : {{ user.username }}
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <a class="btn btn-primary" href="{% url 'ChangeProfilePicture' %}"
+                                           style="width: 100%">Upload Pic</a>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <a class="btn btn-primary" href="{% url 'EditDetails' user.id %}"
+                                           style="width: 100%">Update Info</a>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <a class="btn btn-primary" href="{% url 'addskill' %}" style="width: 100%">Add
+                                            Skill</a>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Followers : {{ followers }}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Following : {{ following }}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Stream : {{ user.userprofile.stream }}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Branch : {{ user.userprofile.branch }}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Year : {{ user.userprofile.year }}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Email : {{ user.email }}</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Ratings :
+                                        {% for i in range %}
+                                            <i class="fa fa-star" style="color:dodgerblue"></i>
+                                        {% endfor %}
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <a class="btn btn-danger" href="{% url 'change_password' %}"
+                                           style="width: 100%">Change Password</a>
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6 " style="margin-top:80px;">
+                    <div class=" bg-light">
+                        <center>
+                            <h2 class="second">BIO</h2>
+                            <br>
+
+                            <h5 style="word-break: break-all">{% if user.userprofile.bio|length == 0 %} No bio
+                                yet! {% else %}
+                                {{ user.userprofile.bio|linebreaks }} {% endif %}</h5>
+                            <br>
+                        </center>
+                    </div>
+                    <br>
+                    <center>
+                        <div>
+                            <h2 class="second">Skills</h2>
+                        </div>
+                    </center>
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        {% for skill in skills %}
+                            <tr>
+                                <td>{{ skill }}</td>
+                                <td><a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></ul></td>
+                            </tr>
+                            <tr>
+                                {% empty %}
+                                <td>You haven't added any skills to your profile!</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <center>
+                        <div>
+                            <h2 class="second">Interested in</h2>
+                        </div>
+                    </center>
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody style="text-align: center;">
+                        {% for project in projects %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'view_project_detail' project.project.id %}">{{ project.project.project_name }}
+                                </td>
+                                </a>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td>You're not interested in any projects right now.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="btn btn-warning" href="{% url 'project_list_view' %}" style="width: 100%">Browse
+                                        active projects!</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-md-6 " style="margin-top:80px;">
-                <div class=" bg-light" >
-                    <center>
-                        <h2 class="second">BIO</h2>
-                        <br>
-
-                        <h5 style="word-break: break-all">{% if user.userprofile.bio|length == 0 %} No bio
-                            yet! {% else %}
-                            {{ user.userprofile.bio|linebreaks }} {% endif %}</h5>
-                        <br>
-                    </center>
-                </div>
-                <br>
-                <center>
-                    <div>
-                        <h2 class="second">Skills</h2>
-                    </div>
-                </center>
-                <table class="table">
-                  <thead>
-                  </thead>
-                  <tbody style="text-align: center;">
-                    {% for skill in skills %}
-                        <tr>
-                          <td>{{skill}}</td>
-                            <td><a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></ul></td>
-                        </tr>
-                    <tr>
-                    {% empty %}
-                      <td>You haven't added any skills to your profile!</td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-                <center>
-                    <div>
-                        <h2 class="second">Interested in</h2>
-                    </div>
-                </center>
-                <table class="table">
-                  <thead>
-                  </thead>
-                  <tbody style="text-align: center;">
-                    {% for project in projects %}
-                        <tr>
-                          <td><a href="{% url 'view_project_detail' project.project.id %}">{{project.project.project_name}}</td></a>
-                        </tr>
-                    {% empty %}
-                    <tr>
-                      <td>You're not interested in any projects right now.</td>
-                    </tr>
-                    <tr><td>
-                          <a class="btn btn-warning" href="{% url 'project_list_view' %}" style="width: 100%">Browse active projects!</a>
-                      </td>
-                      </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-            </div>
         </div>
     </div>
-  </div>
 
 {% endblock %}

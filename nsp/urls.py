@@ -28,7 +28,6 @@ def redirectToAccount(request):
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path("chat/",include("nspmessage.urls")),
                   path('account/', include('accounts.urls')),
                   path('notifications/', include('notifications.urls')),
                   path('api/users_api/', include(user_profile_resource.urls)),

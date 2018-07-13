@@ -1,41 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body %}
-<div class="site-wrapper" style="margin-top:75px;">
+    <div class="site-wrapper" style="margin-top:75px;">
 
-<div class="container-fluid">
-    <h3 style="text-align: center;">Users interested in {{ project.project_name }}</h3>
-    <div class="row">
-        {% for interested,profile in people_profile.items %}
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            {% if profile.photo %}
-                            <img src="{{ profile.photo.url }}"
-                            class="img-fluid">
-                            {% else %}
-                            <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="img-fluid">
-                            {% endif %}
-                        </div>
-                        <div class="col-lg-8">
-                             <a href="{% url 'view_friend' interested.user %}"><h6>{{interested.user}}</h6></a>
-                            <p style="font-size: 12px;">
-                                {{ profile.bio|slice:"50" }}{% if profile.bio|length > 50 %}...{% endif %}
+        <div class="container-fluid">
+            <h3 style="text-align: center;">Users interested in {{ project.project_name }}</h3>
+            <div class="row">
+                {% for interested,profile in people_profile.items %}
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        {% if profile.photo %}
+                                            <img src="{{ profile.photo.url }}"
+                                                 class="img-fluid">
+                                        {% else %}
+                                            <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                                 class="img-fluid">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <a href="{% url 'view_friend' interested.user %}"><h6>{{ interested.user }}</h6>
+                                        </a>
+                                        <p style="font-size: 12px;">
+                                            {{ profile.bio|slice:"50" }}{% if profile.bio|length > 50 %}...{% endif %}
 
-                            </p>
-                            <button class="btn btn-primary btn-xs"> <i class="fa fa-plus" aria-hidden="true"></i>
-Follow</button>
-                            <button class="btn btn-success btn-xs"> <i class="fa fa-envelope-o" aria-hidden="true"></i>
-Message</button>
+                                        </p>
+                                        <button class="btn btn-primary btn-xs"><i class="fa fa-plus"
+                                                                                  aria-hidden="true"></i>
+                                            Follow
+                                        </button>
+                                        <button class="btn btn-success btn-xs"><i class="fa fa-envelope-o"
+                                                                                  aria-hidden="true"></i>
+                                            Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
     </div>
-</div>
-</div>
 {% endblock body %}
