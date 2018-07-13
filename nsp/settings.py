@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'accounts',
     'nspapi',
     'nspmessage',
+    'issueSolution',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
