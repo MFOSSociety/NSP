@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+<!------ Include the above in your HEAD tag ---------->
+{% block customcss %}
+<!------ Include the above in your HEAD tag ---------->
+<link href="{% static 'nspmessage/chatFriend.css' %}" rel="stylesheet">
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+
+{% endblock %}
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+</head>
+<!-- 
+
+A concept for a chat interface. 
+
+Try writing a new message! :)
+
+
+Follow me here:
+Twitter: https://twitter.com/thatguyemil
+Codepen: https://codepen.io/emilcarlsson/
+Website: http://emilcarlsson.se/
+
+-->
+{% block body %}
+
+<div id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+            {% if sender_user_profile.photo %}
+                <img id="profile-img" class="online" src="{{ sender_user_profile.photo.url }}">
+            {% else %}
+                <img id="profile-img" class="online" src="{% static 'accounts/img/nsp_profile_default.jpg' %}" >
+            {% endif %} 				<p style="margin-top: 10px;">{% if request.user.first_name  and request.user.last_name %} {{ request.user.first_name }} {{request.user.last_name}}
+          {% else %} {{ request.user }}{% endif %}</p>
+				<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+				<div id="status-options">
+					<ul>
+						<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+						<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+						<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+						<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
+					</ul>
+				</div>
+				<div id="expanded">
+					<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="mikeross" />
+					<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="ross81" />
+					<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="mike.ross" />
+				</div>
+			</div>
+		</div>
+		<div id="search">
+			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+			<input type="text" placeholder="Search contacts..." />
+		</div>
+		<div style="margin-top:2px;" id="contacts">
+			<ul>
+        
+        {% for conversation in conversations.items %}
+         <!-- conversation.0 is friend user -->
+         <a href="{% url 'chatFriend' conversation.0 %}">
+         {% if conversation.0 == receiver %}
+      				<li class="contact active">
+          {% else %}
+              <li class="contact">
+          {% endif %}
+      					<div class="wrap">
+      						<span class="contact-status online"></span>
+                  {% if conversation.1.profile.photo %}
+                      <img src="{{ conversation.1.profile.photo.url }}">
+                  {% else %}
+                      <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" >
+                  {% endif %}           						
+                  <div class="meta">
+                    <p class="name">{% if conversation.0.first_name and conversation.0.last_name %} {{ conversation.0.first_name }} {{conversation.0.last_name}}
+                  {% else %} {{ conversation.0 }}{% endif %}</p>
+                    <p class="preview">{{conversation.1.last_message}}</p>
+                  </div>
+                </div>
+      				</li>
+          </a>
+        {% endfor %}
+
+			</ul>
+		</div>
+		<div id="bottom-bar">
+			<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span style="font-size: 15px">Add contact</span></button>
+			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span style="font-size: 15px">Settings</span></button>
+		</div>
+	</div>
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>s
+<script type="text/javascript" src="{% static 'nspmessage/chatFriend.js' %}"></script>
+<!-- sourceURL=pen.js -->
+</script>
+{% endblock body %}
+</html>
