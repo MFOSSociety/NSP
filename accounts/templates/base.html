@@ -1,4 +1,5 @@
 {% load static %}
+{% load notification_extras %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -193,35 +194,37 @@
                         <li class="head text-light bg-dark">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12 col-12">
-                                    <span>Notifications</span>
+                                    <span>Notifications {{getNotifcs}}</span>
                                     <a href="" class="float-right text-light">Mark all as read</a>
                                 </div>
                         </li>
-                        {% for notification,profile in notifications.items %}
-                            <li class="notification-box">
+                        {% for notification,profile in notifications|getNotifcs %}
+                            {% if notification.user == request.user %}
+                                <li class="notification-box">
 
-                                {% if profile.photo %}
-                                    <img src="{{ profile.photo.url }}"
-                                         class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                {% else %}
-                                    <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
-                                         class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
-                                {% endif %}
-                                <div class="row">
-                                    <a href="{% url 'view_friend' notification.from_user %}">
-                                        <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                        </div>
-                                        <div class="col-lg-8 col-sm-8 col-8">
-                                            <strong class="text-info">{{ notification.from_user }}</strong>
-                                            <div>
-                                    </a><a href="{{ notification.redirect }}">
-                                    {{ notification.text }}
+                                    {% if profile.photo %}
+                                        <img src="{{ profile.photo.url }}"
+                                             class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                    {% else %}
+                                        <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
+                                             class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
+                                    {% endif %}
+                                    <div class="row">
+                                        <a href="{% url 'view_friend' notification.from_user %}">
+                                            <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8 col-8">
+                                                <strong class="text-info">{{ notification.from_user }}</strong>
+                                                <div>
+                                        </a><a href="{{ notification.redirect }}">
+                                        {{ notification.text }}
+                                    </div>
+                                    </a>
+                                    <small class="text-warning">{{ notification.date }} {{ notification.time }}</small>
                                 </div>
-                                </a>
-                                <small class="text-warning">{{ notification.date }} {{ notification.time }}</small>
-                            </div>
-                            </div>
-                            </li>
+                                </div>
+                                </li>
+                            {% endif %}
                         {% endfor %}
     <li class="footer bg-dark text-center">
         <a href="" class="text-light">View All</a>
