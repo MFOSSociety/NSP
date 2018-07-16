@@ -29,6 +29,7 @@ def redirectToAccount(request):
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('account/', include('accounts.urls')),
+                  path("account/", include("issueSolution.urls")),
                   path('notifications/', include('notifications.urls')),
                   path('api/users_api/', include(user_profile_resource.urls)),
                   path('api/skills_api/', include(skill_resource.urls)),
