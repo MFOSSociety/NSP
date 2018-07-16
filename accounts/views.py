@@ -21,7 +21,6 @@ from accounts.forms import (
     UserProfileForm,
 )
 from accounts.models import *
-from notifications.views import getNotifications
 from nspmessage.models import Message
 
 
@@ -81,11 +80,8 @@ def projectEdit(request, ID):
 
 
 def HomeView(request):
-    notifications = []
-    if request.user.is_authenticated:
-        notifications = getNotifications(request)
     name = "NSP - Network Of Skilled People"
-    args = {'name': name, "notifications": notifications}
+    args = {'name': name}
     return render(request, 'accounts/index.html', args)
 
 
