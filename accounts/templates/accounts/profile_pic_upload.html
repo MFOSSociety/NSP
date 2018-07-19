@@ -1,53 +1,33 @@
-<html>
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="position:center;margin-top: 100px;text-align: center;">
+                            {% if current_user_profile.photo %}
+                            <img class="img-thumbnail" alt="user image" src="{{ current_user_profile.photo.url }}"
+                                 width="240">
+                        {% else %}
+                            <img class="img-thumbnail" alt="user image"
+                                 src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
+                        {% endif %}
 
-<head>
-    <title> Django image and file upload using ajax </title>
-</head>
-
-<body>
-{% if current_user_profile.photo %}
-    <img style="position: center;" src="{{ current_user_profile.photo.url }}">
-{% endif %}
-<form enctype="multipart/form-data" id="id_ajax_upload_form" method="POST" novalidate="">
-    {% csrf_token %}
-    <p>
-        <label for="id_photo">Photo:</label>
-        <input type="file" name="photo" required id="id_photo"/>
-    </p>
-    <input type="submit"/>
-</form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-    // form upload
-    $('#id_ajax_upload_form').submit(function (e) {
-        e.preventDefault();
-        $form = $(this)
-        var formData = new FormData(this);
-        $.ajax({
-            url: window.location.pathname,
-            type: 'POST',
-            data: formData,
-            success: function (response) {
-                $('.error').remove();
-                console.log(response)
-                if (response.error) {
-                    $.each(response.errors, function (name, error) {
-                        error = '<small class="text-muted error">' + error + '</small>'
-                        $form.find('[name=' + name + ']').after(error);
-                    })
-                }
-                else {
-                    alert(response.message)
-                    window.location = ""
-                }
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });
-    });
-    // end
-</script>
-</body>
-
-</html>
+    {% for error,message in form.errors.items %}
+        {{ error }}
+        {{ message }}
+    {% endfor %}
+    <form style="" method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <center>
+            {{ form.as_p}}
+        </center>
+        <button class="btn btn-primary" type="submit">Change</button>
+    </form>
+</div>
+{% endblock body %}
