@@ -444,16 +444,19 @@ def ChangePasswordView(request):
 
 @login_required
 def ChangeProfilePicture(request):
+    form = ImageFileUploadForm()
     current_user = request.user
     current_user_profile = UserProfile.objects.get(user=current_user)
     if request.method == "POST":
-        if request.FILES:
-            current_user_profile.photo = request.FILES["photo"]
-            # "photo" because in the template the upload image file name is photo
-            current_user_profile.save()
-            return redirect("accounts/change_profilepic")
+        form = ImageFileUploadForm(request.POST,request.FILES,instance=current_user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect("/account/change_profilepic")
+        else:
+            context = {"current_user_profile": current_user_profile,"form":form}
+            return render(request, "accounts/profile_pic_upload.html", context)
     else:
-        context = {"current_user_profile": current_user_profile}
+        context = {"current_user_profile": current_user_profile,"form":form}
         return render(request, "accounts/profile_pic_upload.html", context)
 
 
