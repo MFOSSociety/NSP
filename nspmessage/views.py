@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from accounts.models import UserProfile, Follow
 from nspmessage.models import Message
+from django.http import Http404
 
 
 def getConversations(request):
@@ -59,12 +60,18 @@ def chatFriend(request, username):
     current_user_profile = UserProfile.objects.get(user=request.user)
     receiver_user_profile = UserProfile.objects.get(user=receiver)
     current_participants = [sender, receiver]
-    messages = Message.objects.filter(sender__in=current_participants, receiver__in=current_participants).order_by("id")
-    conversations = getConversations(request)
+    if Follow.objects.filter(follower=current_participants[0],following=current_participants[1]):
+        if Follow.objects.filter(follower=current_participants[1],following=current_participants[0]):
+            messages = Message.objects.filter(sender__in=current_participants, receiver__in=current_participants).order_by("id")
+            conversations = getConversations(request)
 
-    context = {"messages": messages, "receiver": receiver, "sender_user_profile": current_user_profile,
-               "receiver_user_profile": receiver_user_profile, "conversations": conversations}
-    return render(request, "chatFriend.html", context)
+            context = {"messages": messages, "receiver": receiver, "sender_user_profile": current_user_profile,
+                       "receiver_user_profile": receiver_user_profile, "conversations": conversations}
+            return render(request, "chatFriend.html", context)
+        else:
+            raise Http404
+    else:
+        raise Http404
 
 
 def newMessage(request, username):
