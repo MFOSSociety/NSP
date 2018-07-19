@@ -22,6 +22,7 @@ from accounts.forms import (
 )
 from accounts.models import *
 from nspmessage.models import Message
+from django.http import Http404
 
 
 @login_required
@@ -588,11 +589,13 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
     def get_object(self, *args, **kwargs):
         user = get_object_or_404(User, pk=self.kwargs['pk'])
-
+        userprofile = UserProfile.objects.get(user=user)
+        if userprofile.user == self.request.user:
         # We can also get user object using self.request.user  but that doesnt work
         # for other models.
-
-        return user.userprofile
+            return userprofile
+        else:
+            raise Http404
 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
