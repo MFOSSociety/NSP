@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from project.models import ProjectDetail
 from project.issueSolution.models import Issue,Solution,IssueComment,SolutionComment
 from accounts.models import UserProfile
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 @login_required
