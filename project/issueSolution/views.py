@@ -18,7 +18,7 @@ def projectIssues(request, ID, status):
         return redirect("/account/project/{}".format(ID))
 
     args = {"project": project, "issues": issues, "status": status}
-    return render(request, "project/projectIssues.html", args)
+    return render(request, "issueSolution/projectIssues.html", args)
 
 
 @login_required
@@ -37,7 +37,7 @@ def projectSolutions(request, ID, status):
         return redirect("/account/project/{}".format(ID))
 
     args = {"project": project, "solutions": solutions, "status": status}
-    return render(request, "project/projectSolutions.html", args)
+    return render(request, "issueSolution/projectSolutions.html", args)
 
 
 @login_required
@@ -83,7 +83,7 @@ def editIssueSolution(request, projectID, type_, ID):
     else:
         args = {"project": project, "type": type_, "openIssues": openIssues,
                 "object": object_, "user_profile": user_profile}
-        return render(request, "project/editIssueSolution.html", args)
+        return render(request, "issueSolution/editIssueSolution.html", args)
 
 
 @login_required
@@ -112,7 +112,7 @@ def createIssueSolution(request, projectID, type_):
     else:
         args = {"project": project, "user_profile": user_profile,
                 "type": type_, "openIssues": openIssues}
-        return render(request, "project/createIssueSolution.html", args)
+        return render(request, "issueSolution/createIssueSolution.html", args)
 
 
 @login_required
@@ -137,7 +137,7 @@ def viewIssueSolution(request, projectID, type_, ID):
             "userProfile": userProfile, "type": type_,
             "profile_comment": profile_comment}
 
-    return render(request, "project/post.html", args)
+    return render(request, "issueSolution/post.html", args)
 
 
 @login_required
