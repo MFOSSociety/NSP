@@ -20,7 +20,7 @@ def ProjectDescribeView(request):
     # These forms will be blank, ready for user input.
     else:
         project_form = ProjectForm()
-    return render(request, 'accounts/start_project.html',
+    return render(request, 'project/start_project.html',
                   {'project_form': project_form, 'project_registered': project_registered})
 
 @login_required
@@ -44,7 +44,7 @@ def projectEdit(request, ID):
             return redirect("/account/project/{}".format(str(project.id)))
         args = {"project": project}
         if project.initiated_by == request.user:
-            return render(request, 'accounts/editProject.html', args)
+            return render(request, 'project/editProject.html', args)
         else:
             raise Http404
     else:
@@ -61,7 +61,7 @@ def ProjectsListView(request):
         dict_[project] = len(interested), current_user_interested
 
     args = {"dict_": dict_}
-    return render(request, 'accounts/listprojects.html', args)
+    return render(request, 'project/listprojects.html', args)
 
 @login_required
 def addInterested(request, ID):
@@ -91,7 +91,7 @@ def ProjectDetailView(request, project_id):
     solutions = Solution.objects.filter(issue__in=allIssues, status="0").order_by('-id')[:5]
     editable = False
     context = locals()
-    template = 'accounts/projectdetailview.html'
+    template = 'project/projectdetailview.html'
     args = {'project': project, "issues": issues,
             'issuesNumber': len(issues),
             "solutions": solutions,
@@ -108,4 +108,4 @@ def interestedList(request, ID):
         people_profile[interested] = UserProfile.objects.get(user=interested.user)
 
     args = {"project": project, "people_profile": people_profile}
-    return render(request, "accounts/interestedList.html", args)
+    return render(request, "project/interestedList.html", args)
