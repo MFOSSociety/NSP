@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 
 urlpatterns = [
 	path('delete/<ID>', views.deleteProject, name="deleteProject"),
@@ -9,4 +9,5 @@ urlpatterns = [
     path("active/removeInsterested/<ID>", views.removeInsterested, name="removeInsterested"),
     path('<ID>/edit', views.projectEdit, name='projectEdit'),
     path('<project_id>/', views.ProjectDetailView, name='view_project_detail'),
+    path("",include("project.issueSolution.urls")),
 ]
