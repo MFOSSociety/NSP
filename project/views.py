@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,reverse
 from django.contrib.auth.decorators import login_required
 from project.models import ProjectDetail,ProjectPeopleInterested
 from project.forms import ProjectForm
+from project.issueSolution.models import Issue,Solution
 # Create your views here.
 
 @login_required
