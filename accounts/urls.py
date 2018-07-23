@@ -35,6 +35,5 @@ urlpatterns = [
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),
     path('profile/deleteskill/<ID>', views.deleteSkill, name='deleteskill'),
-    path('message/', views.send_message, name='message'),
     path("chat/", include("nspmessage.urls")),
 ]
