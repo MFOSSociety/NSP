@@ -309,39 +309,3 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
-
-def handler404(request):
-    response = render_to_response('accounts/error404.html', {})
-    response.status_code = 404
-    return response
-
-
-@login_required
-def search(request):
-    if request.method == 'POST':
-        srch = request.POST['srh']
-
-        if srch:
-            match1 = User.objects.filter(first_name__icontains=srch)
-            match2 = Skill.objects.filter(skill_name__icontains=srch)
-
-            if match1:
-                # for userprofile
-                return render(request, 'accounts/search.html', {'sr': match1, 'condition': 'person'})
-            elif match2:
-                # for user skill
-                return render(request, 'accounts/search.html', {'sr': match2, 'condition': 'skill'})
-            else:
-                return render(request, 'accounts/search.html', {'sr': 'no results found'})
-
-        else:
-            return HttpResponse('/account/search/')
-    return render(request, 'accounts/search.html')
-
-
-@login_required
-def send_message(request, ID):
-    receiver = User.objects.get(pk=ID)
-    receiver = Message.objects.filter(receiver=receiver)
-    sender = Message.objects.filter(sender=request.user)
-    print("{} and {} are talking".format(receiver, sender))
