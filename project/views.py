@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,reverse
 from django.contrib.auth.decorators import login_required
 from project.models import ProjectDetail,ProjectPeopleInterested
+from project.forms import ProjectForm
 # Create your views here.
 
 @login_required
@@ -23,12 +24,11 @@ def ProjectDescribeView(request):
 
 @login_required
 def deleteProject(request, ID):
-    project = ProjectDetail.objects.get(pk=ID)
-    if request.user == project.initiated_by:
-        project.delete()
-        return redirect("/account/project/active")
-    else:
-        return redirect("/account/project/active")
+	project = ProjectDetail.objects.get(pk=ID)
+	if request.user == project.initiated_by:
+		project.delete()
+	return redirect(reverse("project_list_view"))
+
 
 @login_required
 def projectEdit(request, ID):
@@ -64,19 +64,19 @@ def ProjectsListView(request):
 
 @login_required
 def addInterested(request, ID):
-    current_user = request.user
-    project = ProjectDetail.objects.get(pk=ID)
-    current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
-    if not current_user_interested:
-        ProjectPeopleInterested.objects.create(user=current_user, project=project)
-    return redirect("/account/project/active/")
+	current_user = request.user
+	project = ProjectDetail.objects.get(pk=ID)
+	current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
+	if not current_user_interested:
+	    ProjectPeopleInterested.objects.create(user=current_user, project=project)
+	return redirect(reverse("project_list_view"))
 
 @login_required
 def removeInsterested(request, ID):
-    current_user = request.user
-    project = ProjectDetail.objects.get(pk=ID)
-    ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
-    return redirect("/account/project/active/")
+	current_user = request.user
+	project = ProjectDetail.objects.get(pk=ID)
+	ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
+	return redirect(reverse("project_list_view"))
 
 @login_required
 def ProjectDetailView(request, project_id):
