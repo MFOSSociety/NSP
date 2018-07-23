@@ -26,12 +26,6 @@ from django.http import Http404
 
 
 @login_required
-def ProjectHomeView(request):
-    args = {}
-    return render(request, 'accounts/home.html', args)
-
-
-@login_required
 def ProjectDescribeView(request):
     project_registered = False
     initiator = request.user
