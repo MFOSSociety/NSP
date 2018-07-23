@@ -29,6 +29,7 @@ QA_SETTINGS = {
 }
 
 INSTALLED_APPS = [
+    'nsp',
     'bootstrapform',
     'notifications',
     'accounts',
