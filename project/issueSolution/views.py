@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
 from django.contrib.auth.decorators import login_required
 from project.models import ProjectDetail
 from project.issueSolution.models import Issue,Solution,IssueComment,SolutionComment
@@ -15,7 +15,7 @@ def projectIssues(request, ID, status):
     elif status == "all":
         issues = Issue.objects.filter(project=project).order_by("-id")
     else:
-        return redirect("/account/project/{}".format(ID))
+        return redirect(reverse("view_project_detail",args=[ID]))
 
     args = {"project": project, "issues": issues, "status": status}
     return render(request, "issueSolution/projectIssues.html", args)
@@ -34,7 +34,7 @@ def projectSolutions(request, ID, status):
     elif status == "all":
         solutions = Solution.objects.filter(issue__in=issues).order_by("-id")
     else:
-        return redirect("/account/project/{}".format(ID))
+        return redirect(reverse("view_project_detail",args=[ID]))
 
     args = {"project": project, "solutions": solutions, "status": status}
     return render(request, "issueSolution/projectSolutions.html", args)
@@ -49,10 +49,10 @@ def deleteIssueSolution(request, type_, ID):
         instance = Solution.objects.get(pk=ID)
         project = instance.issue.project
     else:
-        return redirect("/account/")
+        return redirect(reverse("home"))
     if request.user == instance.user:
         instance.delete()
-    return redirect("/account/project/{}/{}/all".format(project.id, type_ + "s"))
+    return redirect(reverse("deleteIssueSolution",args=[project.id, type_ + "s"]))
 
 
 @login_required
@@ -66,9 +66,9 @@ def editIssueSolution(request, projectID, type_, ID):
     elif type_ == "issue":
         object_ = Issue.objects.get(pk=ID)
     else:
-        return redirect("/account/project/{}".format(project.id))
+        return redirect(reverse("view_project_detail",args=[project.id]))
     if request.user != object_.user:
-        return redirect("/account/project/{}/{}/{}".format(project.id, type_, object_.id))
+        return redirect(reverse("editIssueSolution",args=[project.id, type_, object_.id]))
     user_profile = UserProfile.objects.get(user=object_.user)
     if request.method == "POST":
         title = request.POST.get("title")
@@ -79,7 +79,7 @@ def editIssueSolution(request, projectID, type_, ID):
             issue = Issue.objects.get(pk=int(request.POST.get("value")))
             object_.issue = issue
         object_.save()
-        return redirect("/account/project/{}/{}/{}".format(project.id, type_, object_.id))
+        return redirect(reverse("editIssueSolution",args=[project.id, type_, object_.id]))
     else:
         args = {"project": project, "type": type_, "openIssues": openIssues,
                 "object": object_, "user_profile": user_profile}
@@ -100,7 +100,7 @@ def createIssueSolution(request, projectID, type_):
             description = request.POST.get("description")
             issue = Issue.objects.create(project=project, user=request.user,
                                          title=title, description=description, status="1")
-            return redirect("/account/project/{}/issue/{}".format(project.id, issue.id))
+            return redirect(reverse("viewIssueSolution",args=[project.id,"issue",issue.id]))
         elif type_ == "solution":
             title = request.POST.get("title")
             description = request.POST.get("description")
@@ -108,7 +108,7 @@ def createIssueSolution(request, projectID, type_):
             issue = Issue.objects.get(pk=int(issueID))
             solution = Solution.objects.create(issue=issue, user=request.user,
                                                title=title, description=description, status="0")
-            return redirect("/account/project/{}/solution/{}".format(project.id, solution.id))
+            return redirect(reverse("viewIssueSolution",args=[project.id,"solution",solution.id]))
     else:
         args = {"project": project, "user_profile": user_profile,
                 "type": type_, "openIssues": openIssues}
@@ -125,7 +125,7 @@ def viewIssueSolution(request, projectID, type_, ID):
         post = Solution.objects.get(pk=ID)
         comments = SolutionComment.objects.filter(solution=post)
     else:
-        return redirect("/account/project/{}".format(projectID))
+        return redirect(reverse("view_project_detail",args=[projectID]))
 
     profile_comment = {}
     for comment in comments:
@@ -161,9 +161,9 @@ def changeStatusIssueSolution(request, projectID, type_, ID, status):
                 instance.status = "2"
             instance.save()
         else:
-            redirect("/account/project/{}".format(projectID))
+            redirect(reverse("view_project_detail",args=[projectID]))
 
-    return redirect("/account/project/{}/{}/{}".format(projectID, type_, ID))
+    return redirect(reverse("viewIssueSolution",args=[projectID, type_, ID]))
 
 
 @login_required
@@ -179,10 +179,10 @@ def commentIssueSolution(request, projectID, type_, ID):
             SolutionComment.objects.create(user=request.user, solution=post,
                                            comment=comment)
         else:
-            return redirect("/account/project/{}/{}/{}".format(projectID, type_, ID))
+            return redirect(reverse("viewIssueSolution",args=[projectID, type_, ID]))
         lastPage = request.POST.get("path")
         return HttpResponseRedirect(lastPage)
 
     else:
-        return redirect("/account/project/{}/{}/{}".format(projectID, type_, ID))
+        return redirect(reverse("viewIssueSolution",args=[projectID, type_, ID]))
 
