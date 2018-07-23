@@ -1,4 +1,5 @@
 from django.urls import path,include
+from . import views
 
 urlpatterns = [
 	path('delete/<ID>', views.deleteProject, name="deleteProject"),
