@@ -9,8 +9,6 @@ admin.site.site_header = "NSP ADMINISTRATION"
 admin.site.register(Skill)
 admin.site.register(UserProfile)
 admin.site.register(Follow)
-admin.site.register(ProjectDetail)
-admin.site.register(ProjectPeopleInterested)
 admin.site.register(Issue)
 admin.site.register(Solution)	
 admin.site.register(IssueComment)
