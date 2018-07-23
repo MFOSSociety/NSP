@@ -15,7 +15,6 @@ urlpatterns = [
     path("change_profilepic", views.ChangeProfilePicture, name="ChangeProfilePicture"),
     path('testing/', views.django_image_and_file_upload_ajax, name='testing'),
     path('', views.HomeView, name='home'),
-    path('project/<projectID>/<type_>/<ID>/comment', views.commentIssueSolution, name='commentIssueSolution'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
     path('registersuccess/', views.SuccesfullRegistrationView, name='registersucess'),
     path('register/', views.RegistrationView, name='signup'),
