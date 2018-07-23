@@ -13,7 +13,6 @@ from django.shortcuts import render_to_response
 from django.views.generic import UpdateView
 from accounts.forms import (
     EditProfileForm,
-    ProjectForm,
     RegistrationForm,
     SkillForm,
     EditInformationForm,
