@@ -2,15 +2,10 @@ from tastypie.resources import ModelResource
 from accounts.models import (
     UserProfile,
     Skill,
-    ProjectDetail,
-    ProjectPeopleInterested,
-    Follow,
-    Issue,
-    IssueComment,
-    Solution,
-    SolutionComment,
+    Follow
 )
-
+from project.models import ProjectDetail,ProjectPeopleInterested
+from project.issueSolution.models import Issue,IssueComment,Solution,SolutionComment
 
 class UserProfileResource(ModelResource):
     class Meta:
