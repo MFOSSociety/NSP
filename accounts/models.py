@@ -5,12 +5,14 @@ from django.db import models
 from django.db.models.signals import post_save
 from project.models import *
 
+
 class Skill(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     skill_name = models.CharField(max_length=100, default="", blank=True)
 
     def __str__(self):
         return self.skill_name
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
