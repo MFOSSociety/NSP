@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from accounts.models import UserProfile, Skill
 from project.models import ProjectDetail
+from notifications.models import Notification
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -32,3 +33,9 @@ class ProjectDetailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ProjectDetail
         fields = ('project_name', 'initiated_by', 'mentor_name', 'branch', 'description', 'paid', 'start_date')
+
+
+class NotificationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ('user', 'from_user', 'text', 'redirect', 'status', 'date', 'time')
