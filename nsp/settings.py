@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'bootstrapform',
     'notifications',
     'accounts',
-    'nspapi',
     'nspmessage',
     'project',
     'rest_framework',
