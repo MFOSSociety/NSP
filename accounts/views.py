@@ -23,6 +23,7 @@ from accounts.models import *
 from nspmessage.models import Message
 from django.http import Http404
 
+
 def HomeView(request):
     name = "NSP - Network Of Skilled People"
     args = {'name': name}
@@ -69,6 +70,8 @@ def PeopleView(request):
     users = User.objects.all()  # do not use filter() with User object
     args = {'users': users, 'viewer': request.user}
     return render(request, 'accounts/people.html', args)
+
+
 @login_required
 def FriendProfileView(request, username):
     try:
@@ -151,15 +154,15 @@ def ChangeProfilePicture(request):
     current_user = request.user
     current_user_profile = UserProfile.objects.get(user=current_user)
     if request.method == "POST":
-        form = ImageFileUploadForm(request.POST,request.FILES,instance=current_user_profile)
+        form = ImageFileUploadForm(request.POST, request.FILES, instance=current_user_profile)
         if form.is_valid():
             form.save()
             return redirect("/account/change_profilepic")
         else:
-            context = {"current_user_profile": current_user_profile,"form":form}
+            context = {"current_user_profile": current_user_profile, "form": form}
             return render(request, "accounts/profile_pic_upload.html", context)
     else:
-        context = {"current_user_profile": current_user_profile,"form":form}
+        context = {"current_user_profile": current_user_profile, "form": form}
         return render(request, "accounts/profile_pic_upload.html", context)
 
 
@@ -301,8 +304,8 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
         user = get_object_or_404(User, pk=self.kwargs['pk'])
         userprofile = UserProfile.objects.get(user=user)
         if userprofile.user == self.request.user:
-        # We can also get user object using self.request.user  but that doesnt work
-        # for other models.
+            # We can also get user object using self.request.user  but that doesnt work
+            # for other models.
             return userprofile
         else:
             raise Http404

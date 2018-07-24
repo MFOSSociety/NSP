@@ -158,24 +158,20 @@
                 <ul class="nav navbar-nav menu-right">
                     {% if user.is_authenticated %}
 
-                        <li class=" "><a href="{% url 'view_profile' %}" class=" customhover">Profile</a>
-
+                        <li>
+                            <a href="{% url 'view_profile' %}" class=" customhover">Profile</a>
                             <a href="{% url 'edit_profile' %}" class=" customhover">Edit Profile</a>
                             <a href="{% url 'chat' %}" class=" customhover">Chat</a>
-
                             <a href="{% url 'view_people' %}" class=" customhover">People</a>
-
                             <a href="{% url 'start_project' %}" class=" customhover">Start Project</a>
                             <a href="{% url 'project_list_view' %}" class=" customhover">Active Projects</a>
-
                             <a href="{% url 'logout' %}" class=" customhover">Log Out</a>
-
                         </li>
                     {% else %}
 
-                        <li class=""><a href="{% url 'signup' %}" class=" customhover">Sign Up</a>
+                        <li>
+                            <a href="{% url 'signup' %}" class=" customhover">Sign Up</a>
                             <a href="{% url 'user_login' %}" class=" customhover">Sign In</a>
-
                         </li>
                     {% endif %}
 
@@ -195,7 +191,7 @@
                             <li class="head text-light bg-dark">
                                 <div class="row">
                                     <div class="col-lg-12 col-sm-12 col-12">
-                                        <span>Notifications{{getNotifcs}}</span>
+                                        <span>Notifications{{ getNotifcs }}</span>
                                         <a href="" class="float-right text-light">Mark all as read</a>
                                     </div>
                             </li>
@@ -227,15 +223,15 @@
                                     </li>
                                 {% endif %}
                             {% endfor %}
-        <li class="footer bg-dark text-center">
-            <a href="" class="text-light">View All</a>
-        </li>
-        </ul>
-        </li>
-        </ul>
-        </div>
+            <li class="footer bg-dark text-center">
+                <a href="" class="text-light">View All</a>
+            </li>
+            </ul>
+            </li>
+            </ul>
+            </div>
         {% endif %}
-        </div>
+    </div>
 </nav>
 
 
