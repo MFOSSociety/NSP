@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from project.models import ProjectDetail
+
+
 # Create your models here.
 
 class Issue(models.Model):
