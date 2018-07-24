@@ -3,24 +3,6 @@ from django.shortcuts import redirect
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from nspapi.resources import (
-    UserProfileResource,
-    SkillResource,
-    ProjectDetailResource,
-    ProjectPeopleInterestedResource,
-    IssueResource,
-    IssueCommentResource,
-    FollowResource,
-)
-
-user_profile_resource = UserProfileResource()
-skill_resource = SkillResource()
-project_detail_resource = ProjectDetailResource()
-project_people_interested_resource = ProjectPeopleInterestedResource()
-issue_resource = IssueResource()
-issue_comment_resource = IssueCommentResource()
-follow_resource = FollowResource()
-
 
 def redirectToAccount(request):
     return redirect("/account/")
