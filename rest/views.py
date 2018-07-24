@@ -8,8 +8,9 @@ from .serializers import (
     GroupSerializer,
     UserProfileSerializer,
     ProjectDetailSerializer,
+    SkillSerializer,
 )
-from accounts.models import UserProfile
+from accounts.models import UserProfile, Skill
 from project.models import ProjectDetail
 
 
@@ -32,6 +33,11 @@ class GroupViewSet(viewsets.ModelViewSet):
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+
+
+class SkillViewSet(viewsets.ModelViewSet):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
 
 
 class ProjectDetailViewSet(viewsets.ModelViewSet):
