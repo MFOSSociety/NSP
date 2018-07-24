@@ -19,4 +19,3 @@ class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserProfile
         fields = ('user', 'ratings', 'year', 'branch', 'stream', 'gender', 'position', 'bio')
-       
