@@ -136,7 +136,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ post.id }}/comment"> {% csrf_token %}
+                <form method="POST" action="{% url 'commentIssueSolution' project.id type post.id %}"> {% csrf_token %}
                     <div class="card-footer text-muted">
                         <div class="form-group">
                             <label for="comment">Comment</label>
