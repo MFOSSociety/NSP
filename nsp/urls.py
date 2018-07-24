@@ -14,7 +14,6 @@ urlpatterns = [
                   path('notifications/', include('notifications.urls')),
                   path("project/", include("project.urls")),
                   path('', redirectToAccount, name="redirectToAccount"),
-                  path('api-auth/', include('rest_framework.urls')),
                   path('api/', include('rest.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
