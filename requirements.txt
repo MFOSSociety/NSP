@@ -19,3 +19,4 @@ social-auth-core==1.7.0
 urllib3==1.23
 wheel==0.24.0
 django-tastypie==0.14.1
+djangorestframework

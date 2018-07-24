@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'nspapi',
     'nspmessage',
     'project',
+    'rest_framework',
     'project.issueSolution',
     'django.contrib.admin',
     'django.contrib.auth',
