@@ -9,9 +9,11 @@ from .serializers import (
     UserProfileSerializer,
     ProjectDetailSerializer,
     SkillSerializer,
+    NotificationSerializer,
 )
 from accounts.models import UserProfile, Skill
 from project.models import ProjectDetail
+from notifications.models import Notification
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -43,3 +45,8 @@ class SkillViewSet(viewsets.ModelViewSet):
 class ProjectDetailViewSet(viewsets.ModelViewSet):
     queryset = ProjectDetail.objects.all()
     serializer_class = ProjectDetailSerializer
+
+
+class NotificationViewSet(viewsets.ModelViewSet):
+    queryset = Notification.objects.all()
+    parser_classes = NotificationSerializer
