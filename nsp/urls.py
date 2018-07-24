@@ -38,7 +38,8 @@ urlpatterns = [
                   path('api/issue_api/', include(issue_resource.urls)),
                   path('api/issue_comment_api/', include(issue_comment_resource.urls)),
                   path('api/follow_api/', include(follow_resource.urls)),
-                  path('', redirectToAccount, name="redirectToAccount")
+                  path('', redirectToAccount, name="redirectToAccount"),
+                  path('api-auth/', include('rest_framework.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'accounts.views.handler404'
