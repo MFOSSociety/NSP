@@ -69,6 +69,11 @@ def deleteIssueSolution(request, type_, ID):
 
 @login_required
 def editIssueSolution(request, projectID, type_, ID):
+    """
+    Uses type_ and id arguments to get the instance 
+    and render a form to edit it this way there is only
+    one view for editing issue/solution instance.
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     openIssues = ""
 
