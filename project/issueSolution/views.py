@@ -201,6 +201,10 @@ def changeStatusIssueSolution(request, projectID, type_, ID, status):
 
 @login_required
 def commentIssueSolution(request, projectID, type_, ID):
+    """
+    Gets issue/solution instance and creates a
+    issue/solutionComment object if POST.
+    """
     if request.method == "POST":
         comment = request.POST.get("comment")
         if type_ == "issue":
