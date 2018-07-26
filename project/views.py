@@ -124,6 +124,9 @@ def ProjectDetailView(request, project_id):
 
 @login_required
 def interestedList(request, ID):
+    """
+    Shows list of interested objects of project with ID
+    """
     project = ProjectDetail.objects.get(pk=ID)
     people_profile = {}
 
