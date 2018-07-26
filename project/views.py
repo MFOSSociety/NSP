@@ -40,6 +40,10 @@ def deleteProject(request, ID):
 
 @login_required
 def projectEdit(request, ID):
+    """
+    Shows ProjectForm form on the page if GET and saves the
+    changes if POST.
+    """
     project = ProjectDetail.objects.get(pk=ID)
     if request.user == project.initiated_by:
         if request.method == 'POST':
