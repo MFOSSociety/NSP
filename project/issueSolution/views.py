@@ -172,6 +172,9 @@ def viewIssueSolution(request, projectID, type_, ID):
 
 @login_required
 def changeStatusIssueSolution(request, projectID, type_, ID, status):
+    """
+    Gets instance and changes it's status to the status argument.
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     if project.initiated_by == request.user:
         if type_ == "issue":
