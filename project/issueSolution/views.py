@@ -49,6 +49,11 @@ def projectSolutions(request, ID, status):
 
 @login_required
 def deleteIssueSolution(request, type_, ID):
+    """
+    Uses type_ and id arguments to get the instance 
+    and delete it this way there is only one view for deleting
+    issue/solution instance.
+    """
     if type_ == "issue":
         instance = Issue.objects.get(pk=ID)
         project = instance.project
