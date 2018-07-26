@@ -28,7 +28,8 @@ def projectIssues(request, ID, status):
 @login_required
 def projectSolutions(request, ID, status):
     """
-    Gets solutions based on the status argument
+    Gets issue with ID argument
+    Gets solutions based on the status argument and the issue instance
     """
     project = ProjectDetail.objects.get(pk=ID)
     issues = Issue.objects.filter(project=project, status="1").order_by("-id")
