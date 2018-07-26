@@ -8,6 +8,9 @@ from django.http import HttpResponseRedirect
 
 @login_required
 def projectIssues(request, ID, status):
+    """
+    Gets issues based on the status argument
+    """
     project = ProjectDetail.objects.get(pk=ID)
     if status == "open":
         issues = Issue.objects.filter(project=project, status="1").order_by("-id")
@@ -24,6 +27,9 @@ def projectIssues(request, ID, status):
 
 @login_required
 def projectSolutions(request, ID, status):
+    """
+    Gets solutions based on the status argument
+    """
     project = ProjectDetail.objects.get(pk=ID)
     issues = Issue.objects.filter(project=project, status="1").order_by("-id")
     if status == "open":
