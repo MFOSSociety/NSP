@@ -32,10 +32,10 @@ def deleteProject(request, ID):
     """
     Deletes project if user is the one who created it
     """
-	project = ProjectDetail.objects.get(pk=ID)
-	if request.user == project.initiated_by:
-		project.delete()
-	return redirect(reverse("project_list_view"))
+    project = ProjectDetail.objects.get(pk=ID)
+    if request.user == project.initiated_by:
+        project.delete()
+    return redirect(reverse("project_list_view"))
 
 
 @login_required
@@ -83,12 +83,12 @@ def addInterested(request, ID):
     Creates ProjectPeopleInterested object if object
      with the same parameters doesn't exist
     """
-	current_user = request.user
-	project = ProjectDetail.objects.get(pk=ID)
-	current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
-	if not current_user_interested:
-	    ProjectPeopleInterested.objects.create(user=current_user, project=project)
-	return redirect(reverse("project_list_view"))
+    current_user = request.user
+    project = ProjectDetail.objects.get(pk=ID)
+    current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
+    if not current_user_interested:
+        ProjectPeopleInterested.objects.create(user=current_user, project=project)
+    return redirect(reverse("project_list_view"))
 
 @login_required
 def removeInsterested(request, ID):
@@ -96,12 +96,12 @@ def removeInsterested(request, ID):
     Deletes ProjectPeopleInterested object if object
      with the same parameters doesn't exist
     """
-	current_user = request.user
-	project = ProjectDetail.objects.get(pk=ID)
+    current_user = request.user
+    project = ProjectDetail.objects.get(pk=ID)
     instance = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
-	if instance:
+    if instance:
         ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
-	return redirect(reverse("project_list_view"))
+    return redirect(reverse("project_list_view"))
 
 @login_required
 def ProjectDetailView(request, project_id):
