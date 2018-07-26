@@ -140,6 +140,13 @@ def createIssueSolution(request, projectID, type_):
 
 @login_required
 def viewIssueSolution(request, projectID, type_, ID):
+    """
+    Uses projectID,type_ and ID arguemnts to get instance
+    and passes it to context, then it gets comments of the
+    instance and creates a dict of {profile:comment} so
+    we can show profile pic,username and comment on the 
+    template.
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     if type_ == "issue":
         post = Issue.objects.get(pk=ID)
