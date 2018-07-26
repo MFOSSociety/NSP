@@ -105,6 +105,12 @@ def editIssueSolution(request, projectID, type_, ID):
 
 @login_required
 def createIssueSolution(request, projectID, type_):
+    """
+    If POST it uses type_ argument to know if it should create
+    an Issue or Solution object, otherwise render template
+    that contains form for issue and solution which uses type_
+    to decide which one to render
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     user_profile = UserProfile.objects.get(user=request.user)
     openIssues = ""
