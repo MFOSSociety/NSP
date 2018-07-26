@@ -29,6 +29,9 @@ def ProjectDescribeView(request):
 
 @login_required
 def deleteProject(request, ID):
+    """
+    Deletes project if user is the one who created it
+    """
 	project = ProjectDetail.objects.get(pk=ID)
 	if request.user == project.initiated_by:
 		project.delete()
