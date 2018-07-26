@@ -105,6 +105,10 @@ def removeInsterested(request, ID):
 
 @login_required
 def ProjectDetailView(request, project_id):
+    """
+    Gets project by project_id and it's issues,solutions objects
+    then passes them to args and renders the tempate
+    """
     try:
         project = ProjectDetail.objects.get(id=project_id)
     except:
