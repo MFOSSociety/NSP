@@ -63,6 +63,9 @@ def projectEdit(request, ID):
 
 @login_required
 def ProjectsListView(request):
+    """
+    Shows a list of all projects
+    """
     current_user = request.user
     projects = ProjectDetail.objects.all()
     dict_ = {}
@@ -76,6 +79,10 @@ def ProjectsListView(request):
 
 @login_required
 def addInterested(request, ID):
+    """
+    Creates ProjectPeopleInterested object if object
+     with the same parameters doesn't exist
+    """
 	current_user = request.user
 	project = ProjectDetail.objects.get(pk=ID)
 	current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
@@ -85,9 +92,15 @@ def addInterested(request, ID):
 
 @login_required
 def removeInsterested(request, ID):
+    """
+    Deletes ProjectPeopleInterested object if object
+     with the same parameters doesn't exist
+    """
 	current_user = request.user
 	project = ProjectDetail.objects.get(pk=ID)
-	ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
+    instance = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
+	if instance:
+        ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
 	return redirect(reverse("project_list_view"))
 
 @login_required
