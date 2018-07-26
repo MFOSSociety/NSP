@@ -8,6 +8,9 @@ from django.http import HttpResponseRedirect
 
 @login_required
 def projectIssues(request, ID, status):
+    """
+    Gets issues based on the status argument
+    """
     project = ProjectDetail.objects.get(pk=ID)
     if status == "open":
         issues = Issue.objects.filter(project=project, status="1").order_by("-id")
@@ -24,6 +27,10 @@ def projectIssues(request, ID, status):
 
 @login_required
 def projectSolutions(request, ID, status):
+    """
+    Gets issue with ID argument
+    Gets solutions based on the status argument and the issue instance
+    """
     project = ProjectDetail.objects.get(pk=ID)
     issues = Issue.objects.filter(project=project, status="1").order_by("-id")
     if status == "open":
@@ -43,6 +50,11 @@ def projectSolutions(request, ID, status):
 
 @login_required
 def deleteIssueSolution(request, type_, ID):
+    """
+    Uses type_ and id arguments to get the instance 
+    and delete it this way there is only one view for deleting
+    issue/solution instance.
+    """
     if type_ == "issue":
         instance = Issue.objects.get(pk=ID)
         project = instance.project
@@ -58,6 +70,11 @@ def deleteIssueSolution(request, type_, ID):
 
 @login_required
 def editIssueSolution(request, projectID, type_, ID):
+    """
+    Uses type_ and id arguments to get the instance 
+    and render a form to edit it this way there is only
+    one view for editing issue/solution instance.
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     openIssues = ""
 
@@ -89,6 +106,12 @@ def editIssueSolution(request, projectID, type_, ID):
 
 @login_required
 def createIssueSolution(request, projectID, type_):
+    """
+    If POST it uses type_ argument to know if it should create
+    an Issue or Solution object, otherwise render template
+    that contains form for issue and solution which uses type_
+    to decide which one to render
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     user_profile = UserProfile.objects.get(user=request.user)
     openIssues = ""
@@ -118,6 +141,13 @@ def createIssueSolution(request, projectID, type_):
 
 @login_required
 def viewIssueSolution(request, projectID, type_, ID):
+    """
+    Uses projectID,type_ and ID arguemnts to get instance
+    and passes it to context, then it gets comments of the
+    instance and creates a dict of {profile:comment} so
+    we can show profile pic,username and comment on the 
+    template.
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     if type_ == "issue":
         post = Issue.objects.get(pk=ID)
@@ -143,6 +173,9 @@ def viewIssueSolution(request, projectID, type_, ID):
 
 @login_required
 def changeStatusIssueSolution(request, projectID, type_, ID, status):
+    """
+    Gets instance and changes it's status to the status argument.
+    """
     project = ProjectDetail.objects.get(pk=projectID)
     if project.initiated_by == request.user:
         if type_ == "issue":
@@ -169,6 +202,10 @@ def changeStatusIssueSolution(request, projectID, type_, ID, status):
 
 @login_required
 def commentIssueSolution(request, projectID, type_, ID):
+    """
+    Gets issue/solution instance and creates a
+    issue/solutionComment object if POST.
+    """
     if request.method == "POST":
         comment = request.POST.get("comment")
         if type_ == "issue":

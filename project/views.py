@@ -7,6 +7,10 @@ from project.issueSolution.models import Issue,Solution
 
 @login_required
 def ProjectDescribeView(request):
+    """
+    Shows create project form if project_registered is false
+    Shows successfully created message if project_registered is True
+    """
     project_registered = False
     initiator = request.user
     if request.method == 'POST':
@@ -25,6 +29,9 @@ def ProjectDescribeView(request):
 
 @login_required
 def deleteProject(request, ID):
+    """
+    Deletes project if user is the one who created it
+    """
 	project = ProjectDetail.objects.get(pk=ID)
 	if request.user == project.initiated_by:
 		project.delete()
@@ -33,6 +40,10 @@ def deleteProject(request, ID):
 
 @login_required
 def projectEdit(request, ID):
+    """
+    Shows ProjectForm form on the page if GET and saves the
+    changes if POST.
+    """
     project = ProjectDetail.objects.get(pk=ID)
     if request.user == project.initiated_by:
         if request.method == 'POST':
@@ -52,6 +63,9 @@ def projectEdit(request, ID):
 
 @login_required
 def ProjectsListView(request):
+    """
+    Shows a list of all projects
+    """
     current_user = request.user
     projects = ProjectDetail.objects.all()
     dict_ = {}
@@ -65,6 +79,10 @@ def ProjectsListView(request):
 
 @login_required
 def addInterested(request, ID):
+    """
+    Creates ProjectPeopleInterested object if object
+     with the same parameters doesn't exist
+    """
 	current_user = request.user
 	project = ProjectDetail.objects.get(pk=ID)
 	current_user_interested = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
@@ -74,13 +92,23 @@ def addInterested(request, ID):
 
 @login_required
 def removeInsterested(request, ID):
+    """
+    Deletes ProjectPeopleInterested object if object
+     with the same parameters doesn't exist
+    """
 	current_user = request.user
 	project = ProjectDetail.objects.get(pk=ID)
-	ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
+    instance = ProjectPeopleInterested.objects.filter(user=current_user, project=project)
+	if instance:
+        ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
 	return redirect(reverse("project_list_view"))
 
 @login_required
 def ProjectDetailView(request, project_id):
+    """
+    Gets project by project_id and it's issues,solutions objects
+    then passes them to args and renders the tempate
+    """
     try:
         project = ProjectDetail.objects.get(id=project_id)
     except:
@@ -100,6 +128,9 @@ def ProjectDetailView(request, project_id):
 
 @login_required
 def interestedList(request, ID):
+    """
+    Shows list of interested objects of project with ID
+    """
     project = ProjectDetail.objects.get(pk=ID)
     people_profile = {}
 
