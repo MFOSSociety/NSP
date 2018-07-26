@@ -7,6 +7,10 @@ from project.issueSolution.models import Issue,Solution
 
 @login_required
 def ProjectDescribeView(request):
+    """
+    Shows create project form if project_registered is false
+    Shows successfully created message if project_registered is True
+    """
     project_registered = False
     initiator = request.user
     if request.method == 'POST':
