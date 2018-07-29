@@ -1,3 +1,8 @@
+import json
+import urllib
+
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
@@ -9,6 +14,7 @@ from django.shortcuts import (
     reverse,
     get_object_or_404,
 )
+from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 
 from accounts.forms import (
@@ -22,13 +28,13 @@ from accounts.forms import (
 from accounts.models import *
 
 
-def HomeView(request):
+def home_view(request):
     name = "NSP - Network Of Skilled People"
     args = {'name': name}
     return render(request, 'accounts/index.html', args)
 
 
-def LoginView(request):
+def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -49,7 +55,7 @@ def LoginView(request):
 # TODO Search form to be added
 
 @login_required
-def ProfileView(request):
+def profile_view(request):
     user = request.user
     followers = len(Follow.objects.filter(following=request.user))
     followings = len(Follow.objects.filter(follower=request.user))
@@ -64,14 +70,14 @@ def ProfileView(request):
 
 
 @login_required
-def PeopleView(request):
+def people_view(request):
     users = User.objects.all()  # do not use filter() with User object
     args = {'users': users, 'viewer': request.user}
     return render(request, 'accounts/people.html', args)
 
 
 @login_required
-def FriendProfileView(request, username):
+def friend_profile_view(request, username):
     try:
         user = User.objects.get(username=username)
     except:
@@ -97,7 +103,7 @@ def FriendProfileView(request, username):
 # pass, if you don't want to write the method yet
 
 @login_required
-def EditProfileView(request):
+def edit_profile_view(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
 
@@ -112,7 +118,7 @@ def EditProfileView(request):
 
 
 @login_required
-def EditInformationView(request):
+def edit_information_view(request):
     if request.method == 'POST':
         form = EditInformationForm(request.POST, instance=request.user)
 
@@ -127,7 +133,7 @@ def EditInformationView(request):
 
 
 @login_required
-def ChangePasswordView(request):
+def change_password_view(request):
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
 
@@ -147,7 +153,7 @@ def ChangePasswordView(request):
 
 
 @login_required
-def ChangeProfilePicture(request):
+def change_profile_picture(request):
     form = ImageFileUploadForm()
     current_user = request.user
     current_user_profile = UserProfile.objects.get(user=current_user)
@@ -166,14 +172,8 @@ def ChangeProfilePicture(request):
 
 # Go through this, this is important
 
-import json
-import urllib
-from django.shortcuts import render, redirect
-from django.conf import settings
-from django.contrib import messages
 
-
-def RegistrationView(request):
+def registration_view(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         print("The form reached")
@@ -218,7 +218,7 @@ def RegistrationView(request):
 
 
 @login_required
-def deleteSkill(request, ID):
+def delete_skill(request, ID):
     skill = Skill.objects.get(pk=ID)
     if skill.user == request.user:
         skill.delete()
@@ -227,14 +227,14 @@ def deleteSkill(request, ID):
     return redirect("/account/profile/")
 
 
-def SkillsView(request):  # I dont know what this does
+def skills_view(request):  # I dont know what this does
     pass
 
 
 # SKILL FORM VIEW LATEST CREATION
 
 @login_required
-def AddSkillView(request):
+def add_skill_view(request):
     if request.method == 'POST':
         form = SkillForm()
         skill = request.POST.get("skill")
@@ -245,7 +245,7 @@ def AddSkillView(request):
     return render(request, 'accounts/addskill.html', {'form': form})
 
 
-def SuccesfullRegistrationView(request):
+def successful_registration_view(request):
     return render(request, 'accounts/registersuccess.html')
 
 
@@ -264,7 +264,7 @@ def django_image_and_file_upload_ajax(request):
 
 
 @login_required
-def followUser(request, ID):
+def follow_user(request, ID):
     friend = User.objects.get(pk=ID)
     follow_value = False
     follow_args = {
@@ -280,7 +280,7 @@ def followUser(request, ID):
 
 
 @login_required
-def unfollowUser(request, ID):
+def unfollow_user(request, ID):
     friend = User.objects.get(pk=ID)
     follow_value = False
     follow_args = {
