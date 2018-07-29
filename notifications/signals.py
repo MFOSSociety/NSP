@@ -10,7 +10,7 @@ from project.issueSolution.models import Issue, Solution
 def create_issue_notification(sender, instance, **kwargs):
     if kwargs["created"]:
         notification_text = "{} created issue #{} on {}".format(instance.user, instance.id,
-                                                               instance.project.project_name)
+                                                                instance.project.project_name)
         redirect = "/account/project/{}/issue/{}".format(instance.project.id, instance.id)
         if instance.project.initiated_by != instance.user:
             notifications.models.Notification.objects.create(
@@ -38,12 +38,13 @@ def create_solution_notification(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Follow)
-def createFollowNotification(sender, instance, **kwargs):
+def create_follow_notification(sender, instance, **kwargs):
     if kwargs["created"]:
-        notificationText = "{} started following you.".format(instance.follower.username)
+        notification_text = "{} started following you.".format(instance.follower.username)
         redirect = "/account/users/{}".format(instance.follower.username)
         notifications.models.Notification.objects.create(
             user=instance.following,
             from_user=instance.follower,
             redirect=redirect,
-            text=notificationText)
+            text=notification_text
+        )
