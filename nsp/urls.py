@@ -4,7 +4,8 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-def redirectToAccount(request):
+
+def redirect_to_account(request):
     return redirect("/account/")
 
 
@@ -13,7 +14,7 @@ urlpatterns = [
                   path('account/', include('accounts.urls')),
                   path('notifications/', include('notifications.urls')),
                   path("project/", include("project.urls")),
-                  path('', redirectToAccount, name="redirectToAccount"),
+                  path('', redirect_to_account, name="redirect_to_account"),
                   path('api/', include('rest.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
