@@ -1,16 +1,16 @@
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from project.models import ProjectPeopleInterested
-from project.issueSolution.models import Issue, Solution, IssueComment, SolutionComment
-from accounts.models import Follow
+
 import notifications.models
+from accounts.models import Follow
+from project.issueSolution.models import Issue, Solution
 
 
 @receiver(post_save, sender=Issue)
 def createIssueNotification(sender, instance, **kwargs):
     if kwargs["created"]:
-        notificationText = "{} created issue #{} on {}".format(instance.user, instance.id, instance.project.project_name)
+        notificationText = "{} created issue #{} on {}".format(instance.user, instance.id,
+                                                               instance.project.project_name)
         redirect = "/account/project/{}/issue/{}".format(instance.project.id, instance.id)
         if instance.project.initiated_by != instance.user:
             notifications.models.Notification.objects.create(
