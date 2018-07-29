@@ -12,11 +12,11 @@ from accounts import views
 from accounts.views import EditUserProfileView
 
 urlpatterns = [
-    path("change_profilepic", views.ChangeProfilePicture, name="ChangeProfilePicture"),
+    path("change_profile_pic", views.ChangeProfilePicture, name="ChangeProfilePicture"),
     path('testing/', views.django_image_and_file_upload_ajax, name='testing'),
     path('', views.HomeView, name='home'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
-    path('registersuccess/', views.SuccesfullRegistrationView, name='registersucess'),
+    path('register_success/', views.SuccesfullRegistrationView, name='registersucess'),
     path('register/', views.RegistrationView, name='signup'),
     path('logout/', logout, {'template_name': 'accounts/logout.html'}, name='logout'),
     path('profile/', views.ProfileView, name='view_profile'),
@@ -34,6 +34,6 @@ urlpatterns = [
             name='password_reset_confirm'),
     path('reset-password/complete/', password_reset_complete, name='password_reset_complete'),
     path('profile/addskill/', views.AddSkillView, name='addskill'),
-    path('profile/deleteskill/<ID>', views.deleteSkill, name='deleteskill'),
+    path('profile/delete_skill/<ID>', views.deleteSkill, name='deleteskill'),
     path("chat/", include("nspmessage.urls")),
 ]
