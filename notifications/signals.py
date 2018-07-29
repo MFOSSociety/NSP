@@ -7,9 +7,9 @@ from project.issueSolution.models import Issue, Solution
 
 
 @receiver(post_save, sender=Issue)
-def createIssueNotification(sender, instance, **kwargs):
+def create_issue_notification(sender, instance, **kwargs):
     if kwargs["created"]:
-        notificationText = "{} created issue #{} on {}".format(instance.user, instance.id,
+        notification_text = "{} created issue #{} on {}".format(instance.user, instance.id,
                                                                instance.project.project_name)
         redirect = "/account/project/{}/issue/{}".format(instance.project.id, instance.id)
         if instance.project.initiated_by != instance.user:
@@ -17,7 +17,8 @@ def createIssueNotification(sender, instance, **kwargs):
                 user=instance.project.initiated_by,
                 from_user=instance.user,
                 redirect=redirect,
-                text=notificationText)
+                text=notification_text
+            )
 
 
 @receiver(post_save, sender=Solution)
