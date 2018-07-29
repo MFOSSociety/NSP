@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from accounts.models import *
-import notifications.signals
 
 
 class Notification(models.Model):
