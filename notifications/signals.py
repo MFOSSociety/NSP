@@ -22,9 +22,9 @@ def create_issue_notification(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Solution)
-def createSolutionNotification(sender, instance, **kwargs):
+def create_solution_notification(sender, instance, **kwargs):
     if kwargs["created"]:
-        notificationText = "{} created solution #{} to issue #{} on {}".format(
+        notification_text = "{} created solution #{} to issue #{} on {}".format(
             instance.user, instance.id, instance.issue.id,
             instance.issue.project.project_name)
         redirect = "/account/project/{}/solution/{}".format(instance.issue.project.id, instance.id)
@@ -33,7 +33,8 @@ def createSolutionNotification(sender, instance, **kwargs):
                 user=instance.issue.project.initiated_by,
                 from_user=instance.user,
                 redirect=redirect,
-                text=notificationText)
+                text=notification_text
+            )
 
 
 @receiver(post_save, sender=Follow)
