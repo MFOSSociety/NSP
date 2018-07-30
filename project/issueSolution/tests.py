@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 testDebug = True
 # Create your tests here.
 
-class TestProjectViewsLoginRequired(TestLoginRequired):
+class TestIssueSolutionViewsLoginRequired(TestLoginRequired):
 	def setUp(self):
 		self.user_object = User.objects.create(username="testing",
 												password="testing")
