@@ -1,12 +1,14 @@
 from collections import OrderedDict
+
 from django.contrib.auth.models import User
+from django.http import Http404
 from django.shortcuts import render, redirect
+
 from accounts.models import UserProfile, Follow
 from nspmessage.models import Message
-from django.http import Http404
 
 
-def getConversations(request):
+def get_conversations(request):
     sender = request.user
     participants = [sender]
     followings = Follow.objects.filter(follower=sender)
@@ -17,8 +19,8 @@ def getConversations(request):
     for conv_message in conv_messages:
         conv_participants = [conv_message.sender, conv_message.receiver]
         last_message = \
-        Message.objects.filter(sender__in=conv_participants, receiver__in=conv_participants).order_by("-id")[
-            0].msg_content
+            Message.objects.filter(sender__in=conv_participants, receiver__in=conv_participants).order_by("-id")[
+                0].msg_content
         if conv_participants[0] == request.user:
             try:
                 if not conversations[conv_participants[1]]:
@@ -47,23 +49,24 @@ def getConversations(request):
 
 
 def chat(request):
-	conversations = getConversations(request)
-	current_user_profile = UserProfile.objects.get(user=request.user)
+    conversations = get_conversations(request)
+    current_user_profile = UserProfile.objects.get(user=request.user)
 
-	context = {"conversations":conversations,"sender_user_profile":current_user_profile}
-	return render(request,"chat.html",context)
+    context = {"conversations": conversations, "sender_user_profile": current_user_profile}
+    return render(request, "chat.html", context)
 
 
-def chatFriend(request, username):
+def chat_friend(request, username):
     sender = request.user
     receiver = User.objects.get(username=username)
     current_user_profile = UserProfile.objects.get(user=request.user)
     receiver_user_profile = UserProfile.objects.get(user=receiver)
     current_participants = [sender, receiver]
-    if Follow.objects.filter(follower=current_participants[0],following=current_participants[1]):
-        if Follow.objects.filter(follower=current_participants[1],following=current_participants[0]):
-            messages = Message.objects.filter(sender__in=current_participants, receiver__in=current_participants).order_by("id")
-            conversations = getConversations(request)
+    if Follow.objects.filter(follower=current_participants[0], following=current_participants[1]):
+        if Follow.objects.filter(follower=current_participants[1], following=current_participants[0]):
+            messages = Message.objects.filter(sender__in=current_participants,
+                                              receiver__in=current_participants).order_by("id")
+            conversations = get_conversations(request)
 
             context = {"messages": messages, "receiver": receiver, "sender_user_profile": current_user_profile,
                        "receiver_user_profile": receiver_user_profile, "conversations": conversations}
@@ -74,7 +77,7 @@ def chatFriend(request, username):
         raise Http404
 
 
-def newMessage(request, username):
+def new_message(request, username):
     sender = request.user
     receiver = User.objects.get(username=username)
     message = request.POST.get("sender_message")
