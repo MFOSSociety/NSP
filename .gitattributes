@@ -2,6 +2,10 @@
 *.html linguist-generted=false
 *.css linguist-vendored=false
 *.css linguist-generted=false
+*.js linguist-vendored=false
+*.js linguist-generted=false
+
 
 *.html linguist-language=Python
 *.css linguist-language=Python
+*.js linguist-language=Python
