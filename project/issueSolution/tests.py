@@ -44,7 +44,18 @@ class TestIssueSolutionViewsLoginRequired(TestLoginRequired):
 														comment="testing")
 		if testDebug:
 			print("solutionComment_object created")
-		self.pathnames_args = {"deleteIssueSolution":["issue",self.solution_object.id],"projectIssues":[self.project_object.id,"open"],
-			"projectSolutions":[self.project_object.id,"open"],"commentIssueSolution":[self.project_object.id,"issue",self.issue_object.id],
-			"editIssueSolution":[self.project_object.id,"issue",self.issue_object.id],"createIssueSolution":[self.project_object.id,"issue"],
-			"viewIssueSolution":[self.project_object.id,"issue",self.issue_object.id],"changeStatusIssueSolution":[self.project_object.id,"issue",self.issue_object.id,"open"]}
+		################# args for paths
+		deleteIssueSolution_args = ["issue",self.solution_object.id]
+		projectIssues_args = [self.project_object.id,"open"]
+		projectSolutions_args = [self.project_object.id,"open"]
+		commentIssueSolution_args = [self.project_object.id,"issue",self.issue_object.id]
+		editIssueSolution_args = [self.project_object.id,"issue",self.issue_object.id]
+		createIssueSolution_args = [self.project_object.id,"issue"]
+		viewIssueSolution_args = [self.project_object.id,"issue",self.issue_object.id]
+		changeStatusIssueSolution_args = [self.project_object.id,"issue",self.issue_object.id,"open"]
+		######
+		self.pathnames_args = {"deleteIssueSolution":deleteIssueSolution_args,"projectIssues":projectIssues_args,
+								"projectSolutions":projectSolutions_args,"commentIssueSolution":commentIssueSolution_args,
+								"editIssueSolution":editIssueSolution_args,"createIssueSolution":createIssueSolution_args,
+								"changeStatusIssueSolution":[self.project_object.id,"issue",self.issue_object.id,"open"],
+								"viewIssueSolution":viewIssueSolution_args}
