@@ -20,7 +20,7 @@ class TestLoginRequired(TestCase):
 			if testDebug:
 				print("Tested {} - {}".format(pathname,result))
 
-class TestProjectViewsLoginRequired(TestCase):
+class TestProjectViewsLoginRequired(TestLoginRequired):
 	def setUp(self):
 		self.user_object = User.objects.create(username="testing",
 												password="testing")
@@ -41,14 +41,6 @@ class TestProjectViewsLoginRequired(TestCase):
 			"interested_list":[self.project_object.id],"view_project_detail":[self.project_object.id],
 			"add_interested":[self.project_object.id],"remove_interested":[self.interested_object.id],
 			"project_edit":[self.project_object.id],"delete_project":[self.project_object.id]}
-	def test_call_view_denies_anonymous(self):
-		if testDebug:
-			print("test_call_view_denies_anonymous")
-		for pathname,args in self.pathnames_args.items():
-			response = self.client.get(reverse(pathname,args=args), follow=True)
-			result = self.assertRedirects(response,reverse("user_login") + "?next=" + reverse(pathname,args=args))
-			if testDebug:
-				print("Tested {} - {}".format(pathname,result))
 
 """class Test_delete_project_view(TestCase):
 	def setUp(self):
