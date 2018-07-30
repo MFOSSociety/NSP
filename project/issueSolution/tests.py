@@ -1,48 +1,47 @@
 from django.test import TestCase
 from django.shortcuts import reverse
 from project.models import ProjectDetail
-from project.tests import TestLoginRequired
+import nsp.tests as tests
 from project.issueSolution.models import Issue,IssueComment,Solution,SolutionComment
 from django.contrib.auth.models import User
 
-testDebug = True
 # Create your tests here.
 
-class TestIssueSolutionViewsLoginRequired(TestLoginRequired):
+class TestIssueSolutionViewsLoginRequired(tests.TestLoginRequired):
 	def setUp(self):
 		self.user_object = User.objects.create(username="testing",
 												password="testing")
-		if testDebug:
+		if tests.testDebug:
 			print("user_object created")
 		self.project_object = ProjectDetail.objects.create(project_name="testing",
 															initiated_by=self.user_object,
 															mentor_name="testing",
 															branch="testing",
 															description="testing")
-		if testDebug:
+		if tests.testDebug:
 			print("project_object created")
 		self.issue_object = Issue.objects.create(user=self.user_object,
 												project=self.project_object,
 												title="testing",
 												description="testing")
-		if testDebug:
+		if tests.testDebug:
 			print("issue_object created")
 		self.solution_object = Solution.objects.create(issue=self.issue_object,
 														user=self.user_object,
 														title="testing",
 														description="testing")
-		if testDebug:
+		if tests.testDebug:
 			print("solution_object created")
 		self.issueComment_object = IssueComment.objects.create(issue=self.issue_object,
 																user=self.user_object,
 																comment="testing")
 
-		if testDebug:
+		if tests.testDebug:
 			print("issueComment_object created")
 		self.solutionComment_object = SolutionComment.objects.create(solution=self.solution_object,
 														user=self.user_object,
 														comment="testing")
-		if testDebug:
+		if tests.testDebug:
 			print("solutionComment_object created")
 		################# args for paths
 		deleteIssueSolution_args = ["issue",self.solution_object.id]
