@@ -1,8 +1,12 @@
-from django.shortcuts import render,redirect,reverse
 from django.contrib.auth.decorators import login_required
-from project.models import ProjectDetail,ProjectPeopleInterested
+from django.shortcuts import render, redirect, reverse
+
 from project.forms import ProjectForm
-from project.issueSolution.models import Issue,Solution
+from project.issueSolution.models import Issue, Solution
+from project.models import ProjectDetail, ProjectPeopleInterested
+from accounts.models import UserProfile
+
+
 # Create your views here.
 
 @login_required
@@ -26,6 +30,7 @@ def ProjectDescribeView(request):
         project_form = ProjectForm()
     return render(request, 'project/start_project.html',
                   {'project_form': project_form, 'project_registered': project_registered})
+
 
 @login_required
 def deleteProject(request, ID):
@@ -61,6 +66,7 @@ def projectEdit(request, ID):
     else:
         return redirect("/account/project/{}".format(str(project.id)))
 
+
 @login_required
 def ProjectsListView(request):
     """
@@ -77,6 +83,7 @@ def ProjectsListView(request):
     args = {"dict_": dict_}
     return render(request, 'project/listprojects.html', args)
 
+
 @login_required
 def addInterested(request, ID):
     """
@@ -90,6 +97,7 @@ def addInterested(request, ID):
         ProjectPeopleInterested.objects.create(user=current_user, project=project)
     return redirect(reverse("project_list_view"))
 
+
 @login_required
 def removeInsterested(request, ID):
     """
@@ -102,6 +110,7 @@ def removeInsterested(request, ID):
     if instance:
         ProjectPeopleInterested.objects.get(user=current_user, project=project).delete()
     return redirect(reverse("project_list_view"))
+
 
 @login_required
 def ProjectDetailView(request, project_id):
@@ -125,6 +134,7 @@ def ProjectDetailView(request, project_id):
             "solutions": solutions,
             "solutionsNumber": len(solutions)}
     return render(request, template, args)
+
 
 @login_required
 def interestedList(request, ID):
