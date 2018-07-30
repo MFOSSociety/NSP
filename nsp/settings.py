@@ -169,9 +169,4 @@ LOGIN_URL = '/account/login/'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
-# For Github Authentication
-
-SOCIAL_AUTH_GITHUB_KEY = '1872ea14c197d599ebe5'
-SOCIAL_AUTH_GITHUB_SECRET = 'cc56899a4a0cf19258c33d76280450f9be98ad46'
-
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
