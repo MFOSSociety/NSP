@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, Http404
 
 from project.forms import ProjectForm
 from project.issueSolution.models import Issue, Solution
@@ -10,7 +10,7 @@ from accounts.models import UserProfile
 # Create your views here.
 
 @login_required
-def ProjectDescribeView(request):
+def project_describe_view(request):
     """
     Shows create project form if project_registered is false
     Shows successfully created message if project_registered is True
@@ -20,10 +20,10 @@ def ProjectDescribeView(request):
     if request.method == 'POST':
         project_form = ProjectForm(data=request.POST)
         if project_form.is_valid():
-            ProjectDetail = project_form.save()
+            project_detail = project_form.save()
             project_registered = True
-            ProjectDetail.initiated_by = request.user
-            ProjectDetail.save()
+            project_detail.initiated_by = request.user
+            project_detail.save()
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
     else:
@@ -33,7 +33,7 @@ def ProjectDescribeView(request):
 
 
 @login_required
-def deleteProject(request, ID):
+def delete_project(request, ID):
     """
     Deletes project if user is the one who created it
     """
@@ -44,7 +44,7 @@ def deleteProject(request, ID):
 
 
 @login_required
-def projectEdit(request, ID):
+def project_edit(request, ID):
     """
     Shows ProjectForm form on the page if GET and saves the
     changes if POST.
