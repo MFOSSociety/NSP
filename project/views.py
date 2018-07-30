@@ -68,7 +68,7 @@ def project_edit(request, ID):
 
 
 @login_required
-def ProjectsListView(request):
+def projects_list_view(request):
     """
     Shows a list of all projects
     """
@@ -85,7 +85,7 @@ def ProjectsListView(request):
 
 
 @login_required
-def addInterested(request, ID):
+def add_interested(request, ID):
     """
     Creates ProjectPeopleInterested object if object
      with the same parameters doesn't exist
@@ -99,7 +99,7 @@ def addInterested(request, ID):
 
 
 @login_required
-def removeInsterested(request, ID):
+def remove_interested(request, ID):
     """
     Deletes ProjectPeopleInterested object if object
      with the same parameters doesn't exist
@@ -113,7 +113,7 @@ def removeInsterested(request, ID):
 
 
 @login_required
-def ProjectDetailView(request, project_id):
+def project_detail_view(request, project_id):
     """
     Gets project by project_id and it's issues,solutions objects
     then passes them to args and renders the tempate
@@ -124,8 +124,8 @@ def ProjectDetailView(request, project_id):
         raise Http404
 
     issues = Issue.objects.filter(project=project, status="1").order_by("-id")[:5]
-    allIssues = Issue.objects.filter(project=project, status="1").order_by("-id")
-    solutions = Solution.objects.filter(issue__in=allIssues, status="0").order_by('-id')[:5]
+    all_issues = Issue.objects.filter(project=project, status="1").order_by("-id")
+    solutions = Solution.objects.filter(issue__in=all_issues, status="0").order_by('-id')[:5]
     editable = False
     context = locals()
     template = 'project/projectdetailview.html'
@@ -137,15 +137,15 @@ def ProjectDetailView(request, project_id):
 
 
 @login_required
-def interestedList(request, ID):
+def interested_list(request, ID):
     """
     Shows list of interested objects of project with ID
     """
     project = ProjectDetail.objects.get(pk=ID)
     people_profile = {}
 
-    peopleInterested = ProjectPeopleInterested.objects.filter(project=project)
-    for interested in peopleInterested:
+    people_interested = ProjectPeopleInterested.objects.filter(project=project)
+    for interested in people_interested:
         people_profile[interested] = UserProfile.objects.get(user=interested.user)
 
     args = {"project": project, "people_profile": people_profile}
