@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 
 from accounts.models import UserProfile, Follow
 from nspmessage.models import Message
-
+from django.contrib.auth.decorators import login_required
 
 def get_conversations(request):
     sender = request.user
@@ -47,7 +47,7 @@ def get_conversations(request):
                 conversations[participant] = {"profile": contact_profile, "last_message": "Nothing to show"}
     return conversations
 
-
+@login_required
 def chat(request):
     conversations = get_conversations(request)
     current_user_profile = UserProfile.objects.get(user=request.user)
@@ -55,7 +55,7 @@ def chat(request):
     context = {"conversations": conversations, "sender_user_profile": current_user_profile}
     return render(request, "chat.html", context)
 
-
+@login_required
 def chat_friend(request, username):
     sender = request.user
     receiver = User.objects.get(username=username)
@@ -76,7 +76,7 @@ def chat_friend(request, username):
     else:
         raise Http404
 
-
+@login_required
 def new_message(request, username):
     sender = request.user
     receiver = User.objects.get(username=username)
