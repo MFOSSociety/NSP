@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest',
     'nspmessage',
     'project',
+    'project.teams',
     'rest_framework',
     'project.issueSolution',
     'django.contrib.admin',
