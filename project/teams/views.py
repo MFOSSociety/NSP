@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import reverse,render,get_object_or_404,redirect
 from .forms import TeamForm
 from .models import Team,Member
 from project.models import ProjectDetail
@@ -20,8 +20,14 @@ def createTeam(request,project_id):
 			team = form.save(commit=False)
 			team.project = get_object_or_404(ProjectDetail,pk=project_id)
 			team.save()
-			
+
 	else:
 		form = TeamForm()
 	context = {"createTeamForm":form,"project_id":project_id}
 	return render(request,"teams/createTeamForm.html",context)
+
+def deleteTeam(request,team_id):
+	team = get_object_or_404(Team,pk=team_id)
+	projectID = team.project.id
+	team.delete()
+	return redirect(reverse("showTeams",args=[projectID]))
