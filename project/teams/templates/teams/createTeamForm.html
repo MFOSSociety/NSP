@@ -1,7 +1,16 @@
-{% load bootstrapform %}
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block body %}
+<div style="margin-top: 155px;">
+<h3 style="text-align: center;">Create team</h3>
+<center>
 <form method="POST" action="{% url 'createTeam' %}">
 	{% csrf_token %}
-	{{ createTeamForm.as_p|bootstrap }}
+	{{ createTeamForm|bootstrap }}
 	<input type="hidden" value="{{ request.URL }}" name="lastPage">
-	<button type="submit">Create team</button>
+	<button class="btn btn-primary" type="submit">Create team</button>
 </form>
+</div>
+</center>s
+{% endblock body %}
