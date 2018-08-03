@@ -5,7 +5,7 @@
 <div style="margin-top: 155px;">
 <h3 style="text-align: center;">Create team</h3>
 <center>
-<form method="POST" action="{% url 'createTeam' %}">
+<form method="POST" action="{% url 'createTeam' project_id %}">
 	{% csrf_token %}
 	{{ createTeamForm|bootstrap }}
 	<input type="hidden" value="{{ request.URL }}" name="lastPage">
