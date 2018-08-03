@@ -18,48 +18,26 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Issue ID</th>
-                                    <th>Title</th>
-                                    <th>Created</th>
-                                    <th>Opened</th>
-                                    <th>Status
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Members</th>
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                {% for team in teamsList %}
+                                {% for team,members in teamMembers.items %}
                                     <tr>
-                                        <td>
-                                            <a href="">#{{ issue.id }}
-                                        </td>
-                                        </a>
-                                        <td>{{ issue.title }}</td>
-                                        <td>{{ issue.date }}</td>
-                                        <td>
-                                            <a href="">{{ issue.user.username }}
-                                        </td>
-                                        </a>
-
-                                        {% if issue.status == "1" %}
-                                            </td>
-
-                                            <td><span class="badge badge-pill badge-success"> Open </span></td>
-
-                                            </tr>
-                                        {% else %}
-                                            </td>
-
-                                            <td><span class="badge badge-pill badge-danger"> Closed </span></td>
-
-                                            </tr>
-                                        {% endif %}
+                                        <td>{{ team.name }}</td>
+                                        <td>{{ team.description }}</td>
+                                        <td>{{ members }}</td>
+                                    </tr>
                                 {% endfor %}
 
                                 </tbody>
                             </table>
                         </div>
-                        {% if not teamsList %}
+                        {% if not teamMembers %}
                             <h3 style="text-align:center;">There are no teams for this project!</h3>
                         {% endif %}
                         <div style="text-align: center;" class="alert alert-warning">[Something here]</b>
