@@ -41,7 +41,7 @@
                         {% if not teamMembers %}
                             <h3 style="text-align:center;">There are no teams for this project!</h3>
                         {% endif %}
-                    <a class="btn btn-primary btn-block" href="{% url 'createTeam' %}" role="button">Create team</a>
+                    <a class="btn btn-primary btn-block" href="{% url 'createTeam' project.id %}" role="button">Create team</a>
 
                         <div style="text-align: center;" class="alert alert-warning">[Something here]</b>
                         </div>
