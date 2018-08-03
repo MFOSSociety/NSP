@@ -2,8 +2,10 @@ from django.shortcuts import reverse,render,get_object_or_404,redirect
 from .forms import TeamForm
 from .models import Team,Member
 from project.models import ProjectDetail
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 
+# Create your views here.
+@login_required
 def showTeams(request,project_id):
 	project = get_object_or_404(ProjectDetail,pk=project_id)
 	teamsList = Team.objects.all()
@@ -13,6 +15,7 @@ def showTeams(request,project_id):
 	context = {"project":project,"teamMembers":teamMembers}
 	return render(request,"teams/teamsList.html",context)
 
+@login_required
 def createTeam(request,project_id):
 	if request.method == "POST":
 		form = TeamForm(request.POST)
@@ -26,6 +29,7 @@ def createTeam(request,project_id):
 	context = {"createTeamForm":form,"project_id":project_id}
 	return render(request,"teams/createTeamForm.html",context)
 
+@login_required
 def deleteTeam(request,team_id):
 	team = get_object_or_404(Team,pk=team_id)
 	projectID = team.project.id
