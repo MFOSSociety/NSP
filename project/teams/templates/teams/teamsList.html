@@ -14,6 +14,7 @@
                         <div class="alert alert-info"><b>Hello {{ user.username|title }}, </b>Below are all teams of
                             {{ project.project_name }}
                         </div>                        <hr>
+
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -40,8 +41,11 @@
                         {% if not teamMembers %}
                             <h3 style="text-align:center;">There are no teams for this project!</h3>
                         {% endif %}
+                    <a class="btn btn-primary btn-block" href="{% url 'createTeam' %}" role="button">Create team</a>
+
                         <div style="text-align: center;" class="alert alert-warning">[Something here]</b>
                         </div>
+
                     </div>
                 </div>
             </div>
