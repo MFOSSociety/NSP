@@ -23,5 +23,5 @@ def createTeam(request,project_id):
 			team.save()
 	else:
 		form = TeamForm()
-		context = {"createTeamForm":form}
+		context = {"createTeamForm":form,"project_id":project_id}
 		return render(request,"teams/createTeamForm.html",context)
