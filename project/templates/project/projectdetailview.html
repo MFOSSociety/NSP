@@ -9,8 +9,8 @@
             <p>Date : {{ project.start_date }}</p>
             <p>Issues: {{ issuesNumber }}</p>
             <p>Solutions: {{ solutionsNumber }}</p>
+                <a class="btn btn-primary btn-block" href="{% url 'showTeams' project.id %}" role="button">Teams</a>
             {% if request.user == project.initiated_by %}
-                <a class="btn btn-primary btn-block" href="#" role="button">Teams</a>
                 <a class="btn btn-warning btn-block" href="{% url 'project_edit' project.id %}" role="button">Edit</a>
                 <a class="btn btn-danger btn-block" href="{% url 'delete_project' project.id %}" role="button">DELETE</a>
                 <p>WARNING! Be sure that you want to delete this project before clicking DELETE!</p>
