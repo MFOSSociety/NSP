@@ -1,0 +1,7 @@
+{% load bootstrapform %}
+<form method="POST" action="{% url 'createTeam' %}">
+	{% csrf_token %}
+	{{ createTeamForm.as_p|bootstrap }}
+	<input type="hidden" value="{{ request.URL }}" name="lastPage">
+	<button type="submit">Create team</button>
+</form>
