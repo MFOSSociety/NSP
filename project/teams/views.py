@@ -18,10 +18,10 @@ def createTeam(request,project_id):
 		form = TeamForm(request.POST)
 		if form.is_valid():
 			team = form.save(commit=False)
-			projectID = request.POST.get("projectID")
-			team.project = get_object_or_404(ProjectDetail,pk=projectID)
+			team.project = get_object_or_404(ProjectDetail,pk=project_id)
 			team.save()
+			
 	else:
 		form = TeamForm()
-		context = {"createTeamForm":form,"project_id":project_id}
-		return render(request,"teams/createTeamForm.html",context)
+	context = {"createTeamForm":form,"project_id":project_id}
+	return render(request,"teams/createTeamForm.html",context)
