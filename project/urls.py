@@ -12,4 +12,5 @@ urlpatterns = [
     path('<ID>/edit', views.project_edit, name='project_edit'),
     path('<project_id>/', views.project_detail_view, name='view_project_detail'),
     path("", include("project.issueSolution.urls")),
+    path("", include("project.teams.urls")),
 ]
