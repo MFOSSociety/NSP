@@ -43,7 +43,10 @@ class TestDeleteTeamView(TestCase):
 											   description="testing")
 
 	def test_delete_view_get(self):
+		self.client.force_login(self.user_object)
 		url = reverse("deleteTeam",args=[self.team_object.id])
 		response = self.client.get(url)
+		print(response)
 		self.assertEquals(response.status_code, 302)
+		self.assertEquals(response.url, reverse("showTeams",args=[self.project_object.id]))
 		self.assertEquals(response.resolver_match.func,views.deleteTeam)
