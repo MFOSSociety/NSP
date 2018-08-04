@@ -32,8 +32,6 @@ class TestDeleteTeamView(TestCase):
 			'testing@example.com',
 			'testing',
 		)
-		self.user_object.set_password("testing")
-		self.user_object.save()	
 		self.project_object = ProjectDetail.objects.create(project_name="testing",
 															initiated_by=self.user_object,
 															mentor_name="testing",
