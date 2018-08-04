@@ -29,7 +29,7 @@
 
                                 {% for team,members in teamMembers.items %}
                                     <tr>
-                                        <td>{{ team.name }}</td>
+                                        <td><a href="{% url 'showTeam' team.id %}">{{ team.name }}</td></a>
                                         <td>{{ team.description }}</td>
                                         <td>{{ members }}</td>
                                     </tr>
