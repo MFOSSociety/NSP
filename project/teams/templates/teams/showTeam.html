@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="site-wrapper" style="margin-top:115px;">
+        <div style="text-align: center;" class="container">
+            <h1><a href="{% url 'view_project_detail' team.project.id %}">{{ team.project.project_name }}</a> - {{ team.name|title }} team</h1>
+            <p>Name : {{ team.name }}</p>
+            <p>Description : {{ team.description|linebreaks }}</p>
+            <p>Members : {{ members|length }}</p>
+            <p>Issues: {{ issuesNumber }}</p>
+            <p>Solutions: {{ solutionsNumber }}</p>
+            {% if request.user == team.project.initiated_by %}
+                <a class="btn btn-warning btn-block" href="#" role="button">Edit</a>
+                <a class="btn btn-danger btn-block" href="{% url 'deleteTeam' team.id %}" role="button">DELETE</a>
+                <p>WARNING! Be sure that you want to delete this team before clicking DELETE!</p>
+            {% endif %}
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3 style="text-align: center;">Latest issues</h3>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-primary btn-block" href="#"
+                               role="button">All issues</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-primary btn-block" href="#"
+                               role="button">Open issues</a>
+                        </div>
+
+                    </div>
+                    <a class="btn btn-success btn-block" href="#"
+                       role="button">New issue</a>
+
+                    <div style="margin:5px;" class="list-group">
+                        {% for issue in issues %}
+                            {% if issue == issues.0 %}
+                                <a href="issue/{{ issue.id }}"
+                                   class="list-group-item list-group-item-action flex-column align-items-start active">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ issue.title }}</h5>
+                                        <small>{{ issue.date }}</small>
+                                    </div>
+                                    <p class="mb-1">{{ issue.description|linebreaks }}</p>
+                                </a>
+                            {% else %}
+                                <a href="issue/{{ issue.id }}"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ issue.title }}</h5>
+                                        <small class="text-muted">{{ issue.date }}</small>
+                                    </div>
+                                    <p class="mb-1">{{ issue.description|linebreaks }}</p>
+                                </a>
+                            {% endif %}
+                        {% empty %}
+                            <h5 style="margin:30px;text-align: center;">There are no open solutions</h5>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col">
+                    <h3 style="text-align: center;">Latest solutions</h3>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-primary btn-block" href="#"
+                               role="button">All solutions</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-primary btn-block" href="#"
+                               role="button">Open solutions</a>
+                        </div>
+
+                    </div>
+                    <a class="btn btn-success btn-block" href="#"
+                       role="button">New solution</a>
+
+                    <div style="margin:5px;" class="list-group">
+                        {% for solution in solutions %}
+                            {% if solution == solutions.0 %}
+                                <a href="solution/{{ solution.id }}"
+                                   class="list-group-item list-group-item-action flex-column align-items-start active">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ solution.title }}</h5>
+                                        <small>{{ solution.date }}</small>
+                                    </div>
+                                    <p class="mb-1">{{ solution.description|linebreaks }}</p>
+                                    <!-- <small class="text-muted">Donec id elit non mi porta.</small> -->
+                                </a>
+                            {% else %}
+                                <a href="solution/{{ solution.id }}"
+                                   class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ solution.title }}</h5>
+                                        <small class="text-muted">{{ solution.date }}</small>
+                                    </div>
+                                    <p class="mb-1">{{ solution.description|linebreaks }}</p>
+                                </a>
+                            {% endif %}
+                        {% empty %}
+                            <h5 style="margin:30px;text-align: center;">There are no open solutions</h5>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
