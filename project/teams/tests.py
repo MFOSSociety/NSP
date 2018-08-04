@@ -3,11 +3,11 @@ from django.shortcuts import reverse
 from project.models import ProjectDetail
 from .models import Team
 from django.contrib.auth.models import User
-import nsp.tests as tests
+from nsp.tests import TestLoginRequired
 
 # Create your tests here.
 
-class TestTeamsViewsLoginRequired(tests.TestLoginRequired):
+class TestTeamsViewsLoginRequired(TestLoginRequired):
 	def setUp(self):
 		self.user_object = User.objects.create(username="testing",
 												password="testing")
