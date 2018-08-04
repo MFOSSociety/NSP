@@ -16,6 +16,13 @@ def showTeams(request,project_id):
 	return render(request,"teams/teamsList.html",context)
 
 @login_required
+def showTeam(request,team_id):
+	team = get_object_or_404(Team,pk=team_id)
+	members = Member.objects.filter(team=team)
+	context = {"team":team,"members":members}
+
+
+@login_required
 def createTeam(request,project_id):
 	if request.method == "POST":
 		form = TeamForm(request.POST)
