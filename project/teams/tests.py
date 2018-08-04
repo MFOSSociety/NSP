@@ -4,7 +4,7 @@ from project.models import ProjectDetail
 from .models import Team
 from django.contrib.auth.models import User
 from nsp.tests import TestLoginRequired
-
+from . import views
 # Create your tests here.
 
 class TestTeamsViewsLoginRequired(TestLoginRequired):
@@ -43,7 +43,7 @@ class TestDeleteTeamView(TestCase):
 											   description="testing")
 
 	def test_delete_view_get(self):
-		self.client.force_login(self.user_object)
 		url = reverse("deleteTeam",args=[self.team_object.id])
 		response = self.client.get(url)
 		self.assertEquals(response.status_code, 302)
+		self.assertEquals(response.resolver_match.func,views.deleteTeam)
