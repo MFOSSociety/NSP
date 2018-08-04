@@ -20,6 +20,7 @@ def showTeam(request,team_id):
 	team = get_object_or_404(Team,pk=team_id)
 	members = Member.objects.filter(team=team)
 	context = {"team":team,"members":members}
+	return render(request,"teams/showTeam.html",context)
 
 
 @login_required
