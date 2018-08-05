@@ -32,10 +32,10 @@ def createTeam(request,project_id):
 			team = form.save(commit=False)
 			team.project = project
 			team.save()
-
+			return redirect(reverse("showTeam",args=[team.id]))
 	else:
 		form = TeamForm()
-	context = {"createTeamForm":form,"id":project_id}
+	context = {"method":"Create","createTeamForm":form,"id":project_id}
 	return render(request,"teams/TeamForm.html",context)
 
 @login_required
