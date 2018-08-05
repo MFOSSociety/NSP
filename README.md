@@ -1,4 +1,5 @@
 # The Network Of Skilled People - NSP
+<img src="https://travis-ci.com/NSP-Community/NSP.svg?branch=master">
 Visit - http://thensp.pythonanywhere.com/
 
 ## Registration Page
