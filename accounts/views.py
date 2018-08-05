@@ -209,10 +209,6 @@ def delete_skill(request, ID):
     return redirect("/account/profile/")
 
 
-def skills_view(request):  # I dont know what this does
-    pass
-
-
 # SKILL FORM VIEW LATEST CREATION
 
 @login_required
