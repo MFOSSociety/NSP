@@ -26,3 +26,9 @@ class TestViews(TestCase):
 		response = self.client.get(url)
 		self.assertEqual(response.status_code,302)
 		self.assertEqual(response.url,reverse("view_friend",args=[self.user_object.username]))
+
+	def test_unfollow_user_view_get(self):
+		url = reverse("unfollow_user",args=[self.user_object.id])
+		response = self.client.get(url)
+		self.assertEqual(response.status_code,302)
+		self.assertEqual(response.url,reverse("view_friend",args=[self.user_object.username]))
