@@ -125,3 +125,4 @@ class TestCreateTeamView(TestCase):
 		response_invalid = self.client.get(url_invalid)
 		self.assertEquals(response_valid.status_code, 200)
 		self.assertEquals(response_invalid.status_code, 404)
+		self.assertContains(response_valid,"</form>")
