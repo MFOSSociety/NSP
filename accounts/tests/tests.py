@@ -20,3 +20,9 @@ class TestViews(TestCase):
 			url = reverse(pathname)
 			response = self.client.get(url)
 			self.assertEqual(response.status_code,200)
+
+	def test_follow_user_view_get(self):
+		url = reverse("follow_user",args=[self.user_object.id])
+		response = self.client.get(url)
+		self.assertEqual(response.status_code,302)
+		self.assertEqual(response.url,reverse("view_friend",args=[self.user_object.username]))
