@@ -101,3 +101,27 @@ class TestShowTeamView(TestCase):
 		response_invalid = self.client.get(url_invalid)
 		self.assertEquals(response_valid.status_code, 200)
 		self.assertEquals(response_invalid.status_code, 404)
+
+class TestCreateTeamView(TestCase):
+	def setUp(self):
+		self.client = Client()
+		self.user_object = User.objects.create_superuser(
+			'testing',
+			'testing@example.com',
+			'testing',
+		)
+		self.project_object = ProjectDetail.objects.create(project_name="testing",
+															initiated_by=self.user_object,
+															mentor_name="testing",
+															branch="testing",
+															description="testing")
+		self.team_object = Team.objects.create(project=self.project_object,
+											   description="testing")
+		self.client.force_login(self.user_object)
+	def test_createTeam_view(self):
+		url_valid = reverse("createTeam",args=[self.project_object.id])
+		url_invalid = reverse("createTeam",args=[100])
+		response_valid = self.client.get(url_valid)
+		response_invalid = self.client.get(url_invalid)
+		self.assertEquals(response_valid.status_code, 200)
+		self.assertEquals(response_invalid.status_code, 404)
