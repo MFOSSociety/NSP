@@ -70,7 +70,7 @@ class TestShowTeamsView(TestCase):
 															branch="testing",
 															description="testing")
 		self.client.force_login(self.user_object)
-	def test_showTeam_view(self):
+	def test_showTeams_view(self):
 		url_valid = reverse("showTeams",args=[self.project_object.id])
 		url_invalid = reverse("showTeams",args=[100])
 		response_valid = self.client.get(url_valid)
