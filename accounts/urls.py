@@ -24,7 +24,6 @@ urlpatterns = [
     path("social/follow/<ID>", views.follow_user, name="follow_user"),
     path("social/unfollow/<ID>", views.unfollow_user, name="unfollow_user"),
     path('users/<username>', views.friend_profile_view, name='view_friend'),
-    path('profile/skills', views.skills_view, name='skills'),
     path('profile/edit', views.edit_profile_view, name='edit_profile'),
     re_path('profile/(?P<pk>\d+)/edit_details', EditUserProfileView.as_view(), name='EditDetails'),
     path('change-password/', views.change_password_view, name='change_password'),
