@@ -34,24 +34,6 @@ def home_view(request):
     return render(request, 'accounts/index.html', args)
 
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/account/')
-            else:
-                return HttpResponse("Your NSP account is disabled.")  # This is not working
-        else:
-            return HttpResponse(
-                "<h2>   Invalid login details supplied.</h2>   ")  # By Default, Django's message is working
-    else:
-        return render(request, 'accounts/login.html', {})
-
-
 # TODO Search form to be added
 
 @login_required
