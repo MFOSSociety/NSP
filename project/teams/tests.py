@@ -46,7 +46,6 @@ class TestDeleteTeamView(TestCase):
 		self.client.force_login(self.user_object)
 		url = reverse("deleteTeam",args=[self.team_object.id])
 		response = self.client.get(url)
-		print(response)
 		self.assertEquals(response.status_code, 302)
 		response2 = self.client.get(url)
 		self.assertEquals(response2.status_code, 404)
@@ -102,7 +101,7 @@ class TestShowTeamView(TestCase):
 		self.assertEquals(response_valid.status_code, 200)
 		self.assertEquals(response_invalid.status_code, 404)
 
-class TestCreateTeamView(TestCase):
+class TestCreateEditTeamViews(TestCase):
 	def setUp(self):
 		self.client = Client()
 		self.user_object = User.objects.create_superuser(
@@ -118,7 +117,7 @@ class TestCreateTeamView(TestCase):
 		self.team_object = Team.objects.create(project=self.project_object,
 											   description="testing")
 		self.client.force_login(self.user_object)
-	def test_createTeam_view(self):
+	def test_createTeam_view_get(self):
 		url_valid = reverse("createTeam",args=[self.project_object.id])
 		url_invalid = reverse("createTeam",args=[100])
 		response_valid = self.client.get(url_valid)
@@ -126,3 +125,37 @@ class TestCreateTeamView(TestCase):
 		self.assertEquals(response_valid.status_code, 200)
 		self.assertEquals(response_invalid.status_code, 404)
 		self.assertContains(response_valid,"</form>")
+
+	def test_createTeam_view_post(self):
+		url_valid = reverse("createTeam",args=[self.project_object.id])
+		url_invalid = reverse("createTeam",args=[100])
+		data = {"name":"TestingTeam","description":"TestingTeam"}
+		response_valid = self.client.post(url_valid,data)
+		response_valid_redirected = self.client.post(url_valid,data,follow=True)
+		response_invalid = self.client.post(url_invalid)
+		self.assertEquals(response_valid.status_code, 302)
+		self.assertEquals(response_valid.url,reverse("showTeam",args=[self.team_object.id + 1]))
+		self.assertEquals(response_invalid.status_code, 404)
+		self.assertEquals(response_valid_redirected.status_code, 200)
+		self.assertEquals(response_valid_redirected.redirect_chain[0][1],302)
+		
+	def test_editTeam_view_get(self):
+		url_valid = reverse("editTeam",args=[self.team_object.id])
+		url_invalid = reverse("editTeam",args=[100])
+		response_valid = self.client.get(url_valid)
+		response_invalid = self.client.get(url_invalid)
+		self.assertEquals(response_valid.status_code, 200)
+		self.assertEquals(response_invalid.status_code, 404)
+		self.assertContains(response_valid,"</form>")
+
+	def test_editTeam_view_post(self):
+		url_valid = reverse("editTeam",args=[self.team_object.id])
+		url_invalid = reverse("editTeam",args=[100])
+		data = {"name":"TestingTeam","description":"TestingTeam"}
+		response_valid = self.client.post(url_valid,data)
+		response_valid_redirected = self.client.post(url_valid,data,follow=True)
+		response_invalid = self.client.post(url_invalid,data)
+		self.assertEquals(response_valid.status_code, 302)
+		self.assertEquals(response_valid.url, reverse("showTeam",args=[self.team_object.id]))
+		self.assertEquals(response_invalid.status_code, 404)
+		self.assertEquals(response_valid_redirected.status_code, 200)
