@@ -35,8 +35,21 @@ def createTeam(request,project_id):
 
 	else:
 		form = TeamForm()
-	context = {"createTeamForm":form,"project_id":project_id}
-	return render(request,"teams/createTeamForm.html",context)
+	context = {"createTeamForm":form,"id":project_id}
+	return render(request,"teams/TeamForm.html",context)
+
+@login_required
+def editTeam(request,team_id):
+	team = get_object_or_404(Team,pk=team_id)
+	if request.method == "POST":
+		form = TeamForm(request.POST,instance=team)
+		if form.is_valid():
+			team.save()
+			return redirect(reverse("showTeam",args=[team.id]))
+	else:
+		form = TeamForm(instance=team)
+	context = {"method":"Edit","createTeamForm":form,"id":team.id}
+	return render(request,"teams/TeamForm.html",context)
 
 @login_required
 def deleteTeam(request,team_id):
