@@ -39,6 +39,8 @@ class TestDeleteTeamView(TestCase):
 															description="testing")
 		self.team_object = Team.objects.create(project=self.project_object,
 											   description="testing")
+		self.team_object2 = Team.objects.create(project=self.project_object,
+											   description="testing")
 
 	def test_delete_view_get(self):
 		self.client.force_login(self.user_object)
@@ -48,5 +50,30 @@ class TestDeleteTeamView(TestCase):
 		self.assertEquals(response.status_code, 302)
 		response2 = self.client.get(url)
 		self.assertEquals(response2.status_code, 404)
+		url2 = reverse("deleteTeam",args=[self.team_object2.id])
+		response3 = self.client.get(url2,follow=True)
+		self.assertEquals(response3.status_code, 200)
 		self.assertEquals(response.url, reverse("showTeams",args=[self.project_object.id]))
 		self.assertEquals(response.resolver_match.func,views.deleteTeam)
+
+class TestShowTeamsView(TestCase):
+	def setUp(self):
+		self.client = Client()
+		self.user_object = User.objects.create_superuser(
+			'testing',
+			'testing@example.com',
+			'testing',
+		)
+		self.project_object = ProjectDetail.objects.create(project_name="testing",
+															initiated_by=self.user_object,
+															mentor_name="testing",
+															branch="testing",
+															description="testing")
+		self.client.force_login(self.user_object)
+	def test_showTeam_view(self):
+		url_valid = reverse("showTeams",args=[self.project_object.id])
+		url_invalid = reverse("showTeams",args=[100])
+		response_valid = self.client.get(url_valid)
+		response_invalid = self.client.get(url_invalid)
+		self.assertEquals(response_valid.status_code, 200)
+		self.assertEquals(response_invalid.status_code, 404)
