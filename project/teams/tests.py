@@ -46,5 +46,7 @@ class TestDeleteTeamView(TestCase):
 		response = self.client.get(url)
 		print(response)
 		self.assertEquals(response.status_code, 302)
+		response2 = self.client.get(url)
+		self.assertEquals(response2.status_code, 404)
 		self.assertEquals(response.url, reverse("showTeams",args=[self.project_object.id]))
 		self.assertEquals(response.resolver_match.func,views.deleteTeam)
