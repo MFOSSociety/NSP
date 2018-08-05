@@ -25,11 +25,12 @@ def showTeam(request,team_id):
 
 @login_required
 def createTeam(request,project_id):
+	project = get_object_or_404(ProjectDetail,pk=project_id)
 	if request.method == "POST":
 		form = TeamForm(request.POST)
 		if form.is_valid():
 			team = form.save(commit=False)
-			team.project = get_object_or_404(ProjectDetail,pk=project_id)
+			team.project = project
 			team.save()
 
 	else:
