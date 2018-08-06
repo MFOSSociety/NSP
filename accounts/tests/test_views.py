@@ -80,3 +80,17 @@ class TestViews(TestCase):
 		response_invalid_get = self.client.get(url_invalid)
 		self.assertEqual(response_noAcess_get.status_code,404)
 		self.assertEqual(response_invalid_get.status_code,404)
+
+	def test_EditUserProfileView_post(self):
+		url_access = reverse("EditDetails",args=[self.user_object.id])
+		valid_data = {
+			"branch":"CSE",
+			"year":"1",
+			"stream":"BCA",
+			"gender":"Male",
+			"position":"Student",
+			"bio":"testing"
+		}
+		response_access_get = self.client.post(url_access,valid_data)
+		self.assertEqual(response_access_get.status_code,302)
+		self.assertEqual(response_access_get.url,reverse("view_profile"))
