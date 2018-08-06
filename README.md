@@ -1,5 +1,7 @@
 # The Network Of Skilled People - NSP
-<img src="https://travis-ci.com/NSP-Community/NSP.svg?branch=master">
+<img src="https://travis-ci.com/NSP-Community/NSP.svg?branch=master">  <a href='https://coveralls.io/github/NSP-Community/NSP?branch=master'><img src='https://coveralls.io/repos/github/NSP-Community/NSP/badge.svg?branch=master' alt='Coverage Status' /></a>
+
+
 Visit - http://thensp.pythonanywhere.com/
 
 ## Registration Page
