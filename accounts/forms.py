@@ -27,15 +27,6 @@ class EditProfileForm(UserChangeForm):
         )
         # we can use exclude(....fields....) if we want to exclude attributes
 
-
-class EditInformationForm(UserChangeForm):
-    class Meta:
-        model = UserProfile
-        fields = (
-            'photo',
-        )
-
-
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
