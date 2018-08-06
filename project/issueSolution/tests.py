@@ -114,7 +114,7 @@ class TestViews(TestCase):
 		response_404 = self.client.get(url_invalid)
 		self.assertEqual(response_404.status_code,404)
 
-	def test_changeStatusIssueSolution_post(self):
+	def test_changeStatusIssueSolution(self):
 		argsList = [[self.project_object.id,"issue",self.issue_object.id,"closed"],
 				[self.project_object.id,"issue",self.issue_object.id,"open"],
 				[self.project_object.id,"solution",self.solution_object.id,"accepted"],
@@ -126,3 +126,13 @@ class TestViews(TestCase):
 			response = self.client.post(url)
 			self.assertEqual(response.status_code,302)
 			self.assertEqual(response.url,reverse("viewIssueSolution",args=args[:3]))
+
+		#Tests if user can edit an issue even if not created by the user
+		self.client.force_login(self.user_object2)
+		for args in argsList:
+			url = reverse("changeStatusIssueSolution",args=args)
+			response = self.client.get(url)
+			self.assertEqual(response.status_code,302)
+			self.assertEqual(response.url,reverse("viewIssueSolution",args=args[:3]))
+
+		self.client.force_login(self.user_object)
