@@ -115,10 +115,14 @@ class TestViews(TestCase):
 		self.assertEqual(response_404.status_code,404)
 
 	def test_changeStatusIssueSolution_post(self):
-		url = reverse("changeStatusIssueSolution",args=[self.project_object.id,
-														"issue",self.issue_object.id,
-														"closed"])
-		response = self.client.post(url)
-		self.assertEqual(response.status_code,302)
-		self.assertEqual(response.url,reverse("viewIssueSolution",args=[self.project_object.id,
-																		"issue",self.issue_object.id]))
+		argsList = [[self.project_object.id,"issue",self.issue_object.id,"closed"],
+				[self.project_object.id,"issue",self.issue_object.id,"open"],
+				[self.project_object.id,"solution",self.solution_object.id,"accepted"],
+				[self.project_object.id,"solution",self.solution_object.id,"notaccepted"],
+				[self.project_object.id,"solution",self.solution_object.id,"open"]
+		]
+		for args in argsList:
+			url = reverse("changeStatusIssueSolution",args=args)
+			response = self.client.post(url)
+			self.assertEqual(response.status_code,302)
+			self.assertEqual(response.url,reverse("viewIssueSolution",args=args[:3]))
