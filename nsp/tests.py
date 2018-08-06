@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.shortcuts import reverse
 
-testDebug = True
+testDebug = False
 
 class TestLoginRequired(TestCase):
 	def setUp(self):

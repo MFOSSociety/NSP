@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="site-wrapper" style="margin-top:115px;">
+
+        <div style="margin: 0px;padding: 10px;" class="col-xl-12 offset-md-1">
+            <div class="Order-list">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><a href="{% url 'view_project_detail' project.id %}">{{ project.project_name|title }}</a> -
+                            Teams </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info"><b>Hello {{ user.username|title }}, </b>Below are all teams of
+                            {{ project.project_name }}
+                        </div>                        <hr>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Members</th>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for team,members in teamMembers.items %}
+                                    <tr>
+                                        <td><a href="{% url 'showTeam' team.id %}">{{ team.name }}</td></a>
+                                        <td>{{ team.description }}</td>
+                                        <td>{{ members }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                        {% if not teamMembers %}
+                            <h3 style="text-align:center;">There are no teams for this project!</h3>
+                        {% endif %}
+                    <a class="btn btn-primary btn-block" href="{% url 'createTeam' project.id %}" role="button">Create team</a>
+
+                        <div style="text-align: center;" class="alert alert-warning">[Something here]</b>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- ORDER LIST END-->
+        </div>
+    </div>
+
+{% endblock body %}

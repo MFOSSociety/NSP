@@ -21,7 +21,6 @@ from accounts.forms import (
     EditProfileForm,
     RegistrationForm,
     SkillForm,
-    EditInformationForm,
     ImageFileUploadForm,
     UserProfileForm,
 )
@@ -32,24 +31,6 @@ def home_view(request):
     name = "NSP - Network Of Skilled People"
     args = {'name': name}
     return render(request, 'accounts/index.html', args)
-
-
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/account/')
-            else:
-                return HttpResponse("Your NSP account is disabled.")  # This is not working
-        else:
-            return HttpResponse(
-                "<h2>   Invalid login details supplied.</h2>   ")  # By Default, Django's message is working
-    else:
-        return render(request, 'accounts/login.html', {})
 
 
 # TODO Search form to be added
@@ -113,24 +94,8 @@ def edit_profile_view(request):
 
     else:
         form = EditProfileForm(instance=request.user)
-        args = {'form': form}
-        return render(request, 'accounts/edit_profile.html', args)
-
-
-@login_required
-def edit_information_view(request):
-    if request.method == 'POST':
-        form = EditInformationForm(request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
-            return redirect('/account/profile')
-
-    else:
-        form = EditInformationForm(instance=request.user)
-        args = {'form': form}
-        return render(request, 'accounts/edit_info.html', args)
-
+    args = {'form': form}
+    return render(request, 'accounts/edit_profile.html', args)
 
 @login_required
 def change_password_view(request):
@@ -161,7 +126,7 @@ def change_profile_picture(request):
         form = ImageFileUploadForm(request.POST, request.FILES, instance=current_user_profile)
         if form.is_valid():
             form.save()
-            return redirect("/account/change_profilepic")
+            return redirect("/account/change_profile_pic")
         else:
             context = {"current_user_profile": current_user_profile, "form": form}
             return render(request, "accounts/profile_pic_upload.html", context)
@@ -219,16 +184,10 @@ def registration_view(request):
 
 @login_required
 def delete_skill(request, ID):
-    skill = Skill.objects.get(pk=ID)
+    skill = get_object_or_404(Skill,pk=ID)
     if skill.user == request.user:
         skill.delete()
-    else:
-        return redirect("/account/profile/")
     return redirect("/account/profile/")
-
-
-def skills_view(request):  # I dont know what this does
-    pass
 
 
 # SKILL FORM VIEW LATEST CREATION
@@ -248,24 +207,9 @@ def add_skill_view(request):
 def successful_registration_view(request):
     return render(request, 'accounts/registersuccess.html')
 
-
-# TODO
-def django_image_and_file_upload_ajax(request):
-    if request.method == 'POST':
-        form = ImageFileUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'error': False, 'message': 'Uploaded Successfully'})
-        else:
-            return JsonResponse({'error': True, 'errors': form.errors})
-    else:
-        form = ImageFileUploadForm()
-        return render(request, 'accounts/profile_pic_upload.html', {'form': form})
-
-
 @login_required
 def follow_user(request, ID):
-    friend = User.objects.get(pk=ID)
+    friend = get_object_or_404(User,pk=ID)
     follow_value = False
     follow_args = {
         "follower": request.user,
@@ -281,7 +225,7 @@ def follow_user(request, ID):
 
 @login_required
 def unfollow_user(request, ID):
-    friend = User.objects.get(pk=ID)
+    friend = get_object_or_404(User,pk=ID)
     follow_value = False
     follow_args = {
         "follower": request.user,
