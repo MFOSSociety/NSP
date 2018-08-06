@@ -6,7 +6,6 @@ from project.issueSolution.models import Issue,IssueComment,Solution,SolutionCom
 from django.contrib.auth.models import User
 
 # Create your tests here.
-tests.testDebug = False
 
 class TestIssueSolutionViewsLoginRequired(TestLoginRequired):
 	def setUp(self):
@@ -62,6 +61,10 @@ class TestViews(TestCase):
 												project=self.project_object,
 												title="testing",
 												description="testing")
+		self.issue_object2 = Issue.objects.create(user=self.user_object2,
+												project=self.project_object,
+												title="testing2",
+												description="testing2")
 		self.solution_object = Solution.objects.create(issue=self.issue_object,
 														user=self.user_object,
 														title="testing",
@@ -95,5 +98,27 @@ class TestViews(TestCase):
 			for args in argsList:
 				url = reverse(pathname,args=args)
 				response = self.client.get(url)
-				print(response)
 				self.assertEqual(response.status_code,200)
+
+	def test_editIssueSolution_get(self):
+		url_noAccess = reverse("editIssueSolution",args=[self.project_object.id,
+												"issue",self.issue_object2.id])
+		response_noAccess = self.client.get(url_noAccess)
+		self.assertEqual(response_noAccess.status_code,302)
+		url_access = reverse("editIssueSolution",args=[self.project_object.id,
+												"issue",self.issue_object.id])
+		response2_access = self.client.get(url_access)
+		self.assertEqual(response2_access.status_code,200)
+		url_invalid = reverse("editIssueSolution",args=[100,
+												"issue",self.issue_object2.id])
+		response_404 = self.client.get(url_invalid)
+		self.assertEqual(response_404.status_code,404)
+
+	def test_changeStatusIssueSolution_post(self):
+		url = reverse("changeStatusIssueSolution",args=[self.project_object.id,
+														"issue",self.issue_object.id,
+														"closed"])
+		response = self.client.post(url)
+		self.assertEqual(response.status_code,302)
+		self.assertEqual(response.url,reverse("viewIssueSolution",args=[self.project_object.id,
+																		"issue",self.issue_object.id]))
