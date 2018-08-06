@@ -13,7 +13,6 @@ from accounts.views import EditUserProfileView
 
 urlpatterns = [
     path("change_profile_pic", views.change_profile_picture, name="change_profile_picture"),
-    path('testing/', views.django_image_and_file_upload_ajax, name='testing'),
     path('', views.home_view, name='home'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
     path('register_success/', views.successful_registration_view, name='registersucess'),
