@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block body %}
+<div style="margin-top: 155px;">
+<h3 style="text-align: center;">{{method}} team</h3>
+<center>
+{% if method == "Create" %}
+<form method="POST" action="{% url 'createTeam' id %}">
+{% elif method == "Edit" %}
+<form method="POST" action="{% url 'editTeam' id %}">
+{% endif %}
+	{% csrf_token %}
+	{{ createTeamForm|bootstrap }}
+	<input type="hidden" value="{{ request.URL }}" name="lastPage">
+	<button class="btn btn-primary" type="submit">{{method}} team</button>
+</form>
+</div>
+</center>s
+{% endblock body %}
