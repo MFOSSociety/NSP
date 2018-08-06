@@ -20,4 +20,4 @@ urllib3==1.23
 wheel==0.24.0
 django-tastypie==0.14.1
 djangorestframework
-coverage==4.5.1
+python-coverage==4.5.1
