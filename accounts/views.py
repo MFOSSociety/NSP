@@ -184,7 +184,7 @@ def registration_view(request):
 
 @login_required
 def delete_skill(request, ID):
-    skill = Skill.objects.get(pk=ID)
+    skill = get_object_or_404(Skill,pk=ID)
     if skill.user == request.user:
         skill.delete()
     return redirect("/account/profile/")
