@@ -21,3 +21,14 @@ class TestViews(TestCase):
 			url = reverse(pathname)
 			response = self.client.get(url)
 			self.assertEqual(response.status_code,200)
+
+	def test_follow_views_302(self):
+		urls = [[reverse("follow_user",args=[self.user_object.id]),302],
+				[reverse("follow_user",args=[100]),404],
+				[reverse("unfollow_user",args=[self.user_object.id]),302],
+				[reverse("unfollow_user",args=[100]),404]]
+		for url,status_code in urls:
+			response = self.client.get(url)
+			self.assertEqual(response.status_code,status_code)
+			if status_code == 302:
+				self.assertEqual(response.url,reverse("view_friend",args=[self.user_object.username]))
