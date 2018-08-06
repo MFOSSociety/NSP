@@ -98,22 +98,6 @@ def edit_profile_view(request):
     args = {'form': form}
     return render(request, 'accounts/edit_profile.html', args)
 
-
-@login_required
-def edit_information_view(request):
-    if request.method == 'POST':
-        form = EditInformationForm(request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
-            return redirect('/account/profile')
-
-    else:
-        form = EditInformationForm(instance=request.user)
-        args = {'form': form}
-        return render(request, 'accounts/edit_info.html', args)
-
-
 @login_required
 def change_password_view(request):
     if request.method == 'POST':
