@@ -40,3 +40,10 @@ class TestViews(TestCase):
 				"email":"testing@gmail.com"}
 		response_valid = self.client.post(url,data=data_valid)
 		self.assertEqual(response_valid.url + "/",reverse("view_profile"))
+
+	def test_change_profile_picture_post(self):
+		url = reverse("change_profile_picture")
+		data_valid = {"photo":"http://thensp.pythonanywhere.com/static/accounts/img/nsp_profile_default.jpg"}
+		response_valid = self.client.post(url,data=data_valid)
+		self.assertEqual(response_valid.status_code,302)
+		self.assertEqual(response_valid.url,reverse("change_profile_picture"))
