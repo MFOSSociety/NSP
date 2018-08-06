@@ -187,8 +187,6 @@ def delete_skill(request, ID):
     skill = Skill.objects.get(pk=ID)
     if skill.user == request.user:
         skill.delete()
-    else:
-        return redirect("/account/profile/")
     return redirect("/account/profile/")
 
 
