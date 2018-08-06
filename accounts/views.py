@@ -207,21 +207,6 @@ def add_skill_view(request):
 def successful_registration_view(request):
     return render(request, 'accounts/registersuccess.html')
 
-
-# TODO
-def django_image_and_file_upload_ajax(request):
-    if request.method == 'POST':
-        form = ImageFileUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'error': False, 'message': 'Uploaded Successfully'})
-        else:
-            return JsonResponse({'error': True, 'errors': form.errors})
-    else:
-        form = ImageFileUploadForm()
-        return render(request, 'accounts/profile_pic_upload.html', {'form': form})
-
-
 @login_required
 def follow_user(request, ID):
     friend = get_object_or_404(User,pk=ID)
