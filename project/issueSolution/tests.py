@@ -154,5 +154,12 @@ class TestViews(TestCase):
 			url = reverse("commentIssueSolution",args=args)
 			valid_data = {"comment":"testing"}
 			response = self.client.post(url,valid_data)
-			print(response)
 			self.assertEqual(response.status_code,404)
+
+	def test_createIssueSolution_issue(self):
+		create_issue_url = reverse("createIssueSolution",args=[self.project_object.id,"issue"])
+		issue_valid_data = {"title":"testing","description":"testing"}
+		response_issue = self.client.post(create_issue_url,issue_valid_data)
+		self.assertEqual(response_issue.status_code,302)
+		issue_object3 = Issue.objects.get(pk=3)
+		self.assertEqual(response_issue.url,reverse("viewIssueSolution",args=[self.project_object.id,
