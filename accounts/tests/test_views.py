@@ -12,6 +12,7 @@ class TestViews(TestCase):
 		self.client.force_login(self.user_object)
 
 	def test_views_200(self):
+		print("running stuff")
 		pathnames = ["home","view_profile","change_profile_picture",
 					"registersucess","signup","view_people",
 					"password_reset_complete","password_reset_done",
@@ -20,15 +21,3 @@ class TestViews(TestCase):
 			url = reverse(pathname)
 			response = self.client.get(url)
 			self.assertEqual(response.status_code,200)
-
-	def test_follow_user_view_get(self):
-		url = reverse("follow_user",args=[self.user_object.id])
-		response = self.client.get(url)
-		self.assertEqual(response.status_code,302)
-		self.assertEqual(response.url,reverse("view_friend",args=[self.user_object.username]))
-
-	def test_unfollow_user_view_get(self):
-		url = reverse("unfollow_user",args=[self.user_object.id])
-		response = self.client.get(url)
-		self.assertEqual(response.status_code,302)
-		self.assertEqual(response.url,reverse("view_friend",args=[self.user_object.username]))
