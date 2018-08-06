@@ -52,17 +52,17 @@
                                         <td class="lead mb-7">{{ project.start_date }}</td>
                                         <td class="lead mb-7">
                                             <center>
-                                                <a href="{% url 'interestedList' project.id %}">{{ interested.0 }} </a>
+                                                <a href="{% url 'interested_list' project.id %}">{{ interested.0 }} </a>
                                                 <!-- insterested.0 is total number of people interested -->
                                             </center>
 
                                             {% if interested.1 %}
                                                 <!-- insterested.1 is for current_user, if he "interested" this project then it's True -->
                                                 </td>
-                                                <td class="lead mb-7"><a href="{% url 'removeInsterested' project.id %}"
+                                                <td class="lead mb-7"><a href="{% url 'remove_interested' project.id %}"
                                                                          class="btn btn-primary">Uninterested</a></td>
                                             {% else %}
-                                                <td class="lead mb-7"><a href="{% url 'addInterested' project.id %}"
+                                                <td class="lead mb-7"><a href="{% url 'add_interested' project.id %}"
                                                                          class="btn btn-primary">Interested</a></td>
 
                                             {% endif %}

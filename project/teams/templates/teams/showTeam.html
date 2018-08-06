@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="site-wrapper" style="margin-top:75px;">
+    <div class="site-wrapper" style="margin-top:115px;">
         <div style="text-align: center;" class="container">
-            <h1>{{ project.project_name }}</h1>
-            <p>Mentor : {{ project.mentor_name }}</p>
-            <p>Description : {{ project.description|linebreaks }}</p>
-            <p>Date : {{ project.start_date }}</p>
+            <h1><a href="{% url 'view_project_detail' team.project.id %}">{{ team.project.project_name }}</a> - {{ team.name|title }} team</h1>
+            <p>Name : {{ team.name }}</p>
+            <p>Description : {{ team.description|linebreaks }}</p>
+            <p>Members : {{ members|length }}</p>
             <p>Issues: {{ issuesNumber }}</p>
             <p>Solutions: {{ solutionsNumber }}</p>
-                <a class="btn btn-primary btn-block" href="{% url 'showTeams' project.id %}" role="button">Teams</a>
-            {% if request.user == project.initiated_by %}
-                <a class="btn btn-warning btn-block" href="{% url 'project_edit' project.id %}" role="button">Edit</a>
-                <a class="btn btn-danger btn-block" href="{% url 'delete_project' project.id %}" role="button">DELETE</a>
-                <p>WARNING! Be sure that you want to delete this project before clicking DELETE!</p>
+            {% if request.user == team.project.initiated_by %}
+                <a class="btn btn-warning btn-block" href="{% url 'editTeam' team.id %}" role="button">Edit</a>
+                <a class="btn btn-danger btn-block" href="{% url 'deleteTeam' team.id %}" role="button">DELETE</a>
+                <p>WARNING! Be sure that you want to delete this team before clicking DELETE!</p>
             {% endif %}
         </div>
 
@@ -23,16 +22,16 @@
                     <h3 style="text-align: center;">Latest issues</h3>
                     <div class="row">
                         <div class="col">
-                            <a class="btn btn-primary btn-block" href="{% url 'projectIssues' project.id 'all' %}"
+                            <a class="btn btn-primary btn-block" href="#"
                                role="button">All issues</a>
                         </div>
                         <div class="col">
-                            <a class="btn btn-primary btn-block" href="{% url 'projectIssues' project.id 'open' %}"
+                            <a class="btn btn-primary btn-block" href="#"
                                role="button">Open issues</a>
                         </div>
 
                     </div>
-                    <a class="btn btn-success btn-block" href="{% url 'createIssueSolution' project.id 'issue' %}"
+                    <a class="btn btn-success btn-block" href="#"
                        role="button">New issue</a>
 
                     <div style="margin:5px;" class="list-group">
@@ -65,16 +64,16 @@
                     <h3 style="text-align: center;">Latest solutions</h3>
                     <div class="row">
                         <div class="col">
-                            <a class="btn btn-primary btn-block" href="{% url 'projectSolutions' project.id 'all' %}"
+                            <a class="btn btn-primary btn-block" href="#"
                                role="button">All solutions</a>
                         </div>
                         <div class="col">
-                            <a class="btn btn-primary btn-block" href="{% url 'projectSolutions' project.id 'open' %}"
+                            <a class="btn btn-primary btn-block" href="#"
                                role="button">Open solutions</a>
                         </div>
 
                     </div>
-                    <a class="btn btn-success btn-block" href="{% url 'createIssueSolution' project.id 'solution' %}"
+                    <a class="btn btn-success btn-block" href="#"
                        role="button">New solution</a>
 
                     <div style="margin:5px;" class="list-group">
