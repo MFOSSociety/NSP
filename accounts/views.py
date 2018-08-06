@@ -243,7 +243,7 @@ def django_image_and_file_upload_ajax(request):
 
 @login_required
 def follow_user(request, ID):
-    friend = User.objects.get(pk=ID)
+    friend = get_object_or_404(User,pk=ID)
     follow_value = False
     follow_args = {
         "follower": request.user,
@@ -259,7 +259,7 @@ def follow_user(request, ID):
 
 @login_required
 def unfollow_user(request, ID):
-    friend = User.objects.get(pk=ID)
+    friend = get_object_or_404(User,pk=ID)
     follow_value = False
     follow_args = {
         "follower": request.user,
