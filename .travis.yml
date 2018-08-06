@@ -7,12 +7,6 @@ env:
   -DJANGO=2.0 DB=sqlite3
 install:
   - pip install -r requirements.txt
-  - python manage.py migrate accounts
-  - python manage.py migrate nspmessage
-  - python manage.py migrate rest
-  - python manage.py migrate project
-  - python manage.py migrate project.issueSolution
-  - python manage.py migrate project.teams
 
 script:
   - python manage.py test
