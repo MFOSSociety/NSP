@@ -136,3 +136,23 @@ class TestViews(TestCase):
 			self.assertEqual(response.url,reverse("viewIssueSolution",args=args[:3]))
 
 		self.client.force_login(self.user_object)
+
+	def test_commentIssueSolution(self):
+		argsList = [[self.project_object.id,"issue",self.issue_object.id],
+					[self.project_object.id,"solution",self.issue_object.id]
+		]
+		for args in argsList:
+			url = reverse("commentIssueSolution",args=args)
+			response = self.client.get(url)
+			self.assertEqual(response.status_code,302)
+			self.assertEqual(response.url,reverse("viewIssueSolution",args=args))
+		args_invalid = [[100,"issue",self.issue_object.id],
+						[100,"dsadsasd",self.issue_object.id],
+						[100,"solution",312],
+						[100,"solution",self.issue_object.id]]
+		for args in args_invalid:
+			url = reverse("commentIssueSolution",args=args)
+			valid_data = {"comment":"testing"}
+			response = self.client.post(url,valid_data)
+			print(response)
+			self.assertEqual(response.status_code,404)

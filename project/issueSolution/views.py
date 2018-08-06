@@ -1,9 +1,9 @@
-from django.shortcuts import render,redirect,reverse
+from django.shortcuts import render,redirect,reverse,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from project.models import ProjectDetail
 from project.issueSolution.models import Issue,Solution,IssueComment,SolutionComment
 from accounts.models import UserProfile
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,Http404
 # Create your views here.
 
 @login_required
@@ -75,7 +75,7 @@ def editIssueSolution(request, projectID, type_, ID):
     and render a form to edit it this way there is only
     one view for editing issue/solution instance.
     """
-    project = ProjectDetail.objects.get(pk=projectID)
+    project = get_object_or_404(ProjectDetail,pk=projectID)
     openIssues = ""
 
     if type_ == "solution":
@@ -209,17 +209,20 @@ def commentIssueSolution(request, projectID, type_, ID):
     if request.method == "POST":
         comment = request.POST.get("comment")
         if type_ == "issue":
-            post = Issue.objects.get(pk=ID)
+            post = get_object_or_404(Issue,pk=ID)
             IssueComment.objects.create(user=request.user, issue=post,
                                         comment=comment)
         elif type_ == "solution":
-            post = Solution.objects.get(pk=ID)
+            post = get_object_or_404(Solution,pk=ID)
             SolutionComment.objects.create(user=request.user, solution=post,
                                            comment=comment)
         else:
-            return redirect(reverse("viewIssueSolution",args=[projectID, type_, ID]))
+            raise Http404
         lastPage = request.POST.get("path")
-        return HttpResponseRedirect(lastPage)
+        if lastPage:
+            return HttpResponseRedirect(lastPage)
+        else:
+            raise Http404
 
     else:
         return redirect(reverse("viewIssueSolution",args=[projectID, type_, ID]))
