@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.5"
+services:
+  - sqlite3
+env:
+  -DJANGO=2.0 DB=sqlite3
+install:
+  - pip install -r requirements.txt
+
+script:
+  - python manage.py test
+  - coverage run --source="." manage.py test
+  
+after_success:
+  coveralls
