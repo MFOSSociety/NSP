@@ -32,3 +32,11 @@ class TestViews(TestCase):
 			self.assertEqual(response.status_code,status_code)
 			if status_code == 302:
 				self.assertEqual(response.url,reverse("view_friend",args=[self.user_object.username]))
+
+	def test_edit_profile_view_post(self):
+		url = reverse("edit_profile")
+		data_valid = {"first_name":"testing",
+				"last_name":"testing",
+				"email":"testing@gmail.com"}
+		response_valid = self.client.post(url,data=data_valid)
+		self.assertEqual(response_valid.url + "/",reverse("view_profile"))
