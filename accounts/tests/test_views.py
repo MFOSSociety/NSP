@@ -58,3 +58,12 @@ class TestViews(TestCase):
 		self.assertEqual(response.url,reverse("view_profile"))
 		response_afterDeleted = self.client.get(url)
 		self.assertEqual(response_afterDeleted.status_code,404)
+
+	def test_add_skill_view(self):
+		url = reverse("addskill")
+		response_get = self.client.get(url)
+		self.assertEqual(response_get.status_code,200)
+		valid_data = {"skill":"testing"}
+		response_post = self.client.post(url,data=valid_data)
+		self.assertEqual(response_post.status_code,200)
+		self.assertContains(response_post,"Success!")
