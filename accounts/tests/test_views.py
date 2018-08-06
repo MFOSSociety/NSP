@@ -9,6 +9,8 @@ class TestViews(TestCase):
 		self.client = Client()
 		self.user_object = User.objects.create(username="testing",
 											   password="testing")
+		self.user_object2 = User.objects.create(username="testing2",
+											   password="testing2")
 		self.UserProfile_object = UserProfile.objects.get(user=self.user_object)
 		self.skill = Skill.objects.create(user=self.user_object,
 										  skill_name="testing")
@@ -67,3 +69,14 @@ class TestViews(TestCase):
 		response_post = self.client.post(url,data=valid_data)
 		self.assertEqual(response_post.status_code,200)
 		self.assertContains(response_post,"Success!")
+
+	def test_EditUserProfileView_get(self):
+		url_access = reverse("EditDetails",args=[self.user_object.id])
+		url_noAccess = reverse("EditDetails",args=[self.user_object2.id])
+		url_invalid = reverse("EditDetails",args=[100])
+		response_access_get = self.client.get(url_access)
+		self.assertEqual(response_access_get.status_code,200)
+		response_noAcess_get = self.client.get(url_noAccess)
+		response_invalid_get = self.client.get(url_invalid)
+		self.assertEqual(response_noAcess_get.status_code,404)
+		self.assertEqual(response_invalid_get.status_code,404)
