@@ -163,3 +163,12 @@ class TestViews(TestCase):
 		self.assertEqual(response_issue.status_code,302)
 		issue_object3 = Issue.objects.get(pk=3)
 		self.assertEqual(response_issue.url,reverse("viewIssueSolution",args=[self.project_object.id,
+																		      "issue",issue_object3.id]))
+	def test_createIssueSolution_post(self):
+		create_solution_url = reverse("createIssueSolution",args=[self.project_object.id,"solution"])
+		solution_valid_data = {"title":"testing","description":"testing","value":"{}".format(self.issue_object.id)}
+		response_issue = self.client.post(create_solution_url,solution_valid_data)
+		self.assertEqual(response_issue.status_code,302)
+		solution_object2 = Issue.objects.get(pk=2)
+		self.assertEqual(response_issue.url,reverse("viewIssueSolution",args=[self.project_object.id,
+																		      "solution",solution_object2.id]))
