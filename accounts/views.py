@@ -126,7 +126,7 @@ def change_profile_picture(request):
         form = ImageFileUploadForm(request.POST, request.FILES, instance=current_user_profile)
         if form.is_valid():
             form.save()
-            return redirect("/account/change_profilepic")
+            return redirect("/account/change_profile_pic")
         else:
             context = {"current_user_profile": current_user_profile, "form": form}
             return render(request, "accounts/profile_pic_upload.html", context)
