@@ -95,8 +95,8 @@ def edit_profile_view(request):
 
     else:
         form = EditProfileForm(instance=request.user)
-        args = {'form': form}
-        return render(request, 'accounts/edit_profile.html', args)
+    args = {'form': form}
+    return render(request, 'accounts/edit_profile.html', args)
 
 
 @login_required
