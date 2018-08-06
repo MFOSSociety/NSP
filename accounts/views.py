@@ -21,7 +21,6 @@ from accounts.forms import (
     EditProfileForm,
     RegistrationForm,
     SkillForm,
-    EditInformationForm,
     ImageFileUploadForm,
     UserProfileForm,
 )
