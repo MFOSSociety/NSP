@@ -1,6 +1,6 @@
 from django.test import TestCase,Client
 from django.shortcuts import reverse
-from accounts.models import UserProfile
+from accounts.models import UserProfile,Skill
 from django.contrib.auth.models import User
 # Create your tests here.
 
@@ -9,6 +9,9 @@ class TestViews(TestCase):
 		self.client = Client()
 		self.user_object = User.objects.create(username="testing",
 											   password="testing")
+		self.UserProfile_object = UserProfile.objects.get(user=self.user_object)
+		self.skill = Skill.objects.create(user=self.user_object,
+										  skill_name="testing")
 		self.client.force_login(self.user_object)
 
 	def test_views_200(self):
@@ -47,3 +50,11 @@ class TestViews(TestCase):
 		response_valid = self.client.post(url,data=data_valid)
 		self.assertEqual(response_valid.status_code,302)
 		self.assertEqual(response_valid.url,reverse("change_profile_picture"))
+
+	def test_delete_skill_view(self):
+		url = reverse("deleteskill",args=[self.skill.id])
+		response = self.client.get(url)
+		self.assertEqual(response.status_code,302)
+		self.assertEqual(response.url,reverse("view_profile"))
+		response_afterDeleted = self.client.get(url)
+		self.assertEqual(response_afterDeleted.status_code,404)
