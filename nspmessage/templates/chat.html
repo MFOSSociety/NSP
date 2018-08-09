@@ -63,7 +63,7 @@ Website: http://emilcarlsson.se/
         
         {% for conversation in conversations.items %}
          <!-- conversation.0 is friend user -->
-         <a href="{% url 'chatFriend' conversation.0 %}">
+         <a href="{% url 'chat_friend' conversation.0 %}">
          {% if conversation.0 == receiver %}
       				<li class="contact active">
           {% else %}

@@ -57,7 +57,7 @@
 
                     {% for conversation in conversations.items %}
                         <!-- conversation.0 is friend user -->
-                        <a href="{% url 'chatFriend' conversation.0 %}">
+                        <a href="{% url 'chat_friend' conversation.0 %}">
                             {% if conversation.0 == receiver %}
                                 <li class="contact active">
                                     {% else %}
@@ -140,7 +140,7 @@
             </div>
             <div class="message-input">
                 <div class="wrap">
-                    <form method="POST" action="{% url 'newMessage' receiver %}"> {% csrf_token %}
+                    <form method="POST" action="{% url 'new_message' receiver %}"> {% csrf_token %}
                         <input style="font-size: 15px;" type="text" name="sender_message"
                                placeholder="Write your message..."/>
                         <i class="fa fa-paperclip attachment" aria-hidden="true"></i>

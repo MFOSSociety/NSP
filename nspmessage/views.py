@@ -81,8 +81,14 @@ def new_message(request, username):
     sender = request.user
     receiver = User.objects.get(username=username)
     message = request.POST.get("sender_message")
-    Message.objects.create(
-        sender=sender,
-        receiver=receiver,
-        msg_content=message)
+    if Follow.objects.filter(follower=sender, following=receiver):
+        if Follow.objects.filter(follower=receiver, following=sender):
+            Message.objects.create(
+                sender=sender,
+                receiver=receiver,
+                msg_content=message)
+        else:
+            raise Http404
+    else:
+        raise Http404
     return redirect("/account/chat/{}".format(username))
