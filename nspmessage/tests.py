@@ -38,3 +38,16 @@ class TestViews(tests.TestLoginRequired):
 			response = self.client.get(url)
 			print(response)
 			self.assertEqual(response.status_code,status_code)
+	def test_new_message_view(self):
+		self.client.force_login(self.user_object)
+		username_statuscode = {self.user_object2:302,
+						   self.user_object3:404,
+						   self.user_object:404}
+		valid_data = {"sender_message":"testing"}
+		for username,status_code in username_statuscode.items():
+			args = [username]
+			url = reverse("new_message",args=args)
+			response = self.client.post(url,valid_data)
+			self.assertEqual(response.status_code,status_code)
+			if status_code == 302:
+				self.assertEqual(response.url,reverse("chat_friend",args=args))
