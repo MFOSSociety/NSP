@@ -51,9 +51,9 @@
                         {% endfor %}</li>
                     <div class="">
                         {% if current_user_following %}
-                            <a href="{% url 'unfollowUser' user.id %}" class="btn btn-primary" style="width: 100%">Unfollow</a>
+                            <a href="{% url 'follow_user' user.id %}" class="btn btn-primary" style="width: 100%">Unfollow</a>
                         {% else %}
-                            <a href="{% url 'followUser' user.id %}" class="btn btn-primary"
+                            <a href="{% url 'unfollow_user' user.id %}" class="btn btn-primary"
                                style="width: 100%">Follow</a>
                         {% endif %}
                     </div>
