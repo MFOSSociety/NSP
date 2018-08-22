@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
-{% block body %}
 
-    <div class="twt-wrapper" style="margin: 50px">
+{% block customcss %}    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+{% endblock customcss %}  
+
+{% block body %}  
+<div class="twt-wrapper" style="margin: 50px">
         <div class="panel panel-info">
             <div class="panel-heading">
             </div>
@@ -56,6 +60,10 @@
                                     href="{% url 'viewIssueSolution' project.id 'issue' post.issue.id %}">{{ post.issue|linebreaks }}
                             </h3></a>
                         {% endif %}
+                        {% if type == "solution" %}
+                            <a href="{% url 'voteSolution' 'upvote' post.id %}"><i class="fas fa-arrow-up">Upvote ({{upvotes}})</i></a>
+                            <a href="{% url 'voteSolution' 'downvote' post.id %}"><i class="fas fa-arrow-down">Downvote({{downvotes}})</i></a>
+                        {% endif %}
                         <a class="btn btn-sm btn-primary-outline float-right"><i
                                 class="fa fa-comments"></i> {{ comments|length }}</a>
                         {% if project.initiated_by == request.user %}
@@ -98,6 +106,7 @@
                                class="btn btn-sm btn-primary-outline float-right btn-danger">Delete</a>
                         {% endif %}
                     </div>
+
                     <div class="clearfix"></div>
                 </div>
                 <div class="container">
