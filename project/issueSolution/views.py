@@ -154,6 +154,8 @@ def viewIssueSolution(request, projectID, type_, ID):
         comments = IssueComment.objects.filter(issue=post)
     elif type_ == "solution":
         post = Solution.objects.get(pk=ID)
+        upvotes = SolutionVote.objects.filter(solution=post,vote="1")
+        downvotes = SolutionVote.objects.filter(solution=post,vote="0")
         comments = SolutionComment.objects.filter(solution=post)
     else:
         return redirect(reverse("view_project_detail",args=[projectID]))
@@ -167,7 +169,9 @@ def viewIssueSolution(request, projectID, type_, ID):
     args = {"project": project, "post": post, "comments": comments,
             "userProfile": userProfile, "type": type_,
             "profile_comment": profile_comment}
-
+    if type_ == "solution":
+        args["upvotes"] = len(upvotes)
+        args["downvotes"] = len(downvotes)
     return render(request, "issueSolution/post.html", args)
 
 
