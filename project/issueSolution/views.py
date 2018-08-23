@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,reverse,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from project.models import ProjectDetail
-from project.issueSolution.models import Issue,Solution,IssueComment,SolutionComment
+from project.issueSolution.models import Issue,Solution,IssueComment,SolutionComment,SolutionVote
 from accounts.models import UserProfile
 from django.http import HttpResponseRedirect,Http404
 # Create your views here.
@@ -154,6 +154,8 @@ def viewIssueSolution(request, projectID, type_, ID):
         comments = IssueComment.objects.filter(issue=post)
     elif type_ == "solution":
         post = Solution.objects.get(pk=ID)
+        upvotes = SolutionVote.objects.filter(solution=post,vote="1")
+        downvotes = SolutionVote.objects.filter(solution=post,vote="0")
         comments = SolutionComment.objects.filter(solution=post)
     else:
         return redirect(reverse("view_project_detail",args=[projectID]))
@@ -167,7 +169,9 @@ def viewIssueSolution(request, projectID, type_, ID):
     args = {"project": project, "post": post, "comments": comments,
             "userProfile": userProfile, "type": type_,
             "profile_comment": profile_comment}
-
+    if type_ == "solution":
+        args["upvotes"] = len(upvotes)
+        args["downvotes"] = len(downvotes)
     return render(request, "issueSolution/post.html", args)
 
 
@@ -227,3 +231,33 @@ def commentIssueSolution(request, projectID, type_, ID):
     else:
         return redirect(reverse("viewIssueSolution",args=[projectID, type_, ID]))
 
+@login_required
+def voteSolution(request,type_,ID):
+    solution = get_object_or_404(Solution,pk=ID)
+    if not solution:
+        raise Http404
+    userDownvoted = SolutionVote.objects.filter(user=request.user,
+                                              solution=solution,
+                                              vote="0")
+    userUpvoted = SolutionVote.objects.filter(user=request.user,
+                                              solution=solution,
+                                              vote="1")
+    
+    if type_ == "downvote":
+        if userUpvoted:
+            userUpvoted.delete()
+        if not userDownvoted:
+            SolutionVote.objects.create(user=request.user,
+                                    solution=solution,
+                                    vote="0")
+    elif type_ == "upvote":
+        if userDownvoted:
+            userDownvoted.delete()
+        if not userUpvoted:
+            SolutionVote.objects.create(user=request.user,
+                                    solution=solution,
+                                    vote="1")
+    else:
+        raise Http404
+    args = [solution.issue.project.id,"solution",ID]
+    return redirect(reverse("viewIssueSolution",args=args))
