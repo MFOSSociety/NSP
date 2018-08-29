@@ -28,6 +28,12 @@ class Solution(models.Model):
     def __str__(self):
         return "#{} - {}".format(self.id, self.title)
 
+class SolutionVote(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    solution = models.ForeignKey(Solution,on_delete=models.CASCADE)
+    vote = models.CharField(max_length=1, choices=(("0", "Downvote"), ("1", "Upvote")))
+    def __str__(self):
+        return "{} {} - {}".format(self.user,self.solution,self.vote)
 
 class IssueComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

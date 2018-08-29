@@ -28,6 +28,37 @@ Visit - http://thensp.pythonanywhere.com/
 ## Change Password Page
 ![Change Password](https://i.imgur.com/CBat1bD.jpg)
 
+## Installation Instructions (Linux/Unix)
+
+##### Clone the repository and get inside NSP directory
+```
+git clone https://github.com/NSP-Community/NSP && cd NSP
+```
+
+##### Installing required Python3 libraries
+```
+sudo pip3 install -r requirements.txt
+```
+
+##### Make Migrations
+```
+python3 manage.py makemigrations accounts
+python3 manage.py makemigrations notifications
+python3 manage.py makemigrations nspmessage
+python3 manage.py makemigrations project
+python3 manage.py makemigrations issueSolution
+```
+
+##### Running the Server
+```
+python3 manage.py runserver
+```
+
+You should now be able to access NSP in localhost:8000 in your browser
+
+### How to install NSP on your Windows System ?
+Install Linux or buy a Mac and revisit https://github.com/NSP-Community/NSP/README.md
+
 ## Developers:
 #### Backend Developers - <a href="https://github.com/rshrc">Rishi Banerjee</a> , <a href="https://github.com/pratikjain04">Pratik Jain</a> , <a href="https://github.com/gjergjk71">Gjergj Kadriu</a>
 #### Frontend Developers - <a href="https://github.com/prachalgoyal03">Prachal Goyal</a>
