@@ -12,22 +12,6 @@ ALLOWED_HOSTS = []
 # Application definition
 GOOGLE_RECAPTCHA_SECRET_KEY = '6LecWGIUAAAAAFZIgG1f3Rt92pabYQx--bnPHjqb'
 
-QA_SETTINGS = {
-    'qa_messages': True,
-    'qa_description_optional': False,
-    'reputation': {
-        'CREATE_QUESTION': 0,
-        'CREATE_ANSWER': 0,
-        'CREATE_ANSWER_COMMENT': 0,
-        'CREATE_QUESTION_COMMENT': 0,
-        'ACCEPT_ANSWER': 0,
-        'UPVOTE_QUESTION': 0,
-        'UPVOTE_ANSWER': 0,
-        'DOWNVOTE_QUESTION': 0,
-        'DOWNVOTE_ANSWER': 0,
-    }
-}
-
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
