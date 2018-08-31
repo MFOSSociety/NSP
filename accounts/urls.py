@@ -8,6 +8,7 @@ from accounts import views
 from accounts.views import EditUserProfileView
 
 urlpatterns = [
+    path("",include('password_reset.urls')),
     path("change_profile_pic", views.change_profile_picture, name="change_profile_picture"),
     path('', views.home_view, name='home'),
     path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
