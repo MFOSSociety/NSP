@@ -1,10 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import (
-    logout,
-    password_reset,
-    password_reset_done,
-    password_reset_confirm,
-    password_reset_complete,
+    logout
 )
 from django.urls.conf import path, re_path, include
 
