@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'project',
     'project.teams',
     'rest_framework',
+    'password_reset',
     'project.issueSolution',
     'django.contrib.admin',
     'django.contrib.auth',
