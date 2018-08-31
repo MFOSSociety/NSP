@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block body %}
+<form method ="POST">{% csrf_token %}
+	<center><br><br><br><br>
+		{% for error,message in form.errors.items %}
+		    <div class="alert alert-danger" role="alert">
+		        {{ error }} {{ message }}
+		    </div>
+		{% endfor %}
+		<h2>Reset password</h2>
+		{{ form|bootstrap }}
+		<button class="btn btn-block btn-success" type="submit">Change password</button>
+	</center>
+</form>
+{% endblock body %}
