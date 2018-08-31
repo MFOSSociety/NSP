@@ -167,7 +167,7 @@ LOGIN_REDIRECT_URL = '/account/'
 LOGIN_URL = '/account/login/'
 # For mailing purposes
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
