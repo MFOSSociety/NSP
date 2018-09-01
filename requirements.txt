@@ -21,3 +21,4 @@ wheel==0.24.0
 django-tastypie==0.14.1
 djangorestframework
 python-coveralls
+django-password-reset==2.0

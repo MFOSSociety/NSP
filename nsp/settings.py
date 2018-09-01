@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'project',
     'project.teams',
     'rest_framework',
+    'password_reset',
     'project.issueSolution',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -167,7 +168,11 @@ LOGIN_REDIRECT_URL = '/account/'
 LOGIN_URL = '/account/login/'
 # For mailing purposes
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = '<example@domain.com>'
+EMAIL_HOST_PASSWORD = '<password>'
+EMAIL_PORT = 587
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
