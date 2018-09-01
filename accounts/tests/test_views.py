@@ -19,9 +19,8 @@ class TestViews(TestCase):
 	def test_views_200(self):
 		print("running stuff")
 		pathnames = ["home","view_profile","change_profile_picture",
-					"registersucess","signup","view_people",
-					"password_reset_complete","password_reset_done",
-					"reset_password","change_password","edit_profile"]
+					"registersucess","signup","view_people"
+					,"change_password","edit_profile"]
 		for pathname in pathnames:
 			url = reverse(pathname)
 			response = self.client.get(url)
