@@ -29,15 +29,39 @@ Visit - http://thensp.pythonanywhere.com/
 ![Change Password](https://i.imgur.com/CBat1bD.jpg)
 
 ## Installation Instructions (Linux/Unix)
+### Small procedure
+
+
+##### Clone the repository and get inside NSP directory
+```
+git clone https://github.com/NSP-Community/NSP && cd NSP && chmod +x go.sh
+```
+
+##### Now run the bash script
+```
+./go.sh
+```
+> **NOTE** : This will create a virtualenv named "mason" by default. Always move in virtualenv before starting any dev process or testing process! 
+>> In order to move in virtualenv shell execute `source mason/bin/activate`
+***
+### Long procedure
 
 ##### Clone the repository and get inside NSP directory
 ```
 git clone https://github.com/NSP-Community/NSP && cd NSP
 ```
 
+##### (Optional) Only if you need virtual environment
+```
+sudo apt-get update
+sudo apt-get install virtualenv
+virtualenv example_name --python=python3
+source example_name/bin/activate
+```
+
 ##### Installing required Python3 libraries
 ```
-sudo pip3 install -r requirements.txt
+sudo python3 -m pip install -r requirements.txt
 ```
 
 ##### Make Migrations
@@ -47,6 +71,7 @@ python3 manage.py makemigrations notifications
 python3 manage.py makemigrations nspmessage
 python3 manage.py makemigrations project
 python3 manage.py makemigrations issueSolution
+python3 manage.py migrate
 ```
 
 ##### Running the Server
@@ -55,9 +80,9 @@ python3 manage.py runserver
 ```
 
 You should now be able to access NSP in localhost:8000 in your browser
-
+***
 ### How to install NSP on your Windows System ?
-Install Linux or buy a Mac and revisit https://github.com/NSP-Community/NSP/README.md
+You can install [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install-win10) on Windows 10 and we suggest you to go for Ubuntu! After this the installation process is same as any other linux distro 
 
 ## Developers:
 #### Backend Developers - <a href="https://github.com/rshrc">Rishi Banerjee</a> , <a href="https://github.com/pratikjain04">Pratik Jain</a> , <a href="https://github.com/gjergjk71">Gjergj Kadriu</a>
