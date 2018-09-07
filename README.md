@@ -29,7 +29,7 @@ Visit - http://thensp.pythonanywhere.com/
 ![Change Password](https://i.imgur.com/CBat1bD.jpg)
 
 ## Installation Instructions (Linux/Unix)
-### Small procedure
+### Short procedure
 
 
 ##### Clone the repository and get inside NSP directory
