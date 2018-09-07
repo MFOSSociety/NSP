@@ -17,7 +17,7 @@ echo -e "\e[32m[+] Making migrations!\e[0m"
 ./mason/bin/python3 manage.py makemigrations >/dev/null 2>&1
 ./mason/bin/python3 manage.py makemigrations accounts >/dev/null 2>&1
 ./mason/bin/python3 manage.py makemigrations notifications >/dev/null 2>&1
-./mason/bin/python3 manage.py makemigrations masonmessage >/dev/null 2>&1
+./mason/bin/python3 manage.py makemigrations nspmessage >/dev/null 2>&1
 ./mason/bin/python3 manage.py makemigrations project >/dev/null 2>&1
 ./mason/bin/python3 manage.py makemigrations issueSolution >/dev/null 2>&1
 ./mason/bin/python3 manage.py migrate >/dev/null 2>&1
