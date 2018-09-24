@@ -51,6 +51,22 @@ function show(json) {
 	}
 	messages_div.appendChild(ul);
 }
+function send() {
+	var csrftoken = getCookie('csrftoken');
+	sender_message = document.getElementById("sender_message").value;
+	try {
+		$.ajax({
+			method: "POST",
+			data: {"csrfmiddlewaretoken":csrftoken,"sender_message":sender_message},
+			url: `/account/chat/send_message_api/${receiver}`,
+		});
+	} catch (err) {
+		alert(err);
+	}
+	document.getElementById("sender_message").value = "";
+}
+document.getElementById("submit_button").onclick = send
+
 
 function update() {
 	var csrftoken = getCookie('csrftoken');
