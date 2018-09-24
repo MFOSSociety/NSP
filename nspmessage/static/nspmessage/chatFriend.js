@@ -69,6 +69,11 @@ function send() {
 }
 document.getElementById("submit_button").onclick = send
 
+window.addEventListener("keyup", (event)=>{
+	if (event.keyCode === 13) {
+		send();
+	}
+})
 
 function update() {
 	var csrftoken = getCookie('csrftoken');
