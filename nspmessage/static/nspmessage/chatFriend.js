@@ -23,6 +23,7 @@ var receiver = document.getElementById("receiver_username").value;
 var receiver_id = document.getElementById("receiver_id").value;
 var messages_len = 0;
 var messages_div = document.getElementById("messages");
+var message_sent = false;
 
 function clear() {
 	var messages_div = document.getElementById("messages");
@@ -48,6 +49,7 @@ function show(json) {
 		li.appendChild(img);
 		li.appendChild(p);
 		ul.appendChild(li);
+		message_sent = true;
 	}
 	messages_div.appendChild(ul);
 }
@@ -65,6 +67,7 @@ function send() {
 			alert(err);
 		}
 		document.getElementById("sender_message").value = "";
+
 	}
 }
 document.getElementById("submit_button").onclick = send
@@ -86,6 +89,10 @@ function update() {
 		if (messages_len < json.length){
 			clear();
 			show(json);
+		} 
+		if (message_sent){
+			var messages = document.getElementById("messages");
+			messages.scrollTop = messages.scrollHeight - messages.clientHeight;
 		}
 		messages_len = json.length
 	})
