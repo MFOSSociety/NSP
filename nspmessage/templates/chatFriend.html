@@ -111,32 +111,6 @@
                 </div>
             </div>
             <div class="messages" id="messages">
-                <ul>
-
-                    {% for message in messages %}
-                        {% if message.sender == request.user %}
-                            <li class="sent">
-                                {% if sender_user_profile.photo %}
-                                    <img src="{{ sender_user_profile.photo.url }}">
-                                {% else %}
-                                    <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}">
-                                {% endif %}
-                                <p>{{ message.msg_content }}</p>
-                            </li>
-                        {% else %}
-                            <li class="replies">
-                                {% if receiver_user_profile.photo %}
-                                    <a href="{% url 'view_friend' receiver %}"><img
-                                            src="{{ receiver_user_profile.photo.url }}"></a>
-                                {% else %}
-                                    <a href="{% url 'view_friend' receiver %}"><img
-                                            src="{% static 'accounts/img/nsp_profile_default.jpg' %}"></a>
-                                {% endif %}
-                                <p>{{ message.msg_content }}</p>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
             </div>
             <div class="message-input">
                 <div class="wrap">
