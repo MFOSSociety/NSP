@@ -93,6 +93,7 @@ function update() {
 		if (message_sent){
 			var messages = document.getElementById("messages");
 			messages.scrollTop = messages.scrollHeight - messages.clientHeight;
+			message_sent = false;
 		}
 		messages_len = json.length
 	})
