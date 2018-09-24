@@ -110,7 +110,7 @@
                     <i class="fa fa-instagram" aria-hidden="true"></i>
                 </div>
             </div>
-            <div class="messages">
+            <div class="messages" id="messages">
                 <ul>
 
                     {% for message in messages %}
@@ -150,6 +150,20 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="receiver_username" value="{{receiver.username}}">
+    <input type="hidden" id="receiver_id" value="{{receiver.id}}">
+    <input type="hidden" id="sender_username" value="{{request.user.username}}">
+    <input type="hidden" id="sender_id" value="{{request.user.id}}">
+    {% if sender_user_profile.photo %}
+        <input type="hidden" id="sender_user_profile_photo_url" value="{{sender_user_profile.photo.url}}">
+    {% else %}
+        <input type="hidden" id="sender_user_profile_photo_url" value="{% static 'accounts/img/nsp_profile_default.jpg' %}">
+    {% endif %}
+    {% if receiver_user_profile.photo %}
+        <input type="hidden" id="receiver_user_profile_photo_url" value="{{receiver_user_profile.photo.url}}">
+    {% else %}
+        <input type="hidden" id="receiver_user_profile_photo_url" value="{% static 'accounts/img/nsp_profile_default.jpg' %}">
+    {% endif %}
     <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
         <script
