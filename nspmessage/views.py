@@ -1,9 +1,9 @@
 from collections import OrderedDict
-
+from django.http import HttpResponse
+from django.core import serializers
 from django.contrib.auth.models import User
 from django.http import Http404
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render, redirect,get_object_or_404
 from accounts.models import UserProfile, Follow
 from nspmessage.models import Message
 from django.contrib.auth.decorators import login_required
@@ -92,3 +92,18 @@ def new_message(request, username):
     else:
         raise Http404
     return redirect("/account/chat/{}".format(username))
+
+@login_required
+def get_messages_api(request,receiver):
+    sender = request.user
+    receiver = get_object_or_404(User,username=receiver)
+    current_participants = [sender,receiver]
+    messages = Message.objects.filter(sender__in=current_participants,
+                                      receiver__in=current_participants).order_by("id")
+    data = serializers.serialize("json",messages)
+    return HttpResponse(data,content_type="application/json")
+
+
+@login_required
+def send_message_api(request,receiver):
+    pass
