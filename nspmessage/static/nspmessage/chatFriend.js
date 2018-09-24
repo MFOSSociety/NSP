@@ -24,7 +24,7 @@ var receiver_id = document.getElementById("receiver_id").value;
 var messages_len = 0;
 var messages_div = document.getElementById("messages");
 var message_sent = false;
-
+messages.scrollTop = messages.scrollHeight - messages.clientHeight;
 function clear() {
 	var messages_div = document.getElementById("messages");
 	messages_div.innerHTML = "";
