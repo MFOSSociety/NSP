@@ -19,12 +19,13 @@ class TestViews(tests.TestLoginRequired):
 												   following=self.user_object)
 		if tests.testDebug:
 			print("user_object created")
-		self.pathnames_args = {"chat":[],"chat_friend":[self.user_object2.id]}
-	def test_chat_view(self):
+		self.pathnames_args = {"chat":[],"chat_friend":[self.user_object2.username],
+							   "get_messages_api":[self.user_object2.username]}
+	def test_views_200(self):
 		self.client.force_login(self.user_object)
-		url = reverse("chat")
-		response = self.client.get(url)
-		self.assertEqual(response.status_code,200)
+		for pathname,args in self.pathnames_args.items():
+			response = self.client.get(reverse(pathname,args=args))
+			self.assertEqual(response.status_code,200)
 	def test_chat_friend_view(self):
 		self.client.force_login(self.user_object)
 		username_statuscode = {self.user_object2:200,
@@ -34,5 +35,4 @@ class TestViews(tests.TestLoginRequired):
 			args = [username]
 			url = reverse("chat_friend",args=args)
 			response = self.client.get(url)
-			print(response)
 			self.assertEqual(response.status_code,status_code)
