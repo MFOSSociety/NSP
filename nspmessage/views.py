@@ -1,9 +1,9 @@
 from collections import OrderedDict
-
+from django.http import HttpResponse
+from django.core import serializers
 from django.contrib.auth.models import User
 from django.http import Http404
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render, redirect,get_object_or_404
 from accounts.models import UserProfile, Follow
 from nspmessage.models import Message
 from django.contrib.auth.decorators import login_required
@@ -77,18 +77,31 @@ def chat_friend(request, username):
         raise Http404
 
 @login_required
-def new_message(request, username):
+def get_messages_api(request,receiver):
     sender = request.user
-    receiver = User.objects.get(username=username)
-    message = request.POST.get("sender_message")
-    if Follow.objects.filter(follower=sender, following=receiver):
-        if Follow.objects.filter(follower=receiver, following=sender):
+    receiver = get_object_or_404(User,username=receiver)
+    current_participants = [sender,receiver]
+    messages = Message.objects.filter(sender__in=current_participants,
+                                      receiver__in=current_participants).order_by("id")
+    data = serializers.serialize("json",messages)
+    return HttpResponse(data,content_type="application/json")
+
+@login_required
+def send_message_api(request,receiver):
+    try:
+        sender = request.user
+        receiver = User.objects.get(username=receiver)
+        message = request.POST.get("sender_message")
+        receiver_follows_sender = Follow.objects.filter(follower=receiver, following=sender)
+        sender_follows_receiver = Follow.objects.filter(follower=sender, following=receiver)
+        if receiver_follows_sender and sender_follows_receiver:
             Message.objects.create(
                 sender=sender,
                 receiver=receiver,
                 msg_content=message)
+            data = '{"successfull":true}'
         else:
-            raise Http404
-    else:
-        raise Http404
-    return redirect("/account/chat/{}".format(username))
+            data = '{"successfull":false,"permission":false}'
+    except:
+        data = '{"successfull":false}'
+    return HttpResponse(data,content_type="application/json")
