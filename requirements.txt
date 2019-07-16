@@ -16,7 +16,7 @@ requests-oauthlib==1.0.0
 six==1.11.0
 social-auth-app-django==2.1.0
 social-auth-core==1.7.0
-urllib3==1.23
+urllib3==1.24.1
 wheel==0.24.0
 django-tastypie==0.14.1
 djangorestframework
