@@ -1,7 +1,5 @@
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import (
-    logout
-)
+from django.contrib.auth import logout
 from django.urls.conf import path, re_path, include
 
 from accounts import views
@@ -11,10 +9,10 @@ urlpatterns = [
     path("",include('password_reset.urls')),
     path("change_profile_pic", views.change_profile_picture, name="change_profile_picture"),
     path('', views.home_view, name='home'),
-    path('login/', auth_views.login, {'template_name': 'accounts/login.html'}, name='user_login'),
+    path('login/', auth_views.LoginView.as_view(template_name="accounts/login.html"), name='user_login'  ), # template_name="accounts/login.html",
     path('register_success/', views.successful_registration_view, name='registersucess'),
     path('register/', views.registration_view, name='signup'),
-    path('logout/', logout, {'template_name': 'accounts/logout.html'}, name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(template_name="accounts/logout.html") , name='logout'),
     path('profile/', views.profile_view, name='view_profile'),
     path('people/', views.people_view, name='view_people'),
     path("social/follow/<ID>", views.follow_user, name="follow_user"),
