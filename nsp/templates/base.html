@@ -137,11 +137,11 @@
                      <a href="{% url 'start_project' %}" class=" customhover">Start Project</a>
                      <a href="{% url 'project_list_view' %}" class=" customhover">Active Projects</a>
                      <a href="{% url 'logout' %}" class=" customhover">Log Out</a>
-                     <a href="#" class="customhover">
+                     <!-- <a href="#" class="customhover">
                          <i class="fa fa-bell">
-                             
+
                          </i>
-                     </a>
+                     </a> -->
                   </li>
                   {% else %}
                   <li class=""><a href="{% url 'signup' %}" class=" customhover">Sign Up</a>
@@ -153,14 +153,15 @@
          </div>
       </div>
       {% if user.is_authenticated %}
-      <div class="collapse navbar-collapse" style="overflow-y: scroll; margin-right: 400px;" id="navbarSupportedContent" style="display: unset !important;">
-      <ul class="nav nav-pills mr-auto justify-content-end">
-         <li class="nav-item dropdown">
+      <div class="collapse navbar-collapse" style="overflow-y: scroll; " id="navbarSupportedContent" style="display: unset !important;">
+      <ul class="nav nav-pills pull-right">
+         <li class="nav-item dropdown" style="float: right;padding-left: 30vw;">
             <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-bell"></i>
-            </a>Notifications
-            <ul class="dropdown-menu">
-               <li class="head text-light bg-dark">
+            <i class="fa fa-bell" ></i>
+            </a>
+            <!-- Notifications -->
+            <ul class="dropdown-menu" >
+               <li class=" text-light bg-dark">
                   <div class="row">
                      <div class="col-lg-12 col-sm-12 col-12">
                         <span>Notifications{{ getNotifcs }}</span>
@@ -171,7 +172,7 @@
                <li class="notification-box">
                {% if profile.photo %}
                <img src="{{ profile.photo.url }}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle"> {% else %}
-               <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">                        
+               <img src="{% static 'accounts/img/nsp_profile_default.jpg' %}" class="col-lg-3 col-sm-8 col-8 w-50 rounded-circle">
                {% endif %}
                <div class="row">
                <a href="{% url 'view_friend' notification.from_user %}">
@@ -396,7 +397,7 @@
                            <p class="fitness-font400 mb20">I believe the initiative taken was much required to improve
                               the practical and industrial knowledge of students which a college fails to provide.
                               Students here can contribute and learn. It feels so great to work for the betterment
-                              of people. 
+                              of people.
                            </p>
                            <img src="../../static/accounts/img/assets/quotes.png" alt="#" class="img-responsive quote-logo">
                         </div>
@@ -438,7 +439,7 @@
                         to the Front end and the changed UI was loved by everyone! <br><br> This was our brief introduction.
                         It's time for you to connect with the developers around the globe and start working on your own
                         projects. Your profile page will be your introduction to the world, make sure to make it worth
-                        watching. 
+                        watching.
                      </p>
                   </div>
                </div>
@@ -474,7 +475,7 @@
                      </h4>
                      <p><a href="acm.muj.org" target="_blank">© 2018 NSP · <img src="../../static/accounts/img/acm.png" style="max-height:20px"
                         alt=""> · MIT License.
-                        <br> </a> 
+                        <br> </a>
                      </p>
                   </div>
                   <div class="col-md-4">
@@ -483,7 +484,7 @@
                         <ul class="menu-right nav navbar-nav">
                            <li class="dropdown megamenu"><a href="https://github.com/rshrc/NSP" class=" customhover"
                               target="_blank">Github</a></li>
-                              <h4>NSP 1.2</h4>                           
+                              <h4>NSP 1.2</h4>
                         </ul>
                      </div>
                   </div>
@@ -496,4 +497,3 @@
       <script src="../../static/accounts/js/jquery.min.js"></script> {% endblock %}
    </body>
 </html>
-
