@@ -118,8 +118,8 @@
                                 <div class="comment mb-2 row">
                                     <div class="comment-avatar col-md-1 col-sm-2 text-center pr-1">
                                         {% if profile_comment.0.photo %}
-                                            <!--<a href=""><img class="mx-auto rounded-circle img-fluid"-->
-                                                            <!--src="{{ profile_comment.0.photo.url }}" alt="avatar"></a>-->
+                                            <a href=""><img class="mx-auto rounded-circle img-fluid"
+                                                            src="{{ profile_comment.0.photo.url }}" alt="avatar"></a>
                                         {% else %}
                                             <a href=""><img class="mx-auto rounded-circle img-fluid"
                                                             src="{% static 'accounts/img/nsp_profile_default.jpg' %}"
@@ -140,7 +140,7 @@
                                     <!-- /reply is indented -->
                                     {% if request.user == profile_comment.0.user %}
                                         <div class="edit-comment" style="margin-left: 5em;">
-                                            <button class="btn btn-sm btn-warning-outline float-right btn-warning edit-comment-button" ">Edit</button>
+                                            <button class="btn btn-sm btn-warning-outline float-right btn-warning edit-comment-button">Edit</button>
                                             <form action="{% url 'editCommentIssueSolution' project.id type profile_comment.1.pk %}" method="post" class="form form-inline" style="display: none;">
                                                 {% csrf_token %}
                                                 <div class="form-group">
@@ -161,6 +161,7 @@
                                 function editComment(e) {
                                     // displays the edit form
                                     const form = e.target.nextElementSibling;
+                                    e.target.innerText = e.target.innerText === "EDIT"? "Close": "EDIT";
                                     form.style.display = form.style.display === ""? "none": "";
                                 };
 
