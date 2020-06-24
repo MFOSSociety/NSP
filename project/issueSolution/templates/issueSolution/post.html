@@ -130,7 +130,7 @@
                                         <h6 class="small comment-meta"><a
                                                 href="{% url 'view_friend' profile_comment.0.user.username %}">{{ profile_comment.0.user.username }}</a> {{ profile_comment.1.date }}
                                         </h6>
-                                        <div class="comment-body">
+                                        <div class="comment-body" id="comment-{{ profile_comment.1.id }}">
                                             <p>
                                                 {{ profile_comment.1.comment|linebreaks }}
                                                 <br>
@@ -138,9 +138,38 @@
                                         </div>
                                     </div>
                                     <!-- /reply is indented -->
+                                    {% if request.user == profile_comment.0.user %}
+                                        <div class="edit-comment" style="margin-left: 5em;">
+                                            <button class="btn btn-sm btn-warning-outline float-right btn-warning edit-comment-button">Edit</button>
+                                            <form action="{% url 'editCommentIssueSolution' project.id type profile_comment.1.pk %}" method="post" class="form form-inline" style="display: none;">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <textarea name="comment" id="" class="form-control" rows="5" cols="50">{{ profile_comment.1.comment }}</textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn" value="submit edit">
+                                                </div>
+                                                <input id="path" type="hidden" name="path" value="{{ request.path }}">
+                                            </form>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                             <!-- /comment -->
+                            <script type="text/javascript">
+                                function editComment(e) {
+                                    // displays the edit form
+                                    const form = e.target.nextElementSibling;
+                                    e.target.innerText = e.target.innerText === "EDIT"? "Close": "EDIT";
+                                    form.style.display = form.style.display === ""? "none": "";
+                                };
+
+                                const editCommentButtons = [...document.getElementsByClassName("edit-comment-button")];
+                                editCommentButtons.forEach(button => {
+                                    button.addEventListener('click', editComment)
+                                });
+                            </script>
 
                         </div>
                     </div>
@@ -153,7 +182,7 @@
                         </div>
                         <button class="btn btn-primary-outline" type="submit"><i class="fa fa-edit"></i></button>
                     </div>
-                    <input id="path" name="path" type="hidden" name="path" value="{{ request.path }}">
+                    <input id="path" type="hidden" name="path" value="{{ request.path }}">
 
                 </form>
                 </span>

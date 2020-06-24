@@ -231,6 +231,43 @@ def commentIssueSolution(request, projectID, type_, ID):
     else:
         return redirect(reverse("viewIssueSolution",args=[projectID, type_, ID]))
 
+
+@login_required
+def editCommentIssueSolution(request, projectID, type_, ID):
+    """
+    Edit an existing issue comment or solution comment
+    a 404 error is thrown if the user does not own the comment or the comment itself does not exist
+    """
+    path = request.POST.get('path', '/')
+
+    if request.method == 'POST':
+        edit_comment_text = request.POST.get('comment', None)
+
+        if type_ == 'issue':
+            comment = get_object_or_404(IssueComment, pk=ID)
+
+        elif type_ == 'solution':
+            comment = get_object_or_404(SolutionComment, pk=ID)
+
+        else:
+            raise Http404
+
+        if comment.user != request.user:
+            raise Http404
+
+        if edit_comment_text:
+            comment.comment = edit_comment_text
+            comment.save()
+
+        # using the comment id we navigate to the edited comment
+        path = "{org_path}#comment-{comment_id}".format(org_path=path, comment_id=comment.pk)
+
+        return redirect(path)
+
+    else:
+        return redirect(path)
+
+
 @login_required
 def voteSolution(request,type_,ID):
     solution = get_object_or_404(Solution,pk=ID)
