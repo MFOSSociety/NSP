@@ -91,6 +91,7 @@
    <link rel="icon" href="../../static/accounts/img/assets/favicon.png" type="image/png">
    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300%7CMontserrat:400,700%7CRaleway:400,200,300' rel='stylesheet'
       type='text/css'>
+   {% block head %}{% endblock head %}
    {% block sadana %}
    <script type="text/javascript">
       if (top != self) {
@@ -505,6 +506,7 @@
       <script src="../../static/accounts/js/plugins.js"></script>
       <script src="../../static/accounts/js/scripts.js"></script>
       <script src="../../static/accounts/js/jquery.min.js"></script> {% endblock %}
+      {% block customjs %}{% endblock customjs %}
    </body>
 </html>
 

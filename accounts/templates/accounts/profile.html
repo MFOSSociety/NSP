@@ -27,12 +27,14 @@
                             <h2>{{ user.first_name }} {{ user.last_name }}</h2>
                         {% endif %}
                         {% if user.userprofile.photo %}
-                            <img class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}"
+                            <img id="user-profile-pic" class="img-thumbnail" alt="user image" src="{{ user.userprofile.photo.url }}"
                                  width="240">
                         {% else %}
-                            <img class="img-thumbnail" alt="user image"
+                            <img id="user-profile-pic" class="img-thumbnail" alt="user image"
                                  src="{% static 'accounts/img/nsp_profile_default.jpg' %}" width="240px">
                         {% endif %}
+                        <br/>
+                        <small id="preview-warning" style="display: none;">This is a preview. Click 'Save picture' below to make it your new profile picture</small>
 
                         <table class="table table-striped " style="margin-left: -40px; width: 300px;">
                             <tr>
@@ -45,25 +47,22 @@
                             <tr>
                                 <td>
                                     <h5>
-                                        <a class="btn btn-primary" href="{% url 'change_profile_picture' %}"
-                                           style="width: 100%">Upload Pic</a>
+                                        <form action="" method="post" class="hidden-form" id="profile-pic-form">
+                                            {% csrf_token %}
+                                            <input type="file" name="profile-pic" id="profile-pic" accept="image/*">
+                                        </form>
+
+                                        <button type="submit" class="btn btn-dark" id="profile-pic-save">save picture</button>
+                                        <button id="profile-pic-upload" class="btn btn-primary" href="{% url 'change_profile_picture' %}" style="width: 100%" onclick="uploadPic()">Upload New Pic</button>
                                     </h5>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <h5>
-                                        <a class="btn btn-primary" href="{% url 'EditDetails' user.id %}"
-                                           style="width: 100%">Update Info</a>
-                                    </h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5>
-                                        <a class="btn btn-primary" href="{% url 'addskill' %}" style="width: 100%">Add
-                                            Skill</a>
-                                    </h5>
+                                        <!-- <a class="btn btn-primary" href="{% url 'EditDetails' user.id %}" style="width: 100%">Update Info</a> -->
+                                        <button id="update-info-btn" class="btn btn-primary" style="width: 100%">Update Info</button>
+                                    </h5>   
                                 </td>
                             </tr>
                             <tr>
@@ -114,6 +113,45 @@
                                 </td>
                             </tr>
                         </table>
+                        <div id="update-info-now">
+                            <div id="modal-title" class="text-center">
+                                <div id="modal-title-1"><h2>Update info</h2></div>
+                                <div id="modal-close"><button class="btn btn-outline-dark" id="modal-close-button" data-modal-id="update-info-now">close</button></div>
+                            </div>
+                            <form action="" method="post">
+                                <div class="grided">
+                                    <div class="form-group" id="profile_year">
+                                        <label for="">{{ profile_form.year.label }}</label>
+                                        <br />
+                                        {{ profile_form.year }}
+                                    </div>
+                                    <div class="form-group" id="profile_branch">
+                                        <label for="">{{ profile_form.branch.label }}</label>
+                                        <br />
+                                        {{ profile_form.branch }}
+                                    </div>
+                                    <div class="form-group" id="profile_stream">
+                                        <label for="">{{ profile_form.stream.label }}</label>
+                                        <br />
+                                        {{ profile_form.stream }}
+                                    </div>
+                                    <div class="form-group" id="profile_gender">
+                                        <label for="">{{ profile_form.gender.label }}</label>
+                                        <br />
+                                        {{ profile_form.gender }}
+                                    </div>
+                                    <div class="form-group" id="profile_position">
+                                        <label for="">{{ profile_form.position.label }}</label>
+                                        <br />
+                                        {{ profile_form.position }}
+                                    </div>
+
+                                    <div class="form-group" id="update-submit-button">
+                                        <button type="submit" class="btn btn-dark">update info</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6 " style="margin-top:80px;">
@@ -122,34 +160,68 @@
                             <h2 class="second">BIO</h2>
                             <br>
 
-                            <h5 style="word-break: break-all">{% if user.userprofile.bio|length == 0 %} No bio
-                                yet! {% else %}
-                                {{ user.userprofile.bio|linebreaks }} {% endif %}</h5>
+                            <h5 style="word-break: break-all">
+                            {% if user.userprofile.bio|length == 0 %}
+                                No bio yet! 
+                                <button class="btn btn-primary toggle-form"  data-form-id="bio-form" data-og-text="add bio">add bio</button>
+                            {% else %}
+                                {{ user.userprofile.bio|linebreaks }}
+                                <button class="btn btn-primary toggle-form"  data-form-id="bio-form" data-og-text="add bio">Change bio</button>
+                            {% endif %}
+                            </h5>
+                            <form action="" id="bio-form" class="hidden-form">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea name="user-bio" id="user-bio" cols="30" rows="5" class="form-control">{% if user.userprofile.bio|length > 0 %}{{ user.userprofile.bio }}{% endif %}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-dark">Update bio</button>
+                                </div>
+                            </form> 
                             <br>
-                        </center>
+                        </center>   
                     </div>
                     <br>
-                    <center>
-                        <div>
-                            <h2 class="second">Skills</h2>
-                        </div>
-                    </center>
-                    <table class="table">
-                        <thead>
-                        </thead>
-                        <tbody style="text-align: center;">
-                        {% for skill in skills %}
-                            <tr>
-                                <td>{{ skill }}</td>
-                                <td><a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></ul></td>
-                            </tr>
-                            <tr>
-                                {% empty %}
-                                <td>You haven't added any skills to your profile!</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    <div>
+                        <center>
+                            <div>
+                                <h2 class="second">Skills</h2>
+                            </div>
+                        </center>
+                        <table class="table">
+                            <thead>
+                            </thead>
+                            <tbody style="text-align: center;">
+                            {% for skill in skills %}
+                                <tr>
+                                    <td>{{ skill }}</td>
+                                    <!-- {% comment %} <td><a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></td> {% endcomment %} -->
+                                    <td>
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="skill-id" id="inputskill-id" class="form-control" value="{{ skill.pk }}">
+                                            <span class="fa fa-trash delete-skill"></span>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    {% empty %}
+                                    <td>You haven't added any skills to your profile!</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary toggle-form" data-form-id="skill-form" data-og-text="Add skill">Add skill</button>
+                        <form action="" id="skill-form" class="form-inline hidden-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" name="skill" id="skill" placeholder="Add a skill" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="add skill" class="btn btn-dark">
+                            </div>
+                        </form>
+                    </div>
                     <center>
                         <div>
                             <h2 class="second">Interested in</h2>
@@ -185,3 +257,9 @@
     </div>
 
 {% endblock %}
+
+
+{% block customjs %}
+<script src="{% static 'accounts/js/ajaxWrapper.js' %}"></script>
+<script src="{% static 'accounts/js/profile.js' %}"></script>
+{% endblock customjs %}
