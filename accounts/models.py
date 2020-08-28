@@ -15,15 +15,54 @@ class Skill(models.Model):
 
 
 class UserProfile(models.Model):
+    branch_choices = (
+        ('CS', 'CSE'),
+        ('IT', 'IT'),
+        ('CC', 'CCE'),
+        ('ME', 'MECHANICAL'),
+        ('CV', 'CIVIL'),
+        ('EC', 'ECE'),
+        ('EE', 'EE'),
+        ('CM', 'CHEMICAL')
+    )
+
+    year_choices = (
+        (1, 'One'),
+        (2, 'Two'),
+        (3, 'Three'),
+        (4, 'Four'),
+    )
+
+    stream_choices = (
+        ('BT', 'B.Tech'),
+        ('BH', 'B.Hons'),
+        ('BJ', 'BJMC'),
+        ('BS', 'BSc'),
+        ('BC', 'BCA')
+    )
+
+    gender_choices = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other')
+    )
+
+    position_choices = (
+        ('ST', 'Student'),
+        ('PR', 'Professor'),
+        ('TA', 'Teaching Assistant'),
+        ('CO', 'Company')
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
     ratings = models.IntegerField(null=True, default=0, blank=True)
     photo = models.ImageField(upload_to="profile_image", null=True, blank=True)
-    year = models.IntegerField(null=True, default=1, blank=True)
-    branch = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
-    stream = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
-    gender = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)
-    position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True)  # Student or Teacher
-    bio = models.TextField()
+    year = models.IntegerField(null=True, default=1, blank=True, choices=year_choices)
+    branch = models.CharField(max_length=20, default="Not Updated", blank=True, null=True, choices=branch_choices)
+    stream = models.CharField(max_length=20, default="Not Updated", blank=True, null=True, choices=stream_choices)
+    gender = models.CharField(max_length=20, default="Not Updated", blank=True, null=True, choices=gender_choices)
+    position = models.CharField(max_length=20, default="Not Updated", blank=True, null=True, choices=position_choices)  # Student or Teacher
+    bio = models.TextField(help_text="Add some information about yourself")
     follows = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
     class Meta:
