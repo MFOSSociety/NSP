@@ -46,7 +46,7 @@ def profile_view(request):
         , "followings": followings, "skills": skills}
     rating_value = user.userprofile.ratings
     args = {'user': user, "followers": followers, "following": followings, "skills": skills,
-            'range': range(rating_value), 'projects': projects}
+            'range': range(rating_value), 'projects': projects, 'profile_form': UserProfileForm(instance=user.userprofile)}
     return render(request, 'accounts/profile.html', args)
 
 
