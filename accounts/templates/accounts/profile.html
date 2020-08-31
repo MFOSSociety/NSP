@@ -162,20 +162,20 @@
 
                             <h5 style="word-break: break-all">
                             {% if user.userprofile.bio|length == 0 %}
-                                No bio yet! 
-                                <button class="btn btn-primary toggle-form"  data-form-id="bio-form" data-og-text="add bio">add bio</button>
+                                <div id="bio-div">No bio yet! </div>
                             {% else %}
-                                {{ user.userprofile.bio|linebreaks }}
-                                <button class="btn btn-primary toggle-form"  data-form-id="bio-form" data-og-text="add bio">Change bio</button>
+                                <div id="bio-div">{{ user.userprofile.bio|linebreaks }}</div>
                             {% endif %}
+                            <button id="bio-form-toogle" class="btn btn-primary toggle-form"  data-form-id="bio-form" data-og-text="Update bio">Update bio</button>
                             </h5>
                             <form action="" id="bio-form" class="hidden-form">
                                 {% csrf_token %}
+                                <span id="bio-error" style="display: none;">Could not update bio, please refresh the page and try again</span>
                                 <div class="form-group">
                                     <textarea name="user-bio" id="user-bio" cols="30" rows="5" class="form-control">{% if user.userprofile.bio|length > 0 %}{{ user.userprofile.bio }}{% endif %}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-dark">Update bio</button>
+                                    <button id="bio-form-sub" type="submit" class="btn btn-dark" disabled >Update bio</button>
                                 </div>
                             </form> 
                             <br>

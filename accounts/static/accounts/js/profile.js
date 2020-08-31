@@ -65,3 +65,39 @@ document.getElementById('update-info-btn').addEventListener('click', () => {
 document.getElementById('modal-close-button').addEventListener('click', (event) => {
     document.getElementById(event.target.dataset.modalId).style.display = 'none';
 });
+
+
+
+/* 
+    Bio submition
+*/
+const bioForm = document.forms['bio-form'];
+
+if (bioForm) {
+    const submitButton = document.getElementById('bio-form-sub');
+    bioForm.onchange = () => submitButton.disabled = false;
+
+    bioForm.onsubmit = (event) => {
+        event.preventDefault();
+        submitButton.innerText = 'Updating...';
+
+        const options = {
+            url: bioForm.action,
+            responseType: 'json',
+            error: () => {
+                submitButton.innerText = 'Could not update!';
+                document.getElementById('bio-error').style.display = 'block';
+                bioForm[1].disabled = true;
+            },
+            success: () => {
+                document.getElementById('bio-div').innerText = bioForm[1].value;
+                submitButton.innerText = 'Update bio'
+                toogleForm(document.getElementById('bio-form-toogle'));
+            },
+            form: bioForm
+        };
+    
+        ajax.post(options);
+    };
+
+};
