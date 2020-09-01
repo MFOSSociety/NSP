@@ -101,3 +101,26 @@ if (bioForm) {
     };
 
 };
+
+
+/* 
+    Delete skill
+*/
+[...document.getElementsByClassName('delete-skill')].forEach((skillDeleteButton) => {
+    skillDeleteButton.addEventListener('click', (event) => {
+        // delete skill
+        const skillDeleteOptions = {
+            url: skillDeleteButton.parentElement.action,
+            responseType: 'json',
+            error: () => {
+                document.getElementById('skill-del-error').style.display = 'block';
+            },
+            success: () => {
+                skillDeleteButton.parentElement.parentElement.parentElement.innerText = 'Skill deleted!'
+            },
+            form: skillDeleteButton.parentElement
+        };   
+        
+        ajax.post(skillDeleteOptions);
+    });
+});

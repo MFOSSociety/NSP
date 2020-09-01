@@ -195,7 +195,7 @@
                             {% for skill in skills %}
                                 <tr>
                                     <td>{{ skill }}</td>
-                                    <!-- {% comment %} <td><a class="fa fa-trash" href="{% url 'deleteskill' skill.id %}"></a></td> {% endcomment %} -->
+                                    <span id="skill-del-error" style="display: none;">Could Delete skill, please refresh the page and try again</span>
                                     <td>
                                         <form action="" method="post">
                                             {% csrf_token %}
