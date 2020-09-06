@@ -213,11 +213,12 @@
                         <button id="add-skill-toogle" class="btn btn-primary toggle-form" data-form-id="skill-form" data-og-text="Add skill">Add skill</button>
                         <form action="{% url 'mock-form' %}" id="skill-form" class="form-inline hidden-form">
                             {% csrf_token %}
+                            <span id="skill-error" style='display: none;'>An error occured, please refresh the page and try again</span>
                             <div class="form-group">
                                 <input type="text" name="skill" id="skill" placeholder="Add a skill" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="add skill" class="btn btn-dark">
+                                <input type="submit" value="add skill" class="btn btn-dark" disabled>
                             </div>
                         </form>
                     </div>

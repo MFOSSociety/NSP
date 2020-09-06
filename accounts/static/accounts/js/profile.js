@@ -106,21 +106,118 @@ if (bioForm) {
 /* 
     Delete skill
 */
+
+const skillDeleteCallback = (skillDeleteButton) => {
+    // delete skill
+    const skillDeleteOptions = {
+        url: skillDeleteButton.parentElement.action,
+        responseType: 'json',
+        error: () => {
+            document.getElementById(skillDeleteButton.dataset.errorId).style.display = 'block';
+        },
+        success: () => {
+            document.getElementById(skillDeleteButton.dataset.formId).innerText = 'Skill deleted!'
+        },
+        form: skillDeleteButton.parentElement
+    };   
+    
+    ajax.post(skillDeleteOptions);
+};
+
+
 [...document.getElementsByClassName('delete-skill')].forEach((skillDeleteButton) => {
-    skillDeleteButton.addEventListener('click', (event) => {
-        // delete skill
-        const skillDeleteOptions = {
-            url: skillDeleteButton.parentElement.action,
-            responseType: 'json',
-            error: () => {
-                document.getElementById('skill-del-error').style.display = 'block';
-            },
-            success: () => {
-                skillDeleteButton.parentElement.parentElement.parentElement.innerText = 'Skill deleted!'
-            },
-            form: skillDeleteButton.parentElement
-        };   
-        
-        ajax.post(skillDeleteOptions);
+    skillDeleteButton.addEventListener('click', () => {
+        skillDeleteCallback(skillDeleteButton);
     });
 });
+
+
+/* 
+    add skill
+*/
+const skillForm = document.forms['skill-form'];
+
+if (skillForm) {
+    const submitSkillButton = [...skillForm.elements].find((element) => element.type === 'submit');
+    skillForm.addEventListener('change', () => {
+        submitSkillButton.disabled = false;
+    });
+
+    skillForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const skillAddOptions = {
+            url: skillForm.action,
+            responseType: 'json',
+            error: () => {
+                if (submitSkillButton) {
+                    submitSkillButton.value = 'Could not add skill!';
+                    submitSkillButton.disabled = true;
+                }
+                document.getElementById('skill-error').style.display = 'block';
+                skillForm[1].disabled = true;
+            },
+            success: () => {
+                const token = skillForm.elements['csrfmiddlewaretoken']? skillForm.elements.csrfmiddlewaretoken.value: '';
+                // add correct details to the function call below
+                createSkill('Test', 10, token, '/account/mock');
+                const noSkills = document.getElementById('no-skills-div');
+                if (noSkills) {
+                    noSkills.style.display = 'none';
+                };
+                toogleForm(document.getElementById('add-skill-toogle'));
+            },
+            form: skillForm
+        };
+
+        ajax.post(skillAddOptions);
+    });
+};
+
+
+/* 
+    create a new skill div
+*/
+function createSkill(skillText, skillId, formToken, formAction) {
+    console.log(formToken)
+    const topDiv = document.createElement('div');
+    topDiv.id = `skill-${skillId}`;
+
+    const deleteError = document.createElement('span');
+    deleteError.id = `skill-${skillId}-del-error`;
+    deleteError.style.display = 'none';
+    deleteError.innerText = 'Could Delete skill, please refresh the page and try again';
+    topDiv.appendChild(deleteError);
+
+    const skillRow = document.createElement('div');
+    skillRow.className = "skill-row";
+
+    const skillTitle = document.createElement('span');
+    skillTitle.innerText = skillText;
+    skillTitle.className = "skill-title";
+    skillRow.appendChild(skillTitle);
+
+
+    const deleteForm = document.createElement('form');
+    deleteForm.action = formAction;
+    deleteForm.className = "skill-delete-form";
+    deleteForm.method = 'POST';
+    [['csrfmiddlewaretoken', formToken], ['skill-id', skillId]].forEach((input) => {
+        const _input = document.createElement('input');
+        _input.type = 'hidden';
+        _input.name = input[0];
+        _input.value = input[1];
+        deleteForm.appendChild(_input);
+    });
+    const submitSpan = document.createElement('span');
+    submitSpan.classList = 'fa fa-trash delete-skill';
+    submitSpan.dataset.formId = topDiv.id;
+    submitSpan.dataset.errorId = deleteError.id;
+    deleteForm.appendChild(submitSpan);
+    submitSpan.addEventListener('click', () => skillDeleteCallback(submitSpan));
+    skillRow.appendChild(deleteForm);
+
+    topDiv.appendChild(skillRow);
+    topDiv.appendChild(document.createElement('hr'));
+    document.getElementById('all-skills').appendChild(topDiv);
+};
