@@ -77,17 +77,17 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <h5>Stream : {{ user.userprofile.stream }}</h5>
+                                    <h5 id="info-stream">Stream : {{ user.userprofile.stream }}</h5>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <h5>Branch : {{ user.userprofile.branch }}</h5>
+                                    <h5 id="info-branch">Branch : {{ user.userprofile.branch }}</h5>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <h5>Year : {{ user.userprofile.year }}</h5>
+                                    <h5 id="info-year">Year : {{ user.userprofile.year }}</h5>
                                 </td>
                             </tr>
                             <tr>
@@ -118,7 +118,11 @@
                                 <div id="modal-title-1"><h2>Update info</h2></div>
                                 <div id="modal-close"><button class="btn btn-outline-dark" id="modal-close-button" data-modal-id="update-info-now">close</button></div>
                             </div>
-                            <form action="" method="post">
+                            <div id="info-update-error" class="alert alert-warning" style="display: none;">
+                                Could not update info please refresh the page and try again
+                            </div>
+                            <form action="uhj" method="post" id="update-info-form" data-modal-id="update-info-now">
+                                {% csrf_token %}
                                 <div class="grided">
                                     <div class="form-group" id="profile_year">
                                         <label for="">{{ profile_form.year.label }}</label>
@@ -147,7 +151,7 @@
                                     </div>
 
                                     <div class="form-group" id="update-submit-button">
-                                        <button type="submit" class="btn btn-dark">update info</button>
+                                        <button id="info-submit-button" type="submit" class="btn btn-dark" disabled >update info</button>
                                     </div>
                                 </div>
                             </form>

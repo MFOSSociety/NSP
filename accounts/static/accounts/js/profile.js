@@ -61,10 +61,50 @@ document.getElementById('update-info-btn').addEventListener('click', () => {
 })
 
 
-// close update form
-document.getElementById('modal-close-button').addEventListener('click', (event) => {
+// send form details
+const modalCloseButton = document.getElementById('modal-close-button');
+const infoForm = document.forms['update-info-form'];
+const submitInfoButton = document.getElementById('info-submit-button');
+const modalCloseCallback = (event) => {
+    submitInfoButton.disabled = true;
     document.getElementById(event.target.dataset.modalId).style.display = 'none';
-});
+}
+
+if (infoForm) {
+    infoForm.addEventListener('change', () => submitInfoButton.disabled = false);
+
+    infoForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        modalCloseButton.disabled = true;
+        const title = document.getElementById('modal-title-1');
+        title.innerHTML = '<h2>Updating info...</h2>';
+        submitInfoButton.disabled = true;
+
+        const infoOptions = {
+            url: infoForm.action,
+            responseType: 'json',
+            error: () => {
+                document.getElementById('info-update-error').style.display = 'block';
+                submitInfoButton.disabled = false;
+            },
+            success: () => {
+                document.getElementById('info-stream').innerText = 'Stream : New Stream';
+                document.getElementById('info-branch').innerText = 'Branch : New Branch';
+                document.getElementById('info-year').innerText = 'Year : New Year';
+                title.innerHTML = '<h2>Update info</h2>';
+                modalCloseButton.disabled = false;
+                modalCloseCallback(event);
+            },
+            form: infoForm
+        };
+
+        ajax.post(infoOptions);
+    });    
+};
+
+
+// close update form
+modalCloseButton.addEventListener('click', modalCloseCallback);
 
 
 
@@ -74,24 +114,24 @@ document.getElementById('modal-close-button').addEventListener('click', (event) 
 const bioForm = document.forms['bio-form'];
 
 if (bioForm) {
-    const submitButton = document.getElementById('bio-form-sub');
-    bioForm.onchange = () => submitButton.disabled = false;
+    const submitInfoButton = document.getElementById('bio-form-sub');
+    bioForm.onchange = () => submitInfoButton.disabled = false;
 
     bioForm.onsubmit = (event) => {
         event.preventDefault();
-        submitButton.innerText = 'Updating...';
+        submitInfoButton.innerText = 'Updating...';
 
         const options = {
             url: bioForm.action,
             responseType: 'json',
             error: () => {
-                submitButton.innerText = 'Could not update!';
+                submitInfoButton.innerText = 'Could not update!';
                 document.getElementById('bio-error').style.display = 'block';
                 bioForm[1].disabled = true;
             },
             success: () => {
                 document.getElementById('bio-div').innerText = bioForm[1].value;
-                submitButton.innerText = 'Update bio'
+                submitInfoButton.innerText = 'Update bio'
                 toogleForm(document.getElementById('bio-form-toogle'));
             },
             form: bioForm
