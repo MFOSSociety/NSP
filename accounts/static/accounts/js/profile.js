@@ -36,6 +36,7 @@ function uploadPic () {
     document.getElementById('profile-pic').click();
 };
 
+const previewWarning = document.getElementById('preview-warning');
 
 document.getElementById('profile-pic').addEventListener('change', (event) => {
     // preview new profile pic for the user
@@ -47,7 +48,35 @@ document.getElementById('profile-pic').addEventListener('change', (event) => {
     document.getElementById('profile-pic-upload').innerText = 'choose another picture';
     // save button
     document.getElementById('profile-pic-save').style.display = 'block';
-    document.getElementById('preview-warning').style.display = 'block';
+    previewWarning.style.display = 'block';
+});
+
+
+const savePictureButton = document.getElementById('profile-pic-save');
+
+savePictureButton.addEventListener('click', () => {
+    const picForm = document.forms['profile-pic-form'];
+    const spinnerImg = document.getElementById('spinner-profile-pic');
+    spinnerImg.src = spinnerImg.dataset.src;
+    spinnerImg.style.display = 'block';
+
+    const profilePicOptions = {
+        url: picForm.action,
+        responseType: 'json',
+        error: () => {
+            document.getElementById('pic-save-error').style.display = '';
+            previewWarning.style.display = 'none';
+            spinnerImg.style.display = 'none';
+        },
+        success: () => {
+            previewWarning.style.display = 'none';
+            savePictureButton.style.display = 'none';
+            spinnerImg.style.display = 'none';
+        },
+        form: picForm
+    };
+
+    ajax.post(profilePicOptions);
 });
 
 

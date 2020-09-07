@@ -35,6 +35,7 @@
                         {% endif %}
                         <br/>
                         <small id="preview-warning" style="display: none;">This is a preview. Click 'Save picture' below to make it your new profile picture</small>
+                        <small class="alert alert-warning" id="pic-save-error" style="display: none;">Could not save the image, please refresh the page and try again</small>
 
                         <table class="table table-striped " style="margin-left: -40px; width: 300px;">
                             <tr>
@@ -47,12 +48,16 @@
                             <tr>
                                 <td>
                                     <h5>
-                                        <form action="" method="post" class="hidden-form" id="profile-pic-form">
+                                        <form action="lk" method="post" class="hidden-form" id="profile-pic-form">
                                             {% csrf_token %}
-                                            <input type="file" name="profile-pic" id="profile-pic" accept="image/*">
+                                            <input type="file" name="profile-picture" id="profile-pic" accept="image/*">
                                         </form>
-
-                                        <button type="submit" class="btn btn-dark" id="profile-pic-save">save picture</button>
+                                        <div id="save-pic-grid">
+                                            <div>
+                                                <button type="submit" class="btn btn-dark" id="profile-pic-save">save picture</button>
+                                            </div>
+                                            <img id="spinner-profile-pic" src="" data-src="{% static 'accounts/img/spinner.gif' %}">
+                                        </div>
                                         <button id="profile-pic-upload" class="btn btn-primary" href="{% url 'change_profile_picture' %}" style="width: 100%" onclick="uploadPic()">Upload New Pic</button>
                                     </h5>
                                 </td>

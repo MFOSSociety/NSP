@@ -44,6 +44,7 @@ body {
 }
 
 #profile-pic-save {
+	margin-top: 3.2em;
 	display: none;
 }
 
@@ -100,4 +101,15 @@ body {
 
 .skill-delete-form {
 	width: 20%;
+}
+
+#spinner-profile-pic {
+	display: none;
+	width: 10em;
+}
+
+#save-pic-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
 }
