@@ -177,7 +177,7 @@
                             {% endif %}
                             <button id="bio-form-toogle" class="btn btn-primary toggle-form"  data-form-id="bio-form" data-og-text="Update bio">Update bio</button>
                             </h5>
-                            <form action="" id="bio-form" class="hidden-form">
+                            <form action="{% url 'update-bio' %}" id="bio-form" class="hidden-form">
                                 {% csrf_token %}
                                 <span id="bio-error" style="display: none;">Could not update bio, please refresh the page and try again</span>
                                 <div class="form-group">

@@ -277,4 +277,7 @@ def update_profile_picture(request):
 
 
 def update_bio(request):
-    pass
+    new_bio = request.POST.get('user-bio')
+    request.user.userprofile.bio = new_bio
+    request.user.userprofile.save()
+    return JsonResponse({'success': True})
