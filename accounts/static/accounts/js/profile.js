@@ -97,7 +97,7 @@ const submitInfoButton = document.getElementById('info-submit-button');
 const modalCloseCallback = (event) => {
     submitInfoButton.disabled = true;
     document.getElementById(event.target.dataset.modalId).style.display = 'none';
-}
+};
 
 if (infoForm) {
     infoForm.addEventListener('change', () => submitInfoButton.disabled = false);
@@ -226,17 +226,23 @@ if (skillForm) {
                 document.getElementById('skill-error').style.display = 'block';
                 skillForm[1].disabled = true;
             },
-            success: () => {
-                const token = skillForm.elements['csrfmiddlewaretoken']? skillForm.elements.csrfmiddlewaretoken.value: '';
-                // add correct details to the function call below
-                createSkill('Test', 10, token, '/account/mock');
-                const noSkills = document.getElementById('no-skills-div');
-                if (noSkills) {
-                    noSkills.style.display = 'none';
+            success: (result) => {
+                const response = result.response;
+                if (response.success) {
+                    const token = skillForm.elements['csrfmiddlewaretoken']? skillForm.elements.csrfmiddlewaretoken.value: '';
+                    // add correct details to the function call below
+                    createSkill(response.skill.name, response.skill.id, token, '/account/mock');
+                    const noSkills = document.getElementById('no-skills-div');
+                    if (noSkills) {
+                        noSkills.style.display = 'none';
+                    };
+                    toogleForm(document.getElementById('add-skill-toogle'));
                 };
-                toogleForm(document.getElementById('add-skill-toogle'));
             },
-            form: skillForm
+            form: skillForm,
+            headers: [
+                {name: 'X-Requested-With', value: 'XMLHttpRequest'},
+            ]
         };
 
         ajax.post(skillAddOptions);
@@ -248,7 +254,6 @@ if (skillForm) {
     create a new skill div
 */
 function createSkill(skillText, skillId, formToken, formAction) {
-    console.log(formToken)
     const topDiv = document.createElement('div');
     topDiv.id = `skill-${skillId}`;
 

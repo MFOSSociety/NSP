@@ -24,4 +24,6 @@ urlpatterns = [
     path('profile/addskill/', views.add_skill_view, name='addskill'),
     path('profile/delete_skill/<ID>', views.delete_skill, name='deleteskill'),
     path("chat/", include("nspmessage.urls")),
+    path('profile/update-pic/', views.update_profile_picture, name='update-picture'),
+    path('profile/update-bio/', views.update_bio, name='update-bio'),
 ]

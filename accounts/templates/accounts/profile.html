@@ -220,7 +220,7 @@
                             {% endif %}
                         </div>
                         <button id="add-skill-toogle" class="btn btn-primary toggle-form" data-form-id="skill-form" data-og-text="Add skill">Add skill</button>
-                        <form action="{% url 'mock-form' %}" id="skill-form" class="form-inline hidden-form">
+                        <form action="{% url 'addskill' %}" id="skill-form" class="form-inline hidden-form">
                             {% csrf_token %}
                             <span id="skill-error" style='display: none;'>An error occured, please refresh the page and try again</span>
                             <div class="form-group">

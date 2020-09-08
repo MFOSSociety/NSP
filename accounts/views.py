@@ -198,7 +198,18 @@ def add_skill_view(request):
         form = SkillForm()
         skill = request.POST.get("skill")
         skill_object = Skill.objects.create(user=request.user, skill_name=skill)
-        return render(request, 'accounts/addskill.html', {'form': form, "successfully": True, "skill": skill_object})
+
+        if request.is_ajax():
+            res_skill = {
+                'name': skill,
+                'id': skill_object.pk
+            }
+            return JsonResponse({
+                'success': True,
+                'skill': res_skill
+            })
+        else:
+            return render(request, 'accounts/addskill.html', {'form': form, "successfully": True, "skill": skill_object})
     else:
         form = SkillForm()
     return render(request, 'accounts/addskill.html', {'form': form})
@@ -254,3 +265,11 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
+
+
+def update_profile_picture(request):
+    pass
+
+
+def update_bio(request):
+    pass
