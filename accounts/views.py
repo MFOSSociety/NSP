@@ -187,6 +187,10 @@ def delete_skill(request, ID):
     skill = get_object_or_404(Skill,pk=ID)
     if skill.user == request.user:
         skill.delete()
+
+    if request.is_ajax():
+        return JsonResponse({'success': True})
+
     return redirect("/account/profile/")
 
 
@@ -202,7 +206,8 @@ def add_skill_view(request):
         if request.is_ajax():
             res_skill = {
                 'name': skill,
-                'id': skill_object.pk
+                'id': skill_object.pk,
+                'delete_skill_url': reverse("deleteskill", kwargs={"ID": str(skill_object.pk)})
             }
             return JsonResponse({
                 'success': True,

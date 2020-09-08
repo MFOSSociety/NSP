@@ -187,7 +187,10 @@ const skillDeleteCallback = (skillDeleteButton) => {
         success: () => {
             document.getElementById(skillDeleteButton.dataset.formId).innerText = 'Skill deleted!'
         },
-        form: skillDeleteButton.parentElement
+        form: skillDeleteButton.parentElement,
+        headers: [
+            {name: 'X-Requested-With', value: 'XMLHttpRequest'},
+        ]
     };   
     
     ajax.post(skillDeleteOptions);
@@ -231,7 +234,7 @@ if (skillForm) {
                 if (response.success) {
                     const token = skillForm.elements['csrfmiddlewaretoken']? skillForm.elements.csrfmiddlewaretoken.value: '';
                     // add correct details to the function call below
-                    createSkill(response.skill.name, response.skill.id, token, '/account/mock');
+                    createSkill(response.skill.name, response.skill.id, token, response.skill.delete_skill_url);
                     const noSkills = document.getElementById('no-skills-div');
                     if (noSkills) {
                         noSkills.style.display = 'none';

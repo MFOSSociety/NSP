@@ -206,7 +206,7 @@
                                         
                                         <div class="skill-row">
                                             <span class="skill-title">{{ skill }}</span>
-                                            <form action="" method="post" class="skill-delete-form">
+                                            <form action="{% url 'deleteskill' skill.pk %}" method="post" class="skill-delete-form">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="skill-id" class="form-control" value="{{ skill.pk }}">
                                                 <span class="fa fa-trash delete-skill" data-form-id="skill-{{ skill.pk }}" data-error-ID="skill-{{ skill.pk }}-del-error"></span>
@@ -216,7 +216,7 @@
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                <td id="no-skills-div">You haven't added any skills to your profile!</td>
+                                <p id="no-skills-div">You haven't added any skills to your profile!</p>
                             {% endif %}
                         </div>
                         <button id="add-skill-toogle" class="btn btn-primary toggle-form" data-form-id="skill-form" data-og-text="Add skill">Add skill</button>
