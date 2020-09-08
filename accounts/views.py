@@ -46,7 +46,7 @@ def profile_view(request):
         , "followings": followings, "skills": skills}
     rating_value = user.userprofile.ratings
     args = {'user': user, "followers": followers, "following": followings, "skills": skills,
-            'range': range(rating_value), 'projects': projects}
+            'range': range(rating_value), 'projects': projects, 'profile_form': UserProfileForm(instance=user.userprofile)}
     return render(request, 'accounts/profile.html', args)
 
 
@@ -187,6 +187,10 @@ def delete_skill(request, ID):
     skill = get_object_or_404(Skill,pk=ID)
     if skill.user == request.user:
         skill.delete()
+
+    if request.is_ajax():
+        return JsonResponse({'success': True})
+
     return redirect("/account/profile/")
 
 
@@ -198,7 +202,19 @@ def add_skill_view(request):
         form = SkillForm()
         skill = request.POST.get("skill")
         skill_object = Skill.objects.create(user=request.user, skill_name=skill)
-        return render(request, 'accounts/addskill.html', {'form': form, "successfully": True, "skill": skill_object})
+
+        if request.is_ajax():
+            res_skill = {
+                'name': skill,
+                'id': skill_object.pk,
+                'delete_skill_url': reverse("deleteskill", kwargs={"ID": str(skill_object.pk)})
+            }
+            return JsonResponse({
+                'success': True,
+                'skill': res_skill
+            })
+        else:
+            return render(request, 'accounts/addskill.html', {'form': form, "successfully": True, "skill": skill_object})
     else:
         form = SkillForm()
     return render(request, 'accounts/addskill.html', {'form': form})
@@ -254,3 +270,42 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
     def get_success_url(self, *args, **kwargs):
         return reverse("view_profile")
+
+
+def update_profile_picture(request):
+    profile_picture = request.FILES.get('profile-picture')
+    request.user.userprofile.photo = profile_picture
+    request.user.userprofile.save()
+    return JsonResponse({'success': True})
+
+
+def update_bio(request):
+    new_bio = request.POST.get('user-bio')
+    request.user.userprofile.bio = new_bio
+    request.user.userprofile.save()
+    return JsonResponse({'success': True})
+
+
+def update_user_profile_info(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user.userprofile)
+        response = {
+            'success': False
+        }
+
+        if form.is_valid():
+            form.save()
+            response.update({
+                'success': True,
+                'profile': {
+                    'stream': request.user.userprofile.stream,
+                    'branch': request.user.userprofile.branch,
+                    'year': request.user.userprofile.year
+                }
+            })
+        else:
+            response.update({
+                'errors': form.errors
+            })
+
+        return JsonResponse(response)
