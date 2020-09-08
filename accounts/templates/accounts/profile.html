@@ -126,7 +126,7 @@
                             <div id="info-update-error" class="alert alert-warning" style="display: none;">
                                 Could not update info please refresh the page and try again
                             </div>
-                            <form action="uhj" method="post" id="update-info-form" data-modal-id="update-info-now">
+                            <form action="{% url 'update-profile' %}" method="post" id="update-info-form" data-modal-id="update-info-now">
                                 {% csrf_token %}
                                 <div class="grided">
                                     <div class="form-group" id="profile_year">

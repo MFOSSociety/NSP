@@ -284,3 +284,28 @@ def update_bio(request):
     request.user.userprofile.bio = new_bio
     request.user.userprofile.save()
     return JsonResponse({'success': True})
+
+
+def update_user_profile_info(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user.userprofile)
+        response = {
+            'success': False
+        }
+
+        if form.is_valid():
+            form.save()
+            response.update({
+                'success': True,
+                'profile': {
+                    'stream': request.user.userprofile.stream,
+                    'branch': request.user.userprofile.branch,
+                    'year': request.user.userprofile.year
+                }
+            })
+        else:
+            response.update({
+                'errors': form.errors
+            })
+
+        return JsonResponse(response)

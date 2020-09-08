@@ -26,4 +26,5 @@ urlpatterns = [
     path("chat/", include("nspmessage.urls")),
     path('profile/update-pic/', views.update_profile_picture, name='update-picture'),
     path('profile/update-bio/', views.update_bio, name='update-bio'),
+    path('profile/update-profile-info/', views.update_user_profile_info, name='update-profile'),
 ]

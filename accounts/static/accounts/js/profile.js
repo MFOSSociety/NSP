@@ -116,13 +116,16 @@ if (infoForm) {
                 document.getElementById('info-update-error').style.display = 'block';
                 submitInfoButton.disabled = false;
             },
-            success: () => {
-                document.getElementById('info-stream').innerText = 'Stream : New Stream';
-                document.getElementById('info-branch').innerText = 'Branch : New Branch';
-                document.getElementById('info-year').innerText = 'Year : New Year';
-                title.innerHTML = '<h2>Update info</h2>';
-                modalCloseButton.disabled = false;
-                modalCloseCallback(event);
+            success: (result) => {
+                const response = result.response;
+                if (response.success) {
+                    document.getElementById('info-stream').innerText = `Stream : ${response.profile.stream}`;
+                    document.getElementById('info-branch').innerText = `Branch : ${response.profile.branch}`;
+                    document.getElementById('info-year').innerText = `Year : ${response.profile.year}`;
+                    title.innerHTML = '<h2>Update info</h2>';
+                    modalCloseButton.disabled = false;
+                    modalCloseCallback(event);
+                };
             },
             form: infoForm
         };
