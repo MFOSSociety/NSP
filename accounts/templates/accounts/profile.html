@@ -48,7 +48,7 @@
                             <tr>
                                 <td>
                                     <h5>
-                                        <form action="lk" method="post" class="hidden-form" id="profile-pic-form">
+                                        <form action="{% url 'update-picture' %}" method="post" class="hidden-form" id="profile-pic-form">
                                             {% csrf_token %}
                                             <input type="file" name="profile-picture" id="profile-pic" accept="image/*">
                                         </form>

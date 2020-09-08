@@ -273,7 +273,10 @@ class EditUserProfileView(UpdateView):  # Note that we are using UpdateView and 
 
 
 def update_profile_picture(request):
-    pass
+    profile_picture = request.FILES.get('profile-picture')
+    request.user.userprofile.photo = profile_picture
+    request.user.userprofile.save()
+    return JsonResponse({'success': True})
 
 
 def update_bio(request):
